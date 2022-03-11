@@ -15,7 +15,8 @@
     "build": "NODE_ENV=production webpack --progress --config config/webpack.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write 'src/**/*.js'"
+    "format": "prettier --write 'src/**/*.js'",
+    "check-format": "prettier --check 'src/**/*.js'"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css,scss}": [
