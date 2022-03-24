@@ -1,0 +1,9 @@
+/*Main Content Styles*/
+.app-wrapper {
+  padding: 24px;
+  width: 100%;
+
+  @media screen and (max-width: 575px) {
+    padding-bottom: 20px;
+  }
+}

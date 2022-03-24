@@ -1,0 +1,407 @@
+/*Theme Amber Styles*/
+$app-primary-amber: #FFC107 !default;
+$secondary-amber: #FF3D00;
+
+$sidebar-amber: $white !default;
+$sidebar-text-color-amber: #868e96 !default;
+
+.amber .side-nav {
+  @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.15));
+
+  & .user-profile {
+    @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.15));
+  }
+
+  & .customizer {
+    border-bottom: solid 1px lighten($sidebar-text-color-amber, 35%);
+  }
+}
+
+.amber ul.nav-menu li.open > a {
+  border-color: $app-primary-amber;
+}
+
+//-Base-scss
+.amber .right-arrow {
+  color: $app-primary-amber;
+  &:after {
+    color: $app-primary-amber;
+  }
+}
+
+//Bootstrap file Style
+.amber {
+  & a,
+  & a.text-primary {
+    color: $app-primary-amber;
+    &:focus,
+    &:hover {
+      color: darken($app-primary-amber, 10%);
+    }
+  }
+
+  & .text-primary {
+    color: $app-primary-amber !important;
+  }
+
+  & .page-link {
+    color: $app-primary-amber;
+    &:focus,
+    &:hover {
+      color: $app-primary-amber;
+    }
+  }
+
+  & .bg-primary,
+  & .badge-primary {
+    background-color: $app-primary-amber !important;
+    color: $sidebar-amber !important;
+  }
+
+  & .btn-primary {
+    background-color: $app-primary-amber;
+    border-color: $app-primary-amber;
+    color: $sidebar-amber;
+
+    &:hover,
+    &:focus {
+      background-color: darken($app-primary-amber, 5%);
+      border-color: darken($app-primary-amber, 5%);
+      color: $sidebar-amber;
+    }
+  }
+
+  & .bg-primary {
+    &.lighten-4 {
+      background-color: #ffecb3 !important;
+    }
+
+    &.lighten-3 {
+      background-color: #ffe082 !important;
+    }
+
+    &.lighten-2 {
+      background-color: #ffd54f !important;
+    }
+
+    &.lighten-1 {
+      background-color: #ffca28 !important;
+    }
+
+    &.darken-1 {
+      background-color: #ffb300 !important;
+    }
+
+    &.darken-2 {
+      background-color: #ffa000 !important;
+    }
+
+    &.darken-3 {
+      background-color: #ff8f00 !important;
+    }
+
+    &.darken-4 {
+      background-color: #ff6f00 !important;
+    }
+
+    &.accent-1 {
+      background-color: #ffe57f !important;
+    }
+
+    &.accent-2 {
+      background-color: #ffd740 !important;
+    }
+
+    &.accent-3 {
+      background-color: #ffc400 !important;
+    }
+
+    &.accent-4 {
+      background-color: #ffab00 !important;
+    }
+  }
+}
+
+//Secondary
+.amber {
+  & a.text-secondary {
+    color: $secondary-amber;
+    &:focus,
+    &:hover {
+      color: darken($secondary-amber, 10%) !important;
+    }
+  }
+
+  & .text-secondary {
+    color: $secondary-amber !important;
+  }
+
+  & .bg-secondary,
+  & .badge-secondary {
+    background-color: $secondary-amber !important;
+    color: $sidebar-amber !important;
+  }
+
+  & .btn-secondary {
+    background-color: $secondary-amber;
+    border-color: $secondary-amber;
+    color: $sidebar-amber;
+
+    &:hover,
+    &:focus {
+      background-color: darken($secondary-amber, 5%);
+      border-color: darken($secondary-amber, 5%);
+      color: $sidebar-amber;
+    }
+  }
+}
+
+//_header.scss
+.amber .app-main-header {
+  background-color: $app-primary-amber !important;
+
+  & .search-bar input {
+    background-color: lighten($app-primary-amber, 5%);
+
+    &:focus {
+      background-color: $white;
+    }
+  }
+
+  & .search-dropdown input {
+    @media screen and (max-width: 575px) {
+      background-color: $white;
+    }
+  }
+}
+
+//_right-sidebar.scss
+.amber .color-theme-header {
+  background-color: $app-primary-amber;
+
+}
+
+//_sidebar.scss
+.amber .side-nav {
+  background-color: $sidebar-amber !important;
+  color: $sidebar-text-color-amber !important;
+
+  & .user-profile {
+    background-color: $sidebar-amber;
+  }
+
+  & .user-detail {
+    & .user-name {
+      color: $app-primary-amber;
+    }
+  }
+}
+
+.amber ul.nav-menu li a {
+  color: $sidebar-text-color-amber;
+}
+
+.amber ul.nav-menu {
+  & .nav-header {
+    color: $sidebar-text-color-amber;
+  }
+}
+
+.amber ul.nav-menu > li.open > a,
+.amber ul.nav-menu > li > a:hover,
+.amber ul.nav-menu > li > a:focus {
+  background-color: $sidebar-amber;
+  color: $app-primary-amber;
+}
+
+.amber ul.nav-menu li.open > a {
+  border-color: $app-primary-amber;
+}
+
+.amber ul.nav-menu li.menu > a:focus:before,
+.amber ul.nav-menu li.menu > a:hover:before {
+  color: $app-primary-amber;
+}
+
+.amber ul.nav-menu li ul {
+  background-color: $sidebar-amber;
+}
+
+.amber ul.nav-menu li.menu > a:before {
+  color: $sidebar-text-color;
+}
+
+.amber ul.nav-menu li.menu.open > a:before,
+.amber ul.nav-menu li.menu > a:focus:before,
+.amber ul.nav-menu li.menu li > a:hover:before {
+  color: $app-primary-amber;
+}
+
+.amber ul.nav-menu li.menu .sub-menu li > a:before {
+  color: $sidebar-text-color-amber;
+}
+
+.amber ul.nav-menu li.menu.open .sub-menu li.active > a {
+  background-color: $sidebar-amber;
+  color: $app-primary-amber;
+}
+
+.amber ul.nav-menu li.menu .sub-menu li > a:hover,
+.amber ul.nav-menu li.menu .sub-menu li > a:focus,
+.amber ul.nav-menu li.menu.open .sub-menu li.active > a:before,
+.amber ul.nav-menu li.menu .sub-menu li > a:focus:before,
+.amber ul.nav-menu li.menu .sub-menu li > a:hover:before {
+  background-color: $sidebar-amber;
+  color: $app-primary-amber;
+}
+
+//_app-module.scss
+.amber .app-module {
+  &:before {
+    background-color: lighten($app-primary-amber, 5%);
+  }
+}
+
+.amber .module-nav {
+  & li a {
+    &.active {
+      background-color: $app-primary-amber;
+    }
+  }
+}
+
+.amber .module-side-header {
+  background-color: lighten($app-primary-amber, 5%);
+}
+
+//_calendar.scss
+.amber .rbc-event {
+  background-color: $app-primary-amber;
+}
+
+.amber .rbc-event.rbc-selected {
+  background-color: darken($app-primary-amber, 10%);
+}
+
+.amber .rbc-slot-selection {
+  background-color: rgba($app-primary-amber, 0.7);
+}
+
+.amber .rbc-toolbar button:active,
+.amber .rbc-toolbar button.rbc-active {
+  background-color: rgba($app-primary-amber, 0.9);
+  border-color: $app-primary-amber;
+}
+
+.amber .rbc-toolbar button:active:hover,
+.amber .rbc-toolbar button.rbc-active:hover,
+.amber .rbc-toolbar button:active:focus,
+.amber .rbc-toolbar button.rbc-active:focus {
+  background-color: rgba($app-primary-amber, 0.9);
+  border-color: $app-primary-amber;
+}
+
+.amber .rbc-toolbar button:focus {
+  background-color: rgba($app-primary-amber, 0.9);
+  border-color: $app-primary-amber;
+}
+
+.amber .rbc-toolbar button:hover {
+  background-color: rgba($app-primary-amber, 0.9);
+  border-color: $app-primary-amber;
+}
+
+//_chat.scss
+.amber .chat-sidenav-title {
+  color: $app-primary-amber;
+}
+
+.amber .chat-user-item {
+  &.active,
+  &:hover {
+    background-color: lighten($app-primary-amber, 45%);
+  }
+}
+
+//_Color.scss
+.amber {
+  background-color: $app-primary-amber !important;
+  &.lighten-1 {
+    background-color: $app-primary-amber !important;
+  }
+}
+
+//_dashboard.scss
+.amber .contact-list {
+  & i {
+    color: $app-primary-amber;
+  }
+}
+
+//The link which when clicked opens the collapsable ChatUserList
+.amber .Collapsible__trigger {;
+  background: $app-primary-amber;
+}
+
+.amber .categories-list {
+  & li a:focus,
+  & li a:hover,
+  & li.active a {
+    color: $app-primary-amber;
+  }
+}
+
+//_login.scss
+.amber .login-content .form-control {
+  &:focus {
+    border-color: $app-primary-amber;
+  }
+}
+
+//_portfolio.scss
+.amber .filter-with-bg-color ul li {
+  & a {
+    border-color: $app-primary-amber;
+
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: $app-primary-amber;
+    }
+  }
+}
+
+//_card.scss
+.amber .profile-intro {
+  & .icon {
+    color: $app-primary-amber;
+  }
+}
+
+.amber .social-link {
+  & li.active a,
+  & li a:hover,
+  & li a:focus {
+    color: $secondary-amber;
+  }
+}
+
+//_tables.scss
+.amber .actions {
+  color: $secondary-amber;
+}
+
+.amber .table-hover tbody tr:hover {
+  background-color: rgba($app-primary-amber, 0.075);
+}
+
+//Border Color
+
+.amber .border-primary {
+  border-color: $app-primary-amber !important;
+}
+
+
+
+
+

@@ -1,0 +1,25 @@
+.long-name--stage-card-title {
+  width: 130px;
+  font-size: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.long-name--stage-card-item {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.helper-text--stage-config {
+  font-style: italic;
+  font-size: smaller;
+}
+
+.wrapper--stage-ground {
+  height: 300px;
+}

@@ -1,0 +1,245 @@
+/*Header Styles*/
+.jr-menu-icon {
+  outline: none !important;
+  @include justify-content(flex-start !important);
+  @extend %size-30;
+  padding: 0 5px !important;
+  @extend %jr-menu-icon;
+  margin-right: 15px;
+}
+
+.app-main-header {
+  // z-index: 1302 !important;
+  background-color: #f8f9fa !important;
+  //background-color: $app-primary !important;
+  color: $black !important;
+
+  & .search-bar input {
+    @include transition($transition-base);
+    background-color: lighten($app-primary, 5%);
+    color: $white;
+    & + .search-icon {
+      top: 0;
+      & i {
+        color: rgba($white, 0.8);
+      }
+    }
+
+    &:focus {
+      background-color: $white;
+      color: $body-color;
+      + .search-icon {
+        & i {
+          color: rgba($body-color, 0.8);
+        }
+      }
+    }
+  }
+}
+
+.app-logo img {
+  height: 35px;
+
+  @media screen and (max-width: 575px) {
+    height: 28px;
+  }
+}
+
+.app-toolbar {
+  min-height: $app-bar-height;
+  height: $app-bar-height;
+  max-height: $app-bar-height;
+
+  & .search-bar {
+    margin-left: 100px;
+    margin-right: auto;
+    max-width: 400px;
+    width: 380px;
+
+    @media screen and (max-width: 991px) {
+      width: 280px;
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-left: 40px;
+      width: 200px;
+    }
+  }
+}
+
+.app-toolbar {
+  & .nav-searchbox {
+    & .search-bar {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    & .search-bar input {
+      @include transition($transition-base);
+      background-color: $white;
+      color: $body-color;
+      & + .search-icon {
+        & i {
+          color: rgba($body-color, 0.8);
+        }
+      }
+
+      &:focus {
+        background-color: transparent;
+        color: $body-color;
+        + .search-icon {
+          & i {
+            color: rgba($body-color, 0.8);
+          }
+        }
+      }
+    }
+  }
+}
+
+.header-notifications {
+  margin-bottom: 0;
+
+  & li {
+    vertical-align: middle;
+  }
+}
+
+.quick-menu {
+  & .dropdown-menu {
+    padding: 5px 10px;
+    width: 350px;
+
+    & .jr-card-header {
+      margin: -5px -10px 5px;
+      padding: 10px 10px 10px 20px;
+      @include box-shadow($shadow-sm);
+      z-index: 10;
+    }
+
+    &:after {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid $white;
+      top: -9px;
+      content: "";
+      height: 9px;
+      position: absolute;
+      right: 8px;
+      width: 10px;
+    }
+
+    &:before {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid $black;
+      top: -10px;
+      content: "";
+      height: 10px;
+      position: absolute;
+      right: 8px;
+      width: 10px;
+    }
+
+    @media screen and (max-width: 575px) {
+      width: 200px;
+    }
+  }
+
+  & .messages-list .user-avatar {
+    position: relative;
+  }
+
+  & .messages-list .badge {
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+    text-align: center;
+    padding: 0;
+  }
+
+}
+
+.messages-list ul li {
+  position: relative;
+  padding: 20px 10px 14px;
+  border-bottom: 1px solid $gray-300;
+
+  & .user-name a {
+    color: $app-primary;
+  }
+
+  & .sub-heading {
+    font-size: 11px;
+    margin-bottom: 6px !important;
+
+    &.mb-0 {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  &:last-child {
+    border-bottom: 0 none;
+  }
+
+  & .jr-btn {
+    margin-right: 0 !important;
+  }
+
+  & .jr-btn-xs {
+    font-size: 11px !important;
+    padding: 5px !important;
+  }
+}
+
+.quick-menu {
+  & .icon-btn {
+    color: $white;
+  }
+
+  & .icon-alert {
+    position: relative;
+
+    &:after {
+      display: block;
+      position: absolute;
+      content: "";
+      right: 0;
+      top: 0;
+      z-index: 10;
+      width: 8px;
+      height: 8px;
+      background-color: $danger;
+      @include border-radius(50%);
+      @extend %pulse-effect;
+    }
+  }
+
+  & i.animated.infinite {
+    -moz-animation-iteration-count: 25;
+    -webkit-animation-iteration-count: 25;
+    -o-animation-iteration-count: 25;
+    animation-iteration-count: 25;
+  }
+}
+
+.quick-menu {
+  & .dropdown-menu {
+    display: block;
+    visibility: hidden;
+    left: auto !important;
+    right: 0 !important;
+    opacity: 0;
+    transform: translate3d(0px, 100px, 0px) !important;
+    @include transition(all 200ms linear 0ms);
+  }
+
+  &.show .dropdown-menu {
+    opacity: 1;
+    transform: translate3d(0px, 30px, 0px) !important;
+    visibility: visible;
+  }
+}

@@ -1,0 +1,343 @@
+/* App Module Style */
+
+.app-wrapper-module {
+  @include display-flex(flex, column, nowrap);
+  @include align-items(stretch);
+  height: 100%;
+}
+
+.app-module {
+  position: relative;
+  @include display-flex(flex, row, nowrap);
+  padding-top: 15px;
+  margin-left: -24px;
+  margin-bottom: -24px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: -24px;
+    top: -24px;
+    height: 200px;
+    background-color: lighten($app-primary, 5%);
+    z-index: 1;
+  }
+}
+
+.module-side {
+  position: relative;
+  z-index: 2;
+  @include display-flex(flex, column, nowrap);
+  @include flex(0, 1, #{$side-nav-width});
+  max-width: $side-nav-width;
+  min-width: $side-nav-width;
+}
+
+.module-side-header {
+  padding: 24px 10px 24px 29px;
+  @include display-flex(flex, column, nowrap);
+}
+
+.module-logo {
+  @include display-flex();
+  @include align-items(center);
+  font-size: 24px;
+  color: $white;
+  & .zmdi {
+    font-size: 32px;
+  }
+}
+
+.module-user-info {
+  @include display-flex(flex, column, nowrap);
+}
+
+.module-side-content {
+  @extend .module-user-info;
+}
+
+.module-add-task {
+  @include display-flex();
+  padding: 24px;
+}
+
+.module-nav {
+  list-style: none;
+  padding-left: 0;
+  @include display-flex(flex, column, nowrap);
+  @include justify-content(center);
+
+  & li {
+    @include display-flex(flex, column, nowrap);
+  }
+
+  & li a {
+    padding: 12px 29px;
+    color: $body-color;
+    @include display-flex();
+    @include align-items(center);
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($body-color, 80%);
+      color: $body-color;
+    }
+
+    &.active {
+      background-color: $app-primary;
+      color: $white;
+    }
+  }
+
+  & li i {
+    margin-right: 16px;
+    font-size: 16px;
+  }
+
+  & li span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  & li.module-nav-label {
+    padding: 12px 29px;
+  }
+}
+
+.module-box {
+  position: relative;
+  z-index: 2;
+  @include display-flex(flex, column, nowrap);
+  @include flex(1, 1, auto);
+}
+
+.module-box-header {
+  margin-bottom: 40px;
+
+  & .search-bar.right-side-icon {
+    & .form-control {
+      @include border-radius(0);
+      height: 56px;
+      padding: 18px 18px 18px 70px;
+      @include box-shadow(0 4px 5px -2px rgba(0, 0, 0, .2), 0 7px 10px 1px rgba(0, 0, 0, .14), 0 2px 16px 1px rgba(0, 0, 0, .12));
+    }
+    & .search-icon {
+      width: 56px;
+      height: 56px;
+      font-size: 20px;
+      left: 9px;
+      top: 0;
+    }
+  }
+}
+
+.module-box-content {
+  @include box-shadow(0 4px 5px -2px rgba(0, 0, 0, .2), 0 7px 10px 1px rgba(0, 0, 0, .14), 0 2px 16px 1px rgba(0, 0, 0, .12));
+  background-color: $white;
+  @include display-flex(flex, column, nowrap);
+}
+
+.module-box-topbar {
+  padding: 8px 12px;
+  border-bottom: solid 1px $gray-400;
+  @include display-flex();
+
+  & button + button {
+    @include border-radius(0);
+  }
+}
+
+.toolbar-separator {
+  border-left: solid 1px $gray-400;
+  height: 100%;
+  width: 1px;
+  margin: 0 12px;
+}
+
+.toolbar-left {
+  margin-left: auto;
+}
+
+.module-list {
+  @include display-flex(flex, column, nowrap);
+  @include justify-content(center);
+}
+
+.module-list-item {
+  @include display-flex();
+  @include align-items(center);
+  padding: 15px 28px;
+  border-bottom: solid 1px $gray-400;
+  z-index: 5;
+  position: relative;
+  cursor: pointer;
+
+  & > .check-label {
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  &.mail-cell {
+    padding-left: 12px;
+  }
+}
+
+.module-detail-header {
+  background-color: darken($gray-100, 2%);
+  border-bottom: solid 1px $gray-400;
+  & > .check-label {
+    margin-right: auto;
+  }
+}
+
+.module-list-info {
+  @include flex(1, 1, 0);
+  max-width: 100%;
+  @include display-flex(flex, column, nowrap);
+}
+
+.module-todo-content {
+  position: relative;
+
+  & .subject {
+    margin-bottom: 5px;
+  }
+}
+
+.module-list-actions {
+  text-align: right;
+}
+
+.app-module-sidenav {
+  & .chat-sidenav-main {
+    max-width: 300px;
+    min-width: 300px;
+    width: 90%;
+  }
+}
+
+.module-date {
+  max-width: 150px;
+
+  & > div:before {
+    display: none;
+  }
+}
+
+.module-detail-item {
+  padding: 10px 28px;
+}
+
+.task-title {
+  font-size: 18px;
+}
+
+.chat-todo-avatar {
+  margin-right: 15px;
+}
+
+.modal-title {
+  @include display-flex();
+  @include justify-content(space-between);
+  @include align-items(center);
+  width: 100%;
+}
+
+.loader-view-block {
+  @include display-flex(flex, column, nowrap);
+  @include justify-content(center);
+  @include align-items(center);
+
+  & .slimScrollBar {
+    display: none !important;
+  }
+}
+
+.loader-view {
+  @extend .loader-view-block;
+}
+
+@media screen and (max-width: 1199px) {
+  .app-module {
+    margin-left: 0;
+
+    &:before {
+      left: -29px;
+    }
+  }
+
+  .module-side {
+    @include display-flex(block, row, nowrap);
+    @include flex(1);
+  }
+
+  .module-side-header {
+    background-color: lighten($app-primary, 5%);
+  }
+
+  .module-box-header {
+    position: relative;
+
+    & .search-bar.right-side-icon {
+      & .form-control {
+        padding-left: 100px;
+      }
+
+      & .search-icon {
+        left: 48px;
+      }
+    }
+
+    & .drawer-btn {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      border-right: solid 1px $gray-400;
+      height: 56px;
+      @include border-radius(0);
+      font-size: 22px;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .app-module {
+    padding-top: 0;
+
+    &:before {
+      height: 164px;
+    }
+  }
+
+  .module-box-header {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .module-box-header .search-bar {
+    margin-left: 0;
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .module-list-item {
+    padding: 10px 12px;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .module-box-header .search-bar {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 399px) {
+  .d-xs-flex {
+    display: flex !important;
+  }
+}

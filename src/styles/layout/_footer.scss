@@ -1,0 +1,20 @@
+/*Footer Styles*/
+
+.app-footer {
+  padding: 0 24px;
+
+  @include box-shadow(0 -1px 4px 0 rgba(0, 0, 0, 0.15));
+  background-color: $body-bg;
+  color: $sidebar-text-color;
+  line-height: $footer-height;
+  min-height: $footer-height;
+  height: $footer-height;
+  max-height: $footer-height;
+
+  & a {
+    color: $sidebar-text-color;
+    &:hover {
+      color: $sidebar-hover-color;
+    }
+  }
+}

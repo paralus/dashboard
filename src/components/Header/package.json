@@ -1,0 +1,10 @@
+{
+  "name": "Header",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.js",
+  "dependencies": {
+    "material-ui": "v1.0.0-beta.25",
+    "material-ui-icons": "^1.0.0-beta.17"
+  }
+}

@@ -1,0 +1,25 @@
+// Nav Style
+.nav-link {
+  cursor: pointer;
+}
+
+.card-header.bg-primary {
+  & .nav-link {
+    color: $white;
+
+    &.active,
+    &:hover,
+    &:focus {
+      color: $black;
+      background-color: $white;
+    }
+
+    &.disabled {
+      color: $gray-100;
+    }
+
+    &.disabled:hover {
+      color: $gray-900;
+    }
+  }
+}

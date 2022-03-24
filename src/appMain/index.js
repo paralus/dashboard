@@ -1,0 +1,211 @@
+import React from "react";
+import { Route, withRouter, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { toggleCollapsedNav, userLogout } from "actions/index";
+
+import Footer from "components/Footer";
+import MiniKubectl from "containers/K8sConsole/MiniKubectl";
+import { Helmet } from "react-helmet";
+import { Container, Button } from "@material-ui/core";
+import RafayInfoCard from "components/RafayInfoCard";
+import { ConsolePaths } from "constants/ConsolePaths";
+
+import Header from "./components/Header";
+
+import Users from "./routes/users";
+import Settings from "./routes/settings";
+import Tools from "./routes/tools";
+import AuditLogs from "./routes/auditLogs";
+import Project from "./routes/project";
+import Group from "./routes/group";
+import Home from "./routes/home";
+
+class AppMain extends React.Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+
+  componentDidMount() {
+    setTimeout(() => window?.localStorage.removeItem("org_changed"), 5000);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.reloadApp) {
+      window.location.reload();
+    }
+    return null;
+  }
+
+  userHasAccess = (_) => {
+    const { location, UserSession } = this.props;
+    const currentPath = location.pathname;
+    let hasAccess = true;
+    if (!UserSession.visibleApps) {
+      hasAccess =
+        hasAccess &&
+        !ConsolePaths.app.some((path) => currentPath.indexOf(path) === 0);
+    }
+    if (!UserSession.visibleInfra) {
+      hasAccess =
+        hasAccess &&
+        !ConsolePaths.infra.some((path) => currentPath.indexOf(path) === 0);
+    }
+    if (!UserSession.visibleAdmin) {
+      hasAccess =
+        hasAccess &&
+        !ConsolePaths.system.some((path) => currentPath.indexOf(path) === 0);
+    }
+
+    // Namespaces is a special case. It is visible with both infra and project admin roles
+    if (
+      UserSession.visibleApps &&
+      !UserSession.visibleAdmin &&
+      currentPath === "/app/namespaces"
+    ) {
+      hasAccess = true;
+    }
+    return hasAccess;
+  };
+
+  backToHome = (_) => {
+    const { history } = this.props;
+    history.push("/");
+  };
+
+  capitalize = (string) => {
+    if (!string) {
+      return " ";
+    }
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  render() {
+    const {
+      match,
+      currentProject,
+      partnerDetail,
+      UserSession,
+      userLogout,
+      organization,
+    } = this.props;
+    let favicon_src =
+      "https://pbs.twimg.com/profile_images/934706849508573186/_l78sPtc_400x400.jpg";
+    if (partnerDetail && partnerDetail.fav_icon_link) {
+      favicon_src = partnerDetail.fav_icon_link;
+    }
+    const hasAccess = this.userHasAccess();
+    if (
+      !hasAccess &&
+      !UserSession.noRolesUser &&
+      window?.localStorage.getItem("org_changed") === "ORG_CHANGED"
+    ) {
+      window?.localStorage.removeItem("org_changed");
+      return <Redirect to="/" />;
+    }
+    const title = this.capitalize(partnerDetail?.metadata.name);
+    let mainContainer = "app-container";
+    if (this.props.kubectlOpen) mainContainer += " kubectl-open";
+
+    return (
+      <div className={mainContainer}>
+        <Helmet>
+          <title>{title}</title>
+          <link rel="icon" type="image/x-icon" href={favicon_src} />
+        </Helmet>
+        <div className="app-main-container">
+          <Header partnerDetail={partnerDetail} />
+          {UserSession.noRolesUser && (
+            <div style={{ paddingTop: "75px" }}>
+              <RafayInfoCard
+                title={<span>No Access</span>}
+                linkHelper={
+                  <span>
+                    You do not have access to any projects. Please contact your
+                    administrator.
+                  </span>
+                }
+                link={
+                  <Button className="text-teal" onClick={(_) => userLogout()}>
+                    <span
+                      style={{
+                        fontSize: 24,
+                        fontWeight: 500,
+                        color: "teal",
+                      }}
+                    >
+                      <span>Logout</span>
+                    </span>
+                  </Button>
+                }
+              />
+            </div>
+          )}
+          {!hasAccess && !UserSession.noRolesUser && (
+            <div style={{ paddingTop: "75px" }}>
+              <RafayInfoCard
+                title={<span>No Access</span>}
+                linkHelper={
+                  <span>
+                    You do not have access to this path. Please contact your
+                    administrator.
+                  </span>
+                }
+                link={
+                  <Button className="text-teal" onClick={this.backToHome}>
+                    <span
+                      style={{
+                        fontSize: 24,
+                        fontWeight: 500,
+                        color: "teal",
+                      }}
+                    >
+                      <i className="zmdi zmdi-long-arrow-left pr-3" />
+                      <span>Back to Home</span>
+                    </span>
+                  </Button>
+                }
+              />
+            </div>
+          )}
+          {hasAccess && currentProject && currentProject.metadata.name && (
+            <main className="app-main-content-wrapper">
+              <div className="app-main-content">
+                <Container maxWidth="lg">
+                  <Route exact path={`${match.url}`} component={Home} />
+                  <Route path={`${match.url}/users`} component={Users} />
+                  <Route path={`${match.url}/settings`} component={Settings} />
+                  <Route path={`${match.url}/tools`} component={Tools} />
+                  <Route path={`${match.url}/audit`} component={AuditLogs} />
+                  <Route path={`${match.url}/projects`} component={Project} />
+                  <Route path={`${match.url}/groups`} component={Group} />
+                </Container>
+              </div>
+            </main>
+          )}
+          {!this.props.kubectlOpen && <Footer />}
+        </div>
+        {hasAccess && currentProject?.id && <MiniKubectl />}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = ({ settings, Projects, UserSession, Kubectl }) => {
+  const { organization, partnerDetail, reloadApp, userAndRoleDetail } =
+    settings;
+  const { currentProject } = Projects;
+  const kubectlOpen = Kubectl?.open;
+  return {
+    partnerDetail,
+    currentProject,
+    reloadApp,
+    organization,
+    UserSession,
+    kubectlOpen,
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, { toggleCollapsedNav, userLogout })(AppMain)
+);

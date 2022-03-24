@@ -1,0 +1,32 @@
+/*Login Styles*/
+
+.login-container {
+  position: relative;
+  height: 100%;
+}
+
+.login-content {
+  width: 420px;
+  margin: auto;
+  padding: 35px 35px 20px;
+  background-color: $white;
+  @include box-shadow($shadow);
+  @include border-radius(4px);
+  font-size: 14px;
+  max-width: 94%;
+}
+
+.login-header {
+  margin-bottom: 30px;
+}
+
+.login-content .form-control {
+  background-color: map_get($gray, lighten-4);
+
+  &:focus {
+    box-shadow: none;
+    border-color: $app-primary;
+  }
+}
+
+.login-content .btn, .login-content .jr-btn { padding: 10px 35px !important;  }
