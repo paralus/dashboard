@@ -1,0 +1,196 @@
+/* eslint-disable react/jsx-wrap-multilines */
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Paper } from "@material-ui/core";
+import { useParams } from "react-router";
+import UserCard from "./components/UserCard";
+import RolesCard from "./components/RolesCard";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: "auto",
+  },
+  titleCard: {
+    display: "flex",
+    padding: "10px",
+    alignItems: "center",
+    marginBottom: "10px",
+    minHeight: "62px",
+    // backgroundColor: "dodgerblue",
+    backgroundColor: "lightgray",
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+}));
+
+const ProjectRoleWidget = ({
+  editNamespaces,
+  systemRoles,
+  usersList,
+  onNamespacesChange,
+  onUserChange,
+  handleRolesChange,
+  editUser,
+  editRoles,
+}) => {
+  const classes = useStyles();
+  const { projectId } = useParams();
+  const [checked, setChecked] = React.useState([]);
+  const [selectedUser, setSelectedUser] = React.useState("");
+  const [projectRoleDisabled, setProjectRoleDisabled] = React.useState(false);
+  const [roleModified, setRoleModified] = React.useState(false);
+  const [selectedNamespaces, setSelectedNamespaces] = React.useState([]);
+
+  React.useEffect(() => {
+    if (editRoles && systemRoles && !roleModified) {
+      const editChecked = editRoles.map((ar) => {
+        return systemRoles.find((r) => r.id === ar.role.id);
+      });
+      if (!checked.length && editRoles) {
+        const uniqueRoles = [...new Set(editChecked)];
+        setChecked(uniqueRoles);
+        handleRolesChange(uniqueRoles);
+      }
+    }
+  }, [editRoles]);
+
+  React.useEffect(() => {
+    setSelectedNamespaces(editNamespaces || []);
+  }, [editNamespaces]);
+
+  const handleToggle = (value) => () => {
+    setRoleModified(true);
+    const currentIndex = checked.findIndex(({ name }) => name === value.name);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      if (value.name === "ADMIN") {
+        setProjectRoleDisabled(true);
+        setChecked([value]);
+        handleRolesChange([value]);
+        setSelectedUser("ALL PROJECTS");
+        onUserChange("ALL PROJECTS");
+        return;
+      }
+      if (value.name === "PROJECT_ADMIN") {
+        const proi = checked.findIndex(
+          ({ name }) => name === "PROJECT_READ_ONLY"
+        );
+        if (proi !== -1) {
+          newChecked.splice(proi, 1);
+        }
+      }
+      if (value.name === "PROJECT_READ_ONLY") {
+        const pai = checked.findIndex(({ name }) => name === "PROJECT_ADMIN");
+        if (pai !== -1) {
+          newChecked.splice(pai, 1);
+        }
+      }
+      if (value.name === "INFRA_ADMIN") {
+        const proi = checked.findIndex(
+          ({ name }) => name === "INFRA_READ_ONLY"
+        );
+        if (proi !== -1) {
+          newChecked.splice(proi, 1);
+        }
+      }
+      if (value.name === "INFRA_READ_ONLY") {
+        const pai = checked.findIndex(({ name }) => name === "INFRA_ADMIN");
+        if (pai !== -1) {
+          newChecked.splice(pai, 1);
+        }
+      }
+      if (value.name === "NAMESPACE_ADMIN") {
+        const pai = checked.findIndex(
+          ({ name }) => name === "NAMESPACE_READ_ONLY"
+        );
+        if (pai !== -1) {
+          newChecked.splice(pai, 1);
+        }
+      }
+      if (value.name === "NAMESPACE_READ_ONLY") {
+        const pai = checked.findIndex(({ name }) => name === "NAMESPACE_ADMIN");
+        if (pai !== -1) {
+          newChecked.splice(pai, 1);
+        }
+      }
+      newChecked.push(value);
+    } else {
+      if (value.name === "ADMIN") {
+        setProjectRoleDisabled(false);
+        setSelectedUser("");
+        onUserChange("");
+      }
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+    handleRolesChange(newChecked);
+  };
+
+  const handleUserChange = (e) => {
+    const proj = e.target.value;
+    if (proj === "ALL PROJECTS") {
+      setProjectRoleDisabled(true);
+      const adminRole = systemRoles.find(({ name }) => name === "ADMIN");
+      if (adminRole) {
+        setChecked([adminRole]);
+        handleRolesChange([adminRole]);
+      }
+    } else {
+      setProjectRoleDisabled(false);
+      const ai = checked.findIndex(({ name }) => name === "ADMIN");
+      if (ai !== -1) {
+        const newChecked = [...checked];
+        newChecked.splice(ai, 1);
+        setChecked(newChecked);
+      }
+    }
+    setSelectedUser(proj);
+    onUserChange(proj);
+  };
+
+  const handleNamespacesChange = (event) => {
+    setSelectedNamespaces([...event.target.value]);
+    onNamespacesChange([...event.target.value]);
+  };
+
+  const namespaceChecked =
+    checked.findIndex((x) => x.name.includes("NAMESPACE")) !== -1;
+
+  return (
+    <Grid
+      container
+      spacing={2}
+      justify="center"
+      alignItems="stretch"
+      className={classes.root}
+    >
+      <Grid item>
+        <Paper className={classes.titleCard}>
+          <h2 className="h2 mb-0">Select User</h2>
+        </Paper>
+        <UserCard
+          selectedUser={editUser}
+          usersList={usersList}
+          handleUserChange={handleUserChange}
+        />
+      </Grid>
+      <Grid item>
+        <Paper className={classes.titleCard}>
+          <h2 className="h2 mb-0">Select Roles</h2>
+        </Paper>
+        <RolesCard
+          systemRoles={systemRoles}
+          handleToggle={handleToggle}
+          projectRoleDisabled={projectRoleDisabled}
+          checked={checked}
+        />
+      </Grid>
+    </Grid>
+  );
+};
+
+export default ProjectRoleWidget;

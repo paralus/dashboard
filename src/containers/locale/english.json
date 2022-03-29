@@ -1,0 +1,1213 @@
+{
+  "projects": {
+    "project_detail": {
+      "layout": {
+        "helptext": "Give access to Groups and Users by assigning them to this project. You can provide restricted access to the assigned Groups and users by specifying access roles"
+      },
+      "no_users": {
+        "title": "No Users Assigned",
+        "helptext": "Click here to assign a User to this project"
+      },
+      "no_groups": {
+        "title": "No Groups Assigned",
+        "helptext": "Click here to assign a Group to this project"
+      }
+    },
+    "assign_group": {
+      "layout": {
+        "title": "Assign Group To Project",
+        "helptext": "Select the group from the dropdown and select the type of access it will have on this project"
+      }
+    },
+    "assign_user": {
+      "layout": {
+        "title": "Assign User to Project",
+        "helptext": "Select the user from the dropdown and select the type of access it will have on this project"
+      }
+    },
+    "edit_group": {
+      "layout": {
+        "title": "Change Group Roles",
+        "helptext": "Change the type of access the group will have on this project"
+      }
+    },
+    "edit_user": {
+      "layout": {
+        "title": "Change User Roles",
+        "helptext": "Change the type of access the user will have on this project"
+      }
+    }
+  },
+  "users": {
+    "user_detail": {
+      "layout": {
+        "helptext": "Update user profile, manage group membership and access to projects"
+      },
+      "tab_labels": {
+        "profile": "Profile",
+        "groups": "Groups",
+        "projects": "Projects"
+      },
+      "no_projects": {
+        "title": "No projects Assigned",
+        "helptext": "Click here to assign this User to a project"
+      },
+      "no_groups": {
+        "title": "No Groups Assigned",
+        "helptext": "Click here to add this User to a Group"
+      }
+    },
+    "add_to_group": {
+      "layout": {
+        "title": "Manage Group Membership",
+        "helptext": "Select Groups from the available list of groups and trasfer them to \"Added to Groups\" list."
+      },
+      "widget_labels": {
+        "available_groups": "Available Groups",
+        "add_to_groups": "Added To Groups"
+      },
+      "widget_button_labels": {
+        "add_groups": "Add Groups",
+        "remove_groups": "Remove Groups"
+      }
+    },
+    "assign_to_project": {
+      "layout": {
+        "title": "Assign User To Project",
+        "helptext": "Select the project from the dropdown and select the type of access the user will have on that project"
+      },
+      "widget_labels": {
+        "select_roles": "Select Roles",
+        "select_project": "Select Project"
+      }
+    },
+    "edit_project": {
+      "layout": {
+        "title": "Change Project Roles",
+        "helptext": "Change the type of access this user will have on the project"
+      },
+      "widget_labels": {
+        "select_roles": "Select Roles",
+        "select_project": "Select Project"
+      }
+    }
+  },
+  "groups": {
+    "group_detail": {
+      "layout": {
+        "helptext": "Manage group membership and access to projects"
+      },
+      "tab_labels": {
+        "users": "Users",
+        "projects": "Projects"
+      },
+      "no_projects": {
+        "title": "No projects Assigned",
+        "helptext": "Click here to assign this Group to a project"
+      },
+      "no_users": {
+        "title": "No Users Assigned",
+        "helptext": "Click here to add a User to this Group"
+      }
+    },
+    "add_users": {
+      "layout": {
+        "title": "Add/Remove Members",
+        "helptext": "Select Users from the available list of users and add them to the Group"
+      },
+      "widget_labels": {
+        "available_users": "Available Users",
+        "group_users": "Group Users"
+      },
+      "widget_button_labels": {
+        "add_to_group": "Add To Group",
+        "remove_from_group": "Remove From Group"
+      }
+    },
+    "assign_to_project": {
+      "layout": {
+        "title": "Assign Group To Project",
+        "helptext": "Select the project from the dropdown and select the type of access the group will have on that project"
+      },
+      "widget_labels": {
+        "select_roles": "Select Roles",
+        "select_project": "Select Project"
+      }
+    },
+    "edit_project": {
+      "layout": {
+        "title": "Change Project Roles",
+        "helptext": "Change the type of access this group will have on the project"
+      },
+      "widget_labels": {
+        "select_roles": "Select Roles",
+        "select_project": "Select Project"
+      }
+    }
+  },
+  "idps": {
+    "idp_list": {
+      "no_idps": {
+        "title": "No Identity Providers Configured",
+        "helptext": "Click here to create an Identity Provider"
+      }
+    }
+  },
+  "unauthorized": "You do not have enough privileges to perform this action.",
+  "welcome": "Welcome {username}",
+  "back_to_home": "Back to Workloads",
+  "back_to_login": "Back to Login",
+  "buttons": {
+    "exit": "Exit",
+    "start": "Begin"
+  },
+  "labels": {
+    "myWorkloads": "My Workloads",
+    "comm_temps": "Workload Templates",
+    "newWorkload": "New Workload",
+    "download_cli": "Download CLI",
+    "newApiKey": "New API Key",
+    "newRegistryAuthKey": "New Registry Key"
+  },
+  "sidenav": {
+    "dashboard": "Dashboard",
+    "workloads": "Workloads",
+    "images": "Container Registry",
+    "certificates": "Certificates",
+    "reports": "Reports",
+    "users": "Users",
+    "organization": "Organization",
+    "registries": "Registries",
+    "dataservices": {
+      "name": "Dataservices",
+      "config": "Configuration"
+    }
+  },
+  "signup": {
+    "password_length": "Passwords must be atleast 8 characters long",
+    "success_heading": "An e-mail has been sent to your Inbox",
+    "success_message1": "You should be receiving a verification email from *{notification_email}* shortly.",
+    "resend_verification_email_link": "Resend Verification E-mail",
+    "verify": {
+      "pending": "Account verification in progress.",
+      "failure": "Account verification failed.",
+      "verified": "Great news! Your account has been verified."
+    }
+  },
+  "forgotpassword": {
+    "success_message": "An email has been sent to *{email}* with instructions on how to reset your password.",
+    "success_message1": "If you have not received a password reset message in about a minute or so, we recommend checking your spam folder or other e-mail filtering tools."
+  },
+  "setpassword": {
+    "success_message": "Your password has been successfully reset.",
+    "back_to_login": "Back to Login"
+  },
+  "organization": {
+    "approval_status_pending": "Customer support is presently confirming your organization's eligibility for access to the system. You will receive an email from us as soon as the approval process has been completed."
+  },
+  "account": {
+    "deactivated": "Your account has been deactivated.",
+    "no_roles": "Your account doesn't have any roles.",
+    "email_verification_pending": "Your email doesn't seem to have been verified. You should have received an e-mail with a verification link. Please complete the verification process or request a new verification message.",
+    "change_password": {
+      "dialog": {
+        "title": "Change Password",
+        "cancel": "Cancel",
+        "submit": "Change Password",
+        "message": "Please note that changing your password will log you out. You will need to log back in with your new password to gain access."
+      }
+    },
+    "change_organization": {
+      "dialog": {
+        "title": "Switch Organization",
+        "message": "Pick an Organization from the following list:"
+      }
+    },
+    "cli_download": {
+      "dialog": {
+        "title": "Download CLI",
+        "message": "Select the OS/platform where you intend to install and run the CLI bundle."
+      }
+    }
+  },
+  "apikey": {
+    "create": {
+      "dialog": {
+        "title": "API Key",
+        "description": "This API key enables your CLI bundle to securely interact with the platform. Please copy this key and secret; this info cannot be viewed again.",
+        "keylabel": "Key",
+        "secretlabel": "Secret",
+        "close": "Close",
+        "ok": "Ok"
+      }
+    }
+  },
+  "regauthkey": {
+    "create": {
+      "dialog": {
+        "title": "Registry Auth Key",
+        "description": "This authorization key is required to access the container registry hosted by the platform. Please copy this key and secret; this info cannot be viewed again.",
+        "keyLabel": "Key",
+        "secretLabel": "Secret",
+        "labelsLabel": "Labels",
+        "close": "Close"
+      }
+    }
+  },
+  "AUTH005": "Authentication Failed.",
+  "invalid_details": "Details submitted are invalid.",
+  "signup_captcha_mismatch": "CAPTCHA input mismatch. Please re-enter the correct characters or refresh the CAPTCHA for a new set of characters.",
+  "signup_invalid_token": "The specific token is either invalid or expired. Please request a new token.",
+  "signup_resend_verification_failure": "Our apologies. We are currently facing technical difficulties and are unable to send any e-mails. Please try again in a few minutes.",
+  "forgot_password_captcha_mismatch": "CAPTCHA input mismatch. Please re-enter the correct characters or refresh the CAPTCHA for a new set of characters.",
+  "account_activation_failed": "Account activation failed. Please try again at a later time.",
+  "account_deactivation_failed": "Account deactivation failed. Please try again at a later time.",
+  "organization_min_one_admin": "An organization must have at least one active administrator.",
+  "user": {
+    "search": {
+      "placeholder": "Search in firstname, lastname and username."
+    },
+    "create": {
+      "dialog": {
+        "title": "",
+        "description": "Please provide an email address for the user you'd like to add to the system, including their first and last name. Name inputs should only include alphanumeric characters. Also select the role you'd like to assign this user.",
+        "close": "Close",
+        "create": "Create",
+        "cancel": "Cancel"
+      },
+      "new_user": "New User",
+      "download_cli": "Download CLI"
+    },
+    "role": {
+      "change": "Change Role",
+      "add_user": "Add User",
+      "new_user": "New User"
+    },
+    "delete": {
+      "dialog": {
+        "title": "",
+        "description": "This action will permanently delete this user from your organization. Are you sure you want to continue?",
+        "close": "Close",
+        "cancel": "Cancel",
+        "yes": "Yes"
+      }
+    },
+    "breadcrumb": {
+      "users": "Users",
+      "details": "Details"
+    },
+    "cli": {
+      "breadcrumb": {
+        "users": "Users",
+        "download": "Download CLI Package"
+      },
+      "platform": {
+        "title": "Download CLI",
+        "description": "Choose the platform/OS where you intend to install the CLI and click on the corresponding Download button below:",
+        "mac": {
+          "title": "Mac",
+          "description": "OS X Yosemite or later",
+          "download": "Download"
+        },
+        "windows": {
+          "title": "Windows",
+          "x86": "32-bit",
+          "x64": "64-bit",
+          "download": {
+            "x86": "Download",
+            "x64": "Download"
+          }
+        },
+        "linux": {
+          "title": "Linux",
+          "x86": "32-bit",
+          "x64": "64-bit",
+          "download": {
+            "x86": "Download",
+            "x64": "Download"
+          }
+        },
+        "exit": "BACK TO USERS"
+      }
+    }
+  },
+  "workload": {
+    "search": {
+      "placeholder": "Search in workload name, hostname"
+    },
+    "create": {
+      "description": "Please provide a name for your workload (alphanumeric characters only), and also optionally add a description for this workload.",
+      "inbound_traffic_info": "Choose 'Disabled' option if the workload will not receive any traffic from other applications or services, for example, this workload will only generate traffic destined for upstream services.",
+      "workload_from_template_info": "Please provide a name for the workload you'd like to create from an available template (alphanumeric characters only).",
+      "workload_from_template_title": "Create Workload From An Available Template",
+      "publish_warning": "This will publish the workload. Are you sure you want to publish this workload ?  ",
+      "template_walkthrough": "Template Walkthrough",
+      "create_template": "Create Template",
+      "template_description": "To create a workload from template , enter a name using alphanumeric characters. Name should not contain any special characters."
+    },
+    "helpText": {
+      "myWorkloads_config": "Your configured workloads are listed below. You can manage individual workloads through the corresponding ACTIONS menu, or you can create a new workload by clicking on the NEW WORKLOAD button.",
+      "myWorkloads_not_config": "You haven't configured any workloads yet. Click on the NEW WORKLOADS button to begin creating your first workload."
+    },
+    "breadcrumb": {
+      "workloads_label": "Workloads"
+    },
+    "general": {
+      "tab_name": "PLACEMENT",
+      "description": "Specify general details about your workload on this page.",
+      "namespace": "Namespace",
+      "name": "Name",
+      "description_label": "Description"
+    },
+    "ingress": {
+      "tab_name": "Ingress",
+      "description": "Specify ingress configuration for your workload on this page.",
+      "ingress_policies_heading": "Ingress Configuration",
+      "add_ingress_button": "New Ingress",
+      "add_path_button": "Add Another Path",
+      "atleast_one_ingress_error": "You must configure at least one ingress policy",
+      "field_empty_error": "Empty fields detected in your ingress policy. Please correct and continue",
+      "no_certificate_error": "You must select a certificate before you continue",
+      "invalid_host_name_error": "Please provide a valid host name, Valid characters are a-zA-Z0-9",
+      "cert_cname_and_host_mismatch_error": "The server name in the certificate you have selected does not match the configured ingress host name",
+      "host_unique_error": "Host names configured as part of an ingress policy must be unique",
+      "invalid_api_path_error": "Please provide valid URL path",
+      "ingress_no_hostname_label": "NO HOSTNAME",
+      "mutual_authentication_text": "Select from the list of supported authentication mechanisms if you would like to limit access to the upstream API services only to authenticated users.",
+      "cname_create_info_text": "IMPORTANT: You must create a CNAME for this workload via your DNS service and point to: ",
+      "cname_create_info_text2": "Because you are using our domain, your traffic will be encrypted using System Provided certificates.",
+      "generate_self_signed_cert_link": "Generate Self Signed Certificate",
+      "no_cert_available": "No certificates available.",
+      "atleast_one_api_path_msg": "You must configure atleast one API Path. Please correct and continue.",
+      "delete_ingress_warning": "Are you sure you want to delete this Ingress ?",
+      "delete_path_warning": "Are you sure you want to delete this Path ?",
+      "mutual_auth_label": "Mutual Authentication",
+      "use_your_domain": "Use your domain",
+      "use_rafay_domain": "Use System domain",
+      "use_system_domain": "Use System domain",
+      "host": "Host",
+      "select_server_certificate": "Select Server Certificate",
+      "hostname": "Hostname",
+      "url_paths": "URL Paths",
+      "url_paths_helptext": "This platform natively supports API routing policies, which you can define here for your devices or endpoints to connect to over the Internet. For each defined path, you can specify if you want to send the payloads accessing the path to an external service or a micro-service running in the workload context. You will be able to specify specific external services or containers before publishing. Please note that you cannot repeat a URL Path in this configuration.",
+      "non_unique_URL": "URL Paths must be unique.",
+      "no_slash_URL": "URL Paths must begin with forward slash."
+    },
+    "settings": {
+      "tab_name": "Template Params",
+      "description": "Customize application related settings on this page.",
+      "namespace": "Namespace",
+      "name": "Name",
+      "description_label": "Description"
+    },
+    "containers": {
+      "tab_name": "Containers",
+      "description": "This page is where you describe the containers that make up this workload.",
+      "description_2": "For each container, you can also configure ports, image tags, environment variables, and other critical features.",
+      "helptext": "Your configured containers are listed below. You can view or edit specific container configuration by clicking on the edit button in line with the container name. All containers within a namespace can interact with each other using the service_name:port combination.",
+      "package_type_label": "Package Type",
+      "docker_label": "Docker",
+      "docker_compose_label": "Docker Compose",
+      "kubernetes_label": "Kubernetes",
+      "helm_label": "Helm",
+      "add_container_button": "New Container",
+      "field_empty_error": "Empty fields detected. Please correct and continue.",
+      "no_containers_configured_info": "You haven't configured any containers yet. Click on the NEW CONTAINER button to begin creating your first container.",
+      "add_container_label": "New Container",
+      "delete_container_warning": "Deleting this container will require changes to the API Routing policies that may have already been defined. Are you sure you want to do this?",
+      "cancel_button_label": "No",
+      "delete_button_label": "Yes",
+      "atleast_one_container_error": "You must specify at least one container",
+      "logs_helptext": "Enable automatic collection and aggregation of log output from all container replicas to configured aggregation endpoints.",
+      "log_collection": "Enable Log Aggregation",
+      "api_path_label": "API Path",
+      "upstream_type_label": "Send To",
+      "container_configuration": "Container Configuration",
+      "add_volumes": "Add Volumes",
+      "persistent": "Persistent",
+      "gib": "GB ",
+      "mount_path": "Mount Path",
+      "add_ports": "Add Ports",
+      "port_label": "Port",
+      "name_label": "Name",
+      "value_label": "Value",
+      "value_label_vault": "Vault Reference",
+      "secure_label": "Secure",
+      "file_name_label": "File Name",
+      "content_label": "Content",
+      "mount_point_label": "Mount Point",
+      "add_environment_settings": "Add Startup Configuration",
+      "select_type": "Select Type",
+      "environment_variable": "Environment Variable",
+      "file": "File",
+      "certificate": "Certificate",
+      "image_name_label": "Image Name",
+      "image_tag_label": "Image Tag",
+      "download_cli_desc": "If you haven't already, please use the CLI utility to push your container image to the platform's container repository.",
+      "discourage_latest_tag": "Example: index.docker.io/rafaysystems/testapp:v2 , please avoid using \"latest\" tag for container images",
+      "replica_default": "Replica Default",
+      "replica_max": "Replica Max",
+      "cpu_request": "CPU Request",
+      "cpu_limit": "CPU Limit",
+      "memory_request": "Memory Request",
+      "memory_limit": "Memory Limit",
+      "deploy_description": "General settings of the workload helps to identify the workload by Name and description. Workload can be deployed with API G/W ( for ingress traffic ) or stand alone ( without API G/W).",
+      "size_nano_label": "Size Nano",
+      "size_nano_cpu": "CPU : 0.125",
+      "size_nano_network_io": "Network I/O : 5Mbps",
+      "size_nano_memory": "Memory : 0.5GB",
+      "size_nano_storage": "Storage : 1GB",
+      "size_nano_block_io": "Block I/O : 5iops",
+      "size_micro_label": "Size Micro",
+      "size_micro_cpu": "CPU : 0.25",
+      "size_micro_network_io": "Network I/O : 10Mbps",
+      "size_micro_memory": "Memory : 1GB",
+      "size_micro_storage": "Storage : 2GB",
+      "size_micro_block_io": "Block I/O : 10iops",
+      "size_small_label": "Size Small",
+      "size_small_cpu": "CPU : 0.5",
+      "size_small_network_io": "Network I/O : 10Mbps",
+      "size_small_memory": "Memory : 2GB",
+      "size_small_storage": "Storage : 10GB",
+      "size_small_block_io": "Block I/O : 10iops",
+      "size_medium_label": "Size Medium",
+      "size_medium_cpu": "CPU : 1",
+      "size_medium_network_io": "Network I/O : 50Mbps",
+      "size_medium_memory": "Memory : 4GB",
+      "size_medium_storage": "Storage : 20GB",
+      "size_medium_block_io": "Block I/O : 50iops",
+      "size_large_label": "Size Large",
+      "size_large_cpu": "CPU : 2",
+      "size_large_network_io": "Network I/O : 100Mbps",
+      "size_large_memory": "Memory : 8GB",
+      "size_large_storage": "Storage : 40GB",
+      "size_large_block_io": "Block I/O : 100iops",
+      "size_extra_large_label": "Size Extra Large",
+      "size_extra_large_cpu": "CPU : 4",
+      "size_extra_large_network_io": "Network I/O : 100Mbps",
+      "size_extra_large_memory": "Memory : 16GB",
+      "size_extra_large_storage": "Storage : 80GB",
+      "size_extra_large_block_io": "Block I/O : 500iops",
+      "container_health_check": "Container Health Checks",
+      "health_check_inline_desc": "Use this feature to configure readiness and liveness probes for this container. Readiness checks are carried out once when a container is started and if the check is successful, your container is deemed operationally ready. Liveness checks are carried out periodically for the lifetime of the container; a failed liveness checks means that your container is no longer operational. For HTTP/S health checks, please specify Header(s) to be sent with the request below.",
+      "liveness_same_as_readiness": "Check this box if you want to use the same logic to test for readiness and liveness",
+      "readines_probe": "Readines Probe",
+      "none": "none",
+      "command": "Command",
+      "path": "Path",
+      "port": "Port",
+      "timeout": "Timeout",
+      "timeout_helptext": "before container is deemed unavailable",
+      "type": "Type",
+      "interval": "Interval",
+      "interval_helptext": "how frequently the container will be probed",
+      "add_metrics": "Add Metric",
+      "add_metric_header": "Add Header",
+      "http_headers_heading": "Optional HTTP Headers",
+      "metrics_inline_desc": "Use this feature to configure metrics collection for this container.",
+      "success_threshold": "Success Threshold (# of probes before container deemed UP)",
+      "failure_threshold": "Failure Threshold (# of probes before container deemed DOWN)",
+      "add_header": "Add Header",
+      "shared_volumes_label": "Workload-wide, Shared Volumes",
+      "shared_volume_inline_desc": "Use this feature to define volumes that you'd like to share across all containers defined within this workload. You can always define container-specific volumes within the container configuration page if needed.",
+      "add_shared_volumes": "Add Shared Volume",
+      "delete_shared_volumes_warning": "Are you sure you want to delete this Shared Volume.",
+      "data_export_endpoints_inline_desc": "Use this feature to select the logs endpoint where logs generated by containers within this workload should be sent. You can define logs endpoints under \"Integrations > Aggregation Endpoints\".",
+      "data_export_endpoints_title": "Logs Aggregation",
+      "liveness_probe": "Liveness Probe",
+      "name": "Name",
+      "value": "Value",
+      "gb": "GB",
+      "auto_scale_factor": "Auto Scale Factor",
+      "auto_scale_help_text": "Specify the minimum and maximum number of container replicas you’d like the system to spawn in each cluster. Please also specify the mean CPU threshold that the system should target across running containers. Replicas will be added when the mean CPU usage exceeds the configured threshold value for 30 seconds, and will be removed when the mean CPU usage is below the configured threshold value for 5 minutes across the current replicas.",
+      "auto_scale_custom_metrics_help_text": "Scale containers by the metrics exposed from the container using Metrics Endpoint defined. The average value is calculated every 30 sec of moving window of 5 mins for very metric exposed and max number of containers are launched aganist all metric thrsholds.",
+      "auto_scale_invalid_error": "Min replica count should be less than or equal to max replica",
+      "replicas": "Initial Replica Count",
+      "min_replica": "Min",
+      "max_replica": "Max",
+      "combine_private_key_and_certificate": "Combine Certificate and Private Key",
+      "file_name_for_certificate": "File Name For Certificate",
+      "mount_point_for_certificate": "Mount Point For Certificate",
+      "file_name_for_private_key": "File Name For Private Key",
+      "mount_point_for_private_key": "Mount Point For Private Key",
+      "file_name_for_ca_certificate": "File Name For CA Certificate",
+      "mount_point_for_ca_certificate": "Mount Point For CA Certificate",
+      "cpu_utilization_percent": "CPU",
+      "memory_utilization_percent": "Memory",
+      "cpu_utilization_percent_threshold": "Threshold (%)",
+      "memory_utilization_percent_threshold": "Threshold (%)",
+      "custom_metrics_heading": "Custom Metrics",
+      "add_metric_button": "Add Metric",
+      "auto_scale_resources": "Built-in Metrics",
+      "auto_scale_scale_up_help_text": "Step up rule will be evaluated every 30 sec and if the conditon is true autoscaler will scale up the instances in the percentage provided. cpu and memory are reserved key words for CPU and Memory. The Values of CPU and Memory are average utilization values like 80% used in last 5 min. Where other metrics are rate of increase like http_requests is 200 requests/sec in last 5 mins. For specific time window per metric in minutes can be used as {minutes}",
+      "auto_scale_scale_up_label": "Add Replica",
+      "auto_scale_scale_up_help_expression": "eg: ((cpu[8m] > 80) && (http_requests[3m] > 200)) || (memory[3m] >80)",
+      "auto_scale_scale_up_help_instance": "eg: if 2 instances are running and expression is true in 30  sec and 10% is configured to scale up then one more instance will be added making total instances to 3. If 100% is configured 2 more instances will be added making total instances to 4 ",
+      "auto_scale_scale_down_help_text": "Step down rule will be evaluated every 30 sec and if the conditon is true for 5 mins autoscaler will scale down the instances in the percentage provided. cpu and memory are reserved key words for CPU and Memory. The Values of CPU and Memory are utilization values like 80% used.",
+      "auto_scale_scale_down_label": "Remove Replica",
+      "auto_scale_scale_down_help_expression": "eg: ((cpu < 50) && (http_requests_latest[10m] < 50)) || (memory < 65)",
+      "auto_scale_scale_down_help_instance": "eg: if 4 instances are running and expression is true for last 5 mins and 50% is configured for scale down then 2 instance will be removed making total instances to 2. If 100% is configured auto scaler scales down to minimum instances ",
+      "auto_scale_type": "Auto-Scale Type",
+      "max_replicas": "Maximum Replicas",
+      "enable_auto_scale": "Enable Auto Scale",
+      "add_args_button": "Add Argument",
+      "add_command_button": "Add Command",
+      "container_security_inline_desc": "Use this feature to configure readiness and liveness probes for this container. Readiness checks are carried out once when a container is started and if the check is successful, your container is deemed operationally ready. Liveness checks are carried out periodically for the lifetime of the container; a failed liveness checks means that your container is no longer operational. For HTTP/S health checks, please specify Header(s) to be sent with the request below.",
+      "lifecycle_hooks_inline_desc": "Use this feature to configure readiness and liveness probes for this container. Readiness checks are carried out once when a container is started and if the check is successful, your container is deemed operationally ready. Liveness checks are carried out periodically for the lifetime of the container; a failed liveness checks means that your container is no longer operational. For HTTP/S health checks, please specify Header(s) to be sent with the request below.",
+      "node_affinity_inline_desc": "Use this feature to configure readiness and liveness probes for this container. Readiness checks are carried out once when a container is started and if the check is successful, your container is deemed operationally ready. Liveness checks are carried out periodically for the lifetime of the container; a failed liveness checks means that your container is no longer operational. For HTTP/S health checks, please specify Header(s) to be sent with the request below.",
+      "pod_affinity_inline_desc": "Use this feature to configure readiness and liveness probes for this container. Readiness checks are carried out once when a container is started and if the check is successful, your container is deemed operationally ready. Liveness checks are carried out periodically for the lifetime of the container; a failed liveness checks means that your container is no longer operational. For HTTP/S health checks, please specify Header(s) to be sent with the request below.",
+      "pod_anti_affinity_inline_desc": "Use this feature to configure readiness and liveness probes for this container. Readiness checks are carried out once when a container is started and if the check is successful, your container is deemed operationally ready. Liveness checks are carried out periodically for the lifetime of the container; a failed liveness checks means that your container is no longer operational. For HTTP/S health checks, please specify Header(s) to be sent with the request below.",
+      "lifecyclehooks": {
+        "poststart_label": "Post Start",
+        "prestop_label": "Pre Stop",
+        "poststart_type": "Post Start Hook Type",
+        "prestop_type": "Post Start Hook Type"
+      },
+      "conatiner_security": {
+        "capability_add_label": "Add Capability",
+        "capability_drop_label": "Drop Capability",
+        "priviliged_label": "Priviliged",
+        "run_as_user_label": "Run As User",
+        "run_as_non_root_label": "Run As Non Root",
+        "read_only_root_filesystem_label": "Read Only Filesystem",
+        "allow_privilege_escalation_label": "Allow Priviliged Escalation",
+        "se_linux_options_label": "SE Linix Options",
+        "capability_add_button": "Add Capability",
+        "capability_drop_button": "Drop Capability",
+        "se_linux_options": {
+          "user_label": "User",
+          "role_label": "Role",
+          "type_label": "Type",
+          "level_label": "Label"
+        }
+      },
+      "affinity": {
+        "node_affinity_label": "Node Affinity",
+        "pod_affinity_label": "Pod Affinity",
+        "pod_anti_affinity_label": "Pod Anti Affinity",
+        "required_during_scheduling_label": "Required During Scheduling Ignored During Execution",
+        "preferred_during_scheduling_label": "Preferred During Scheduling Ignored During Execution",
+        "add_node_selector_terms": "Add Node Selector",
+        "key_label": "Key",
+        "operator_label": "Operator",
+        "values_label": "Values",
+        "add_pod_selector_terms": "Add Pod Selector",
+        "value_label": "Value",
+        "node_affinity": {
+          "add_match_expression": "Add Expression",
+          "add_match_label": "Add Label",
+          "add_match_labels": "Add Label",
+          "add_match_field": "Add Field"
+        }
+      }
+    },
+    "placement": {
+      "select_all": "Select all locations"
+    },
+    "policies": {
+      "tab_name": "Policies",
+      "description": "This page is where you define various policies for the workload, including API routing and container upgrade",
+      "description_2": "For each API Path, please specify where the received requests should be sent. Requests may be sent to a container (specify relevant service name and port), or to an external service.",
+      "routing_policies_label": "API Routing Policies",
+      "hints_for_custom_policy": "Hints: You can select the required clusters from the list below.",
+      "hints_for_developer_policy": "Hints: You can select the required locations from the list below.",
+      "preserve_host_label": "Preserve Host",
+      "placement_policy_label": "Placement Policy",
+      "latency_label": "Target Round-trip Time Between End Point And Closest Cluster (in milliseconds)",
+      "higher_cost_label": "Higher Cost",
+      "lower_cost_label": "Lower Cost",
+      "placement_policy_line_1": "Where, in relation to your users and endpoints, do you want to deploy this workload? You can choose one of two policy options.",
+      "placement_policy_line_2": "If you're testing a development build or simply kicking the tires, we recommend you use the DEVELOPER placement type, which will limit your workload footprint to two Clusters worldwide.",
+      "placement_policy_line_3": "If you are ready to experience the benefits of cluster deployment and want to evaluate performance benefits, set the placement type to PERFORMANCE and subsequently select the round-trip time (RTT) in miiliseconds that you believe will most improve the end user experience.",
+      "placement_policy_line_4": "If you wish to only run your app in certain parts of the world, you can choose the SPECIFIC LOCATIONS option and pick locations that are of interest to your business.",
+      "placement_policy_line_5": "Select the clusters where you wish to deploy your workload.",
+      "placement_policy_line_6": "If you wish to run your app in certain clusters, you can choose the SPECIFIC CLUSTERS option and pick global clusters that are of interest to your business.",
+      "placement_policy_line_7": "If you wish to run your app with certain labels, you can choose the CUSTOM LABELS option and pick custom labels that are of interest to your business.",
+      "auto_rollback_on_failure": "Rollback on Failure",
+      "test_upgrade": "Test Upgrade",
+      "probes_configure": "Please configure probes to all the containers for Rolling Upgrade to be seamless",
+      "edge_refinement": {
+        "title": "Cluster Refinement",
+        "description": "This section allows you to change the defaults that govern workload allocation across additional clusters when a new cluster of users is detected on the Internet. Note that you can optionally choose to only expand the current workload footprint, or only contract clusters.",
+        "target_percentile": "Use this configuration to describe the percentage of end users or endpoints for whom you want to ensure that the configured service-level object (in terms of Round-Trip Time) is met.",
+        "refinement_interval_title": "Refinement Interval",
+        "refinement_interval_description": "Specify how often the system must review collected metrics to determine if the target percentile is presently being met or not.",
+        "min_datapoints_per_sec_title": "Minimum Data Points Per Second",
+        "min_datapoints_per_sec_description": "Specify how many new latency-related data points must be received by the system across all clusters per second before the system should review the current workload footprint.",
+        "threshold_title": "Threshold",
+        "threshold_description": "Specify how many refinement cycles you want the system to wait before a new decision is made about adding or removing clusters for this workload.",
+        "tolerance_title": "Tolerance (0 - 1)",
+        "tolerance_description": "Specify how quickly the system should take action based on changes in end user or endpoint population globally. If the RTT experienced by a cluster of users changes by more than the tolerance level relative to the configured RTT objective, clusters may be added or removed accordingly."
+      },
+      "threshold_percentile": "Target Percentile",
+      "interval_second": "Refinement Interval (in seconds)",
+      "floor_samples_per_second": "Minimum Data points Per Second",
+      "expand_edges": "Expand Clusters",
+      "contract_edges": "Contract Clusters",
+      "threshold": "Threshold",
+      "tolerance": "Tolerance (0 - 1)",
+      "alert": "Alert",
+      "enabled": "Enabled"
+    },
+    "publish": {
+      "tab_name": "Publish",
+      "description": "This page is where you can initiate the deployment of your workload at the Cluster. Clusters will be selected based on your configured placement policy and infrastructure resources available to your organization.",
+      "config_error": "There appear to be errors in your workload configuration.",
+      "config_error_info": "The system has detected the following errors in your workload configuration. Please correct these so that you can successfully publish this workload.",
+      "publish_failed_error": "Failed to publish the workload. Please try again.",
+      "validate_label": "Validating configuration ...",
+      "ready_label": "Ready to Publish",
+      "submit_label": "Workload Submitted",
+      "deployed_info": "Workload Placed At Clusters",
+      "dns_configured": "DNS Configured",
+      "workload_published": "Workload Published",
+      "configuring_dns": "Configuring DNS"
+    },
+    "buttons": {
+      "save_and_return_to_general": "Save and return to placement",
+      "save_and_return_to_settings": "Save and return to Template Params",
+      "save_and_return_to_ingress": "Save and return to ingress",
+      "save_and_return_to_containers": "Save and return to containers",
+      "return_to_policies": "Return to policies",
+      "exit": "Exit",
+      "discard_changes_and_exit": "Discard changes and exit",
+      "save_and_exit": "Save and exit",
+      "save_and_go_to_ingress": "Save and go to ingress",
+      "save_and_go_to_settings": "Save and go to Template Params",
+      "save_and_go_to_containers": "Save and go to containers",
+      "save_and_go_to_policies": "Save and go to policies",
+      "save_and_go_to_publish": "Save and go to publish",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "create": "Create",
+      "save": "Save",
+      "yes": "Yes",
+      "no": "No",
+      "add_namespace": "Add Namespace",
+      "discard_and_return_to_containers": "Discard and return to Container list",
+      "save_and_return_to_container_list": "Save and return to Container list"
+    },
+    "delete": {
+      "warning": "This will bring down the workload, if already published. Are you sure you want to remove workload ",
+      "unpublish_warning": "This will unpublish the workload, if already published. Are you sure you want to unpublish workload "
+    },
+    "status": {
+      "published": "Published",
+      "failed": "Publish Failed",
+      "in_progress": "In Progress",
+      "not_published": "Not Published"
+    },
+    "templates": {
+      "search": {
+        "placeholder": "Search for workload template"
+      }
+    },
+    "workload_upload": {
+      "repository": "Provide the repository to be used for the workload",
+      "revision": "Provide the revision to be used for the workload",
+      "helmInGitRepo_file_path": "Provide file path for the helm chart",
+      "values_file_path": "Provide file path for the values file. Optionally Specify path for additional Values files",
+      "values_file_path_single": "Provide file path for the values file"
+    }
+  },
+  "dashboard": {
+    "uniqueClients": "Unique Client Count",
+    "RTT": "RTT",
+    "Configured": "Configured:",
+    "P95": "P95 Sampling",
+    "Deployed_edges": "Deployed Clusters",
+    "http": "HTTP Response Codes",
+    "Location_view": "Clusters",
+    "Latency_view": "Users",
+    "accesslogsHeading": "API Gateway Log Output (100 lines)",
+    "requestDistribution": "Request Distribution by Cluster Locations",
+    "latency_distribution": "Latency ",
+    "client_distribution": "Client ",
+    "cluster": "Cluster",
+    "access_logs": "Access Logs",
+    "cluster_refinement": "Cluster Refinement",
+    "cluster_refinement_feed": "Cluster Refinement Feed",
+    "performance": "Performance"
+  },
+  "edgemap": {
+    "edgeFailed": "Failed",
+    "edgeDeployed": "Deployed",
+    "edgeInProgress": "In Progress",
+    "edgeUpgrading": "Upgrading"
+  },
+  "certificate": {
+    "desc1": "Your configured certificates are listed below. You can manage individual certificates through the corresponding ACTIONS menu, or you can create a new certificate by clicking on the NEW CERTIFICATE button.",
+    "desc2": "You haven't configured any certificates yet. Click on the NEW CERTIFICATES button to begin defining your first certificate.",
+    "tab_name": "Certificates",
+    "new": "New Certificate",
+    "name": "Name",
+    "certificate_type": "Certificate Type",
+    "ca_certificate": "CA Certificate",
+    "password": "Password",
+    "private_key": "Private Key",
+    "certificate": "Certificate",
+    "cert_body": "Certificate Body",
+    "cert_private_key": "Certificate Private Key",
+    "valid_until": "Valid Until",
+    "issued_at": "Issued At",
+    "new_certificate": "New Certificate",
+    "delete_certificate": "Delete Certificate",
+    "delete_certificate_warning": "Are you sure you want to delete this certificate ?",
+    "search": {
+      "placeholder": "Search for name and cname."
+    }
+  },
+  "debug": {
+    "edge_detail": {
+      "helptext": "You can debug your published containers in the location you selected through this page. You can click on the SHELL button to console into each container replica in the selected location. You can also view log output from each replica by clicking on the LOGS button."
+    }
+  },
+  "dataservices": {
+    "workloads": {
+      "tab_name": "Workloads"
+    },
+    "config": {
+      "tab_name": "Runtime Configuration",
+      "no_result_help_text": "You haven't configured any Runtime Configurations yet. Click on the NEW CONFIGURATION button to begin defining your first Runtime Configuration.",
+      "help_text": "Your configuration for the workload are listed below. You can manage individual configurations through the corresponding ACTIONS menu, or you can create a new configuration by clicking on the NEW CONFIGURATION button. You can use PUSH CONFIGURATION button to push your configurations to the workload.",
+      "new_config_btn": "NEW CONFIGURATION",
+      "publish_btn": "PUSH CONFIGURATION",
+      "search": {
+        "placeholder": "Search for name"
+      },
+      "create": {
+        "dialog": {
+          "heading": "Add Runtime Configuration",
+          "description": "This will add New Runtime Configuration",
+          "button": "Create"
+        },
+        "success": {
+          "msg": "Successfully created new configuration."
+        }
+      },
+      "edit": {
+        "dialog": {
+          "heading": "Edit Runtime Configuration",
+          "description": "Modify the content and use publish for pushing this content",
+          "button": "Update"
+        },
+        "success": {
+          "msg": "Succesfully updated configuration."
+        }
+      },
+      "list": {
+        "cellmenu": {
+          "edit": "Edit",
+          "view_content": "View Configuration",
+          "publish": "Publish",
+          "delete": "Delete",
+          "mappings": "Map Workloads"
+        }
+      },
+      "publish": {
+        "warning": {
+          "msg": "Do you want to push this content to the workloads?",
+          "cancel_label": "Cancel",
+          "yes_label": "Publish"
+        },
+        "success": {
+          "msg": "Successfully pushed configuration."
+        }
+      },
+      "mapping": {
+        "new_mapping_btn": "Add Workload"
+      },
+      "delete": {
+        "warning_message": "This will remove the file from the shared volume of the workload, if already published. Are you sure you want to remove this configuration ?",
+        "cancel_label": "Cancel",
+        "yes_label": "Yes",
+        "success": {
+          "msg": "Successfully deleted configuration."
+        }
+      },
+      "buttons": {
+        "exit": "Cancel",
+        "save_and_exit": "Save",
+        "save_and_publish": "Publish",
+        "save_and_go_to_targets": "Save and Go To Targets",
+        "save_and_back_to_content": "Content",
+        "save_and_go_to_publish": "Save and Go To Publish",
+        "publish": "Publish"
+      }
+    }
+  },
+  "tools": {
+    "title": "Tools",
+    "helptext": "Use the RCTL CLI to securely interact with the Controller through command line. Use RCTL to integrate the with your existing automation pipelines.",
+    "cli_section": "Command Line Interface ( CLI )",
+    "download_cli_button": "Download Cli",
+    "download_cli_help": "RCTL CLI can be used on Windows, Linux and macOS.",
+    "download_cli_config_button": "Download Cli Config",
+    "download_cli_config_text": "Generates new credentials for the logged in user.",
+    "kubeconfig_section": "Kubectl Access",
+    "download_kubeconfig_button": "DOWNLOAD KUBECONFIG",
+    "download_kubeconfig_help": "Generates Kubeconfig file for "
+  },
+  "registries": {
+    "dialog": {
+      "new_description": "Please choose a registry provider and provide credentials",
+      "edit_warning": "WARNING: Workloads using this registry may have to be republished if credentials are changed",
+      "title_create": "Create Registry",
+      "title_edit": "Edit Registry",
+      "create": "Create",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "delete_title": "Delete Registry",
+    "delete_warning": "Are you sure you want to remove this Registry",
+    "title": "Container Registries",
+    "search": {
+      "placeholder": "Search in name"
+    },
+    "provider": {
+      "system": "System",
+      "docker_hub": "Docker Hub",
+      "custom_registry": "Custom",
+      "aws_ecr": "AWS ECR",
+      "gcp_gcr": "GCP GCR",
+      "quay_redhat": "Quay By RedHat",
+      "nexus_sonatype": "Nexus By Sonatype",
+      "jfrog_artifactory": "JFrog Artifactory",
+      "harbor": "Harbor",
+      "microsoft_mcr": "Microsoft MCR",
+      "azure_acr": "Azure ACR"
+    },
+    "new_registry": "New Registry",
+    "tab_name": {
+      "registries": "Registries",
+      "repositories": "Repositories"
+    }
+  },
+  "secretstores": {
+    "new_secret_store": "New Secret Store",
+    "dialog": {
+      "new_description": "Please choose a registry provider and provide credentials",
+      "edit_warning": "WARNING: Workloads using this registry may have to be republished if credentials are changed",
+      "title_create": "Create Secret Store",
+      "title_edit": "Edit Secret Store",
+      "create": "Create",
+      "cancel": "Cancel",
+      "save": "Save",
+      "close": "Close",
+      "add_clusters": "Add Clusters"
+    },
+    "desc": {
+      "name": "Enter a name for your Secret Store",
+      "provider": "Select your Secret Store provider ",
+      "host": "Host address should be accessible from the kubernetes cluster",
+      "host_2": "The existing workloads need to be republished to start using the new updated vault config",
+      "auth_method": "Select your Secret Store Auth Method ",
+      "cluster": "Enable kubernetes auth method in vault at this path. eg. test/cluster1",
+      "cluster_note": "Note : If you edit the auth path then also configure the auth methods at new paths in vault"
+    },
+    "delete_title": "Remove Secret Store",
+    "delete_warning": "Are you sure you want to remove this Secret Store"
+  },
+  "configure_node": {
+    "title": "Edit Node",
+    "roles": {
+      "label": "Roles",
+      "helptext": {
+        "master": "Enable this role if you want this to be a Master Node",
+        "worker": "Enable this role if you want this to be a Worker Node",
+        "storage": "Enable this role if you want to enable storage on this node and configure Storage location"
+      }
+    }
+  },
+  "eks_provision": {
+    "general": {
+      "description": "Provide configuration for the cluster",
+      "fields": {
+        "name": "Enter a name for your EKS cluster",
+        "cloud_provider": "Select your cloud credentials profile ",
+        "region_k8sversion": "Select the AWS region for the EKS Cluster",
+        "availability_zones": "Specify Availability zones for the cluster",
+        "blueprint": "Select your cluster blueprint",
+        "service_role_arn": "Specify your previously created service role ARN",
+        "service_role_permissions_boundary": "Specify your previously created service role permissions boundary policy arn",
+        "upload_config": "Upload Config file"
+      }
+    },
+    "networking": {
+      "description": "Specify Endpoint Access, VPC and Subnets for your cluster node groups",
+      "fields": {
+        "vpc_cidr": "Specify a range of IPv4 addresses for your VPC",
+        "vpc_nat_mode": "Specify the NAT Mode for your VPC",
+        "vpc_private_subnet": "Specify VPC Private Subnet IDs",
+        "vpc_public_subnet": "Specify VPC public Subnet IDs"
+      }
+    },
+    "node_groups": {
+      "description": "Configure cluster node groups below",
+      "fields": {
+        "node_group_name": "Enter a unique name for your managed node group",
+        "instance_type": "Choose the instance type to use in your managed node group. Larger instance types can accommodate more pods",
+        "spot_instance_type": "Choose the instance type to use for your spot instances. Larger instance types can accommodate more pods",
+        "nodes": "Enter the current number of worker nodes that your managed node group should maintain at launch",
+        "Nodes_min_max": "Specify the minimum number of worker nodes that your managed node group can scale in to",
+        "nodes_min_max": "Specify the maximum number of worker nodes that your managed node group can scale out to",
+        "node_volume": "Choose your node volume type",
+        "node_ami": "Specify based on GPU & non-GPU instances",
+        "ec2_ssh_key_name": "Specify your Amazon EC2 SSH key to use",
+        "max_pods_per_node": "Specify maximum pods per node",
+        "private_ip_worker_nodes": "Check the box if applicable",
+        "instance_profile_arn": "Specify your previously created instance profile ARN",
+        "instance_role_arn": "Specify your previously created instance role ARN",
+        "instance_role_permissions_boundary": "Specify your previously created instance role permissions boundary policy arn",
+        "managed_node_group": "Select to provision optimized groups of nodes- each scoped to a single Availability Zone for your cluster. Note: Managed nodegroups do not have complete feature parity with unmanaged nodegroups",
+        "wavelength_node_group": "Select to provision the node group in wavelength zone",
+        "wavelength_subnet_config": "Specify network configuration to provision wavelength zone resources",
+        "security_groups": "Specify your previously created security group's ID",
+        "node_availability_zones": "Specify availability zones for the nodegroups",
+        "node_subnets": "Specify VPC subnet IDs for the nodegroup",
+        "node_labels": "Automatically assign the configured labels to all nodes in the node group",
+        "aws_tags": "Underline resources will be automatically created with the specified tags",
+        "use_spot_instances": "Specifies the distribution of On-Demand Instances and Spot Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance types to fulfill On-Demand and Spot capacity.",
+        "volume_encrypted": "Specifies whether the volumes are encrypted.",
+        "volume_kms_key_id": "Specifies the optional KMS Key Id to be used for volume encryption.",
+        "OnDemandAllocationStrategy": "Indicates how to allocate instance types to fulfill On-Demand capacity.",
+        "OnDemandBaseCapacity": "The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand Instances. This base portion is provisioned first as your group scales.",
+        "OnDemandPercentageAboveBaseCapacity": "Controls the percentages of On-Demand Instances and Spot Instances for your additional capacity beyond OnDemandBaseCapacity.",
+        "SpotAllocationStrategy": "Indicates how to allocate instances across Spot Instance pools.",
+        "SpotInstancePools": "The number of Spot Instance pools across which to allocate your Spot Instances. ",
+        "SpotMaxPrice": "The maximum price per unit hour that you are willing to pay for a Spot Instance."
+      }
+    },
+    "service_roles": {
+      "description": "Choose the service roles that will be attached to EKS Node Groups",
+      "fields": {
+        "asg_access": "Enable IAM role for autoscaling",
+        "dns_access": "Enable IAM role for DNS",
+        "ecr_access": "Enable IAM role for accessing Amazon ECR",
+        "appmesh_access": "Enable IAM role for Appmesh",
+        "alb_ingress_controller": "Enable IAM role for ALB configuration",
+        "enable_efs": "Enable IAM role for EFS",
+        "cloudformation_role_arn": "IAM role used by CloudFormation to call AWS API on your behalf"
+      }
+    }
+  },
+  "upgrade_job": {
+    "general_desc": "Provide Configuration for the upgrade Execution",
+    "fields": {
+      "name": "Enter a name for your upgrade plan execution",
+      "plan_id": "Select a plan for the execution",
+      "k8s_version": "Enter the kubernetes version to upgrade to"
+    }
+  },
+  "blueprints": {
+    "version": {
+      "header": "Create a new version of a cluster blueprint based on the configuration provided below",
+      "description": "",
+      "version_name": "Provide a unique version for the cluster blueprint",
+      "psp": "Select one or more PSPs from the available list",
+      "addons": "Select one or more addons and their versions from the available list",
+      "opaPolicy": "Select the OPA Policy and version to be associated with the blueprint",
+      "baseBlueprint": "Select the base Blueprint and version to be associated with the blueprint",
+      "system_addons": "The list of default addons that will be part of this cluster blueprint.",
+      "driftAction": "Detect, Notify and optionally Block workload configuration drift on target clusters"
+    },
+    "detail": {
+      "title1": "Provide the configuration for a new version of the addon.",
+      "title2": "NOTE: All operations related to lifecycle of addons can be automated using the RCTL CLI.",
+      "no_versions_help": "Create a new version of a cluster blueprint"
+    },
+    "list": {
+      "title1": "Create, view and manage custom cluster blueprints.",
+      "title2": "NOTE: All operations related to lifecycle of blueprints can also performed using the RCTL CLI via an automation pipeline."
+    },
+    "search": {
+      "placeholder": "Search for name"
+    }
+  },
+  "addons": {
+    "search": {
+      "placeholder": "Search for name"
+    },
+    "list": {
+      "title": "All cluster blueprints are composed of one or more software addons. Cluster administrators can assemble one or more addons to create a custom cluster blueprint. Good candidates for \"addons\" are components that are well suited as cluster wide services. For example, an Ingress Controller etc."
+    },
+    "detail": {
+      "title1": "Create and view current and historic versions of configured addons.",
+      "title2": "NOTE: All operations related to lifecycle of addons can also be embedded into an automation pipeline using the RCTL CLI.",
+      "no_versions_help": "Click on \"New Version\" to create a new version of the addon"
+    },
+    "version": {
+      "description": "Provide description for the addon",
+      "managed": {
+        "header": "Provide the configuration for the new version of the “managed alertmanager” addon.",
+        "version_name": "Provide a unique version name for version control purposes",
+        "alertmanager-configuration": "Provide the Alertmanager Configuration YAML manifest",
+        "alertmanager-statefulset": "Provide the Alertmanager StatefulSet YAML manifest",
+        "alertmanager-secret": "Provide the Alertmanager Secret YAML manifest",
+        "alertmanager-configmap": "Provide the Alertmanager ConfigMap YAML manifest",
+        "disclaimer": "Disclaimer: Adding new attributes to yaml configuration is permitted. However editing/deleting the existing attributes is not."
+      },
+      "system": {
+        "header1": "Provide the configuration for a new version of the addon.",
+        "header2": "NOTE: All operations related to lifecycle of addons can be automated using the RCTL CLI.",
+        "version_name": "Provide a unique version name for version control purposes",
+        "helm": "Provide the Helm Chart tgz file for the addon",
+        "values": "Provide the values.yaml files to be used with the Helm chart",
+        "repository": "Provide the repository to be used for the addon",
+        "revision": "Provide the revision to be used for the addon",
+        "chart": "Provide the chart name and version to be used for the addon",
+        "yaml": "Provide the k8s yaml file for the addon",
+        "file_path": "Provide the file path for the addon",
+        "helmInGitRepo_file_path": "Provide file path for the helm chart",
+        "values_file_path": "Provide file path for the values file. Optionally Specify path for additional Values files"
+      }
+    }
+  },
+  "agents": {
+    "list": {
+      "title": "Create and manage the lifecycle of CD agents to enable secure connectivity to your private Git and Helm repos. It is recommended to configure multiple agents for availability and scalability."
+    },
+    "create": "Create a new agent and associate it with a managed Kubernetes cluster to enable secure connectivity to your repositories"
+  },
+  "repository": {
+    "list": {
+      "title": "Find list of repositories below"
+    },
+    "configure": {
+      "name": "Provide a name for your repository",
+      "type": "",
+      "endpoint": "Provide the URL where your repository can be reached",
+      "network_access": "Select Public if your repository is accessible on the Internet",
+      "disable_ssl": "Select this if your repository does not require https for access",
+      "ca_certificate": "Required if your repository uses a private certificate authentication. Provide your repository’s CA certificate in PEM format",
+      "credential_type": "Select the method you would like to use for the agent to authenticate so that it can securely access your repository",
+      "username_password": "Enter an authorized username and password/token combination",
+      "ssh_private_key": "Provide the SSH Private Key in PEM format",
+      "agents": "Select one or more agents from the list that can reach your repository's endpoint"
+    }
+  },
+  "clusterOverrides": {
+    "list": {
+      "title": "Create your Cluster Overrides here."
+    },
+    "create": "Create and configure a new Cluster Override.",
+    "general": {
+      "description": "Specify your general details of the cluster overrides here",
+      "fields": {
+        "name": "Name of the Cluster Override",
+        "type": "Name of the Cluster Override type"
+      }
+    },
+    "selector": {
+      "description": "Specify your Resource Selector and labels for the cluster overrides here",
+      "fields": {
+        "resourceSelector": "Specify your resource selector here",
+        "labels": "Specify your resource selector labels here",
+        "configType": "Specify your Override Configuration type here",
+        "repositoryRef": "Specify your Respository Ref here",
+        "relPath": "Specify your Git file name and git path here",
+        "revision": "Specify your revision here"
+      }
+    }
+  },
+  "pipelines": {
+    "list": {
+      "title": "Create and manage declarative, GitOps based, multi-stage automation pipelines for application delivery and lifecycle management on Kubernetes"
+    },
+    "create": "Create and configure a new GitOps pipeline",
+    "detail": {
+      "title1": "Ensure that you activate the pipeline if you want it to be automatically executed based on external triggers. Deactivate the pipeline to temporarily or permanently pause trigger based execution.",
+      "title2": "Click on Run to manually execute the pipeline. Click on Edit to and reconfigure the pipeline’s stages and triggers."
+    },
+    "configure": {
+      "stages": {
+        "name": "Provide a user friendly name for the stage",
+        "action": "Select the type of action for the stage",
+        "revision": "Use Revision from Webhook Trigger",
+        "approval_type": "Select the approval type from the dropdown list",
+        "emails": "Specify one or more email address that will be sent an email for approval",
+        "timeout": "Specify how long the stage will wait for all approvals before timing out (Eg. 100s). Use \"0s\" to set no timeout",
+        "onfailure": "Specify the action you would like to perform upon failure of the stage",
+        "workload": "Select the workload you would like deploy from the drop down list"
+      }
+    },
+    "triggers": {
+      "title": "Create and configure external triggers that will execute the pipeline. Note that it is possible to configure multiple triggers to drive the same pipeline.",
+      "configure": {
+        "name": "Provide a unique name for the trigger",
+        "type": "Select the type of trigger from the available options. Webhook triggers are automatically pushed from the monitored repository. Use a Crobjob if your repository does not support webhooks.",
+        "repository": "Select the repository from the dropdown list that you would like to associate with the trigger",
+        "repo_type": "Select the type of repository from the available options",
+        "payload": "Specify the payload format for the webhook from the available options",
+        "periodicity": "Specify how frequently (minutes) the specified repository will be polled to detect changes",
+        "cron": "Specify the sync frequency in Cron time string format e.g, 0 0 * * * (Minute, Hour, Day, Month, Week)",
+        "chartname": "Specify the name of the Helm chart and Revision",
+        "repo_revision": "Specify the revision for which triggers will be created",
+        "repo_paths": "Optionally specify the paths for which triggers will be created"
+      }
+    }
+  },
+  "databackup": {
+    "jobs": {
+      "title": ""
+    },
+    "locations": {
+      "title": "Configure and manage locations where backups will be stored",
+      "configure": {
+        "name": "A unique name for the backup location",
+        "type": "Select type of location",
+        "target_type": "Select Target type for Backup Location",
+        "bucket_name": "Enter the name of the S3 Bucket",
+        "container_name": "Enter the container of the Storage Account",
+        "resource_group": "Enter the name of the Resource Group",
+        "storage_account": "Enter the name of Storage Account",
+        "region": "Enter the AWS region code. For example, us-east-1",
+        "s3_url": "Enter the URL for the S3 Endpoint. For example, https://minio.example.com"
+      }
+    },
+    "agents": {
+      "title": "Create and manage the lifecycle of Data Agents to perform backup and restore operations on your cluster"
+    }
+  },
+  "workloadtemplate": {
+    "list": {
+      "title": "Your configured workloads are listed below. You can create a new workload template by clicking on the NEW WORKLOAD TEMPLATE button."
+    },
+    "repository": "Provide the repository to be used for the workload template",
+    "revision": "Provide the revision to be used for the workload template"
+  },
+  "opa": {
+    "policy": {
+      "version": {
+        "header": "Create a new version of a gatekeeper config based on the configuration provided below",
+        "version_name": "Provide a unique version for the gatekeeper config",
+        "installation_params": "Provide the installation parameter for this gatekeeper config",
+        "sync_objects": "Add Kubernetes objects to be synced into OPA.",
+        "excluded_namespaces": "List of namespaces excluded from certain processes for all constraints in the cluster.",
+        "constraints": "The list of constraints that will be part of this gatekeeper config"
+      },
+      "detail": {
+        "title1": "Provide the configuration for a new version of the gatekeeper config.",
+        "title2": "NOTE: All operations related to lifecycle of gatekeeper config can be automated using the RCTL CLI.",
+        "no_versions_help": "Create a new version of a gatekeeper config"
+      },
+      "list": {
+        "title1": "Create, view and manage custom gatekeeper configs.",
+        "title2": "NOTE: All operations related to lifecycle of blueprints can also performed using the RCTL CLI via an automation pipeline."
+      },
+      "search": {
+        "placeholder": "Search for name"
+      }
+    }
+  },
+  "systemSync": {
+    "configure": {
+      "git2systemSync": "Select to automatically reconcile changes in Git to downstream clusters",
+      "systemSync2git": "Select to automatically reconcile changes from the controller to your Git repository",
+      "sourceRepo": "Select the source repository, the branch and folder path",
+      "destinationRepo": "Select the destination repository, the branch and folder path",
+      "includedResources": "Select which resources you want to include from the list",
+      "excludedResources": "Select which resources you want to exclude from the list"
+    }
+  }
+}

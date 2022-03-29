@@ -1,0 +1,22 @@
+/*Avatar Styles*/
+.user-avatar {
+  margin-right: 8px;
+  @extend %size-50;
+  & img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.user-detail {
+  & .user-name {
+    margin-bottom: 2px;
+    font-weight: 400;
+    text-transform: capitalize;
+  }
+  & .user-description {
+    font-size: 13px;
+    margin-bottom: 0;
+    color: $gray-600;
+  }
+}

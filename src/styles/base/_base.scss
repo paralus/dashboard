@@ -1,0 +1,317 @@
+/*Base Styles*/
+
+html {
+  height: 100%;
+}
+
+body {
+  font: {
+    family: $font-family-base;
+    size: $font-size-base;
+    weight: $font-weight-base;
+  }
+  color: $body-color;
+  background-color: $body-bg;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ripple-effect {
+  @extend %ripple-effect;
+}
+
+.text-transform-none {
+  text-transform: none;
+}
+
+.br-break {
+  word-break: break-all !important;
+}
+
+.font-weight-semibold {
+  font-weight: 500 !important;
+}
+
+.z-index-20 {
+  z-index: 20;
+}
+
+.size-120 {
+  @extend %size-120;
+}
+
+.size-100 {
+  @extend %size-100;
+}
+
+.size-80 {
+  @extend %size-80;
+}
+
+.size-60 {
+  @extend %size-60;
+}
+
+.size-50 {
+  @extend %size-50;
+}
+
+.size-40 {
+  @extend %size-40;
+}
+
+.size-30 {
+  @extend %size-30;
+}
+
+.border-bottom {
+  border-bottom: solid 1px $gray-300;
+}
+
+div[tabindex="-1"] {
+  z-index: 1100 !important;
+}
+
+.col-with-divider div[class*="col-"] {
+  border-left: solid 1px $gray-300;
+  &:first-child {
+    border: 0 none;
+  }
+}
+
+.height-100 {
+  height: 100px !important;
+}
+
+.height-150 {
+  height: 150px !important;
+}
+
+.height-200 {
+  height: 200px !important;
+}
+
+.max-width-100 {
+  max-width: 100px !important;
+}
+
+.max-height-120 {
+  max-height: 120px !important;
+}
+
+.right-arrow {
+  display: inline-block;
+  color: $app-primary;
+  text-transform: capitalize;
+  &:after {
+    content: "\f30f";
+    font-family: Material-Design-Iconic-Font, sans-serif;
+    color: $app-primary;
+    margin-left: 8px;
+    font-size: 20px;
+    vertical-align: middle;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.letter-spacing-base {
+  letter-spacing: $letter-spacing-base;
+}
+
+.letter-spacing-lg {
+  letter-spacing: $letter-spacing-lg;
+}
+
+.letter-spacing-xl {
+  letter-spacing: $letter-spacing-xl;
+}
+
+.page-heading {
+  @extend %jr-card-style;
+  margin-bottom: $jr-card-margin * 1.5;
+  padding: $jr-card-padding;
+
+  & .title {
+    text-transform: capitalize;
+  }
+
+  & .breadcrumb {
+    padding: 0 !important;
+    background-color: inherit;
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 575px) {
+    margin-bottom: 18px;
+  }
+}
+
+.sub-heading {
+  font-size: $font-size-base;
+  color: $gray-600;
+  margin-bottom: 0;
+  &:not(:last-child) {
+    margin-bottom: 16px !important;
+  }
+}
+
+.manage-margin {
+  margin-bottom: 0;
+  & > * {
+    margin-bottom: 6px;
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
+}
+
+//Shadow
+.no-shadow {
+  @include box-shadow(none !important);
+}
+
+.shadow-sm {
+  @include box-shadow($shadow-sm);
+}
+
+.shadow {
+  @include box-shadow($shadow);
+}
+
+.shadow-lg {
+  @include box-shadow($shadow-lg);
+}
+
+.shadow-xl {
+  @include box-shadow($shadow-xl);
+}
+
+.avatar-shadow {
+  @include box-shadow($avatar-shadow);
+}
+
+.remove-table-border {
+  td,
+  th {
+    border: 0 none;
+  }
+}
+
+//Media Object list
+.media-list {
+  margin-bottom: 10px;
+  &:not(:last-child) {
+    border-bottom: solid 1px $gray-200;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+}
+
+.border-2 {
+  border: 2px solid $gray-400 !important;
+}
+
+.border-w2 {
+  border-width: 2px;
+}
+
+// Border Color Classes
+
+@each $color_name, $color in $colors_palette {
+  @each $color_type, $color_value in $color {
+    @if $color_type == "base" {
+      .border-#{$color_name} {
+        border-color: $color_value !important;
+      }
+    }
+  }
+}
+
+//Center Crop image
+
+.center-crop-img {
+  position: relative;
+  width: 100%;
+  min-height: 120px;
+  overflow: hidden;
+
+  & img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  & img.portrait {
+    width: 100%;
+    height: auto;
+  }
+}
+
+//Bootstrap Components Override
+
+//Buttons
+
+a.btn-info {
+  @extend %link-hover;
+}
+
+a.btn-danger {
+  @extend %link-hover;
+}
+
+a.btn-warning {
+  @extend %link-hover;
+}
+
+a.btn-success {
+  @extend %link-hover;
+}
+
+a.btn-dark {
+  @extend %link-hover;
+}
+
+//Badges
+a.badge-success {
+  @extend %link-hover;
+}
+
+a.badge-danger {
+  @extend %link-hover;
+}
+
+a.badge-warning {
+  @extend %link-hover;
+}
+
+a.badge-info {
+  @extend %link-hover;
+}
+
+a.badge-dark {
+  @extend %link-hover;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+// Quill editor
+
+.ql-editor {
+  min-height: 200px;
+}
+
+.ql-content {
+  min-height: 200px;
+}
