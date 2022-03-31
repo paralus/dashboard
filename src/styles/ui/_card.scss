@@ -33,7 +33,7 @@
     width: 100%;
     min-height: 100%;
     //@include background('#{$image_path}/background.jpg', center center); /*use this for local image*/
-    @include background('https://via.placeholder.com/1920x1080', center center);
+    @include background("https://via.placeholder.com/1920x1080", center center);
   }
   & .pi-content {
     padding: 70px 40px 24px !important;

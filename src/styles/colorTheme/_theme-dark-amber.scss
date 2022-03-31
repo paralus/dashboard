@@ -1,6 +1,6 @@
 /*Theme Dark Amber Styles*/
 $app-primary-dark-amber: #ffc107 !default;
-$secondary-dark-amber: #FF3D00;
+$secondary-dark-amber: #ff3d00;
 
 $sidebar-dark-amber: #252525 !default;
 $sidebar-text-dark-amber: #a1a1a1 !default;
@@ -166,7 +166,6 @@ $link-hover-dark-amber: $white;
 //_right-sidebar.scss
 .dark-amber .color-theme-header {
   background-color: $app-primary-dark-amber;
-
 }
 
 //_sidebar.scss
@@ -327,7 +326,7 @@ $link-hover-dark-amber: $white;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.dark-amber .Collapsible__trigger {;
+.dark-amber .Collapsible__trigger {
   background: $app-primary-dark-amber;
 }
 

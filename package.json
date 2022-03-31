@@ -77,7 +77,7 @@
     "build": "NODE_ENV=production webpack --progress --config config/webpack.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write 'src/**/*.js'",
+    "format": "prettier --write 'src/**/*.*'",
     "check-format": "prettier --check 'src/**/*.*'"
   },
   "engines": {

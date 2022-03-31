@@ -8,12 +8,12 @@ $rafay-sidebar-highlight-hover: #000000;
 // Fonts
 //
 // Font, line-height, and color for body text, headings, and more.
-@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i");
 
 //# sourceMappingURL=roboto.css.map
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: 'Roboto', sans-serif;
+$font-family-sans-serif: "Roboto", sans-serif;
 $font-family-base: $font-family-sans-serif;
 
 // stylelint-enable value-keyword-case
@@ -52,7 +52,7 @@ $enable-shadows: true;
 
 $app-primary: #3f51b5 !default;
 $primary: $app-primary;
-$secondary: #E91E63;
+$secondary: #e91e63;
 
 $sidebar-bg: #252525 !default;
 $sidebar-text-color: #a1a1a1 !default;
@@ -73,33 +73,33 @@ $dark: $gray-800;
 $body-bg: $gray-100;
 
 $theme-colors: (
-        "primary": $primary,
-        "secondary": $secondary,
-        "success": $success,
-        "info": $info,
-        "warning": $warning,
-        "danger": $danger,
-        "light": $light,
-        "dark": $dark
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
 );
 
 //Default shadow
 $shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
 $shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
-$shadow-lg: 0 1px 8px -1px rgba(0, 0, 0, 0.20);
-$shadow-xl: 0 0 16px 0px rgba(0, 0, 0, 0.20);
-$avatar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.50);
+$shadow-lg: 0 1px 8px -1px rgba(0, 0, 0, 0.2);
+$shadow-xl: 0 0 16px 0px rgba(0, 0, 0, 0.2);
+$avatar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
 
 //Default Image Location
 $image_path: "../assets/images" !default;
 
 // Motion
 // https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
-$transition-bezier: .05, .74, .27, .99 !default; // for nav, quickview
+$transition-bezier: 0.05, 0.74, 0.27, 0.99 !default; // for nav, quickview
 
-$transition-ease: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
-$transition-ease-out: cubic-bezier(0.0, 0.0, 0.2, 1) !default;
-$transition-ease-in: cubic-bezier(0.4, 0.0, 1, 1) !default;
+$transition-ease: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$transition-ease-out: cubic-bezier(0, 0, 0.2, 1) !default;
+$transition-ease-in: cubic-bezier(0.4, 0, 1, 1) !default;
 
 //Side Nav Width
 $side-nav-width: 200px !default;

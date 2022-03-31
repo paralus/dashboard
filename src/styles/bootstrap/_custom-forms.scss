@@ -2,7 +2,6 @@
 // Released under MIT and copyright 2014 Waybury.
 // https://useiconic.com/open
 
-
 // Checkboxes and radios
 //
 // Base class takes care of all the key behavioral aspects.
@@ -102,7 +101,6 @@
   }
 }
 
-
 // Layout options
 //
 // By default radios and checkboxes are `inline-block` with no additional spacing
@@ -121,7 +119,6 @@
   }
 }
 
-
 // Select
 //
 // Replaces the browser default select with a custom one, mostly pulled from
@@ -132,11 +129,14 @@
   display: inline-block;
   max-width: 100%;
   height: $input-height;
-  padding: $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding) $custom-select-padding-y $custom-select-padding-x;
+  padding: $custom-select-padding-y
+    ($custom-select-padding-x + $custom-select-indicator-padding)
+    $custom-select-padding-y $custom-select-padding-x;
   line-height: $custom-select-line-height;
   color: $custom-select-color;
   vertical-align: middle;
-  background: $custom-select-bg $custom-select-indicator no-repeat right $custom-select-padding-x center;
+  background: $custom-select-bg $custom-select-indicator no-repeat right
+    $custom-select-padding-x center;
   background-size: $custom-select-bg-size;
   border: $custom-select-border-width solid $custom-select-border-color;
   @if $enable-rounded {
@@ -184,7 +184,6 @@
   padding-bottom: $custom-select-padding-y;
   font-size: $custom-select-font-size-sm;
 }
-
 
 // File
 //
@@ -246,7 +245,9 @@
     color: $custom-file-button-color;
     @include gradient-bg($custom-file-button-bg);
     border: $custom-file-border-width solid $custom-file-border-color;
-    @include border-radius(0 $custom-file-border-radius $custom-file-border-radius 0);
+    @include border-radius(
+      0 $custom-file-border-radius $custom-file-border-radius 0
+    );
   }
 
   @each $lang, $text in map-get($custom-file-text, button-label) {

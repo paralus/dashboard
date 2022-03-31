@@ -1,6 +1,6 @@
 /*Theme Deep Purple Styles*/
 $app-primary-deep-purple: #673ab7 !default;
-$secondary-deep-purple: #FFAB00;
+$secondary-deep-purple: #ffab00;
 
 $sidebar-deep-purple: $white !default;
 $sidebar-text-deep-purple: #868e96 !default;
@@ -162,7 +162,6 @@ $sidebar-text-deep-purple: #868e96 !default;
 //_right-sidebar.scss
 .deep-purple .color-theme-header {
   background-color: $app-primary-deep-purple;
-
 }
 
 //_sidebar.scss
@@ -323,7 +322,7 @@ $sidebar-text-deep-purple: #868e96 !default;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.deep-purple .Collapsible__trigger {;
+.deep-purple .Collapsible__trigger {
   background: $app-primary-deep-purple;
 }
 

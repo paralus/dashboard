@@ -1,6 +1,6 @@
 /*Theme Dark Pink Styles*/
 $app-primary-dark-pink: #e91e63 !default;
-$secondary-dark-pink: #00BFA5;
+$secondary-dark-pink: #00bfa5;
 
 $sidebar-dark-pink: #252525 !default;
 $sidebar-text-dark-pink: #a1a1a1 !default;
@@ -166,7 +166,6 @@ $link-hover-dark-pink: $white;
 //_right-sidebar.scss
 .dark-pink .color-theme-header {
   background-color: $app-primary-dark-pink;
-
 }
 
 //_sidebar.scss
@@ -327,7 +326,7 @@ $link-hover-dark-pink: $white;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.dark-pink .Collapsible__trigger {;
+.dark-pink .Collapsible__trigger {
   background: $app-primary-dark-pink;
 }
 

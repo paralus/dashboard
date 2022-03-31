@@ -10,7 +10,7 @@
   padding: 5px;
   background: $white;
   border-radius: 1px;
-  @include box-shadow(0 0 0 1px rgba($black, .1));
+  @include box-shadow(0 0 0 1px rgba($black, 0.1));
   display: inline-block;
   cursor: pointer;
 }

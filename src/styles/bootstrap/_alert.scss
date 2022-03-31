@@ -36,13 +36,16 @@
   }
 }
 
-
 // Alternate styles
 //
 // Generate contextual modifier classes for colorizing the alert.
 
 @each $color, $value in $theme-colors {
   .alert-#{$color} {
-    @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
+    @include alert-variant(
+      theme-color-level($color, -10),
+      theme-color-level($color, -9),
+      theme-color-level($color, 6)
+    );
   }
 }

@@ -1,6 +1,6 @@
 /*Theme Dark Blue Styles*/
-$app-primary-dark-blue: #2196F3 !default;
-$secondary-dark-blue: #FF6E40;
+$app-primary-dark-blue: #2196f3 !default;
+$secondary-dark-blue: #ff6e40;
 
 $sidebar-dark-blue: #252525 !default;
 $sidebar-text-dark-blue: #a1a1a1 !default;
@@ -60,51 +60,51 @@ $link-hover-dark-blue: $white;
 
   & .bg-primary {
     &.lighten-4 {
-      background-color: #BBDEFB !important;
+      background-color: #bbdefb !important;
     }
 
     &.lighten-3 {
-      background-color: #90CAF9 !important;
+      background-color: #90caf9 !important;
     }
 
     &.lighten-2 {
-      background-color: #64B5F6 !important;
+      background-color: #64b5f6 !important;
     }
 
     &.lighten-1 {
-      background-color: #42A5F5 !important;
+      background-color: #42a5f5 !important;
     }
 
     &.darken-1 {
-      background-color: #1E88E5 !important;
+      background-color: #1e88e5 !important;
     }
 
     &.darken-2 {
-      background-color: #1976D2 !important;
+      background-color: #1976d2 !important;
     }
 
     &.darken-3 {
-      background-color: #1565C0 !important;
+      background-color: #1565c0 !important;
     }
 
     &.darken-4 {
-      background-color: #0D47A1 !important;
+      background-color: #0d47a1 !important;
     }
 
     &.accent-1 {
-      background-color: #82B1FF !important;
+      background-color: #82b1ff !important;
     }
 
     &.accent-2 {
-      background-color: #448AFF !important;
+      background-color: #448aff !important;
     }
 
     &.accent-3 {
-      background-color: #2979FF !important;
+      background-color: #2979ff !important;
     }
 
     &.accent-4 {
-      background-color: #2962FF !important;
+      background-color: #2962ff !important;
     }
   }
 }
@@ -165,7 +165,6 @@ $link-hover-dark-blue: $white;
 //_right-sidebar.scss
 .dark-blue .color-theme-header {
   background-color: $app-primary-dark-blue;
-
 }
 
 //_sidebar.scss
@@ -326,7 +325,7 @@ $link-hover-dark-blue: $white;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.dark-blue .Collapsible__trigger {;
+.dark-blue .Collapsible__trigger {
   background: $app-primary-dark-blue;
 }
 
