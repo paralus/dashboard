@@ -106,7 +106,7 @@
   position: relative;
   overflow: hidden;
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -157,7 +157,7 @@
 //Pulse Effect
 %pulse-effect {
   display: block;
-  @include box-shadow (0 0 0 rgba($danger, 0.4));
+  @include box-shadow(0 0 0 rgba($danger, 0.4));
   animation: pulse 2s infinite;
 }
 
@@ -191,7 +191,7 @@
 //Online Effect
 %online-effect {
   display: block;
-  @include box-shadow (0 0 0 rgba($green, 0.4));
+  @include box-shadow(0 0 0 rgba($green, 0.4));
   animation: online 2s infinite;
 }
 
@@ -225,7 +225,7 @@
 //Away Effect
 %away-effect {
   display: block;
-  @include box-shadow (0 0 0 rgba($yellow, 0.4));
+  @include box-shadow(0 0 0 rgba($yellow, 0.4));
   animation: away 2s infinite;
 }
 

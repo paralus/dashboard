@@ -46,7 +46,7 @@
   transform: rotate($degrees);
 }
 //Background Image
-@mixin background($imgpath,$position:0 0,$repeat: no-repeat,$size: cover) {
+@mixin background($imgpath, $position: 0 0, $repeat: no-repeat, $size: cover) {
   background: {
     image: url($imgpath);
     position: $position;
@@ -57,10 +57,10 @@
 
 // Flex
 @mixin display-flex($flex: flex, $flex-direction: row, $flex-wrap: wrap) {
-  display: #{'-webkit'}-#{$flex};
-  display: #{'-moz'}-#{$flex};
-  display: #{'-ms'}-#{$flex};
-  display: #{'-o'}-#{$flex};
+  display: #{"-webkit"}-#{$flex};
+  display: #{"-moz"}-#{$flex};
+  display: #{"-ms"}-#{$flex};
+  display: #{"-o"}-#{$flex};
   display: $flex;
   -webkit-flex-direction: $flex-direction;
   -ms-flex-direction: $flex-direction;
@@ -142,7 +142,6 @@
   }
   //  }
 }
-
 
 @mixin hover-focus {
   @if $enable-hover-media-query {

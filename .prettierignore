@@ -1,0 +1,5 @@
+# Failing build.
+src/styles/bootstrap/mixins/_image.scss
+
+*.png
+*.svg

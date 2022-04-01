@@ -4,7 +4,8 @@ button {
   cursor: pointer;
 }
 
-.btn, .jr-btn {
+.btn,
+.jr-btn {
   position: relative;
   min-width: 10px !important;
   min-height: 10px !important;
@@ -118,7 +119,7 @@ button {
 }
 
 .complex-btn-wrapper {
- @include display-flex();
+  @include display-flex();
   min-width: 200px;
   width: 100%;
 }

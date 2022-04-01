@@ -1,6 +1,6 @@
 /*Theme Pink Styles*/
 $app-primary-pink: #e91e63 !default;
-$secondary-pink: #00BFA5;
+$secondary-pink: #00bfa5;
 
 $sidebar-pink: $white !default;
 $sidebar-text-pink: #868e96 !default;
@@ -162,7 +162,6 @@ $sidebar-text-pink: #868e96 !default;
 //_right-sidebar.scss
 .pink .color-theme-header {
   background-color: $app-primary-pink;
-
 }
 
 //_sidebar.scss
@@ -323,7 +322,7 @@ $sidebar-text-pink: #868e96 !default;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.pink .Collapsible__trigger {;
+.pink .Collapsible__trigger {
   background: $app-primary-pink;
 }
 

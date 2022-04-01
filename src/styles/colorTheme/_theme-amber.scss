@@ -1,6 +1,6 @@
 /*Theme Amber Styles*/
-$app-primary-amber: #FFC107 !default;
-$secondary-amber: #FF3D00;
+$app-primary-amber: #ffc107 !default;
+$secondary-amber: #ff3d00;
 
 $sidebar-amber: $white !default;
 $sidebar-text-color-amber: #868e96 !default;
@@ -178,7 +178,6 @@ $sidebar-text-color-amber: #868e96 !default;
 //_right-sidebar.scss
 .amber .color-theme-header {
   background-color: $app-primary-amber;
-
 }
 
 //_sidebar.scss
@@ -339,7 +338,7 @@ $sidebar-text-color-amber: #868e96 !default;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.amber .Collapsible__trigger {;
+.amber .Collapsible__trigger {
   background: $app-primary-amber;
 }
 
@@ -400,8 +399,3 @@ $sidebar-text-color-amber: #868e96 !default;
 .amber .border-primary {
   border-color: $app-primary-amber !important;
 }
-
-
-
-
-

@@ -1,6 +1,6 @@
 /*Theme Indigo Styles*/
 $app-primary-indigo: #3f51b5 !default;
-$secondary-indigo: #FF4081;
+$secondary-indigo: #ff4081;
 
 $sidebar-indigo: $white !default;
 $sidebar-text-indigo: #868e96 !default;
@@ -162,7 +162,6 @@ $sidebar-text-indigo: #868e96 !default;
 //_right-sidebar.scss
 .indigo .color-theme-header {
   background-color: $app-primary-indigo;
-
 }
 
 //_sidebar.scss
@@ -323,7 +322,7 @@ $sidebar-text-indigo: #868e96 !default;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.indigo .Collapsible__trigger {;
+.indigo .Collapsible__trigger {
   background: $app-primary-indigo;
 }
 

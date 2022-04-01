@@ -1,7 +1,7 @@
 /*Tables Styles*/
 
 .table-header {
-  padding-right: 2px!important;
+  padding-right: 2px !important;
   &.highlight-light {
     color: map_get($gray, darken-2);
     background-color: map_get($gray, lighten-2);
@@ -13,13 +13,13 @@
 }
 
 .spacer {
-  @include flex(1,1,100%);
+  @include flex(1, 1, 100%);
 }
 .actions {
   color: map_get($red, base);
 }
 .title {
-  @include flex(0,0,auto);
+  @include flex(0, 0, auto);
 }
 
 .table-hover tbody tr:hover {
@@ -54,15 +54,15 @@
 
 .d-flex-stretch {
   @include align-items(stretch);
-  display:  -webkit-flex;
-  display:  -webkit-box;
-  display:  -moz-flex;
-  display:  -moz-box;
-  display:  -ms-flexbox;
-  display:  flex;
-  -webkit-flex-wrap:  wrap;
-  -ms-flex-wrap:  wrap;
-  flex-wrap:  wrap;
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -moz-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .default-table {
@@ -88,7 +88,7 @@
 }
 
 .table-responsive-material {
-  min-height: .01%;
+  min-height: 0.01%;
   overflow-x: auto;
 }
 

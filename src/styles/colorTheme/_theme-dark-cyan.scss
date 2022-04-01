@@ -1,6 +1,6 @@
 /*Theme Dark Cyan Styles*/
 $app-primary-dark-cyan: #00bcd4 !default;
-$secondary-dark-cyan: #69F0AE;
+$secondary-dark-cyan: #69f0ae;
 
 $sidebar-dark-cyan: #252525 !default;
 $sidebar-text-dark-cyan: #a1a1a1 !default;
@@ -110,7 +110,6 @@ $link-hover-dark-cyan: $white;
   }
 }
 
-
 //Secondary
 .dark-cyan {
   & a.text-secondary {
@@ -167,7 +166,6 @@ $link-hover-dark-cyan: $white;
 //_right-sidebar.scss
 .dark-cyan .color-theme-header {
   background-color: $app-primary-dark-cyan;
-
 }
 
 //_sidebar.scss
@@ -328,7 +326,7 @@ $link-hover-dark-cyan: $white;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.dark-cyan .Collapsible__trigger {;
+.dark-cyan .Collapsible__trigger {
   background: $app-primary-dark-cyan;
 }
 

@@ -1,6 +1,6 @@
 /*Theme Dark Deep Orange Styles*/
 $app-primary-dark-deep-orange: #ff5722 !default;
-$secondary-dark-deep-orange: #40C4FF;
+$secondary-dark-deep-orange: #40c4ff;
 
 $sidebar-dark-deep-orange: #252525 !default;
 $sidebar-text-dark-deep-orange: #a1a1a1 !default;
@@ -166,7 +166,6 @@ $link-hover-dark-deep-orange: $white;
 //_right-sidebar.scss
 .dark-deep-orange .color-theme-header {
   background-color: $app-primary-dark-deep-orange;
-
 }
 
 //_sidebar.scss
@@ -327,7 +326,7 @@ $link-hover-dark-deep-orange: $white;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.dark-deep-orange .Collapsible__trigger {;
+.dark-deep-orange .Collapsible__trigger {
   background: $app-primary-dark-deep-orange;
 }
 

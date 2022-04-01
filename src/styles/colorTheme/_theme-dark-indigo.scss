@@ -1,6 +1,6 @@
 /*Theme Dark Indigo Styles*/
 $app-primary-dark-indigo: #3f51b5 !default;
-$secondary-dark-indigo: #FF4081;
+$secondary-dark-indigo: #ff4081;
 
 $sidebar-dark-indigo: #252525 !default;
 $sidebar-text-dark-indigo: #a1a1a1 !default;
@@ -167,7 +167,6 @@ $link-hover-dark-indigo: $white;
 //_right-sidebar.scss
 .dark-indigo .color-theme-header {
   background-color: $app-primary-dark-indigo;
-
 }
 
 //_sidebar.scss
@@ -328,7 +327,7 @@ $link-hover-dark-indigo: $white;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.dark-indigo .Collapsible__trigger {;
+.dark-indigo .Collapsible__trigger {
   background: $app-primary-dark-indigo;
 }
 

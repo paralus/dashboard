@@ -8,7 +8,6 @@
 
     @each $prop, $abbrev in (margin: m, padding: p) {
       @each $size, $length in $spacers {
-
         .#{$abbrev}#{$infix}-#{$size} {
           #{$prop}: $length !important;
         }

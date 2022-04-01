@@ -16,7 +16,7 @@
     align-content: stretch;
 
     & li {
-      @include flex(1,1,0);
+      @include flex(1, 1, 0);
       overflow: hidden;
       padding: 10px 40px;
       border-right: 2px solid $body-color;
@@ -40,7 +40,7 @@
         }
 
         & .icon {
-          background-color: map_get($indigo, 'lighten-1');
+          background-color: map_get($indigo, "lighten-1");
           color: $white;
           @include border-radius(50%);
           margin-right: 6px;
@@ -80,7 +80,6 @@
         }
       }
     }
-
   }
 }
 

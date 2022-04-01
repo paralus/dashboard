@@ -1,6 +1,6 @@
 /*Theme Cyan Styles*/
 $app-primary-cyan: #00bcd4 !default;
-$secondary-cyan: #69F0AE;
+$secondary-cyan: #69f0ae;
 
 $sidebar-cyan: $white !default;
 $sidebar-text-cyan: #868e96 !default;
@@ -166,7 +166,6 @@ $link-hover-color: $app-primary;
 //_right-sidebar.scss
 .cyan .color-theme-header {
   background-color: $app-primary-cyan;
-
 }
 
 //_sidebar.scss
@@ -327,7 +326,7 @@ $link-hover-color: $app-primary;
 }
 
 //The link which when clicked opens the collapsable ChatUserList
-.cyan .Collapsible__trigger {;
+.cyan .Collapsible__trigger {
   background: $app-primary-cyan;
 }
 
