@@ -50,20 +50,22 @@ module.exports = merge(common, {
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, "../public/favicon.ico"),
-        to: path.resolve(__dirname, "../dist")
-      },
-      {
-        from: path.resolve(__dirname, "../public/vendors"),
-        to: path.resolve(__dirname, "../dist/vendors")
-      },
-      {
-        from: path.resolve(__dirname, "../src/assets/images"),
-        to: path.resolve(__dirname, "../dist/assets/images")
-      }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "../public/favicon.ico"),
+          to: path.resolve(__dirname, "../dist")
+        },
+        {
+          from: path.resolve(__dirname, "../public/vendors"),
+          to: path.resolve(__dirname, "../dist/vendors")
+        },
+        {
+          from: path.resolve(__dirname, "../src/assets/images"),
+          to: path.resolve(__dirname, "../dist/assets/images")
+        }
+      ]
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../public/index.template")
     }),
