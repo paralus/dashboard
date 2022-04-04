@@ -1,6 +1,12 @@
 import http from "./Config";
 
 export function getOrganization(partner, name) {
+  if (partner === "") {
+    partner = JSON.parse(window?.localStorage.getItem("partner"));
+  }
+  if (name === "") {
+    name = JSON.parse(window?.localStorage.getItem("organization"));
+  }
   return function (dispatch) {
     http("auth")
       .get(`partner/${partner}/organization/${name}`)
@@ -13,11 +19,11 @@ export function getOrganization(partner, name) {
           "organization_id",
           JSON.stringify(response.data.metadata.id)
         );
+        localStorage.setItem("organization", JSON.stringify(response.data.metadata.name));
       })
       .catch((error) => {
         console.log(error);
       });
-    localStorage.setItem("organization", JSON.stringify(name));
   };
 }
 

@@ -37,7 +37,7 @@ class ToolsDetail extends React.Component {
   };
 
   handleDownloadConfig = (downloadConfig) => {
-    const filename = `${this.props.userAndRoleDetail.organization.name}-${this.props.userAndRoleDetail.account.username}`;
+    const filename = `${this.props.userAndRoleDetail.metadata.name}`;
     const jsonstr = JSON.stringify(downloadConfig, null, 4);
     const textFileAsBlob = new Blob([jsonstr], {
       type: "application/json",
@@ -64,11 +64,11 @@ class ToolsDetail extends React.Component {
   handleManageKeys = () => {
     const { history, userAndRoleDetail } = this.props;
     let path = "managekeys";
-    if (userAndRoleDetail.account.is_sso) {
+    if (userAndRoleDetail.spec.is_sso) {
       path = "managessokeys";
     }
     history.push(
-      `${history.location.pathname}/${path}/${userAndRoleDetail.account.id}`
+      `${history.location.pathname}/${path}/${userAndRoleDetail.metadata.id}`
     );
   };
 
@@ -133,7 +133,7 @@ class ToolsDetail extends React.Component {
           </CardBox>
         </div>
 
-        <Kubeconfig user={this.props.userAndRoleDetail.account} />
+        <Kubeconfig user={this.props.userAndRoleDetail} />
 
         <div className="row">
           <CardBox
@@ -152,14 +152,13 @@ class ToolsDetail extends React.Component {
                 </Button>
               </div>
               {this.props.userAndRoleDetail &&
-                this.props.userAndRoleDetail.account &&
-                this.props.userAndRoleDetail.account.username && (
+                this.props.userAndRoleDetail.metadata.name && (
                   <div
                     className="col-md-12 pt-2"
                     style={{ color: "rgb(117, 117, 117)" }}
                   >
                     Manage{" "}
-                    <b>{this.props.userAndRoleDetail.account.username}</b>
+                    <b>{this.props.userAndRoleDetail.metadata.name}</b>
                     's API keys and Registry Authorization keys.
                   </div>
                 )}

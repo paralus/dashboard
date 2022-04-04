@@ -220,7 +220,7 @@ const DataTableToolbar = (props) => {
               </Paper>
             )}
             <div className="d-inline-block">
-              <DownloadKubeconfig user={userAndRoleDetail?.account} withIcon />
+              <DownloadKubeconfig user={userAndRoleDetail} withIcon />
               <Button
                 variant="contained"
                 className="jr-btn jr-btn-label left text-nowrap text-white mr-3"

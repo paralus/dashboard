@@ -8,7 +8,6 @@ import {
   userLogout,
   getLang,
   changePassword,
-  getUserAccountRoles,
   organizationLogin,
   getRafayCliDownloadOptions,
   resetCliDownload,
@@ -33,7 +32,7 @@ class UserInfo extends React.Component {
       this.changeOrganizationDialog.close();
       getUserSessionInfo();
     }
-    if (props.userAndRoleDetail.account && !props.isProjectSet) {
+    if (props.userAndRoleDetail && !props.isProjectSet) {
       getInitProjects();
     }
     this.setState({ open: false });
@@ -76,17 +75,17 @@ class UserInfo extends React.Component {
   render() {
     let username = "";
     let isSSOUser = false;
-    const { userAndRoleDetail, associatedUserRoleDetails } = this.props;
+    const { userAndRoleDetail } = this.props;
     const { isChangeOrgSuccess, anchorEl, open } = this.state;
-    if (userAndRoleDetail.account) {
-      username = userAndRoleDetail.account.username;
+    if (userAndRoleDetail) {
+      username = userAndRoleDetail.metadata.name;
     } else {
       return null;
     }
 
     // TODO: This is temporary. Add a flag to indicate usertype RC-6789
     if (
-      !`${userAndRoleDetail.account.first_name}${userAndRoleDetail.account.last_name}`
+      !`${userAndRoleDetail.spec.firstName}${userAndRoleDetail.spec.lastName}`
         .length
     ) {
       isSSOUser = true;
@@ -95,12 +94,6 @@ class UserInfo extends React.Component {
     if (isChangeOrgSuccess) {
       return <Redirect to="/login" />;
     }
-
-    const orgList = associatedUserRoleDetails
-      .filter((r) => r?.role?.scope !== "SYSTEM")
-      .filter(
-        (r) => r?.organization?.id !== userAndRoleDetail?.organization?.id
-      );
 
     return (
       <div className="user-profile d-flex flex-row align-items-center">
@@ -113,8 +106,8 @@ class UserInfo extends React.Component {
             {` ${username} `}
             <i className="zmdi zmdi-caret-down zmdi-hc-fw align-middle" />
           </h4>
-          {userAndRoleDetail.organization && (
-            <small>{userAndRoleDetail.organization.name}</small>
+          {this.props.organization && this.props.organization.detail && (
+            <small>{this.props.organization.detail.metadata.name}</small>
           )}
         </div>
         <a
@@ -182,11 +175,11 @@ const mapStateToProps = ({ settings, Projects }) => {
     lang,
     isChangePasswordSuccess,
     isChangePasswordError,
-    associatedUserRoleDetails,
     userAndRoleDetail,
     isChangeOrgSuccess,
     auth,
     partnerDetail,
+    organization,
   } = settings;
   const { isProjectSet } = Projects;
   return {
@@ -196,11 +189,11 @@ const mapStateToProps = ({ settings, Projects }) => {
     lang,
     isChangePasswordSuccess,
     isChangePasswordError,
-    associatedUserRoleDetails,
     userAndRoleDetail,
     isChangeOrgSuccess,
     auth,
     partnerDetail,
+    organization,
     isProjectSet,
   };
 };
@@ -212,7 +205,6 @@ export default withRouter(
     userLogout,
     getLang,
     changePassword,
-    getUserAccountRoles,
     organizationLogin,
     getRafayCliDownloadOptions,
     resetCliDownload,

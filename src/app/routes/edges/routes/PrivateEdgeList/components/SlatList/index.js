@@ -109,7 +109,7 @@ const SlatList = (props) => {
           cluster.spec.clusterData.cluster_status.conditions[index].type ===
             "ClusterReady" &&
           cluster.spec.clusterData.cluster_status.conditions[index].status ===
-            3;
+            "Success";
         if (ready) {
           return ready;
         }

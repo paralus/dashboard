@@ -9,7 +9,7 @@ import useLocalStorage from "utils/useLocalStorage";
 import { useSnack } from "../../../../../utils/useSnack";
 import { testProtocol } from "../../../../../utils/helpers";
 
-import { getEdgeDetail, updateCluster } from "actions/index";
+import { getEdgeDetail, updateEdge } from "actions/index";
 
 import { useQuery } from "../../../../../utils";
 import Breadcrumb from "./components/Breadcrumb";
@@ -23,7 +23,7 @@ const ClusterConfig = ({
   history,
   match,
   getEdgeDetail,
-  updateCluster,
+  updateEdge,
 }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -127,7 +127,6 @@ const ClusterConfig = ({
   }, []);
 
   const handleEdgeChange = (name) => (event) => {
-    alert("handleEdgeChange");
     if (
       [
         "httpProxy",
@@ -175,15 +174,11 @@ const ClusterConfig = ({
       }
       setEdge({
         ...edge,
-        metro,
+        [name]: event.target.value,
       });
       return;
     }
 
-    setEdge({
-      ...edge,
-      [name]: event.target.value,
-    });
   };
 
   const handleSuccessResponse = (_) => {
@@ -203,15 +198,15 @@ const ClusterConfig = ({
     ) {
       return;
     }
-
-    if (!edge.spec.Metro) {
-      edge.spec.Metro = { name: "" };
+    alert(JSON.stringify(edge))
+    if (!edge.spec.metro) {
+      edge.spec.metro = { name: "" };
     }
     if (edge.spec.params) {
       edge.spec.params.state = "PROVISION";
     }
 
-    updateCluster(edge, handleSuccessResponse, handleErrorResponse);
+    updateEdge(edge, handleSuccessResponse, handleErrorResponse);
   };
 
   if (loading)
@@ -344,6 +339,6 @@ const mapStateToProps = ({ settingsOps, Projects }) => {
 export default withRouter(
   connect(mapStateToProps, {
     getEdgeDetail,
-    updateCluster,
+    updateEdge,
   })(ClusterConfig)
 );

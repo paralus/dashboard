@@ -19,8 +19,6 @@ import {
   addUser,
   editUser,
   resetError,
-  activateUser,
-  deactivateUser,
   resetUserResponse,
   deleteUser,
   resetUserDeleteResponse,
@@ -98,8 +96,8 @@ class UserList extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      order: "asc",
-      orderBy: "username",
+      order: "",
+      orderBy: "",
       searchText: "",
       selected: [],
       data: [], // workloads.sort((a, b) => (a.name < b.name ? -1 : 1)),
@@ -373,15 +371,15 @@ class UserList extends React.Component {
   };
 
   handleRevokeKubeconfig = (user) => {
-    if (user?.id) {
-      revokeKubeconfig(user.id)
+    if (user?.metadata.id) {
+      revokeKubeconfig(user.metadata.id)
         .then((_) => {
           this.setState({
             showAlert: true,
             alertMessage: (
               <>
                 <span className="mr-2">Kubeconfig Revoked for</span>
-                <b>{user.username}</b>
+                <b>{user.metadata.name}</b>
               </>
             ),
             alertSeverity: "success",
@@ -445,30 +443,6 @@ class UserList extends React.Component {
 
   handleRafaySnackbarClose = () => {
     this.setState({ showAlert: false, alertMessage: null });
-  };
-
-  handleToggleActive = (user) => {
-    const { searchText, orderBy, order, filters } = this.state;
-    const { activateUser, deactivateUser } = this.props;
-    if (user?.spec?.active) {
-      deactivateUser(
-        user?.metadata.id,
-        searchText,
-        orderBy,
-        order,
-        filters,
-        this.onFailure
-      );
-    } else {
-      activateUser(
-        user?.metadata.id,
-        searchText,
-        orderBy,
-        order,
-        filters,
-        this.onFailure
-      );
-    }
   };
 
   fetchUsers = () => {
@@ -565,7 +539,6 @@ class UserList extends React.Component {
         />
         <UserListCellMenu
           data={data}
-          handleToggleActive={this.handleToggleActive}
           handleRevokeKubeconfig={this.handleRevokeKubeconfig}
           handleGoToManageKeys={this.handleGoToManageKeys}
         />
@@ -704,25 +677,6 @@ class UserList extends React.Component {
           handleRemoveRole={this.handleRemoveRole}
         />
 
-        {/* <Dialog
-          open={this.state.open1}
-          onBackdropClick={() => this.setState({ open1: false })}
-          maxWidth="lg"
-        >
-          <DialogContent>
-            <DownloadCli />
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={() => this.setState({ open1: false })}
-              id="downloadCli_close"
-              color="accent"
-            >
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog> */}
-
         <Dialog
           open={this.state.newUserOpen || false}
           onBackdropClick={() => this.setState({ newUserOpen: false })}
@@ -786,8 +740,6 @@ export default withRouter(
     addUser,
     editUser,
     resetError,
-    activateUser,
-    deactivateUser,
     resetUserResponse,
     deleteUser,
     resetUserDeleteResponse,

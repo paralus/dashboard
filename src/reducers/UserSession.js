@@ -21,10 +21,10 @@ const parseProjectRoles = (roles) => {
         visibleApps: false,
         visibleSystem: false,
       };
-      if (ret[item.project.id]) {
-        data = ret[item.project.id];
+      if (ret[item.project]) {
+        data = ret[item.project];
       }
-      switch (item.role.name) {
+      switch (item.role) {
         case "PROJECT_READ_ONLY":
         case "PROJECT_ADMIN":
           data.visibleApps = true;
@@ -45,7 +45,7 @@ const parseProjectRoles = (roles) => {
         default:
           break;
       }
-      ret[item.project.id] = data;
+      ret[item.project] = data;
       return ret;
     }, {}) || {}
   );
@@ -54,7 +54,7 @@ const parseProjectRoles = (roles) => {
 const parseUserRoles = (roles) => {
   const userRoles = {};
   roles.forEach((r) => {
-    switch (r.role.name) {
+    switch (r.role) {
       case "PROJECT_READ_ONLY":
         userRoles.projectReadOnly = true;
         break;
@@ -90,12 +90,12 @@ const createSession = (user) => {
     visibleAdmin: false,
     visibleSystem: false,
   };
-  const { roles } = user;
+  const roles = user.spec.permissions;
   if (roles && roles.length === 0) {
     data.noRolesUser = true;
   } else if (
     roles?.find((r) =>
-      ["ADMIN", "ADMINISTRATOR_READ_ONLY"].includes(r.role.name)
+      ["ADMIN", "ADMIN_READ_ONLY"].includes(r.role)
     )
   ) {
     data.visibleAdmin = true;
@@ -116,10 +116,10 @@ const createProjectSession = (roles, projectId) => {
     projectId,
   };
   const projectRoles = roles.filter(
-    (r) => r.project && r.project.id === projectId
+    (r) => r.project && r.project === projectId
   );
   projectRoles.forEach((ac) => {
-    switch (ac.role.name) {
+    switch (ac.role) {
       case "PROJECT_READ_ONLY":
       case "PROJECT_ADMIN":
         data.visibleApps = true;
@@ -161,7 +161,7 @@ const UserSession = (state = initialData, action) => {
       adminSession = createSession(action.user);
       if (!adminSession.visibleAdmin && state.projectId) {
         projectSession = createProjectSession(
-          action.user.roles,
+          action.user.spec.permissions,
           state.projectId
         );
         return {

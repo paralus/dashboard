@@ -225,6 +225,7 @@ const TopNavBar = () => {
         options={[
           { label: "Users", path: "/main/users", hide },
           { label: "Groups", path: "/main/groups", hide },
+          { label: "Roles", path: "/main/roles", hide },
           { label: "Identity Providers", path: "/main/sso", hide },
           { label: "Audit Logs", path: "/main/audit" },
           { label: "Settings", path: "/main/settings", hide },

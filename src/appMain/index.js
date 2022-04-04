@@ -18,7 +18,10 @@ import Tools from "./routes/tools";
 import AuditLogs from "./routes/auditLogs";
 import Project from "./routes/project";
 import Group from "./routes/group";
+import Roles from "./routes/roles";
 import Home from "./routes/home";
+import IdpList from "./routes/sso/IdpList";
+import RegistrationWizard from "./routes/sso/RegistrationWizard";
 
 class AppMain extends React.Component {
   constructor() {
@@ -41,11 +44,6 @@ class AppMain extends React.Component {
     const { location, UserSession } = this.props;
     const currentPath = location.pathname;
     let hasAccess = true;
-    if (!UserSession.visibleApps) {
-      hasAccess =
-        hasAccess &&
-        !ConsolePaths.app.some((path) => currentPath.indexOf(path) === 0);
-    }
     if (!UserSession.visibleInfra) {
       hasAccess =
         hasAccess &&
@@ -179,6 +177,17 @@ class AppMain extends React.Component {
                   <Route path={`${match.url}/audit`} component={AuditLogs} />
                   <Route path={`${match.url}/projects`} component={Project} />
                   <Route path={`${match.url}/groups`} component={Group} />
+                  <Route path={`${match.url}/roles`} component={Roles} />
+                  <Route exact
+                    path={`${match.url}/sso/new`}
+                    component={RegistrationWizard}
+                  />
+                  <Route
+                    exact
+                    path={`${match.url}/sso/update/:ssoId`}
+                    component={RegistrationWizard}
+                  />
+                  <Route exact path={`${match.url}/sso`} component={IdpList} />
                 </Container>
               </div>
             </main>

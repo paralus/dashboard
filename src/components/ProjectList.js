@@ -34,7 +34,7 @@ const getProjectList = (roles, showExpandedList) => {
   const projectArray = [];
 
   (roles || []).forEach((e) => {
-    if (["ADMIN", "ADMINISTRATOR_READ_ONLY"].includes(e?.role)) {
+    if (["ADMIN", "ADMIN_READ_ONLY"].includes(e?.role)) {
       projectArray.push("All Projects");
     } else if (e?.project) {
       projectArray.push(e.project);

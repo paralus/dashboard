@@ -11,7 +11,7 @@ function AutoLogoutSetting({ partner, organization }) {
     severity: "error",
   });
 
-  const [idleLogoutTime, setIdleLogoutTime] = useState(0);
+  const [idleLogoutTime, setIdleLogoutTime] = useState(organization.spec?.settings?.idleLogoutMin);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const savedValueRef = useRef(null);
 

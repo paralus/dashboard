@@ -34,15 +34,14 @@ const RolesCard = ({
   checked,
 }) => {
   const classes = useStyles();
-  const filterAdminRole = (role) => {
-    return role.metadata.name !== "ADMIN";
-  };
 
   return (
     <Card elevation={0} variant="outlined">
       <List className={classes.list} dense component="div" role="list">
         {systemRoles &&
-          systemRoles.filter(filterAdminRole).map((value, index) => {
+          systemRoles.filter(r => r.metadata.name !== "ADMIN")
+          .filter(r => r.spec.scope !== "system")
+          .map((value, index) => {
             const labelId = `transfer-list-all-item-${index}-label`;
             const adminDisabled =
               (projectRoleDisabled &&
@@ -73,10 +72,10 @@ const RolesCard = ({
                   id={labelId}
                   primary={
                     <span style={{ fontWeight: 500 }}>
-                      {RoleTypes[value.metadata.name]}
+                      {RoleTypes[value.metadata.name] || value.metadata.name}
                     </span>
                   }
-                  secondary={RoleHelp[value.metadata.name]}
+                  secondary={RoleHelp[value.metadata.name] || value.metadata.description}
                 />
               </ListItem>
             );

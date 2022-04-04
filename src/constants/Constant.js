@@ -142,6 +142,31 @@ export const GROUP_COLUMN_HEADER_CONFIG = [
   },
 ];
 
+export const ROLE_COLUMN_HEADER_CONFIG = [
+  {
+    id: "",
+    disablePadding: false,
+    label: "",
+  },
+  {
+    id: "name",
+    disablePadding: false,
+    disableSorting: true,
+    label: "Name",
+  },
+  {
+    id: "roles",
+    disablePadding: false,
+    disableSorting: true,
+    label: "Permissions",
+  },
+  {
+    id: "options",
+    disablePadding: false,
+    label: "",
+  },
+];
+
 export const CRON_EXPRESSION_CONFIG = [
   {
     name: "CronExpressionMinute",

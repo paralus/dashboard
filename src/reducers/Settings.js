@@ -34,18 +34,6 @@ const initialSettings = {
   isLoginSuccess: false,
   isLoginFailed: false,
   reloadApp: false,
-  certificate: {
-    list: null,
-    detail: null,
-    error: null,
-    isCreateSuccess: false,
-    isCertificateSaved: false,
-    isCertificateResponseError: false,
-    isCertificateDeleted: false,
-    rowsPerPage: 5,
-    offset: 0,
-    page: 0,
-  },
   edges: {
     list: null,
     detail: null,
@@ -70,6 +58,19 @@ const initialSettings = {
   },
   roles: {
     list: null,
+    newRole: null,
+    isDeleteSuccess: false,
+    isDeleteFailed: false,
+    isUpdateRoleError: false,
+    isCreateSuccess: false,
+    isAddRolePermissionError: false,
+    error: null,
+    roleDetail: null,
+    loading: false,
+  },
+  permissions: {
+    list: null,
+    loading: false,
   },
   organization: {
     detail: null,
@@ -114,7 +115,6 @@ const initialSettings = {
   isTotpRequired: false,
   isTotpVerified: false,
   download_index: 0,
-  associatedUserRoleDetails: [],
 };
 
 const is_super_or_partner_admin = (data) => {
@@ -123,20 +123,15 @@ const is_super_or_partner_admin = (data) => {
     isPartnerAdmin: false,
     isOrgAdmin: false,
   };
-  if (data && data.roles && data.roles.length > 0) {
-    for (let index = 0; index < data.roles.length; index++) {
-      const element = data.roles[index];
+  if (data && data.spec.permissions && data.spec.permissions.length > 0) {
+    for (let index = 0; index < data.spec.permissions.length; index++) {
+      const element = data.spec.permissions[index];
       if (
-        element.role.name === "ADMIN" &&
-        element.role.scope === "ORGANIZATION"
+        element.role === "ADMIN"
       )
         userRole.isOrgAdmin = true;
-      if (element.role.name === "SUPER_ADMIN") {
+      if (element.role === "SUPER_ADMIN") {
         userRole.isSuperAdmin = true;
-        break;
-      }
-      if (element.role.name === "PARTNER_ADMIN") {
-        userRole.isPartnerAdmin = true;
         break;
       }
     }
@@ -192,8 +187,8 @@ const settings = (state = initialSettings, action) => {
     case "user_login_success":
       return {
         ...state,
-        userAndRoleDetail: action.payload,
-        userRole: is_super_or_partner_admin(action.payload),
+        userAndRoleDetail: action.payload.data,
+        userRole: is_super_or_partner_admin(action.payload.data),
         isLoginSuccess: true,
         isSessionExpired: false,
         isTotpRequired: false,
@@ -204,34 +199,6 @@ const settings = (state = initialSettings, action) => {
         isTotpRequired: true,
         isTotpVerified: action.payload.totp_verified,
         totpUrl: action.payload.totp_url,
-      };
-    case "user_accountroles_load":
-      return {
-        ...state,
-        organization: {
-          ...state.organization,
-          loading: true,
-        },
-      };
-    case "user_accountroles_success":
-      state.associatedUserRoleDetails = action.payload.data;
-      return {
-        ...state,
-        organization: {
-          ...state.organization,
-          loading: false,
-        },
-        isLoginSuccess: true,
-        isSessionExpired: false,
-      };
-    case "user_accountroles_error":
-      return {
-        ...state,
-        organization: {
-          ...state.organization,
-          loading: false,
-          error: action.payload,
-        },
       };
     case "user_changeorg_success":
       state.userAndRoleDetail = action.payload.data;
@@ -472,6 +439,83 @@ const settings = (state = initialSettings, action) => {
         roles: {
           list: changeValuePosition(action.payload.data.items),
         },
+      };
+    case "reset_roles_list":
+      return {
+        ...state,
+        roles: {},
+      };
+    case "reset_role":
+      return {
+        ...state,
+        roles: {
+          isDeleteSuccess: false,
+          isDeleteFailed: false,
+          isUpdateRoleError: false,
+          isCreateSuccess: false,
+          isAddRolePermissionError: false,
+          error: null,
+          permissions: {},
+          roleDetail: null,
+          loading: false,
+        }
+      };
+    case "get_roledetail_success":
+      state.roles.roleDetail = action.payload.data;
+      return {
+        ...state,
+        isSessionExpired: false,
+      };
+    case "get_rolepermission_success":
+      return {
+        ...state,
+        permissions: {
+          list: action.payload.data.items,
+        },
+      };
+    case "create_role_success":
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          isCreateSuccess: true,
+          newRole: action.payload.data, 
+        }
+      };
+    case "create_role_error":
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          isCreateSuccess: false,
+          error: action.payload,
+        }
+      };
+    case "delete_role_success":
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          isDeleteSuccess: true,
+        }
+      };
+    case "delete_role_error":
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          isDeleteFailed: true,
+          error: action.payload
+        }
+      };
+    case "update_role_error":
+      return {
+        ...state,
+        roles: {
+          ...state.roles,
+          isUpdateGroupError: true,
+          error: action.payload,
+        }
       };
     case "add_user_success":
       return {

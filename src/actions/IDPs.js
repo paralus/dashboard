@@ -2,12 +2,12 @@ import http from "./Config";
 import Cookies from "js-cookie";
 
 export function getServiceProviderConfig(idpId) {
-  return http("auth").get(`/sso/idp/${idpId}/spconfig/`);
+  return http("auth").get(`/sso/oidc/provider/${idpId}`);
 }
 export function getAllIdentityProviders(onSuccess) {
   return function () {
     http("auth")
-      .get("/sso/idp/?limit=1000")
+      .get("/sso/oidc/provider")
       .then((response) => {
         onSuccess(response);
       })
@@ -19,18 +19,22 @@ export function getAllIdentityProviders(onSuccess) {
 
 export function handleIdentityProviderSubmission(
   payload = {},
-  idpId = "",
+  idp = "",
   mode
 ) {
+  const partner = JSON.parse(window?.localStorage.getItem("partner"));
+  const organization = JSON.parse(window?.localStorage.getItem("organization"));
+  payload.metadata.partner = partner;
+  payload.metadata.organization = organization;
   return mode === "CREATE"
-    ? http("auth").post("/sso/idp/", payload)
-    : http("auth").put(`/sso/idp/${idpId}/`, payload);
+    ? http("auth").post("/sso/oidc/provider", payload)
+    : http("auth").put(`/sso/oidc/provider/${idp}`, payload);
 }
 
-export function deleteIdentityProvider(idpId = "", onSuccess, onFailure) {
+export function deleteIdentityProvider(idp = "", onSuccess, onFailure) {
   return function () {
     http("auth")
-      .delete(`/sso/idp/${idpId}/`)
+      .delete(`/sso/oidc/provider/${idp}`)
       .then((response) => {
         onSuccess(response);
       })

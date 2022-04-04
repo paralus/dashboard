@@ -67,7 +67,6 @@ class AssignUser extends React.Component {
 
   transformRoles = () => {
     const { selectedUser, selectedRoles } = this.state;
-    alert(JSON.stringify(selectedRoles.length));
     const roles = [];
     selectedRoles.forEach((role) => {
       let r = {
@@ -123,18 +122,16 @@ class AssignUser extends React.Component {
   render() {
     const { projectName, projectId, showAlert, alertMessage } = this.state;
     const { drawerType, systemRoles, usersList } = this.props;
-    const filteredUsersList = usersList
+    let filteredUsersList = usersList
       .filter((u) =>
         u.spec.projectNamespaceRoles?.find((pnr) => pnr.role !== "ADMIN")
       ) // Filter out all users with ADMIN roles
-      .filter(
-        // a => !a.projects.length || !a.projects.find(a => a.id === projectId)
-        (a) =>
-          !a.spec.projectNamespaceRoles?.find(
-            (pnr) => pnr.project === projectId
-          )
+      .filter((a) =>
+        !a.spec.projectNamespaceRoles?.find((pnr) => pnr.project === projectId)
       ); // Filter out users already assigned to the project
-
+    if (filteredUsersList.length === 0) {
+      filteredUsersList = usersList.filter(u => !u.spec.projectNamespaceRoles)
+    }
     const config = {
       links: [
         {

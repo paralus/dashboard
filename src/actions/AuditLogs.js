@@ -2,6 +2,9 @@ import http from "./Config";
 import { getFilterQuery } from "./Common";
 
 export function getAuditLogs(filter, projectId) {
+  const partner = JSON.parse(window?.localStorage.getItem("partner_id"));
+  const organization = JSON.parse(window?.localStorage.getItem("organization_id"));
+  filter = { ... filter, partner_id: partner, organization_id: organization }
   const query = getFilterQuery(filter);
 
   let url = "auditlog?";
@@ -9,7 +12,7 @@ export function getAuditLogs(filter, projectId) {
 
   return function (dispatch) {
     dispatch({ type: "load_audit_logs" });
-    http("event")
+    http("event", "v1")
       .get(`${url}${query}`)
       .then((response) => {
         dispatch({ type: "get_audit_logs", payload: response.data?.result });
@@ -21,12 +24,15 @@ export function getAuditLogs(filter, projectId) {
 }
 
 export function getKubectlLogs(filter, type = "RelayCommands") {
+  const partner = JSON.parse(window?.localStorage.getItem("partner_id"));
+  const organization = JSON.parse(window?.localStorage.getItem("organization_id"));
+  filter = { ... filter, partner_id: partner, organization_id: organization }
   let query = `auditType=${type}`;
   query += getFilterQuery(filter);
 
   return function (dispatch) {
     dispatch({ type: "load_audit_logs" });
-    http("event")
+    http("event", "v1")
       .get(`audit/relay?${query}`)
       .then((response) => {
         dispatch({

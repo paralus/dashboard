@@ -14,8 +14,8 @@ import { getKubeconfigValidity, setKubeconfigValidity } from "actions/index";
 const KubeconfigValiditySSO = ({ open, user, onClose, setAlert }) => {
   if (!open) return null;
   if (!user) return null;
-  const userId = user.accountID;
-  const userName = user.userName;
+  const userId = user.metadata.id;
+  const userName = user.metadata.name;
   const getHours = (seconds) => {
     return Math.round(seconds / (60 * 60));
   };
@@ -50,7 +50,7 @@ const KubeconfigValiditySSO = ({ open, user, onClose, setAlert }) => {
       .catch((error) => {
         setAlert({
           showAlert: true,
-          alertMessage: error?.response?.data?.error || "Unexpected Error",
+          alertMessage: error?.response?.data?.message || "Unexpected Error",
           alertSeverity: "error",
         });
         onClose();

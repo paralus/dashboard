@@ -46,7 +46,7 @@ const ProjectRoleWidget = ({
   React.useEffect(() => {
     if (editRoles && systemRoles && !roleModified) {
       const editChecked = editRoles.map((ar) => {
-        return systemRoles.find((r) => r.id === ar.role.id);
+        return systemRoles.find((r) => r.metadata.name === ar.role);
       });
       if (!checked.length && editRoles) {
         const uniqueRoles = [...new Set(editChecked)];
@@ -62,11 +62,11 @@ const ProjectRoleWidget = ({
 
   const handleToggle = (value) => () => {
     setRoleModified(true);
-    const currentIndex = checked.findIndex(({ name }) => name === value.name);
+    const currentIndex = checked.findIndex((element) => element.metadata.name === value.metadata.name);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      if (value.name === "ADMIN") {
+      if (value.metadata.name === "ADMIN") {
         setProjectRoleDisabled(true);
         setChecked([value]);
         handleRolesChange([value]);
@@ -74,51 +74,51 @@ const ProjectRoleWidget = ({
         onUserChange("ALL PROJECTS");
         return;
       }
-      if (value.name === "PROJECT_ADMIN") {
+      if (value.metadata.name === "PROJECT_ADMIN") {
         const proi = checked.findIndex(
-          ({ name }) => name === "PROJECT_READ_ONLY"
+          (element) => element.metadata.name === "PROJECT_READ_ONLY"
         );
         if (proi !== -1) {
           newChecked.splice(proi, 1);
         }
       }
-      if (value.name === "PROJECT_READ_ONLY") {
-        const pai = checked.findIndex(({ name }) => name === "PROJECT_ADMIN");
+      if (value.metadata.name === "PROJECT_READ_ONLY") {
+        const pai = checked.findIndex((element) => element.metadata.name === "PROJECT_ADMIN");
         if (pai !== -1) {
           newChecked.splice(pai, 1);
         }
       }
-      if (value.name === "INFRA_ADMIN") {
+      if (value.metadata.name === "INFRA_ADMIN") {
         const proi = checked.findIndex(
-          ({ name }) => name === "INFRA_READ_ONLY"
+          (element) => element.metadata.name === "INFRA_READ_ONLY"
         );
         if (proi !== -1) {
           newChecked.splice(proi, 1);
         }
       }
-      if (value.name === "INFRA_READ_ONLY") {
-        const pai = checked.findIndex(({ name }) => name === "INFRA_ADMIN");
+      if (value.metadata.name === "INFRA_READ_ONLY") {
+        const pai = checked.findIndex((element) => element.metadata.name === "INFRA_ADMIN");
         if (pai !== -1) {
           newChecked.splice(pai, 1);
         }
       }
-      if (value.name === "NAMESPACE_ADMIN") {
+      if (value.metadata.name === "NAMESPACE_ADMIN") {
         const pai = checked.findIndex(
-          ({ name }) => name === "NAMESPACE_READ_ONLY"
+          (element) => element.metadata.name === "NAMESPACE_READ_ONLY"
         );
         if (pai !== -1) {
           newChecked.splice(pai, 1);
         }
       }
-      if (value.name === "NAMESPACE_READ_ONLY") {
-        const pai = checked.findIndex(({ name }) => name === "NAMESPACE_ADMIN");
+      if (value.metadata.name === "NAMESPACE_READ_ONLY") {
+        const pai = checked.findIndex((element) => element.metadata.name === "NAMESPACE_ADMIN");
         if (pai !== -1) {
           newChecked.splice(pai, 1);
         }
       }
       newChecked.push(value);
     } else {
-      if (value.name === "ADMIN") {
+      if (value.metadata.name === "ADMIN") {
         setProjectRoleDisabled(false);
         setSelectedUser("");
         onUserChange("");
@@ -134,14 +134,14 @@ const ProjectRoleWidget = ({
     const proj = e.target.value;
     if (proj === "ALL PROJECTS") {
       setProjectRoleDisabled(true);
-      const adminRole = systemRoles.find(({ name }) => name === "ADMIN");
+      const adminRole = systemRoles.find((element) => element.metadata.name === "ADMIN");
       if (adminRole) {
         setChecked([adminRole]);
         handleRolesChange([adminRole]);
       }
     } else {
       setProjectRoleDisabled(false);
-      const ai = checked.findIndex(({ name }) => name === "ADMIN");
+      const ai = checked.findIndex((element) => element.metadata.name === "ADMIN");
       if (ai !== -1) {
         const newChecked = [...checked];
         newChecked.splice(ai, 1);
@@ -158,7 +158,7 @@ const ProjectRoleWidget = ({
   };
 
   const namespaceChecked =
-    checked.findIndex((x) => x.name.includes("NAMESPACE")) !== -1;
+    checked.findIndex((x) => x.metadata.name.includes("NAMESPACE")) !== -1;
 
   return (
     <Grid

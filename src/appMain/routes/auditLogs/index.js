@@ -51,11 +51,7 @@ function AuditLogs() {
         {
           label: "Kubectl",
           panel: <KubectlLogs />,
-        },
-        {
-          label: "OPA",
-          panel: <OpaAudit />,
-        },
+        }
       ]}
     />
   );

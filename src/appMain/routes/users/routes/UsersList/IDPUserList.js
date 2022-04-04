@@ -7,7 +7,7 @@ import AvTimerIcon from "@material-ui/icons/AvTimer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import GroupIcon from "@material-ui/icons/Group";
-import { getIDPUsers, revokeKubeconfig } from "actions/index";
+import { getUsers, revokeKubeconfig } from "actions/index";
 import ProjectList from "components/ProjectList";
 import ProjectRoleMatrix from "components/ProjectRoleMatrix";
 import RafaySnackbar from "components/RafaySnackbar";
@@ -67,7 +67,7 @@ class IDPUserList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getIDPUsers(this.props.organizationId);
+    this.props.getUsers();
   }
 
   getLastLogin = (data) => {
@@ -85,15 +85,15 @@ class IDPUserList extends React.Component {
   };
 
   handleRevokeKubeconfig = (_, user) => {
-    if (user?.accountID) {
-      revokeKubeconfig(user.accountID, true)
+    if (user?.metadata?.id) {
+      revokeKubeconfig(user.metadata.id, true)
         .then((_) => {
           this.setState({
             showAlert: true,
             alertMessage: (
               <>
                 <span className="mr-2">Kubeconfig Revoked for</span>
-                <b>{user.userName}</b>
+                <b>{user.metadata.name}</b>
               </>
             ),
             alertSeverity: "success",
@@ -122,19 +122,12 @@ class IDPUserList extends React.Component {
   formatProjects = (projects) => {
     return projects?.map((item) => {
       const newProjectObj = {
-        role: {
-          name: item.roleNames,
-        },
-        group: {
-          name: item.group,
-        },
+        role: item.role,
+        group: item.group,
       };
 
-      if (item?.projectName) {
-        newProjectObj.project = {
-          id: item.projectID,
-          name: item.projectName,
-        };
+      if (item?.project) {
+        newProjectObj.project = item.project;
       }
 
       return newProjectObj;
@@ -142,24 +135,24 @@ class IDPUserList extends React.Component {
   };
 
   getCollapsedRow = (data) => {
-    return <ProjectRoleMatrix roles={this.formatProjects(data.projects)} />;
+    return <ProjectRoleMatrix roles={this.formatProjects(data.spec.projectNamespaceRoles)} />;
   };
 
   parseRowData = (data) => {
     const userDetails = (
       <div style={style.userDetailContainer}>
-        <div style={style.userNameLabel}> {data.userName} </div>
+        <div style={style.userNameLabel}> {data.metadata.name} </div>
       </div>
     );
 
     const projectDetails = (
-      <ProjectList roles={this.formatProjects(data.projects)} />
+      <ProjectList roles={this.formatProjects(data.spec.projectNamespaceRoles)} />
     );
 
     const lastAccessDetails = (
       <div style={style.lastAccessValue}>
-        {data.lastLogin ? (
-          getTimeFromNow(data.lastLogin)
+        {data.spec.lastLogin ? (
+          getTimeFromNow(data.spec.lastLogin)
         ) : (
           <span style={style.noResult}>-</span>
         )}
@@ -182,7 +175,7 @@ class IDPUserList extends React.Component {
             aria-label="edit"
             className="m-0"
             onClick={(event) =>
-              this.handleGoToManageKeys(event, data.accountID)
+              this.handleGoToManageKeys(event, data.metadata.name)
             }
           >
             <i className="zmdi zmdi-key" />
@@ -208,7 +201,7 @@ class IDPUserList extends React.Component {
           confirmText={
             <span className="mr-2">
               Are you sure you want to revoke kubectlconfig for
-              <b> {data.userName}</b> ?
+              <b> {data.metadata.name}</b> ?
             </span>
           }
           tooltip="Revoke Kubeconfig"
@@ -274,7 +267,7 @@ class IDPUserList extends React.Component {
 
     if (this.state.searchText) {
       data = data.filter(
-        (u) => u.userName.indexOf(this.state.searchText) !== -1
+        (u) => u.metadata.name.indexOf(this.state.searchText) !== -1
       );
       listCount = data.length;
     }
@@ -313,7 +306,7 @@ class IDPUserList extends React.Component {
           user={selectedUser}
           onClose={(_) => {
             this.setState({ openGroups: false, selectedUser: null }, (_) =>
-              this.props.getIDPUsers(this.props.organizationId)
+              this.props.getUsers()
             );
           }}
         />
@@ -322,17 +315,14 @@ class IDPUserList extends React.Component {
   }
 }
 
-const mapStateToProps = ({ settings, Users }) => {
-  const users = Users.idpUsers;
-  const organizationId = settings?.userAndRoleDetail?.organization?.id;
+const mapStateToProps = ({ settings }) => {
+  const users = settings.users.list;
   return {
     users,
-
-    organizationId,
   };
 };
 export default withRouter(
   connect(mapStateToProps, {
-    getIDPUsers,
+    getUsers,
   })(IDPUserList)
 );

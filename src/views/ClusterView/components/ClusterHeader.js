@@ -63,7 +63,7 @@ const getClusterStatus = (edge) => {
     let ready =
       edge.spec.clusterData.cluster_status.conditions[index].type ===
         "ClusterReady" &&
-      edge.spec.clusterData.cluster_status.conditions[index].status === 3;
+      edge.spec.clusterData.cluster_status.conditions[index].status === "Success";
     if (ready) {
       return "READY";
     }
@@ -71,12 +71,16 @@ const getClusterStatus = (edge) => {
   return status;
 };
 
-function getStatus({ status }) {
+function getStatus({ edge }) {
   const getStatusColor = R.cond([
     [R.equals("READY"), R.always("primary")],
     [R.test(/(NOT|FAIL)/), R.always("error")],
     [R.T, R.always("textSecondary")],
   ]);
+  if (!edge) return false;
+  alert(JSON.stringify(edge))
+  let status = getClusterStatus(edge)
+  alert(status)
   return (
     <Typography display="inline" color={getStatusColor(status)}>
       {status || "NOT_READY"}
@@ -144,32 +148,15 @@ export default function ClusterHeader({
     }
     return color;
   };
-
-  const parseUpgradeState = ((value) =>
-    edge?.cluster_type === "azure-aks"
-      ? value?.replace("NODEGROUP", "NODEPOOL")
-      : value)(
-    edge?.edge_upgrade_info?.upgrade_state_status_str?.toUpperCase()
-  );
-
   return (
     <Paper className={classes.root}>
       <Box p={2}>
         <Typography color="primary" paragraph variant="h5">
-          {edge.name} &nbsp; &nbsp;
-          {edge.provision &&
-            edge.provision.status &&
-            edge.provision.status.includes(
-              "UPDATE_CLUSTER_ENDPOINTS_INPROGRESS"
-            ) && (
-              <Badge className="cluster-glow-status sm" color="info">
-                UPDATING CLUSTER ENDPOINTS
-              </Badge>
-            )}
+          {edge.metadata.name} &nbsp; &nbsp;
         </Typography>
         <Box display="flex" alignItems="center" height="20px" lineHeight="20px">
           <Typography display="inline" component="span">
-            Status: {getStatus(getClusterStatus(edge))}
+            Status: {getStatus(edge)}
           </Typography>
           <Typography
             display="inline"
@@ -178,30 +165,6 @@ export default function ClusterHeader({
           >
             {getHealth(edge, classes)}
           </Typography>
-          {edge &&
-            edge.edge_upgrade_info &&
-            edge.edge_upgrade_info.upgrade_state_status_str && (
-              <Typography
-                display="inline"
-                component="span"
-                style={{
-                  marginLeft: "500px",
-                  position: "absolute",
-                }}
-              >
-                Last Upgrade Status :
-                <span
-                  className="ml-1"
-                  style={{
-                    color: getStatusColorCode(
-                      edge.edge_upgrade_info.upgrade_state_status_str
-                    ),
-                  }}
-                >
-                  {parseUpgradeState}
-                </span>
-              </Typography>
-            )}
         </Box>
       </Box>
       <Box p={2}>
@@ -227,7 +190,7 @@ export default function ClusterHeader({
         >
           <KubeCtlShellAccess
             projectId={edge.project_id}
-            clusterName={edge.name}
+            clusterName={edge.metadata.name}
           />
         </Grid>
       </Box>

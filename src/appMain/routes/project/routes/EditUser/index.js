@@ -41,29 +41,16 @@ class EditUser extends React.Component {
     getUserDetail(userId);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { userDetail } = this.props;
-    if (userDetail !== prevProps.userDetail) {
-      const selectedNamespaces = userDetail?.roles?.reduce((acc, userRole) => {
-        const { role, namespace_id } = userRole;
-        if (role?.name?.includes("NAMESPACE") && namespace_id)
-          acc.push(namespace_id);
-        return acc;
-      }, []);
-      const uniqueNamespace = [...new Set(selectedNamespaces)];
-      this.handleNamespacesChange(uniqueNamespace);
-    }
-  }
   static getDerivedStateFromProps(props, state) {
     const newState = { ...state };
     const { projectDetail, userDetail } = props;
     if (projectDetail) {
-      newState.projectName = projectDetail.name;
+      newState.projectName = projectDetail.metadata.name;
     }
     if (userDetail) {
-      newState.selectedUser = userDetail;
-      newState.editRoles = userDetail.roles.filter(
-        (r) => r.project.id === state.projectId
+      newState.selectedUser = userDetail.metadata.name;
+      newState.editRoles = userDetail.spec.projectNamespaceRoles.filter(
+        (r) => r.project === state.projectId
       );
     }
     return {
@@ -94,31 +81,26 @@ class EditUser extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedRoles, selectedNamespaces } = this.state;
+    const { selectedUser, selectedRoles } = this.state;
     const roles = [];
-    selectedRoles.forEach((role) => {
-      const { name } = role;
-
-      if (name.includes("NAMESPACE"))
-        role.namespace_id_list = selectedNamespaces;
-      roles.push(role);
+    selectedRoles.forEach((r) => {
+      let ur = {
+        user: selectedUser,
+        role: r.metadata.name,
+      };
+      roles.push(ur);
     });
     return roles;
   };
 
   handleSaveChanges = () => {
-    const { selectedUser } = this.state;
     const { editProjectWithCallback, projectDetail } = this.props;
-    const postData = { project: projectDetail, roles: this.transformRoles() };
-    editProjectWithCallback(postData, this.successCallback, this.errorCallback);
+    projectDetail.spec.userRoles = this.transformRoles();
+    editProjectWithCallback(projectDetail, this.successCallback, this.errorCallback);
   };
 
   handleUserChange = (user) => {
     this.setState({ selectedUser: user });
-  };
-
-  handleNamespacesChange = (namespaces) => {
-    this.setState({ selectedNamespaces: namespaces });
   };
 
   handleRolesChange = (checked) => {
@@ -139,7 +121,7 @@ class EditUser extends React.Component {
 
     let breadcrumbLabel = "";
     if (selectedUser) {
-      breadcrumbLabel = selectedUser.account.username;
+      breadcrumbLabel = selectedUser;
     }
 
     const config = {
@@ -226,8 +208,8 @@ const mapStateToProps = ({ settings, Projects, Users }) => {
   const { projectDetail } = Projects;
   const systemRoles = settings.roles.list;
   let usersList = [];
-  if (settings.users && settings.users.list && settings.users.list.users) {
-    usersList = settings.users.list.users;
+  if (settings.users && settings.users.list) {
+    usersList = settings.users.list;
   }
   return {
     drawerType,

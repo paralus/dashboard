@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { useParams } from "react-router";
 import { connect } from "react-redux";
-import { getSSOUser, resetUser } from "actions/index";
+import { getUserDetail, resetUser } from "actions/index";
 
 import T from "i18n-react";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
@@ -13,8 +13,8 @@ const UserDetailSSO = () => {
   const { userId } = useParams();
   const [ssoUser, setSSOUser] = useState();
   useEffect((_) => {
-    getSSOUser(userId).then((res) => {
-      console.log("getSSOUser", res.data);
+    getUserDetail(userId).then((res) => {
+      console.log("getUserDetail", res.data);
       setSSOUser(res.data);
     });
   }, []);

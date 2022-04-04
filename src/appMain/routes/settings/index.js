@@ -46,12 +46,12 @@ class Settings extends React.Component {
 
   componentDidMount() {
     this.props.getOrganization(
-      this.props.userAndRoleDetail.organization.partner.name,
-      this.props.userAndRoleDetail.organization.name
+      this.props.userAndRoleDetail.metadata.partner,
+      this.props.userAndRoleDetail.metadata.organization
     );
-    if (this.props?.userAndRoleDetail?.organization?.id) {
+    if (this.props?.userAndRoleDetail) {
       getOrgKubeconfigValidity(
-        this.props.userAndRoleDetail.organization.id
+        this.props.detail.metadata.id
       ).then((res) => {
         this.setState({
           kubectlSettings: res?.data,
@@ -111,7 +111,7 @@ class Settings extends React.Component {
   };
 
   handleSaveValidity = (settings) => {
-    const orgId = this.props?.userAndRoleDetail?.organization?.id;
+    const orgId = this.props?.detail?.metadata.id;
     if (orgId) {
       return setOrgKubeconfigValidity(orgId, settings);
     }
