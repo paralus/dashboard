@@ -17,6 +17,7 @@
     "chroma-js": "^2.4.2",
     "classnames": "^2.2.5",
     "connected-react-router": "^6.9.2",
+    "copy-webpack-plugin": "^10.2.4",
     "create-react-context": "^0.3.0",
     "formik": "^2.2.9",
     "highcharts": "^10.0.0",
