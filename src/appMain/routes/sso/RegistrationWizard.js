@@ -20,7 +20,7 @@ import {
   Tooltip,
   StepLabel,
   Radio,
-  RadioGroup
+  RadioGroup,
 } from "@material-ui/core";
 import T from "i18n-react";
 import { connect } from "react-redux";
@@ -31,7 +31,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import {
   getServiceProviderConfig,
   uploadMetaDataFile,
-  handleIdentityProviderSubmission
+  handleIdentityProviderSubmission,
 } from "actions/IDPs";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect, useRef, useState } from "react";
@@ -53,10 +53,10 @@ const SpConfigSchema = Yup.object().shape({
     .required("Client secret is required"),
   providerName: Yup.string()
     .max(256, `Can't be longer than 256`)
-    .required("Idp name is required")
+    .required("Idp name is required"),
 });
 
-const R = require('ramda');
+const R = require("ramda");
 
 const MetaDataUrlSchema = Yup.object().shape({
   metadata_url: Yup.string()
@@ -64,33 +64,33 @@ const MetaDataUrlSchema = Yup.object().shape({
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
       "Invalid link "
     )
-    .max(300, `Can't be longer than 300`)
+    .max(300, `Can't be longer than 300`),
 });
 
 const idpModeConfig = {
-  'CREATE': {
-    label: 'Created'
+  CREATE: {
+    label: "Created",
   },
-  'UPDATE': {
-    label: 'Updated'
-  }
+  UPDATE: {
+    label: "Updated",
+  },
 };
 
 const ignoreConfigList = [
-  'group_attribute_name',
-  'mapperUrl',
-  'issuerUrl',
-  'authUrl',
-  'tokenUrl'
+  "group_attribute_name",
+  "mapperUrl",
+  "issuerUrl",
+  "authUrl",
+  "tokenUrl",
 ];
 
 const ignoreConfigListUpdate = [
-  'clientSecret',
-  'group_attribute_name',
-  'mapperUrl',
-  'issuerUrl',
-  'authUrl',
-  'tokenUrl'
+  "clientSecret",
+  "group_attribute_name",
+  "mapperUrl",
+  "issuerUrl",
+  "authUrl",
+  "tokenUrl",
 ];
 
 const CustomInput = ({
@@ -153,17 +153,17 @@ const CustomSelect = ({
   );
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%"
+    width: "100%",
   },
   button: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
 
   instructions: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   highLightUrl: {
     backgroundColor: "#f8f8f8",
@@ -172,14 +172,14 @@ const useStyles = makeStyles(theme => ({
     lineHeight: "19px",
     overflow: "auto",
     padding: "6px 10px",
-    borderRadius: "3px"
+    borderRadius: "3px",
   },
   textField: {
     marginBottom: theme.spacing(2),
-    minWidth: "500px"
+    minWidth: "500px",
   },
   spConfigLabel: {
-    width: "350px"
+    width: "350px",
   },
   urlCopy: {
     position: "relative",
@@ -190,7 +190,7 @@ const useStyles = makeStyles(theme => ({
     borderColor: "grey",
     color: "black",
     paddingLeft: "15px",
-    paddingRight: "15px"
+    paddingRight: "15px",
   },
   helpText: {
     marginBottom: "0px",
@@ -199,14 +199,12 @@ const useStyles = makeStyles(theme => ({
     paddingTop: "20px",
     paddingBottom: "20px",
     fontStyle: "italic",
-    color: "rgb(117, 117, 117)"
-  }
+    color: "rgb(117, 117, 117)",
+  },
 }));
 
-const RegistrationWizard = props => {
-  const {
-    editModeOn
-  } = props;
+const RegistrationWizard = (props) => {
+  const { editModeOn } = props;
 
   const firstStep = useRef();
   const secondStep = useRef();
@@ -246,11 +244,11 @@ const RegistrationWizard = props => {
   function getSpConfig(idpId) {
     setLoading(true);
     getServiceProviderConfig(idpId)
-      .then(response => {
+      .then((response) => {
         setSpConfig(response.data);
         setLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         setSpConfig({});
         setLoading(false);
       });
@@ -258,9 +256,13 @@ const RegistrationWizard = props => {
 
   function checkIfValid(object) {
     for (const item of Object.entries(object)) {
-      if (!editMode && !ignoreConfigList.includes(item[0]) && item[1] === undefined ) {
+      if (
+        !editMode &&
+        !ignoreConfigList.includes(item[0]) &&
+        item[1] === undefined
+      ) {
         return false;
-      } 
+      }
     }
     return true;
   }
@@ -274,26 +276,25 @@ const RegistrationWizard = props => {
   function saveIdpDetails(payload, mode, skipNextStep) {
     setLoading(true);
     setIdpPayload(payload);
-    handleIdentityProviderSubmission(payload, idpId, mode).then(response => {
-      setIdpId(response.data.metadata.name);
-      setIdpResponse(response.data);
-      //setCertificate(response.data.sp_cert);
-      setLoading(false);
-      setMsg(`IdP ${idpModeConfig[mode].label} Successfully!`);
-      if (skipNextStep)
-        setRedirect(true)
-      else
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
-    })
-    .catch(error => {
-      setError(
-        error.response.data
-          ? error.response.data.message
-          : "Unable to process request"
-      );
-      setLoading(false);
-      setMsg("");
-    });
+    handleIdentityProviderSubmission(payload, idpId, mode)
+      .then((response) => {
+        setIdpId(response.data.metadata.name);
+        setIdpResponse(response.data);
+        //setCertificate(response.data.sp_cert);
+        setLoading(false);
+        setMsg(`IdP ${idpModeConfig[mode].label} Successfully!`);
+        if (skipNextStep) setRedirect(true);
+        else setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      })
+      .catch((error) => {
+        setError(
+          error.response.data
+            ? error.response.data.message
+            : "Unable to process request"
+        );
+        setLoading(false);
+        setMsg("");
+      });
   }
 
   function updateIDPWithMetaUrl(values) {
@@ -306,17 +307,16 @@ const RegistrationWizard = props => {
 
     payload.spec.mapperUrl = values.metadata_url || "";
 
-    handleIdentityProviderSubmission(payload, idpId, 'UPDATE')
-      .then(response => {
+    handleIdentityProviderSubmission(payload, idpId, "UPDATE")
+      .then((response) => {
         setIsSuccess(true);
         setLoading(false);
         setRedirect(true);
-        setTimeout(() => {
-        }, 500);
+        setTimeout(() => {}, 500);
       })
-      .catch(error => {
+      .catch((error) => {
         setError(
-          error.response.data 
+          error.response.data
             ? error.response.data.message
             : "Unable to process request"
         );
@@ -327,14 +327,14 @@ const RegistrationWizard = props => {
 
   const handleUPloadMetaDataFile = () => {
     uploadMetaDataFile(idpResponse?.id, {
-      idp_metadata: metadata_file
+      idp_metadata: metadata_file,
     })
-      .then(response => {
+      .then((response) => {
         setIsSuccess(true);
         setLoading(false);
         setRedirect(true);
       })
-      .catch(error => {
+      .catch((error) => {
         setError(
           error.response.data && error.response.data.details.length
             ? error.response.data.details[0].detail
@@ -357,19 +357,24 @@ const RegistrationWizard = props => {
   };
 
   const transformRequest = (data) => {
-    let scope = editMode && data['group_attribute_name'] ? data['group_attribute_name'] : data['group_attribute_name'] ? [data['group_attribute_name']] : []
+    let scope =
+      editMode && data["group_attribute_name"]
+        ? data["group_attribute_name"]
+        : data["group_attribute_name"]
+        ? [data["group_attribute_name"]]
+        : [];
     let payload = {
       metadata: {
-        name: data['name']
+        name: data["name"],
       },
       spec: {
-        providerName: data['providerName'],
-        clientId: data['clientId'],
-        clientSecret: data['clientSecret'],
-        scopes: scope
-      }
-    }
-    return payload
+        providerName: data["providerName"],
+        clientId: data["clientId"],
+        clientSecret: data["clientSecret"],
+        scopes: scope,
+      },
+    };
+    return payload;
   };
 
   const handleSubmit = (skipNextStep) => {
@@ -378,11 +383,19 @@ const RegistrationWizard = props => {
 
       if (checkIfValid(firstStep.current.values)) {
         if (editMode || editModeOn) {
-          saveIdpDetails(transformRequest(firstStep.current.values), 'UPDATE', skipNextStep);
+          saveIdpDetails(
+            transformRequest(firstStep.current.values),
+            "UPDATE",
+            skipNextStep
+          );
           return;
         }
-        saveIdpDetails(transformRequest(firstStep.current.values), 'CREATE', skipNextStep);
-      } 
+        saveIdpDetails(
+          transformRequest(firstStep.current.values),
+          "CREATE",
+          skipNextStep
+        );
+      }
     }
   };
 
@@ -434,7 +447,7 @@ const RegistrationWizard = props => {
                   values,
                   setFieldValue,
                   errors,
-                  touched
+                  touched,
                 }) => {
                   return (
                     <Form>
@@ -480,7 +493,8 @@ const RegistrationWizard = props => {
                             focused
                             className="text-grey mt-4 ml-4"
                           >
-                            This is the client id generated from the respective oauth provider
+                            This is the client id generated from the respective
+                            oauth provider
                           </FormHelperText>
                         </div>
 
@@ -499,7 +513,8 @@ const RegistrationWizard = props => {
                             focused
                             className="text-grey mt-4 ml-4"
                           >
-                            This is the client secret generated from the respective oauth provider
+                            This is the client secret generated from the
+                            respective oauth provider
                           </FormHelperText>
                         </div>
 
@@ -515,8 +530,8 @@ const RegistrationWizard = props => {
                             focused
                             className="text-grey mt-4 ml-4"
                           >
-                            Configure the name of the Group Attribute Statement in
-                            OAuth Scopes to map to the group with assigned
+                            Configure the name of the Group Attribute Statement
+                            in OAuth Scopes to map to the group with assigned
                             roles in the console
                           </FormHelperText>
                         </div>
@@ -555,7 +570,9 @@ const RegistrationWizard = props => {
                     >
                       <IconButton
                         onClick={() => {
-                          navigator.clipboard.writeText(`${spConfig?.spec?.callbackUrl}`);
+                          navigator.clipboard.writeText(
+                            `${spConfig?.spec?.callbackUrl}`
+                          );
                           setToolTip("Copied");
                         }}
                         aria-label="copy"
@@ -656,7 +673,6 @@ const RegistrationWizard = props => {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         );
@@ -694,7 +710,7 @@ const RegistrationWizard = props => {
                   <Formik
                     key="second"
                     initialValues={{
-                      metadata_url: idpResponse?.spec?.mapperUrl
+                      metadata_url: idpResponse?.spec?.mapperUrl,
                     }}
                     validationSchema={MetaDataUrlSchema}
                     innerRef={secondStep}
@@ -702,7 +718,7 @@ const RegistrationWizard = props => {
                       submitForm,
                       isSubmitting,
                       values,
-                      setFieldValue
+                      setFieldValue,
                     }) => {
                       return (
                         <Form>
@@ -747,28 +763,30 @@ const RegistrationWizard = props => {
     }
 
     // First step first send the request and then proceed next
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
     if (activeStep === 1) {
       setEditMode(true);
     }
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const config = { links: [] };
   config.links = [
     {
       label: "Identity Providers",
-      href: "#/main/sso"
+      href: "#/main/sso",
     },
     {
-      label: idpResponse?.metadata?.name ? idpResponse.metadata.name : "New IdP"
-    }
+      label: idpResponse?.metadata?.name
+        ? idpResponse.metadata.name
+        : "New IdP",
+    },
   ];
 
-  const handleSetStep = value => {
+  const handleSetStep = (value) => {
     if (activeStep === 0) {
       setIdpPayload(transformRequest(firstStep.current.values));
     }
@@ -782,7 +800,7 @@ const RegistrationWizard = props => {
     }
 
     setRedirect(true);
-  }
+  };
 
   return (
     <Box className="">
@@ -797,16 +815,16 @@ const RegistrationWizard = props => {
             tabs={[
               {
                 label: "IdP Configuration",
-                panel: getStepContent(0)
+                panel: getStepContent(0),
               },
               {
                 label: "SP Configuration",
-                panel: getStepContent(1)
+                panel: getStepContent(1),
               },
               {
                 label: "Mapper Configuration",
-                panel: getStepContent(2)
-              }
+                panel: getStepContent(2),
+              },
             ]}
             step={activeStep}
             handleChange={props.location.state ? handleSetStep : undefined}
@@ -839,8 +857,7 @@ const RegistrationWizard = props => {
                   >
                     &nbsp;Discard & exit
                   </Button>
-                  {
-                    [0, 1].includes(activeStep) && 
+                  {[0, 1].includes(activeStep) && (
                     <Button
                       className="mr-4 bg-white text-teal"
                       variant="contained"
@@ -850,7 +867,7 @@ const RegistrationWizard = props => {
                     >
                       &nbsp;Save & exit
                     </Button>
-                  }
+                  )}
                 </div>
               </div>
               <div className="next d-flex align-items-center">
@@ -865,8 +882,8 @@ const RegistrationWizard = props => {
                   {activeStep === steps.length - 1
                     ? "Save & Exit"
                     : editMode || editModeOn
-                      ? "Update & Continue"
-                      : "Save & Continue"}
+                    ? "Update & Continue"
+                    : "Save & Continue"}
                 </Button>
               </div>
             </div>
@@ -886,7 +903,7 @@ const RegistrationWizard = props => {
                 color="inherit"
               >
                 <CloseIcon />
-              </IconButton>
+              </IconButton>,
             ]}
           />
         </div>

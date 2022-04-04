@@ -41,14 +41,12 @@ const RolesCard = ({
         {systemRoles &&
           systemRoles
             .filter((r) => r.metadata.name !== "ADMIN")
-            .filter(r => r.spec.scope !== "system")
+            .filter((r) => r.spec.scope !== "system")
             .map((value, index) => {
               const labelId = `transfer-list-all-item-${index}-label`;
               const adminDisabled =
-                (projectRoleDisabled &&
-                  !["ADMIN", "ADMIN_READ_ONLY"].includes(
-                    value.metadata.name
-                  ));
+                projectRoleDisabled &&
+                !["ADMIN", "ADMIN_READ_ONLY"].includes(value.metadata.name);
 
               return (
                 <ListItem
@@ -83,7 +81,10 @@ const RolesCard = ({
                         {RoleTypes[value.metadata.name] || value.metadata.name}
                       </span>
                     }
-                    secondary={RoleHelp[value.metadata.name] || value.metadata.description}
+                    secondary={
+                      RoleHelp[value.metadata.name] ||
+                      value.metadata.description
+                    }
                   />
                 </ListItem>
               );

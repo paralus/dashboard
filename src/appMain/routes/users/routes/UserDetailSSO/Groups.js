@@ -1,7 +1,11 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUserDetail, editUser, resetUserGroupDeleteError } from "actions/index";
+import {
+  getUserDetail,
+  editUser,
+  resetUserGroupDeleteError,
+} from "actions/index";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import T from "i18n-react";

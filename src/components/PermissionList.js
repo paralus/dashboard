@@ -45,11 +45,18 @@ const getPermissionList = (permissions, showExpandedList) => {
 
   return {
     baseList: [...uniquePermissionList].splice(0, 2),
-    otherList: [...uniquePermissionList].splice(2, uniquePermissionList.length - 1),
+    otherList: [...uniquePermissionList].splice(
+      2,
+      uniquePermissionList.length - 1
+    ),
   };
 };
 
-const PermissionList = ({ permissions, handleClick, showExpandedList = false }) => {
+const PermissionList = ({
+  permissions,
+  handleClick,
+  showExpandedList = false,
+}) => {
   const classes = useStyles();
   const [permissionList, setPermissionList] = useState([]);
 
@@ -58,7 +65,10 @@ const PermissionList = ({ permissions, handleClick, showExpandedList = false }) 
   }, [permissions]);
 
   const renderExpandedPermissionResult = (
-    <div className={classes.permissionExpandedListContainer} onClick={handleClick}>
+    <div
+      className={classes.permissionExpandedListContainer}
+      onClick={handleClick}
+    >
       {!permissionList?.length ? (
         <span className={classes.mutedLabel}> No permissions </span>
       ) : (
@@ -87,7 +97,9 @@ const PermissionList = ({ permissions, handleClick, showExpandedList = false }) 
     </div>
   );
 
-  return showExpandedList ? renderExpandedPermissionResult : renderPermissionResult;
+  return showExpandedList
+    ? renderExpandedPermissionResult
+    : renderPermissionResult;
 };
 
 export default PermissionList;

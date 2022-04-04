@@ -39,10 +39,10 @@ export function getFilterQuery(filter) {
       value = value.join("&filter.projectIds=");
     }
     if (key === "partner_id") {
-      return `${acc}&metadata.partner=${value}`
+      return `${acc}&metadata.partner=${value}`;
     }
     if (key === "organization_id") {
-      return `${acc}&metadata.organization=${value}`
+      return `${acc}&metadata.organization=${value}`;
     }
     return `${acc}&filter.${key}=${value}`;
   }, "");

@@ -17,11 +17,7 @@ export function getAllIdentityProviders(onSuccess) {
   };
 }
 
-export function handleIdentityProviderSubmission(
-  payload = {},
-  idp = "",
-  mode
-) {
+export function handleIdentityProviderSubmission(payload = {}, idp = "", mode) {
   const partner = JSON.parse(window?.localStorage.getItem("partner"));
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   payload.metadata.partner = partner;

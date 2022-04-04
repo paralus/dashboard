@@ -13,8 +13,8 @@ import Button from "@material-ui/core/Button";
 
 const roleScopes = {
   ORGANIZATION: "ORGANIZATION",
-  PROJECT: "PROJECT"
-}
+  PROJECT: "PROJECT",
+};
 
 const scopesList = Object.keys(roleScopes).map((option) => {
   return {
@@ -42,14 +42,14 @@ const CreateResourceDialog = ({
         >
           <DialogContent>
             <Select
-                placeholder="Select Role Scope"
-                options={scopesList}
-                defaultValue={scopesList[1]}
-                menuPlacement="auto"
-                isClearable
-                maxMenuHeight={200}
-                onChange={handleResourceChange("scope")}
-              />
+              placeholder="Select Role Scope"
+              options={scopesList}
+              defaultValue={scopesList[1]}
+              menuPlacement="auto"
+              isClearable
+              maxMenuHeight={200}
+              onChange={handleResourceChange("scope")}
+            />
             <TextValidator
               autoFocus
               required

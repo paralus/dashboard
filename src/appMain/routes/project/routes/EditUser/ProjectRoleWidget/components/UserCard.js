@@ -44,7 +44,10 @@ const UserCard = ({ selectedUser, usersList, handleUserChange }) => {
             >
               {usersList &&
                 usersList.map((option) => (
-                  <MenuItem key={option.metadata.id} value={option.metadata.name}>
+                  <MenuItem
+                    key={option.metadata.id}
+                    value={option.metadata.name}
+                  >
                     {option.metadata.name}
                   </MenuItem>
                 ))}

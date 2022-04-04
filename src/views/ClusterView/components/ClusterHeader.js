@@ -63,7 +63,8 @@ const getClusterStatus = (edge) => {
     let ready =
       edge.spec.clusterData.cluster_status.conditions[index].type ===
         "ClusterReady" &&
-      edge.spec.clusterData.cluster_status.conditions[index].status === "Success";
+      edge.spec.clusterData.cluster_status.conditions[index].status ===
+        "Success";
     if (ready) {
       return "READY";
     }
@@ -78,9 +79,9 @@ function getStatus({ edge }) {
     [R.T, R.always("textSecondary")],
   ]);
   if (!edge) return false;
-  alert(JSON.stringify(edge))
-  let status = getClusterStatus(edge)
-  alert(status)
+  alert(JSON.stringify(edge));
+  let status = getClusterStatus(edge);
+  alert(status);
   return (
     <Typography display="inline" color={getStatusColor(status)}>
       {status || "NOT_READY"}

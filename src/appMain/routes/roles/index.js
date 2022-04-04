@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch, HashRouter } from "react-router-dom";
-import AddRolePermissions from "./routes/AddRolePermissions"
+import AddRolePermissions from "./routes/AddRolePermissions";
 import List from "./routes/RolesList";
 
 const Roles = ({ match }) => (

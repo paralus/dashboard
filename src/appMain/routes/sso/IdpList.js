@@ -18,12 +18,12 @@ const style = {
     paddingTop: "20px",
     paddingBottom: "20px",
     fontStyle: "italic",
-    color: "rgb(117, 117, 117)"
+    color: "rgb(117, 117, 117)",
   },
   detailLink: {
     color: "teal",
-    cursor: "pointer"
-  }
+    cursor: "pointer",
+  },
 };
 
 class IdpList extends React.Component {
@@ -32,7 +32,7 @@ class IdpList extends React.Component {
 
     this.state = {
       tableData: [],
-      loading: false
+      loading: false,
     };
   }
 
@@ -42,23 +42,23 @@ class IdpList extends React.Component {
     getAllIdentityProviders(this.onGetListSuccess);
   }
 
-  onGetListSuccess = response => {
+  onGetListSuccess = (response) => {
     this.setState({
       tableData: response.data.items,
-      loading: false
+      loading: false,
     });
   };
 
-  handleCreateClick = _ => {
+  handleCreateClick = (_) => {
     const { history } = this.props;
     history.push("/main/sso/new");
   };
 
-  handleEditClick = n => {
+  handleEditClick = (n) => {
     const { history } = this.props;
     history.push({
       pathname: `/main/sso/update/${n.metadata.name}`,
-      state: n
+      state: n,
     });
   };
 
@@ -67,15 +67,15 @@ class IdpList extends React.Component {
     getAllIdentityProviders(this.onGetListSuccess);
   };
 
-  onDeleteIdpFailure = message => {
+  onDeleteIdpFailure = (message) => {
     this.setState({
       alertOpen: true,
       alertMessage: message,
-      alertSeverity: "error"
+      alertSeverity: "error",
     });
   };
 
-  handleDeleteIdp = idpId => {
+  handleDeleteIdp = (idpId) => {
     const { deleteIdentityProvider } = this.props;
     deleteIdentityProvider(
       idpId,
@@ -88,11 +88,13 @@ class IdpList extends React.Component {
     this.setState({ alertOpen: false, alertMessage: null });
   };
 
-  parseRowData = data => {
+  parseRowData = (data) => {
     const confirmText = (
       <span>
         <span>Are you sure you want to delete IdP </span>
-        <span style={{ fontWeight: 500, fontSize: "16px" }}>{data.metadata.name}</span>
+        <span style={{ fontWeight: 500, fontSize: "16px" }}>
+          {data.metadata.name}
+        </span>
         <span>?</span>
       </span>
     );
@@ -106,19 +108,19 @@ class IdpList extends React.Component {
           >
             {data.metadata.name}
           </span>
-        )
+        ),
       },
       {
         type: "regular",
-        value: data.spec.providerName
+        value: data.spec.providerName,
       },
       {
         type: "regular",
-        value: data.spec.callbackUrl
+        value: data.spec.callbackUrl,
       },
       {
         type: "regular",
-        value: data.spec.scopes.join()
+        value: data.spec.scopes.join(),
       },
       {
         type: "buttons",
@@ -128,7 +130,7 @@ class IdpList extends React.Component {
             label: "Edit",
             handleClick: () => {
               this.handleEditClick(data);
-            }
+            },
           },
           {
             type: "danger-icon",
@@ -136,10 +138,10 @@ class IdpList extends React.Component {
             confirmText,
             handleClick: () => {
               this.handleDeleteIdp(data.metadata.name);
-            }
-          }
-        ]
-      }
+            },
+          },
+        ],
+      },
     ];
   };
 
@@ -161,20 +163,20 @@ class IdpList extends React.Component {
 
     const columnLabels = [
       {
-        label: "Name"
+        label: "Name",
       },
       {
-        label: "Provider"
+        label: "Provider",
       },
       {
-        label: "Callback URL"
+        label: "Callback URL",
       },
       {
-        label: "Scopes"
+        label: "Scopes",
       },
       {
-        label: ""
-      }
+        label: "",
+      },
     ];
 
     return (
@@ -219,14 +221,13 @@ class IdpList extends React.Component {
   }
 }
 
-const mapStateToProps = ({ }) => {
-  return {
-  };
+const mapStateToProps = ({}) => {
+  return {};
 };
 
 export default withRouter(
   connect(mapStateToProps, {
     getAllIdentityProviders,
-    deleteIdentityProvider
+    deleteIdentityProvider,
   })(IdpList)
 );

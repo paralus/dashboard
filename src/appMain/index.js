@@ -178,7 +178,8 @@ class AppMain extends React.Component {
                   <Route path={`${match.url}/projects`} component={Project} />
                   <Route path={`${match.url}/groups`} component={Group} />
                   <Route path={`${match.url}/roles`} component={Roles} />
-                  <Route exact
+                  <Route
+                    exact
                     path={`${match.url}/sso/new`}
                     component={RegistrationWizard}
                   />

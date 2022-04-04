@@ -157,8 +157,7 @@ class ToolsDetail extends React.Component {
                     className="col-md-12 pt-2"
                     style={{ color: "rgb(117, 117, 117)" }}
                   >
-                    Manage{" "}
-                    <b>{this.props.userAndRoleDetail.metadata.name}</b>
+                    Manage <b>{this.props.userAndRoleDetail.metadata.name}</b>
                     's API keys and Registry Authorization keys.
                   </div>
                 )}

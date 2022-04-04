@@ -63,8 +63,7 @@ class List extends React.Component {
 
   static getDerivedStateFromProps(props, state) {
     const newState = { ...state };
-    const { history, resetRole, list, isCreateSuccess, newRole, error } =
-      props;
+    const { history, resetRole, list, isCreateSuccess, newRole, error } = props;
     if (isCreateSuccess && newRole) {
       resetRole();
       history.push(`/main/roles/${newRole.metadata.name}`);

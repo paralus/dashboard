@@ -126,10 +126,7 @@ const is_super_or_partner_admin = (data) => {
   if (data && data.spec.permissions && data.spec.permissions.length > 0) {
     for (let index = 0; index < data.spec.permissions.length; index++) {
       const element = data.spec.permissions[index];
-      if (
-        element.role === "ADMIN"
-      )
-        userRole.isOrgAdmin = true;
+      if (element.role === "ADMIN") userRole.isOrgAdmin = true;
       if (element.role === "SUPER_ADMIN") {
         userRole.isSuperAdmin = true;
         break;
@@ -458,7 +455,7 @@ const settings = (state = initialSettings, action) => {
           permissions: {},
           roleDetail: null,
           loading: false,
-        }
+        },
       };
     case "get_roledetail_success":
       state.roles.roleDetail = action.payload.data;
@@ -479,8 +476,8 @@ const settings = (state = initialSettings, action) => {
         roles: {
           ...state.roles,
           isCreateSuccess: true,
-          newRole: action.payload.data, 
-        }
+          newRole: action.payload.data,
+        },
       };
     case "create_role_error":
       return {
@@ -489,7 +486,7 @@ const settings = (state = initialSettings, action) => {
           ...state.roles,
           isCreateSuccess: false,
           error: action.payload,
-        }
+        },
       };
     case "delete_role_success":
       return {
@@ -497,7 +494,7 @@ const settings = (state = initialSettings, action) => {
         roles: {
           ...state.roles,
           isDeleteSuccess: true,
-        }
+        },
       };
     case "delete_role_error":
       return {
@@ -505,8 +502,8 @@ const settings = (state = initialSettings, action) => {
         roles: {
           ...state.roles,
           isDeleteFailed: true,
-          error: action.payload
-        }
+          error: action.payload,
+        },
       };
     case "update_role_error":
       return {
@@ -515,7 +512,7 @@ const settings = (state = initialSettings, action) => {
           ...state.roles,
           isUpdateGroupError: true,
           error: action.payload,
-        }
+        },
       };
     case "add_user_success":
       return {

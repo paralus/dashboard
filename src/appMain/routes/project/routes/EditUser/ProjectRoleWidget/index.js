@@ -62,7 +62,9 @@ const ProjectRoleWidget = ({
 
   const handleToggle = (value) => () => {
     setRoleModified(true);
-    const currentIndex = checked.findIndex((element) => element.metadata.name === value.metadata.name);
+    const currentIndex = checked.findIndex(
+      (element) => element.metadata.name === value.metadata.name
+    );
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
@@ -83,7 +85,9 @@ const ProjectRoleWidget = ({
         }
       }
       if (value.metadata.name === "PROJECT_READ_ONLY") {
-        const pai = checked.findIndex((element) => element.metadata.name === "PROJECT_ADMIN");
+        const pai = checked.findIndex(
+          (element) => element.metadata.name === "PROJECT_ADMIN"
+        );
         if (pai !== -1) {
           newChecked.splice(pai, 1);
         }
@@ -97,7 +101,9 @@ const ProjectRoleWidget = ({
         }
       }
       if (value.metadata.name === "INFRA_READ_ONLY") {
-        const pai = checked.findIndex((element) => element.metadata.name === "INFRA_ADMIN");
+        const pai = checked.findIndex(
+          (element) => element.metadata.name === "INFRA_ADMIN"
+        );
         if (pai !== -1) {
           newChecked.splice(pai, 1);
         }
@@ -111,7 +117,9 @@ const ProjectRoleWidget = ({
         }
       }
       if (value.metadata.name === "NAMESPACE_READ_ONLY") {
-        const pai = checked.findIndex((element) => element.metadata.name === "NAMESPACE_ADMIN");
+        const pai = checked.findIndex(
+          (element) => element.metadata.name === "NAMESPACE_ADMIN"
+        );
         if (pai !== -1) {
           newChecked.splice(pai, 1);
         }
@@ -134,14 +142,18 @@ const ProjectRoleWidget = ({
     const proj = e.target.value;
     if (proj === "ALL PROJECTS") {
       setProjectRoleDisabled(true);
-      const adminRole = systemRoles.find((element) => element.metadata.name === "ADMIN");
+      const adminRole = systemRoles.find(
+        (element) => element.metadata.name === "ADMIN"
+      );
       if (adminRole) {
         setChecked([adminRole]);
         handleRolesChange([adminRole]);
       }
     } else {
       setProjectRoleDisabled(false);
-      const ai = checked.findIndex((element) => element.metadata.name === "ADMIN");
+      const ai = checked.findIndex(
+        (element) => element.metadata.name === "ADMIN"
+      );
       if (ai !== -1) {
         const newChecked = [...checked];
         newChecked.splice(ai, 1);

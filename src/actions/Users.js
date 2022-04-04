@@ -67,9 +67,7 @@ export function getUserDetail(name) {
 }
 
 export function getSSOUserDetail(name) {
-  return http("auth").get(
-    `user/${name}`
-  );
+  return http("auth").get(`user/${name}`);
 }
 
 export function addUser(params) {
@@ -189,10 +187,7 @@ export function updateSSOUser(params) {
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   params.metadata.partner = partner;
   params.metadata.organization = organization;
-  return http("auth").put(
-    `user/${params.metadata.name}`,
-    params
-  );
+  return http("auth").put(`user/${params.metadata.name}`, params);
 }
 
 export function editUserWithCallback(params, onSuccess, onFailure) {
@@ -395,11 +390,7 @@ export function revokeKubeconfig(accountId, isSSOUser = false) {
       account: accountId,
     },
   };
-  return http(
-    `v2/sentry/kubeconfig/revoke`,
-    "",
-    true
-  ).post("", req);
+  return http(`v2/sentry/kubeconfig/revoke`, "", true).post("", req);
 }
 
 export function revokeSelfKubeconfig(accountId) {

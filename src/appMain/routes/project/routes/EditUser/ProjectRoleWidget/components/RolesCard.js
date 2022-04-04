@@ -39,45 +39,55 @@ const RolesCard = ({
     <Card elevation={0} variant="outlined">
       <List className={classes.list} dense component="div" role="list">
         {systemRoles &&
-          systemRoles.filter(r => r.metadata.name !== "ADMIN")
-          .filter(r => r.spec.scope !== "system")
-          .map((value, index) => {
-            const labelId = `transfer-list-all-item-${index}-label`;
+          systemRoles
+            .filter((r) => r.metadata.name !== "ADMIN")
+            .filter((r) => r.spec.scope !== "system")
+            .map((value, index) => {
+              const labelId = `transfer-list-all-item-${index}-label`;
 
-            return (
-              <ListItem
-                key={index}
-                role="listitem"
-                button
-                onClick={handleToggle(value)}
-                className={classes.listItem}
-                disabled={projectRoleDisabled && value.metadata.name === "ADMIN"}
-              >
-                <ListItemIcon>
-                  <Checkbox
-                    color="primary"
-                    checked={
-                      checked.findIndex((element) => element.metadata.name === value.metadata.name) !==
-                      -1
-                    }
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
-                    disabled={projectRoleDisabled && value.metadata.name === "ADMIN"}
-                  />
-                </ListItemIcon>
-                <ListItemText
-                  id={labelId}
-                  primary={
-                    <span style={{ fontWeight: 500 }}>
-                      {RoleTypes[value.metadata.name] || value.metadata.name}
-                    </span>
+              return (
+                <ListItem
+                  key={index}
+                  role="listitem"
+                  button
+                  onClick={handleToggle(value)}
+                  className={classes.listItem}
+                  disabled={
+                    projectRoleDisabled && value.metadata.name === "ADMIN"
                   }
-                  secondary={RoleHelp[value.metadata.name] || value.metadata.description}
-                />
-              </ListItem>
-            );
-          })}
+                >
+                  <ListItemIcon>
+                    <Checkbox
+                      color="primary"
+                      checked={
+                        checked.findIndex(
+                          (element) =>
+                            element.metadata.name === value.metadata.name
+                        ) !== -1
+                      }
+                      tabIndex={-1}
+                      disableRipple
+                      inputProps={{ "aria-labelledby": labelId }}
+                      disabled={
+                        projectRoleDisabled && value.metadata.name === "ADMIN"
+                      }
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    id={labelId}
+                    primary={
+                      <span style={{ fontWeight: 500 }}>
+                        {RoleTypes[value.metadata.name] || value.metadata.name}
+                      </span>
+                    }
+                    secondary={
+                      RoleHelp[value.metadata.name] ||
+                      value.metadata.description
+                    }
+                  />
+                </ListItem>
+              );
+            })}
         <ListItem />
       </List>
     </Card>

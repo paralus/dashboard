@@ -51,7 +51,7 @@ function AuditLogs() {
         {
           label: "Kubectl",
           panel: <KubectlLogs />,
-        }
+        },
       ]}
     />
   );

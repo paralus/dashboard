@@ -135,7 +135,11 @@ class IDPUserList extends React.Component {
   };
 
   getCollapsedRow = (data) => {
-    return <ProjectRoleMatrix roles={this.formatProjects(data.spec.projectNamespaceRoles)} />;
+    return (
+      <ProjectRoleMatrix
+        roles={this.formatProjects(data.spec.projectNamespaceRoles)}
+      />
+    );
   };
 
   parseRowData = (data) => {
@@ -146,7 +150,9 @@ class IDPUserList extends React.Component {
     );
 
     const projectDetails = (
-      <ProjectList roles={this.formatProjects(data.spec.projectNamespaceRoles)} />
+      <ProjectList
+        roles={this.formatProjects(data.spec.projectNamespaceRoles)}
+      />
     );
 
     const lastAccessDetails = (

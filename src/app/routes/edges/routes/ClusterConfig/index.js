@@ -178,7 +178,6 @@ const ClusterConfig = ({
       });
       return;
     }
-
   };
 
   const handleSuccessResponse = (_) => {
@@ -198,7 +197,7 @@ const ClusterConfig = ({
     ) {
       return;
     }
-    alert(JSON.stringify(edge))
+    alert(JSON.stringify(edge));
     if (!edge.spec.metro) {
       edge.spec.metro = { name: "" };
     }

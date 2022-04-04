@@ -2,7 +2,7 @@ import React from "react";
 import ResourceDialog from "components/ResourceDialog";
 import Moment from "moment";
 
-function isClusterAvailable (cluster) {
+function isClusterAvailable(cluster) {
   let ready = false;
   if (
     cluster?.spec.clusterData &&
@@ -26,7 +26,7 @@ function isClusterAvailable (cluster) {
     }
   }
   return ready;
-};
+}
 
 function ClusterStatusInfo({
   cluster,
@@ -62,9 +62,7 @@ function ClusterStatusInfo({
                 >
                   Last check in&nbsp;
                   {cluster.metadata.modifiedAt ? (
-                    <span>
-                      {Moment(cluster.metadata.modifiedAt).fromNow()}
-                    </span>
+                    <span>{Moment(cluster.metadata.modifiedAt).fromNow()}</span>
                   ) : (
                     <span>Unknown</span>
                   )}

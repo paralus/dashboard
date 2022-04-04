@@ -19,7 +19,10 @@ export function getOrganization(partner, name) {
           "organization_id",
           JSON.stringify(response.data.metadata.id)
         );
-        localStorage.setItem("organization", JSON.stringify(response.data.metadata.name));
+        localStorage.setItem(
+          "organization",
+          JSON.stringify(response.data.metadata.name)
+        );
       })
       .catch((error) => {
         console.log(error);

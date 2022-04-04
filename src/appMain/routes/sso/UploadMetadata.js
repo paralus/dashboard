@@ -22,7 +22,7 @@ import {
   StepLabel,
   Radio,
   RadioGroup,
-  FormLabel
+  FormLabel,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -33,7 +33,7 @@ class UploadMedaData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: "url"
+      type: "url",
     };
   }
 
@@ -43,19 +43,19 @@ class UploadMedaData extends React.Component {
     }
   }
 
-  successCallback = message => {
+  successCallback = (message) => {
     this.setState({
       showAlert: true,
       alertMessage: "Upload Successfull",
-      alertSeverity: "success"
+      alertSeverity: "success",
     });
   };
 
-  errorCallback = message => {
+  errorCallback = (message) => {
     this.setState({
       showAlert: true,
       alertMessage: "Upload Failed",
-      alertSeverity: "error"
+      alertSeverity: "error",
     });
   };
 
@@ -67,7 +67,7 @@ class UploadMedaData extends React.Component {
     this.fileEl.click();
   };
 
-  inputFileChanged = e => {
+  inputFileChanged = (e) => {
     const file = e.target.files[0];
     this.state.fileName = file.name;
     this.state.fileData = file;
@@ -97,7 +97,7 @@ class UploadMedaData extends React.Component {
                 <a
                   style={{
                     color: "teal",
-                    textDecoration: "none"
+                    textDecoration: "none",
                   }}
                   download={this.state.fileName}
                   href={`/auth/v1/sso/idp/${this.props.idpId}/download_metadata/`}
@@ -109,7 +109,7 @@ class UploadMedaData extends React.Component {
             )}
             <input
               type="file"
-              ref={el => {
+              ref={(el) => {
                 this.fileEl = el;
               }}
               accept={["*"]}

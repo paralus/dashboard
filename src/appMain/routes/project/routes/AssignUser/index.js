@@ -126,11 +126,16 @@ class AssignUser extends React.Component {
       .filter((u) =>
         u.spec.projectNamespaceRoles?.find((pnr) => pnr.role !== "ADMIN")
       ) // Filter out all users with ADMIN roles
-      .filter((a) =>
-        !a.spec.projectNamespaceRoles?.find((pnr) => pnr.project === projectId)
+      .filter(
+        (a) =>
+          !a.spec.projectNamespaceRoles?.find(
+            (pnr) => pnr.project === projectId
+          )
       ); // Filter out users already assigned to the project
     if (filteredUsersList.length === 0) {
-      filteredUsersList = usersList.filter(u => !u.spec.projectNamespaceRoles)
+      filteredUsersList = usersList.filter(
+        (u) => !u.spec.projectNamespaceRoles
+      );
     }
     const config = {
       links: [

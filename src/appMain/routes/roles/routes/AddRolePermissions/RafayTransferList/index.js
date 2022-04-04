@@ -279,7 +279,11 @@ const TransferList = ({
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`${value.metadata.name}`} secondary={`${value.metadata.description}`} />
+              <ListItemText
+                id={labelId}
+                primary={`${value.metadata.name}`}
+                secondary={`${value.metadata.description}`}
+              />
             </ListItem>
           );
         })}

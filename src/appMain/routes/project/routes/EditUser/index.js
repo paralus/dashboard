@@ -96,7 +96,11 @@ class EditUser extends React.Component {
   handleSaveChanges = () => {
     const { editProjectWithCallback, projectDetail } = this.props;
     projectDetail.spec.userRoles = this.transformRoles();
-    editProjectWithCallback(projectDetail, this.successCallback, this.errorCallback);
+    editProjectWithCallback(
+      projectDetail,
+      this.successCallback,
+      this.errorCallback
+    );
   };
 
   handleUserChange = (user) => {

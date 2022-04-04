@@ -1,19 +1,19 @@
 import http from "./Config";
 
 export function getRoles() {
-    const partner = JSON.parse(window?.localStorage.getItem("partner"));
-    const organization = JSON.parse(window?.localStorage.getItem("organization"));
-    return function (dispatch) {
-      http("auth")
-        .get(`partner/${partner}/organization/${organization}/roles`)
-        .then((response) => {
-          console.log(response);
-          dispatch({ type: "get_roles_success", payload: response });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
+  const partner = JSON.parse(window?.localStorage.getItem("partner"));
+  const organization = JSON.parse(window?.localStorage.getItem("organization"));
+  return function (dispatch) {
+    http("auth")
+      .get(`partner/${partner}/organization/${organization}/roles`)
+      .then((response) => {
+        console.log(response);
+        dispatch({ type: "get_roles_success", payload: response });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 }
 
 export function getRoleDetail(role) {
@@ -32,43 +32,43 @@ export function getRoleDetail(role) {
 }
 
 export function resetRolesList() {
-    return { type: "reset_roles_list" };
+  return { type: "reset_roles_list" };
 }
 
 export function resetRole() {
-    return { type: "reset_role" };
+  return { type: "reset_role" };
 }
 
 export function getRolePermissions() {
-    return function (dispatch) {
-      http("auth")
-        .get("rolepermissions")
-        .then((response) => {
-          console.log(response);
-          dispatch({ type: "get_rolepermission_success", payload: response });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
+  return function (dispatch) {
+    http("auth")
+      .get("rolepermissions")
+      .then((response) => {
+        console.log(response);
+        dispatch({ type: "get_rolepermission_success", payload: response });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 }
 
 export function createRole(data) {
-    const partner = JSON.parse(window?.localStorage.getItem("partner"));
-    const organization = JSON.parse(window?.localStorage.getItem("organization"));
-    return function (dispatch) {
-      http("auth")
-        .post(`partner/${partner}/organization/${organization}/roles`, data)
-        .then((response) => {
-          dispatch({ type: "create_role_success", payload: response });
-        })
-        .catch((error) => {
-          dispatch({
-            type: "create_role_error",
-            payload: error.response.data,
-          });
+  const partner = JSON.parse(window?.localStorage.getItem("partner"));
+  const organization = JSON.parse(window?.localStorage.getItem("organization"));
+  return function (dispatch) {
+    http("auth")
+      .post(`partner/${partner}/organization/${organization}/roles`, data)
+      .then((response) => {
+        dispatch({ type: "create_role_success", payload: response });
+      })
+      .catch((error) => {
+        dispatch({
+          type: "create_role_error",
+          payload: error.response.data,
         });
-    };
+      });
+  };
 }
 
 export function editRoleWithCallback(data, onSuccess, onFailure) {
@@ -98,23 +98,23 @@ export function removeRole(name) {
   const partner = JSON.parse(window?.localStorage.getItem("partner"));
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   return function (dispatch) {
-      http("auth")
+    http("auth")
       .delete(
-          `partner/${partner}/organization/${organization}/role/${name}`,
-          {}
+        `partner/${partner}/organization/${organization}/role/${name}`,
+        {}
       )
       .then((response) => {
-          dispatch({
+        dispatch({
           type: "delete_role_success",
           payload: response,
-          });
-          dispatch(getRoles());
+        });
+        dispatch(getRoles());
       })
       .catch((error) => {
-          dispatch({
+        dispatch({
           type: "delete_role_error",
           payload: error.response.data,
-          });
+        });
       });
   };
 }

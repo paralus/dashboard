@@ -78,20 +78,20 @@ function ClusterLabelEditor({ isOpen, onOpen, labels, edge, refreshEdge }) {
       return acc;
     }, {});
     if (edge) {
-      edge.metadata.labels = payload
+      edge.metadata.labels = payload;
       a.updateCluster(edge)
-      .then((res) => {
-        if (res.status === 200) {
-          if (refreshEdge) refreshEdge();
-          onOpen(false);
-        } else {
-          console.error(res);
-        }
-      })
-      .catch((err) => {
-        showSnack("Failed to update labels");
-        console.error(err.response?.data);
-      });
+        .then((res) => {
+          if (res.status === 200) {
+            if (refreshEdge) refreshEdge();
+            onOpen(false);
+          } else {
+            console.error(res);
+          }
+        })
+        .catch((err) => {
+          showSnack("Failed to update labels");
+          console.error(err.response?.data);
+        });
     }
   };
 

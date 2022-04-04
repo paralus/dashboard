@@ -94,9 +94,7 @@ const createSession = (user) => {
   if (roles && roles.length === 0) {
     data.noRolesUser = true;
   } else if (
-    roles?.find((r) =>
-      ["ADMIN", "ADMIN_READ_ONLY"].includes(r.role)
-    )
+    roles?.find((r) => ["ADMIN", "ADMIN_READ_ONLY"].includes(r.role))
   ) {
     data.visibleAdmin = true;
     data.visibleApps = true;

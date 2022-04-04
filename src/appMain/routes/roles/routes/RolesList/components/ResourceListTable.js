@@ -139,7 +139,12 @@ class ResourceListTable extends React.Component {
   };
 
   getCollapsedRow = (data) => {
-    return <PermissionList permissions={data.spec.rolepermissions} showExpandedList></PermissionList>;
+    return (
+      <PermissionList
+        permissions={data.spec.rolepermissions}
+        showExpandedList
+      ></PermissionList>
+    );
   };
 
   parseRowData = (data) => {
@@ -219,7 +224,9 @@ class ResourceListTable extends React.Component {
     let roleList = [...list];
     if (searchText) {
       roleList = list.filter(
-        (u) => u.metadata.name && u.metadata.name.indexOf(searchText.toUpperCase()) !== -1
+        (u) =>
+          u.metadata.name &&
+          u.metadata.name.indexOf(searchText.toUpperCase()) !== -1
       );
       listCount = roleList.length;
     }

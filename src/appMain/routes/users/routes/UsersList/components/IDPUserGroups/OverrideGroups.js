@@ -27,7 +27,7 @@ const OverrideGroups = ({ groups, user, refershGroups }) => {
       override_enabled: overrides.length > 0,
       group_overrides: overrides,
     };
-    user.spec.groups = overrides
+    user.spec.groups = overrides;
     updateSSOUser(user)
       .then((_) => {
         refershGroups();
@@ -42,7 +42,7 @@ const OverrideGroups = ({ groups, user, refershGroups }) => {
       override_enabled: overrides.length > 0,
       group_overrides: overrides,
     };
-    user.spec.groups = overrides
+    user.spec.groups = overrides;
     updateSSOUser(user)
       .then((_) => {
         refershGroups();

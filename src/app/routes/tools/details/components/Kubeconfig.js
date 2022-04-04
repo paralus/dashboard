@@ -30,7 +30,8 @@ const Kubeconfig = ({ user }) => {
       .catch((error) => {
         setAlert({
           show: true,
-          message: error?.response?.data?.message.toString() || "Unexpected Error",
+          message:
+            error?.response?.data?.message.toString() || "Unexpected Error",
           severity: "error",
         });
       });

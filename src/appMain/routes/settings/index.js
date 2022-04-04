@@ -50,9 +50,7 @@ class Settings extends React.Component {
       this.props.userAndRoleDetail.metadata.organization
     );
     if (this.props?.userAndRoleDetail) {
-      getOrgKubeconfigValidity(
-        this.props.detail.metadata.id
-      ).then((res) => {
+      getOrgKubeconfigValidity(this.props.detail.metadata.id).then((res) => {
         this.setState({
           kubectlSettings: res?.data,
         });

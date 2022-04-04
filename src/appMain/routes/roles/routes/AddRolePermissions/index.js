@@ -42,7 +42,11 @@ class AddRolePermissions extends React.Component {
     if (roleDetail && permissions) {
       newState.roleName = roleDetail.metadata.name;
       if (roleDetail.spec.rolepermissions) {
-        for (let indx = 0; indx < roleDetail.spec.rolepermissions.length; indx++) {
+        for (
+          let indx = 0;
+          indx < roleDetail.spec.rolepermissions.length;
+          indx++
+        ) {
           let permission = permissions.filter(function (ele) {
             return ele.metadata.name === roleDetail.spec.rolepermissions[indx];
           });
@@ -159,8 +163,14 @@ class AddRolePermissions extends React.Component {
         );
       });
     }
-    roleDetail.spec.rolepermissions = [...new Set(roleDetail.spec.rolepermissions)];
-    editRoleWithCallback(roleDetail, this.addPermissionSuccessCallback, this.handleFailureCallback);
+    roleDetail.spec.rolepermissions = [
+      ...new Set(roleDetail.spec.rolepermissions),
+    ];
+    editRoleWithCallback(
+      roleDetail,
+      this.addPermissionSuccessCallback,
+      this.handleFailureCallback
+    );
   };
 
   render() {
@@ -172,7 +182,7 @@ class AddRolePermissions extends React.Component {
     }
     let allPermissions = [];
     if (permissions) {
-      allPermissions = this.arrayObjectRemove(permissions, "ops_star.all")
+      allPermissions = this.arrayObjectRemove(permissions, "ops_star.all");
     }
     const config = {
       links: [

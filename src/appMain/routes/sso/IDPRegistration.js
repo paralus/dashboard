@@ -13,13 +13,13 @@ import DataGrid from "components/DataGrid/DataGrid";
 import React, { useEffect, useState } from "react";
 import { downloadCertificate } from "./util";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   link: {
     color: theme.palette.primary.main,
     "&:hover": {
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
     },
-    cursor: "pointer"
+    cursor: "pointer",
   },
 
   toolbar: theme.mixins.toolbar,
@@ -30,8 +30,8 @@ const useStyles = makeStyles(theme => ({
     lineHeight: "19px",
     overflow: "auto",
     padding: "6px 10px",
-    borderRadius: "3px"
-  }
+    borderRadius: "3px",
+  },
 }));
 
 function IDPRegistration(props) {
@@ -65,12 +65,12 @@ function IDPRegistration(props) {
     handleClose();
     setLoading(true);
     getAllIdentityProviders()
-      .then(response => {
+      .then((response) => {
         setLoading(false);
         console.log("IDPS", response);
         setTableData(response.data.items);
       })
-      .catch(error => setLoading(false));
+      .catch((error) => setLoading(false));
   }
 
   useEffect(() => {
@@ -82,7 +82,7 @@ function IDPRegistration(props) {
 
     props.history.push({
       pathname: `/main/sso/update/${idpDetail.id}`,
-      state: idpDetail
+      state: idpDetail,
     });
   }
 
@@ -91,13 +91,13 @@ function IDPRegistration(props) {
     setLoading(true);
     setOpenDialog(false);
     deleteIdentityProvider(idpId)
-      .then(response => {
+      .then((response) => {
         fetchIDPRegistrations();
         // setOpen(undefined);
         setDeleteInfo({});
         setLoading(false);
       })
-      .catch(error => setLoading(false));
+      .catch((error) => setLoading(false));
   }
 
   function openDetail(idpDetail) {
@@ -182,23 +182,23 @@ function IDPRegistration(props) {
                   >
                     {rowData.name}
                   </span>
-                )
+                ),
               },
 
               {
                 label: "Domain",
-                dataKey: "domain"
+                dataKey: "domain",
               },
               {
                 label: "Group Attribute Name",
-                dataKey: "group_attribute_name"
+                dataKey: "group_attribute_name",
               },
 
               {
                 label: "Certficate Enabled",
                 dataKey: "is_sae_enabled",
                 render: ({ rowData }) =>
-                  rowData.is_sae_enabled ? "Enabled" : "Disabled"
+                  rowData.is_sae_enabled ? "Enabled" : "Disabled",
               },
               {
                 label: "Actions",
@@ -210,7 +210,7 @@ function IDPRegistration(props) {
                         aria-label="more"
                         aria-controls="long-menu"
                         aria-haspopup="true"
-                        onClick={event => handleClick(event, rowData)}
+                        onClick={(event) => handleClick(event, rowData)}
                       >
                         <MoreVertIcon />
                       </IconButton>
@@ -225,8 +225,8 @@ function IDPRegistration(props) {
                         PaperProps={{
                           style: {
                             maxHeight: 40 * 4.5,
-                            width: 170
-                          }
+                            width: 170,
+                          },
                         }}
                       >
                         <MenuItem onClick={() => enableEditMode()} key="edit">
@@ -241,8 +241,8 @@ function IDPRegistration(props) {
                       </Menu>
                     </div>
                   );
-                }
-              }
+                },
+              },
             ]}
           />
         </>
@@ -281,7 +281,7 @@ function IDPRegistration(props) {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <Typography className="px-4" variant="h6">

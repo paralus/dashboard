@@ -70,7 +70,7 @@ class Users extends React.Component {
   handleRemoveGroupUser = (account) => {
     const { groupDetail, updateGroup } = this.props;
     const deleteInitiated = true;
-    groupDetail.spec.users = this.arrayRemove(groupDetail.spec.users, account)
+    groupDetail.spec.users = this.arrayRemove(groupDetail.spec.users, account);
     this.setState({ deleteInitiated }, updateGroup(groupDetail));
   };
 
