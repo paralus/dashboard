@@ -5,18 +5,14 @@ import DataTableToolbar from "components/RafayTable/DataTableToolbar";
 import { useSnack } from "utils/useSnack";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addToSSOUserGroups, getGroups } from "actions/index";
+import { updateSSOUser } from "actions/index";
 import { parseError } from "utils";
 
 import HeaderCard from "./HeaderCard";
 import AddGroup from "./AddGroup";
 
 const OverrideGroups = ({ groups, user, refershGroups }) => {
-  const dispatch = useDispatch();
-  useEffect((_) => {
-    dispatch(getGroups());
-  }, []);
-  const groupsList = useSelector((s) => s?.Groups.groupsList?.results || []);
+  const groupsList = useSelector((s) => s?.Groups.groupsList || []);
   const { showSnack } = useSnack();
   const [openAddGroup, setOpenAddGroup] = useState(false);
   const columnLabels = [
@@ -31,7 +27,8 @@ const OverrideGroups = ({ groups, user, refershGroups }) => {
       override_enabled: overrides.length > 0,
       group_overrides: overrides,
     };
-    addToSSOUserGroups(user.accountID, params)
+    user.spec.groups = overrides;
+    updateSSOUser(user)
       .then((_) => {
         refershGroups();
       })
@@ -45,7 +42,8 @@ const OverrideGroups = ({ groups, user, refershGroups }) => {
       override_enabled: overrides.length > 0,
       group_overrides: overrides,
     };
-    addToSSOUserGroups(user.accountID, params)
+    user.spec.groups = overrides;
+    updateSSOUser(user)
       .then((_) => {
         refershGroups();
         setOpenAddGroup(false);

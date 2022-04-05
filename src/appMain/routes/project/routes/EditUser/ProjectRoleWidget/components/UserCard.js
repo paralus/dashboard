@@ -37,18 +37,18 @@ const UserCard = ({ selectedUser, usersList, handleUserChange }) => {
               required
               disabled
               className="mt-0"
-              value={selectedUser ? selectedUser.account.id : ""}
+              value={selectedUser ? selectedUser : ""}
               label="User"
               onChange={handleUserChange}
               fullWidth
             >
-              {/* <MenuItem key="default" value="ALL PROJECTS">
-                <span style={{ fontWeight: 500 }}>ALL PROJECTS</span>
-              </MenuItem> */}
               {usersList &&
                 usersList.map((option) => (
-                  <MenuItem key={option.account.id} value={option.account.id}>
-                    {option.account.username}
+                  <MenuItem
+                    key={option.metadata.id}
+                    value={option.metadata.name}
+                  >
+                    {option.metadata.name}
                   </MenuItem>
                 ))}
             </TextField>

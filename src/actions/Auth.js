@@ -110,18 +110,18 @@ export function setPassword(params) {
 export function getUserSessionInfo() {
   return function (dispatch) {
     http("auth")
-      .get("users/-/current/")
+      .get("userinfo")
       .then((response) => {
         dispatch({ type: "update_user_session", user: response.data });
         dispatch({ type: "user_login_success", payload: response });
       })
       .catch((error) => {
         console.log(error);
-        // dispatch({type: "get_user_failed", payload: error.response});
+        dispatch({ type: "get_user_failed", payload: error.response });
         dispatch({ type: "user_session_expired" });
-        // if (error.response.status === 403) {
-        //   dispatch({ type: "user_session_expired" });
-        // }
+        if (error.response.status === 403) {
+          dispatch({ type: "user_session_expired" });
+        }
       });
   };
 }
@@ -155,31 +155,6 @@ export function resendVerificationEmail(user) {
       .catch((error) => {
         dispatch({
           type: "send_email_verification_error",
-          payload: error.response.data,
-        });
-      });
-  };
-}
-
-export function getUserAccountRoles() {
-  return function (dispatch) {
-    // console.log('get_user_success');
-    dispatch({ type: "user_accountroles_load" });
-    http("auth")
-      .get("users/-/organizations/")
-      .then((response) => {
-        dispatch({
-          type: "user_accountroles_success",
-          payload: response,
-        });
-      })
-      .catch((error) => {
-        // dispatch({type: "get_user_failed", payload: error.response});
-        // if (error.response.status === 403) {
-        //   dispatch({ type: "user_session_expired" });
-        // }
-        dispatch({
-          type: "user_accountroles_error",
           payload: error.response.data,
         });
       });

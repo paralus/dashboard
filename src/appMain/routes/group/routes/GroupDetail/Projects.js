@@ -147,6 +147,7 @@ class Projects extends React.Component {
     const { groupDetail } = this.props;
     const tableData = [];
     if (
+      groupDetail &&
       groupDetail.spec.projectNamespaceRoles &&
       groupDetail.spec.projectNamespaceRoles.length > 0
     ) {

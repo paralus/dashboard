@@ -30,7 +30,7 @@ class Footer extends Component {
                   <>Copyright Rafay Systems &copy; {new Date().getFullYear()}</>
                 )}
               </span>
-              {this.props.userAndRoleDetail?.organization?.type !== "paid" && (
+              {this.props.organization?.detail?.spec.type !== "paid" && (
                 <>
                   {this.props.partnerDetail &&
                   this.props.partnerDetail.tos_link ? (
@@ -63,17 +63,6 @@ class Footer extends Component {
                 Privacy Policy
               </a>
             </div>
-            {/*
-                    <div>
-                        <Button
-                            href="https://codecanyon.net/cart/configure_before_adding/20978545?license=regular&ref=phpbits&size=source&support=bundle_12month&_ga=2.172338659.1340179557.1515677375-467259501.1481606413"
-                            target="_blank"
-                            dense
-                            className="text-secondary"
-                            color="accent"
-                        >BUY NOW</Button>
-                    </div>
-                    */}
           </div>
         )}
         {this.props.partnerDetail?.name !== "Rafay Cloud" && (
@@ -118,8 +107,8 @@ class Footer extends Component {
 }
 
 const mapStateToProps = ({ settings }) => {
-  const { userAndRoleDetail, partnerDetail } = settings;
-  return { userAndRoleDetail, partnerDetail };
+  const { userAndRoleDetail, organization, partnerDetail } = settings;
+  return { userAndRoleDetail, organization, partnerDetail };
 };
 
 export default withRouter(connect(mapStateToProps, {})(Footer));

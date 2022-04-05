@@ -87,7 +87,7 @@ export default function ClusterDetails({ match, history, location, userRole }) {
           isOpen={openLabelEditor}
           onOpen={setOpenLabelEditor}
           labels={edgeLabels}
-          edgeId={edge.id}
+          edge={edge}
           refreshEdge={refreshEdge}
         />
       </HideTheChildren>

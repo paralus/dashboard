@@ -14,7 +14,7 @@ const formatProjectRoles = (roles) => {
     const nsarray = item?.project;
 
     if (!output[item?.project]) {
-      if (["ADMIN", "ADMINISTRATOR_READ_ONLY"].includes(item?.role)) {
+      if (["ADMIN", "ADMIN_READ_ONLY"].includes(item?.role)) {
         output["All Projects"] = {
           [item?.group]: {
             roles: [item.role],
@@ -30,10 +30,7 @@ const formatProjectRoles = (roles) => {
         };
       }
     } else if (!output[item?.project][item.group]) {
-      if (
-        ["ADMIN", "ADMINISTRATOR_READ_ONLY"].includes(item?.role) &&
-        !item.project
-      ) {
+      if (["ADMIN", "ADMIN_READ_ONLY"].includes(item?.role) && !item.project) {
         const referenceObj = output["All Projects"];
 
         if (item?.group)
@@ -85,9 +82,7 @@ const getRoleProjectRowList = (role, config, clx) => (
         <ul className="m-0">
           {config.roles.map((role, roleidx) => (
             <li key={roleidx}>
-              {role === "ADMINISTRATOR_READ_ONLY"
-                ? "ORGANIZATION READ ONLY"
-                : role}
+              {role === "ADMIN_READ_ONLY" ? "ORGANIZATION READ ONLY" : role}
             </li>
           ))}
         </ul>

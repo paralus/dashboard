@@ -75,27 +75,27 @@ class Profile extends React.Component {
         <DialogContent className="p-0">
           <hr className="m-0" />
           <div style={style.profileContainer}>
-            {!!`${user.account.first_name}${user.account.last_name}`.length && (
+            {!!`${user.spec.firstName}${user.spec.lastName}`.length && (
               <>
                 <div>
                   <b>Name</b>
                 </div>
-                <div className="">{`${user.account.first_name} ${user.account.last_name}`}</div>
+                <div className="">{`${user.spec.firstName} ${user.spec.lastName}`}</div>
               </>
             )}
             <div>
               <b>Username</b>
             </div>
-            <div className="">{user.account.username}</div>
+            <div className="">{user.metadata.name}</div>
             <div>
               <b>Projects</b>
             </div>
             <div className="">
-              <ProjectList roles={user.roles} showExpandedList />
+              <ProjectList roles={user.spec.permissions} showExpandedList />
             </div>
           </div>
           <div>
-            <ProjectRoleMatrix roles={user.roles} />
+            <ProjectRoleMatrix roles={user.spec.permissions} />
           </div>
         </DialogContent>
         <DialogActions style={style.dialogAction}>

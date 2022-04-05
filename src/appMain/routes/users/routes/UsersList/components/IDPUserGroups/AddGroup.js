@@ -27,8 +27,10 @@ const AddGroup = ({ groups, onClose, open, onSave, groupsList }) => {
   };
 
   const uGroupList = groupsList
-    ?.filter((a) => a.type === "SYSTEM" && !groups.includes(a.name))
-    .map((b) => b.name);
+    ?.filter(
+      (a) => a.spec.type === "SYSTEM" && !groups.includes(a.metadata.name)
+    )
+    .map((b) => b.metadata.name);
 
   return (
     <div>

@@ -182,7 +182,7 @@ function ClusterMeta({ edge, refreshEdge, dispatch }) {
       return;
     }
     if (edgeObj.metadata.name) {
-      dispatch(a.updateCluster(edgeObj)).then(() => {
+      a.updateCluster(edgeObj).then(() => {
         setOpenEditLocation(false);
         refreshEdge();
       });
@@ -288,7 +288,7 @@ function ClusterMeta({ edge, refreshEdge, dispatch }) {
             isOpen={openLabelEditor}
             onOpen={setOpenLabelEditor}
             labels={edgeLabels}
-            edgeId={edge.id}
+            edge={edge}
             refreshEdge={refreshEdge}
           />
         </HideTheChildren>

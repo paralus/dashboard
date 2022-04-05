@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ClusterLabelEditor({ isOpen, onOpen, labels, edgeId, refreshEdge }) {
+function ClusterLabelEditor({ isOpen, onOpen, labels, edge, refreshEdge }) {
   const classes = useStyles();
   const { showSnack } = useSnack();
   const { a } = useContext(ClusterViewContext);
@@ -77,20 +77,22 @@ function ClusterLabelEditor({ isOpen, onOpen, labels, edgeId, refreshEdge }) {
       acc[curr.key] = curr.value || "";
       return acc;
     }, {});
-
-    a.updateClusterLabels(currentProject.id, edgeId, payload)
-      .then((res) => {
-        if (res.status === 200) {
-          if (refreshEdge) refreshEdge();
-          onOpen(false);
-        } else {
-          console.error(res);
-        }
-      })
-      .catch((err) => {
-        showSnack("Failed to update labels");
-        console.error(err.response?.data);
-      });
+    if (edge) {
+      edge.metadata.labels = payload;
+      a.updateCluster(edge)
+        .then((res) => {
+          if (res.status === 200) {
+            if (refreshEdge) refreshEdge();
+            onOpen(false);
+          } else {
+            console.error(res);
+          }
+        })
+        .catch((err) => {
+          showSnack("Failed to update labels");
+          console.error(err.response?.data);
+        });
+    }
   };
 
   const handleExistingLabels = (push) => (selectedOption) => {

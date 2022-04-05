@@ -145,6 +145,27 @@
       }
     }
   },
+  "roles": {
+    "role_detail": {
+      "layout": {
+        "helptext": "Manage roles and role permissions"
+      }
+    },
+    "add_permissions": {
+      "layout": {
+        "title": "Add/Remove Permissions",
+        "helptext": "Select Permissions from the available list and add them to the Role"
+      },
+      "widget_labels": {
+        "available_permissions": "Available Permissions",
+        "role_permissions": "Role Permissions"
+      },
+      "widget_button_labels": {
+        "add_to_role": "Add To Role",
+        "remove_from_role": "Remove From Role"
+      }
+    }
+  },
   "idps": {
     "idp_list": {
       "no_idps": {

@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { getGroupDetail, resetGroupUsers } from "actions/index";
+import { getGroupDetail, updateGroup, resetGroupUsers } from "actions/index";
 import T from "i18n-react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
@@ -9,7 +9,6 @@ import RafaySnackbar from "components/RafaySnackbar";
 import RafayInfoCard from "components/RafayInfoCard";
 import DataTableToolbar from "components/RafayTable/DataTableToolbar";
 import DataTable from "components/RafayTable/DataTable";
-import { editGroupWithCallback } from "../../../../../actions/Groups";
 
 class Users extends React.Component {
   constructor(props, context) {
@@ -62,11 +61,17 @@ class Users extends React.Component {
     history.push(`/main/groups/${groupId}/addusers`);
   };
 
-  handleRemoveGroupUser = (groupDetail, account) => {
-    const { editGroup } = this.props;
+  arrayRemove = (arr, value) => {
+    return arr.filter(function (ele) {
+      return ele != value;
+    });
+  };
+
+  handleRemoveGroupUser = (account) => {
+    const { groupDetail, updateGroup } = this.props;
     const deleteInitiated = true;
-    groupDetail.spec.users.remove(account);
-    this.setState({ deleteInitiated }, editGroup(groupDetail));
+    groupDetail.spec.users = this.arrayRemove(groupDetail.spec.users, account);
+    this.setState({ deleteInitiated }, updateGroup(groupDetail));
   };
 
   handleResponseErrorClose = () => {
@@ -96,7 +101,7 @@ class Users extends React.Component {
             confirmText,
             disabled: isDefaultUsersGroup,
             handleClick: () => {
-              this.handleRemoveGroupUser(groupId, data);
+              this.handleRemoveGroupUser(data);
             },
           },
         ],
@@ -181,6 +186,7 @@ const mapStateToProps = ({ Groups, Users }) => {
 export default withRouter(
   connect(mapStateToProps, {
     getGroupDetail,
+    updateGroup,
     resetGroupUsers,
   })(Users)
 );

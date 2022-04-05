@@ -1,7 +1,11 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUser, editUser, resetUserGroupDeleteError } from "actions/index";
+import {
+  getUserDetail,
+  editUser,
+  resetUserGroupDeleteError,
+} from "actions/index";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import T from "i18n-react";
@@ -31,9 +35,9 @@ class Groups extends React.Component {
   }
 
   componentDidMount() {
-    const { getUser } = this.props;
+    const { getUserDetail } = this.props;
     const { userId } = this.state;
-    getUser(userId);
+    getUserDetail(userId);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -204,7 +208,7 @@ const mapStateToProps = ({ Users }) => {
 
 export default withRouter(
   connect(mapStateToProps, {
-    getUser,
+    getUserDetail,
     editUser,
     resetUserGroupDeleteError,
   })(Groups)

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUser, resetUser } from "actions/index";
+import { getUserDetail, resetUser } from "actions/index";
 
 import T from "i18n-react";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
@@ -12,8 +12,8 @@ import UserProfile from "./UserProfile";
 
 class UserDetail extends Component {
   componentDidMount() {
-    const { getUser, match } = this.props;
-    getUser(match.params.userId);
+    const { getUserDetail, match } = this.props;
+    getUserDetail(match.params.userId);
   }
 
   componentWillUnmount() {
@@ -68,7 +68,7 @@ const mapStateToProps = ({ Users }) => {
 
 export default withRouter(
   connect(mapStateToProps, {
-    getUser,
+    getUserDetail,
     resetUser,
   })(UserDetail)
 );

@@ -18,9 +18,9 @@ const LocationField = (props) => {
   });
 
   const defaultLocationValue = () => {
-    if (props.edge?.spec.Metro?.name?.length > 0) {
+    if (props.edge?.spec.metro?.name?.length > 0) {
       return locationList.find((e) => {
-        if (e.value === props.edge.spec.Metro.name) {
+        if (e.value === props.edge.spec.metro.name) {
           return e;
         }
         return null;

@@ -4,10 +4,12 @@ export function getUsers(
   rows,
   offset,
   searchText,
-  orderBy = "username",
-  order = "asc",
+  orderBy = "",
+  order = "",
   filters
 ) {
+  const partner = JSON.parse(window?.localStorage.getItem("partner"));
+  const organization = JSON.parse(window?.localStorage.getItem("organization"));
   let filterQuery = "";
   const filterKeys = Object.keys(filters || {});
   filterKeys.forEach((key) => {
@@ -16,7 +18,8 @@ export function getUsers(
       : filters[key];
     if (value && value !== "ALL") filterQuery += `&${key}=${value}`;
   });
-
+  filterQuery += `&partner=${partner}`;
+  filterQuery += `&organization=${organization}`;
   if (rows) filterQuery += `&limit=${rows}`;
   if (offset) filterQuery += `&offset=${offset}`;
   if (orderBy) filterQuery += `&orderBy=${orderBy}&order=${order}`;
@@ -46,55 +49,7 @@ export function getApproverIDPUserList() {
 }
 
 export function getUserList() {
-  return http("auth").get(`users/`);
-}
-
-export function getIDPUserList(organizationId) {
-  return http(
-    `v2/sentry/account/organization/${organizationId}/ssoaccounts`,
-    "",
-    true
-  ).get();
-}
-
-export function getIDPUsers(organizationId) {
-  return function (dispatch) {
-    http(
-      `v2/sentry/account/organization/${organizationId}/ssoaccounts`,
-      "",
-      true
-    )
-      .get()
-      .then((response) => {
-        console.log(response);
-        dispatch({ type: "get_IDP_users_success", payload: response });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-}
-
-export function getSSOUser(accountID) {
-  return http("auth").get(`ssousers/${accountID}/groups/`);
-}
-
-export function addToSSOUserGroups(accountID, params) {
-  return http("auth").post(`ssousers/${accountID}/groups/`, params);
-}
-
-export function getUser(id) {
-  return function (dispatch) {
-    http("auth")
-      .get(`user/${id}`)
-      .then((response) => {
-        console.log(response);
-        dispatch({ type: "get_user_detail_success", payload: response });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  return http("auth").get(`users`);
 }
 
 export function getUserDetail(name) {
@@ -111,20 +66,8 @@ export function getUserDetail(name) {
   };
 }
 
-export function getRoles() {
-  const partner = JSON.parse(window?.localStorage.getItem("partner"));
-  const organization = JSON.parse(window?.localStorage.getItem("organization"));
-  return function (dispatch) {
-    http("auth")
-      .get(`partner/${partner}/organization/${organization}/roles`)
-      .then((response) => {
-        console.log(response);
-        dispatch({ type: "get_roles_success", payload: response });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+export function getSSOUserDetail(name) {
+  return http("auth").get(`user/${name}`);
 }
 
 export function addUser(params) {
@@ -239,6 +182,14 @@ export function editUser(params) {
   };
 }
 
+export function updateSSOUser(params) {
+  const partner = JSON.parse(window?.localStorage.getItem("partner"));
+  const organization = JSON.parse(window?.localStorage.getItem("organization"));
+  params.metadata.partner = partner;
+  params.metadata.organization = organization;
+  return http("auth").put(`user/${params.metadata.name}`, params);
+}
+
 export function editUserWithCallback(params, onSuccess, onFailure) {
   const partner = JSON.parse(window?.localStorage.getItem("partner"));
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
@@ -261,56 +212,6 @@ export function editUserWithCallback(params, onSuccess, onFailure) {
           onFailure(error.response.data);
         }
         console.log(error);
-      });
-  };
-}
-
-export function activateUser(
-  id,
-  searchText,
-  orderBy,
-  order,
-  filters,
-  onFailure
-) {
-  return function (dispatch) {
-    http("auth")
-      .post(`users/${id}/activate/`)
-      .then((_) => {
-        dispatch(getUsers(null, null, searchText, orderBy, order, filters));
-      })
-      .catch((error) => {
-        console.log(error);
-        onFailure(error);
-        // dispatch({
-        //   type: "user_response_error",
-        //   payload: error.response.data
-        // });
-      });
-  };
-}
-
-export function deactivateUser(
-  id,
-  searchText,
-  orderBy,
-  order,
-  filters,
-  onFailure
-) {
-  return function (dispatch) {
-    http("auth")
-      .post(`users/${id}/deactivate/`)
-      .then((_) => {
-        dispatch(getUsers(null, null, searchText, orderBy, order, filters));
-      })
-      .catch((error) => {
-        console.log(error);
-        onFailure(error);
-        // dispatch({
-        //   type: "user_response_error",
-        //   payload: error.response.data
-        // });
       });
   };
 }
@@ -455,7 +356,7 @@ export function getKubeconfigValidity(accountId, isSSOUser = false) {
   let type = "user";
   if (isSSOUser) type = "ssouser";
   return http(
-    `v2/sentry/kubeconfig/${type}/${accountId}/setting?opts.Organization=${orgid}`,
+    `v2/sentry/kubeconfig/${type}/${accountId}/setting?opts.organization=${orgid}`,
     "",
     true
   ).get();
@@ -478,23 +379,18 @@ export function setKubeconfigValidity(accountId, params, isSSOUser = false) {
 export function revokeKubeconfig(accountId, isSSOUser = false) {
   let type = "user";
   if (isSSOUser) type = "ssouser";
-  return http(
-    `v2/sentry/kubeconfig/${type}/${accountId}/revoke`,
-    "",
-    true
-  ).post("", {});
-}
-
-export function downloadKubeConfig(accountId, isSSOUser = false) {
-  if (!accountId) return null;
-
-  let type = "user";
-  if (isSSOUser) type = "ssouser";
-  return http(
-    `v2/sentry/kubeconfig/${type}/${accountId}/download`,
-    "",
-    true
-  ).get();
+  const partnerId = JSON.parse(window?.localStorage.getItem("partner_id"));
+  const organizationId = JSON.parse(
+    window?.localStorage.getItem("organization_id")
+  );
+  let req = {
+    opts: {
+      partner: partnerId,
+      organization: organizationId,
+      account: accountId,
+    },
+  };
+  return http(`v2/sentry/kubeconfig/revoke`, "", true).post("", req);
 }
 
 export function revokeSelfKubeconfig(accountId) {

@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  getUser,
+  getUserDetail,
   editUser,
   getGroups,
   resetUserGroupDeleteError,
@@ -38,9 +38,9 @@ class Groups extends React.Component {
 
   componentDidMount() {
     const { getGroups } = this.props;
-    const { getUser } = this.props;
+    const { getUserDetail } = this.props;
     const { userId } = this.state;
-    getUser(userId);
+    getUserDetail(userId);
     getGroups();
   }
 
@@ -235,7 +235,7 @@ const mapStateToProps = ({ Users, Groups }) => {
 export default withRouter(
   connect(mapStateToProps, {
     getGroups,
-    getUser,
+    getUserDetail,
     editUser,
     resetUserGroupDeleteError,
   })(Groups)

@@ -201,7 +201,6 @@ class App extends React.Component {
               <div className="app-main-content">
                 <RafaySuspense>
                   {/* <Route exact path={`${match.url}`} component={Home} /> */}
-                  <Route path={`${match.url}/projects`} component={Project} />
                   <Route path={`${match.url}/clusters`} component={Cluster} />
                   <Route path={`${match.url}/edges`} component={Edges} />
                   <Route

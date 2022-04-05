@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  getUser,
+  getUserDetail,
   editUserWithCallback,
   resetProjectError,
 } from "actions/index";
@@ -50,9 +50,9 @@ class Projects extends React.Component {
   };
 
   successCallback = () => {
-    const { getUser } = this.props;
+    const { getUserDetail } = this.props;
     const { userId } = this.state;
-    getUser(userId);
+    getUserDetail(userId);
   };
 
   errorCallback = (error) => {
@@ -260,7 +260,7 @@ const mapStateToProps = ({ settings, Users }) => {
 
 export default withRouter(
   connect(mapStateToProps, {
-    getUser,
+    getUserDetail,
     editUserWithCallback,
     resetProjectError,
   })(Projects)
