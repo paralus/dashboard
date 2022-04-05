@@ -179,7 +179,7 @@ class ResourceListTable extends React.Component {
           button={{
             type: "danger-icon",
             label: "Delete",
-            disabled: data.spec.scope !== "project",
+            disabled: data.spec.isGlobal,
             confirmText: (
               <span>
                 Are you sure you want to delete
