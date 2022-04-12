@@ -1,3 +1,7 @@
+// NOTE: how much this reducer works with the permissions
+// top level control here? read permissions for meus/page access
+// check granular permissionsin the respective components
+
 const initialData = {
   roles: [],
   projectRoles: {},
@@ -24,27 +28,32 @@ const parseProjectRoles = (roles) => {
       if (ret[item.project]) {
         data = ret[item.project];
       }
-      switch (item.role) {
-        case "PROJECT_READ_ONLY":
-        case "PROJECT_ADMIN":
-          data.visibleApps = true;
-          data.visibleSystem = true;
-          break;
-        case "NAMESPACE_READ_ONLY":
-        case "NAMESPACE_ADMIN":
-          data.visibleApps = true;
-          break;
-        case "INFRA_READ_ONLY":
-        case "INFRA_ADMIN":
-          data.visibleInfra = true;
-          data.visibleSystem = true;
-          break;
-        case "CLUSTER_ADMIN":
-          data.visibleInfra = true;
-          break;
-        default:
-          break;
-      }
+      item.permissions.forEach((perm) => {
+        switch (perm) {
+          case "project.read":
+          case "project.write":
+          case "project.admin.write":
+            data.visibleApps = true;
+            data.visibleSystem = true;
+            break;
+          // TODO: remove if not needed
+          // case "NAMESPACE_READ_ONLY":
+          // case "NAMESPACE_ADMIN":
+          //   data.visibleApps = true;
+          //   break;
+          // case "INFRA_READ_ONLY":
+          // case "INFRA_ADMIN":
+          //   data.visibleInfra = true;
+          //   data.visibleSystem = true;
+          //   break;
+          case "cluster.read":
+          case "cluster.write":
+            data.visibleInfra = true;
+            break;
+          default:
+            break;
+        }
+      })
       ret[item.project] = data;
       return ret;
     }, {}) || {}
@@ -54,29 +63,36 @@ const parseProjectRoles = (roles) => {
 const parseUserRoles = (roles) => {
   const userRoles = {};
   roles.forEach((r) => {
-    switch (r.role) {
-      case "PROJECT_READ_ONLY":
-        userRoles.projectReadOnly = true;
-        break;
-      case "PROJECT_ADMIN":
-        userRoles.projectAdmin = true;
-        break;
-      case "NAMESPACE_READ_ONLY":
-        userRoles.namespaceReadOnly = true;
-        break;
-      case "NAMESPACE_ADMIN":
-        userRoles.namespaceAdmin = true;
-        break;
-      case "INFRA_READ_ONLY":
-        userRoles.infaReadOnly = true;
-        break;
-      case "INFRA_ADMIN":
-        userRoles.infaAdmin = true;
-        break;
-      case "ADMIN":
-        userRoles.admin = true;
-        break;
-    }
+    r.permissions.forEach((perm) => {
+      switch (perm) {
+        case "project.read":
+          userRoles.projectReadOnly = true;
+          break;
+        case "project.write":
+          userRoles.projectReadOnly = false;
+          break;
+        case "project.admin.write":
+          userRoles.projectAdmin = true;
+          break;
+        // case "NAMESPACE_READ_ONLY":
+        //   userRoles.namespaceReadOnly = true;
+        //   break;
+        // case "NAMESPACE_ADMIN":
+        //   userRoles.namespaceAdmin = true;
+        //   break;
+        // case "INFRA_READ_ONLY":
+        //   userRoles.infaReadOnly = true;
+        //   break;
+        // case "INFRA_ADMIN":
+        //   userRoles.infaAdmin = true;
+        //   break;:w
+
+        // TODO: What determines admin user?
+        // case "ADMIN":
+        //   userRoles.admin = true;
+        //   break;
+      }
+    })
   });
 
   return userRoles;
@@ -91,6 +107,8 @@ const createSession = (user) => {
     visibleSystem: false,
   };
   const roles = user.spec.permissions;
+  // TODO: Check user.spec.permissions.[].permissions to determine if admin or not
+  // Which permissions to check to determine admin-ness?
   if (roles && roles.length === 0) {
     data.noRolesUser = true;
   } else if (
@@ -117,27 +135,32 @@ const createProjectSession = (roles, projectId) => {
     (r) => r.project && r.project === projectId
   );
   projectRoles.forEach((ac) => {
-    switch (ac.role) {
-      case "PROJECT_READ_ONLY":
-      case "PROJECT_ADMIN":
-        data.visibleApps = true;
-        data.visibleSystem = true;
-        break;
-      case "NAMESPACE_READ_ONLY":
-      case "NAMESPACE_ADMIN":
-        data.visibleApps = true;
-        break;
-      case "INFRA_READ_ONLY":
-      case "INFRA_ADMIN":
-        data.visibleInfra = true;
-        data.visibleSystem = true;
-        break;
-      case "CLUSTER_ADMIN":
-        data.visibleInfra = true;
-        break;
-      default:
-        break;
-    }
+    ac.permissions.forEach((perm) => {
+      switch (perm) {
+        case "project.read":
+        case "project.write":
+        case "project.admin.write":
+          data.visibleApps = true;
+          data.visibleSystem = true;
+          break;
+        // TODO: remove if not needed
+        // case "NAMESPACE_READ_ONLY":
+        // case "NAMESPACE_ADMIN":
+        //   data.visibleApps = true;
+        //   break;
+        // case "INFRA_READ_ONLY":
+        // case "INFRA_ADMIN":
+        //   data.visibleInfra = true;
+        //   data.visibleSystem = true;
+        //   break;
+        case "cluster.read":
+        case "cluster.write":
+          data.visibleInfra = true;
+          break;
+        default:
+          break;
+      }
+    })
   });
 
   data.userRoles = parseUserRoles(projectRoles);

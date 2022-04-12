@@ -1,6 +1,7 @@
 import http from "./Config";
 import { getInitProjects } from "./Projects";
 import { closeKubectlDrawer } from "./Kubectl";
+import { Configuration, V0alpha2Api } from '@ory/kratos-client'
 
 export function userSignup(user) {
   return function (dispatch) {
@@ -16,6 +17,25 @@ export function userSignup(user) {
         });
       });
   };
+}
+
+export const newKratosSdk = () => {
+  return new V0alpha2Api(
+    new Configuration({
+      basePath: window.env.KRATOS_URL || "http://127.0.0.1:4433",
+      baseOptions: {
+        // Setting this is very important as axios will send the CSRF cookie otherwise
+        // which causes problems with ORY Kratos' security detection.
+        withCredentials: true,
+
+        // Timeout after 5 seconds.
+        timeout: 10000
+      }
+    }),
+    '',
+    // Ensure that we are using the axios client with retry.
+    // axios
+  )
 }
 
 export function userLogin(user) {
@@ -112,7 +132,7 @@ export function getUserSessionInfo() {
     http("auth")
       .get("userinfo")
       .then((response) => {
-        dispatch({ type: "update_user_session", user: response.data });
+        dispatch({ type: "update_user_session", user: response });
         dispatch({ type: "user_login_success", payload: response });
       })
       .catch((error) => {
