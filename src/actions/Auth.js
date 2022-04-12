@@ -107,6 +107,8 @@ export function setPassword(params) {
   };
 }
 
+//TODO: uncomment below and remove mock method once login is available
+/*
 export function getUserSessionInfo() {
   return function (dispatch) {
     http("auth")
@@ -114,6 +116,30 @@ export function getUserSessionInfo() {
       .then((response) => {
         dispatch({ type: "update_user_session", user: response.data });
         dispatch({ type: "user_login_success", payload: response });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: "get_user_failed", payload: error.response });
+        dispatch({ type: "user_session_expired" });
+        if (error.response.status === 403) {
+          dispatch({ type: "user_session_expired" });
+        }
+      });
+  };
+}
+*/
+
+//FIXME: This is mocking rafayops admin user, to be removed once login pr is raised
+let userLoginMockText =
+  '{ "roles":[ { "id":"dk3ropk", "group":{ "id":"w2l8lek", "name":"Organization Admins", "type":"DEFAULT_ADMINS", "organization_id":"699074c5-428e-4d2c-b596-687b3515b494", "partner_id":"rx28oml" }, "role":{ "id":"7w2lnkp", "name":"ADMIN", "is_global":true, "scope":"ORGANIZATION" }, "organization":{ "id":"699074c5-428e-4d2c-b596-687b3515b494", "name":"finmanorg", "is_totp_enabled":false, "approved":true, "active":true }, "partner":{ "id":"rx28oml", "name":"finman", "description":"Rafay Cloud Partner", "settings":{ "gslb_enabled":true, "signup_enabled":true, "salt_exec_enabled":true }, "host":"console.stage.rafay.dev", "domain":"run.stage.rafay-edge.net",  "tos_link":"", "logo_link":"", "notification_email":"notify-signups@rafay.co", "support_team_name":"Team Rafay", "partner_helpdesk_email":"support@rafay.co", "partner_product_name":"Rafay Systems", "ops_host":"ops.stage.rafay.dev", "fav_icon_link":"", "is_totp_enabled":false, "is_synthetic_partner_enabled":false }, "default":false, "active":true } ], "account":{ "id":"b2e4162c-60df-4fd7-b8fd-8fd3e4d6e533", "username":"nirav.parikh@infracloud.io", "user_type":"CONSOLE", "phone":"", "first_name":"Nirav", "last_name":"Parikh", "email_verified":true, "phone_verified":false, "require_change_password":false, "totp_verified":true, "last_login":"2022-03-14T08:46:30.828360Z", "require_email_verification":true }, "organization":{ "id":"699074c5-428e-4d2c-b596-687b3515b494", "name":"finmanorg", "description":"", "settings":{ "lockout_settings":{ "lockout_enabled":true, "lockout_period_min":15, "invalid_attempts_limit":3, "invalid_attempts_counter_period_min":5 }, "idle_time_logout_min":45 }, "billing_address":"", "active":true, "approved":true, "type":"free", "address_line1":"", "address_line2":"", "city":"", "state":"", "country":"", "partner_id":"rx28oml", "phone":"", "zipcode":"", "is_private":true, "is_totp_enabled":false, "published_workload_count":0, "psps_enabled":true, "custom_psps_enabled":true, "partner":{ "id":"rx28oml", "name":"finman", "description":"Rafay Cloud Partner", "settings":{ "gslb_enabled":true, "signup_enabled":true, "salt_exec_enabled":true }, "host":"console.stage.rafay.dev", "domain":"run.stage.rafay-edge.net", "tos_link":"", "logo_link":"", "notification_email":"notify-signups@rafay.co", "support_team_name":"Team Rafay", "partner_helpdesk_email":"support@rafay.co", "partner_product_name":"Rafay Systems", "ops_host":"ops.stage.rafay.dev", "fav_icon_link":"", "is_totp_enabled":false, "is_synthetic_partner_enabled":false }, "default_blueprints_enabled":false, "referer":null } }';
+const userLoginMock = JSON.parse(userLoginMockText);
+export function getUserSessionInfo() {
+  return function (dispatch) {
+    http("auth")
+      .get("userinfo?metadata.name=opsadmin@rcloud.co")
+      .then((response) => {
+        dispatch({ type: "update_user_session", user: response.data });
+        dispatch({ type: "user_login_success", payload: userLoginMock });
       })
       .catch((error) => {
         console.log(error);
