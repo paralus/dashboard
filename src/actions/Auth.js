@@ -22,7 +22,7 @@ export function userSignup(user) {
 export const newKratosSdk = () => {
   return new V0alpha2Api(
     new Configuration({
-      basePath: window.env.KRATOS_URL || "http://127.0.0.1:4433",
+      basePath: window.env?.KRATOS_URL || "http://127.0.0.1:4433",
       baseOptions: {
         // Setting this is very important as axios will send the CSRF cookie otherwise
         // which causes problems with ORY Kratos' security detection.
