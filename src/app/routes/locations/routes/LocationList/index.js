@@ -43,12 +43,6 @@ const columnData = [
   { id: "city", numeric: false, disablePadding: true, label: "City" },
   { id: "state", numeric: false, disablePadding: true, label: "State" },
   { id: "country", numeric: false, disablePadding: true, label: "Country" },
-  {
-    id: "coordinates",
-    numeric: false,
-    disablePadding: false,
-    label: "Coordinates",
-  },
   { id: "options", numeric: true, disablePadding: false, label: "Actions" },
 ];
 
@@ -223,6 +217,10 @@ class LocationList extends React.Component {
       this.state.count = props.metroList.length;
       this.state.showSpinner = false;
     }
+    if (!props.metroList) {
+      this.state.count = 0;
+      this.state.showSpinner = false;
+    }
     if (props.isLocationCreateSuccess || props.isLocationEditSuccess) {
       this.state.open = false;
     }
@@ -275,7 +273,7 @@ class LocationList extends React.Component {
 
   handleSearchChange = (event) => {
     this.state.filter = event.target.value;
-    this.state.locations = this.props.metroList.filter((l) => {
+    this.state.locations = this.props.metroList?.filter((l) => {
       const searchBase =
         `${l.city}-${l.country}-${l.name}-${l.state}`.toLowerCase();
       return searchBase.indexOf(this.state.filter.toLowerCase()) !== -1;
@@ -284,7 +282,7 @@ class LocationList extends React.Component {
   };
 
   handleCreateLocationClick = (e) => {
-    this.state.location = { ...defaultLocationObject };
+    this.state.location = defaultLocationObject;
     this.state.open = true;
     this.setState({ ...this.state });
   };
@@ -350,13 +348,13 @@ class LocationList extends React.Component {
   handleCreateLocationClose = (e) => {
     console.log("handleCreateLocationClose");
     this.state.open = false;
-    this.state.location = { ...defaultLocationObject };
+    this.state.location = defaultLocationObject;
     this.setState({ ...this.state });
   };
   handleCreateLocation = (e) => {
     console.log("handleCreateLocation", this.state.location);
     var isLocationExists = false;
-    for (var index = 0; index < this.state.locations.length; index++) {
+    for (var index = 0; index < this.state.locations?.length; index++) {
       if (
         this.state.location.metadata.name === this.state.locations[index].name
       ) {
@@ -456,18 +454,6 @@ class LocationList extends React.Component {
                         <TableCell padding="none">{n.state}</TableCell>
                         <TableCell padding="none">{n.country}</TableCell>
 
-                        <TableCell>
-                          <div className="d-flex flex-row pt-2 pb-2">
-                            <div className="d-flex flex-column mr-2">
-                              <div className="font-weight-bold">Latitude</div>
-                              <div className="font-weight-bold">Longitude</div>
-                            </div>
-                            <div className="d-flex flex-column">
-                              <div>{n.latitude}</div>
-                              <div>{n.longitude}</div>
-                            </div>
-                          </div>
-                        </TableCell>
                         <TableCell>
                           {!isReadOnlyOps && (
                             <CellMenu
@@ -577,39 +563,6 @@ class LocationList extends React.Component {
                     fullWidth
                     validators={["required"]}
                     errorMessages={["this field is required"]}
-                  />
-                </div>
-
-                <div className="col-md-6 mt-4 mb-4">
-                  <TextValidator
-                    id="Latitude"
-                    name="Latitude"
-                    label="Latitude"
-                    value={this.state.location.spec.latitude}
-                    onChange={this.handleLocationChange("latitude")}
-                    margin="dense"
-                    fullWidth
-                    validators={["required", "lat"]}
-                    errorMessages={[
-                      "Latitude is required.",
-                      "Latitude must be numeric and in range of -90 and 90",
-                    ]}
-                  />
-                </div>
-                <div className="col-md-6 mt-4 mb-4">
-                  <TextValidator
-                    id="Longitude"
-                    name="Longitude"
-                    label="Longitude"
-                    value={this.state.location.spec.longitude}
-                    onChange={this.handleLocationChange("longitude")}
-                    margin="dense"
-                    fullWidth
-                    validators={["required", "long"]}
-                    errorMessages={[
-                      "Longitude is required.",
-                      `Longitude must be numeric and in range of -180 and 180`,
-                    ]}
                   />
                 </div>
               </div>

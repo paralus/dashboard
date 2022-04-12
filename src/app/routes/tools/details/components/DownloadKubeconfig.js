@@ -41,7 +41,7 @@ const DownloadKubeconfig = ({ user, withIcon, disableActions }) => {
         <Button
           variant="contained"
           className="jr-btn jr-btn-label left text-nowrap text-white"
-          onClick={getKubeConfig(user.metadata.id, setConfig, () =>
+          onClick={getKubeConfig(user?.metadata.id, setConfig, () =>
             setAlert({
               show: true,
               message: "Error Downloading Kubeconfig. Try again later.",
@@ -60,7 +60,7 @@ const DownloadKubeconfig = ({ user, withIcon, disableActions }) => {
           variant="contained"
           color="primary"
           className="mr-4"
-          onClick={getKubeConfig(user.metadata.id, setConfig, () =>
+          onClick={getKubeConfig(user?.metadata.id, setConfig, () =>
             setAlert({
               show: true,
               message: "Error Downloading Kubeconfig. Try again later.",
