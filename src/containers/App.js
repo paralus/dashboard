@@ -6,9 +6,9 @@ import { connect } from "react-redux";
 import T from "i18n-react";
 
 import {
-//   initializeApp,
+  //   initializeApp,
   getUserSessionInfo,
-//   getInitProjects,
+  //   getInitProjects,
 } from "actions/index";
 import { SnackbarProvider } from "utils/useSnack";
 import RafaySuspense from "components/RafaySuspense";

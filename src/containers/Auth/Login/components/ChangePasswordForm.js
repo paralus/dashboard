@@ -8,7 +8,7 @@ const ChangePasswordForm = ({
   auth,
   change_password,
   handleChangePassword,
-  handlePasswordChangeAttributes
+  handlePasswordChangeAttributes,
 }) => {
   return (
     <>
@@ -40,7 +40,7 @@ const ChangePasswordForm = ({
               validators={["required", "passwordLength"]}
               errorMessages={[
                 "this field is required",
-                <T.span text="signup.password_length" />
+                <T.span text="signup.password_length" />,
               ]}
               onChange={handlePasswordChangeAttributes("password")}
             />

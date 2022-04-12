@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import Footer from "components/Footer";
 
-const capitalize = string => {
+const capitalize = (string) => {
   if (!string) {
     return " ";
   }

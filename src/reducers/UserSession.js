@@ -53,7 +53,7 @@ const parseProjectRoles = (roles) => {
           default:
             break;
         }
-      })
+      });
       ret[item.project] = data;
       return ret;
     }, {}) || {}
@@ -92,7 +92,7 @@ const parseUserRoles = (roles) => {
         //   userRoles.admin = true;
         //   break;
       }
-    })
+    });
   });
 
   return userRoles;
@@ -160,7 +160,7 @@ const createProjectSession = (roles, projectId) => {
         default:
           break;
       }
-    })
+    });
   });
 
   data.userRoles = parseUserRoles(projectRoles);

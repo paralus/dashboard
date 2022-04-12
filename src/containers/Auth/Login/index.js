@@ -5,7 +5,7 @@ import {
   Input,
   InputAdornment,
   InputLabel,
-  LinearProgress
+  LinearProgress,
 } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -59,22 +59,19 @@ class Login extends Component {
 
   initializeFlow = () =>
     newKratosSdk()
-      .initializeSelfServiceLoginFlowForBrowsers(
-        true,
-        "aal1",
-      )
+      .initializeSelfServiceLoginFlowForBrowsers(true, "aal1")
       .then((response) => {
-        const { data: flow } = response
+        const { data: flow } = response;
         flow.ui.nodes.forEach((node) => {
           if (node.attributes.name === "csrf_token") {
-            this.setState({csrf_token: node.attributes.value})
+            this.setState({ csrf_token: node.attributes.value });
           }
-        })
+        });
         this.setState({
-          flow
+          flow,
         });
       })
-      .catch(console.error)
+      .catch(console.error);
 
   UNSAFE_componentWillMount() {
     const rememberMe = window.localStorage.getItem("rememberMe");
@@ -84,14 +81,14 @@ class Login extends Component {
         this.setState({
           usertype: meta.usertype,
           username: meta.username,
-          redirectUrl: meta.redirectUrl
+          redirectUrl: meta.redirectUrl,
         });
       }
     }
-    ValidatorForm.addValidationRule("isPasswordMatch", value => {
+    ValidatorForm.addValidationRule("isPasswordMatch", (value) => {
       return value === this.state.change_password.password;
     });
-    ValidatorForm.addValidationRule("passwordLength", value => {
+    ValidatorForm.addValidationRule("passwordLength", (value) => {
       return this.state.change_password.password.length >= 8;
     });
     this.initializeFlow();
@@ -124,7 +121,7 @@ class Login extends Component {
                 key={li}
                 style={{
                   backgroundColor: "transparent",
-                  border: "transparent"
+                  border: "transparent",
                 }}
               >
                 {li.detail}
@@ -136,7 +133,7 @@ class Login extends Component {
     );
   };
 
-  handleMouseDownPassword = event => {
+  handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
@@ -144,12 +141,12 @@ class Login extends Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  handleChange = name => event => {
+  handleChange = (name) => (event) => {
     this.state[name] = event.target.value;
     this.setState({ ...this.state });
   };
 
-  handleBlur = event => {
+  handleBlur = (event) => {
     if (this.emailNode) {
       this.emailNode.validate(event.target.value);
     }
@@ -161,7 +158,7 @@ class Login extends Component {
     auth.username = username;
 
     newKratosSdk()
-      .submitSelfServiceLoginFlow(flow.id, undefined , {
+      .submitSelfServiceLoginFlow(flow.id, undefined, {
         csrf_token: this.state.csrf_token,
         method: "password",
         password_identifier: this.state.username,
@@ -169,19 +166,19 @@ class Login extends Component {
       })
       .then(({ data }) => Promise.resolve(data))
       .then((session) => {
-        setSession(session)
+        setSession(session);
         setTimeout(() => {
-          navigation.navigate('Home')
-        }, 100)
+          navigation.navigate("Home");
+        }, 100);
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   };
 
   handleResponseErrorClose = () => {
     this.props.resetLoginError();
     this.setState({
       ...this.state,
-      isResponseError: false
+      isResponseError: false,
     });
   };
 
@@ -208,7 +205,7 @@ class Login extends Component {
   //   this.setState({ ...this.state });
   // };
 
-  handleKeyPress = event => {
+  handleKeyPress = (event) => {
     if (event.key === "Enter" && this.state.usertype !== undefined) {
     }
 
@@ -217,12 +214,12 @@ class Login extends Component {
     }
   };
 
-  changeUser = e => {
+  changeUser = (e) => {
     e.preventDefault();
     this.setState({ usertype: undefined, username: "" });
   };
 
-  handleRememberClick = e => {
+  handleRememberClick = (e) => {
     this.setState({ rememberMe: e.target.checked });
   };
 
@@ -232,10 +229,7 @@ class Login extends Component {
     return (
       <>
         <>
-          <ValidatorForm
-            onSubmit={this.handleSubmit}
-            instantValidate={false}
-          >
+          <ValidatorForm onSubmit={this.handleSubmit} instantValidate={false}>
             <fieldset>
               <div style={{ marginTop: "25px", marginBottom: "25px" }}>
                 {this.state.usertype !== undefined ? (
@@ -243,7 +237,7 @@ class Login extends Component {
                     id="email"
                     label="Email"
                     name="email"
-                    ref={node => {
+                    ref={(node) => {
                       this.emailNode = node;
                     }}
                     fullWidth
@@ -256,7 +250,7 @@ class Login extends Component {
                     validators={["required", "isEmail"]}
                     errorMessages={[
                       "this field is required",
-                      "email is not valid"
+                      "email is not valid",
                     ]}
                   />
                 ) : (
@@ -264,7 +258,7 @@ class Login extends Component {
                     id="email"
                     label="Email"
                     name="email"
-                    ref={node => {
+                    ref={(node) => {
                       this.emailNode = node;
                     }}
                     fullWidth
@@ -277,7 +271,7 @@ class Login extends Component {
                     validators={["required", "isEmail"]}
                     errorMessages={[
                       "this field is required",
-                      "email is not valid"
+                      "email is not valid",
                     ]}
                   />
                 )}
@@ -304,7 +298,7 @@ class Login extends Component {
                               {this.state.showPassword ? (
                                 <Visibility
                                   style={{
-                                    color: "00bcd4"
+                                    color: "00bcd4",
                                   }}
                                 />
                               ) : (
@@ -324,7 +318,7 @@ class Login extends Component {
                         marginBottom: 10,
                         marginTop: 10,
                         width: 208,
-                        marginRight: -1
+                        marginRight: -1,
                       }}
                       href={this.state.redirectUrl}
                       variant="contained"
@@ -348,7 +342,7 @@ class Login extends Component {
                   <div className="animated slideInRightTiny animation-duration-3 mt-4">
                     <Button
                       style={{
-                        marginBottom: 10
+                        marginBottom: 10,
                       }}
                       href={this.state.redirectUrl}
                       variant="contained"
@@ -377,10 +371,11 @@ class Login extends Component {
               </div>
               <div className="my-4 py-4">
                 <div
-                  className={`d-flex ${[undefined, "internal"].includes(this.state.usertype)
-                    ? "justify-content-between"
-                    : "justify-content-center"
-                    } align-items-center`}
+                  className={`d-flex ${
+                    [undefined, "internal"].includes(this.state.usertype)
+                      ? "justify-content-between"
+                      : "justify-content-center"
+                  } align-items-center`}
                 >
                   <div>
                     <a
@@ -393,7 +388,7 @@ class Login extends Component {
                   </div>
                   <div>
                     {this.state.usertype === undefined ||
-                      this.state.usertype === "internal" ? (
+                    this.state.usertype === "internal" ? (
                       <Button
                         variant="contained"
                         className="jr-btn text-white"
@@ -414,13 +409,13 @@ class Login extends Component {
                     // style={{ border: "1px solid #009688", borderRadius: "5px" }}
                     style={{
                       background: "rgb(222, 243, 241)",
-                      borderRadius: "5px"
+                      borderRadius: "5px",
                     }}
                   >
                     <div className="mb-2">Don' t have an account ?</div>
                     <Button
                       color="primary"
-                      onClick={_ => this.props.history.push("/signup")}
+                      onClick={(_) => this.props.history.push("/signup")}
                       variant="outlined"
                     >
                       Sign Up
@@ -442,7 +437,7 @@ class Login extends Component {
       isLoginFailed,
       isLoginSuccess,
       userAndRoleDetail,
-      UserSession
+      UserSession,
     } = this.props;
     const { isResponseError } = this.state;
 
@@ -509,7 +504,7 @@ class Login extends Component {
           open={isResponseError}
           onClose={this.handleResponseErrorClose}
           SnackbarContentProps={{
-            "aria-describedby": "message-id"
+            "aria-describedby": "message-id",
           }}
           className="mb-3"
           message={this.getErrorMessage()}
@@ -521,7 +516,7 @@ class Login extends Component {
               onClick={this.handleResponseErrorClose}
             >
               <CloseIcon />
-            </IconButton>
+            </IconButton>,
           ]}
         />
         <Snackbar
@@ -529,7 +524,7 @@ class Login extends Component {
           open={this.state.isPreLoginError}
           onClose={() => this.setState({ isPreLoginError: false })}
           SnackbarContentProps={{
-            "aria-describedby": "message-id"
+            "aria-describedby": "message-id",
           }}
           className="mb-3"
           message={
@@ -545,7 +540,7 @@ class Login extends Component {
               onClick={() => this.setState({ isPreLoginError: false })}
             >
               <CloseIcon />
-            </IconButton>
+            </IconButton>,
           ]}
         />
       </>
@@ -564,7 +559,7 @@ const mapStateToProps = ({ settings, UserSession, Projects }) => {
     isSetPasswordFailed,
     isTotpRequired,
     isTotpVerified,
-    totpUrl
+    totpUrl,
   } = settings;
   const { currentProject } = Projects;
   return {
@@ -579,7 +574,7 @@ const mapStateToProps = ({ settings, UserSession, Projects }) => {
     isTotpVerified,
     totpUrl,
     UserSession,
-    currentProject
+    currentProject,
   };
 };
 export default withRouter(

@@ -1,7 +1,7 @@
 import http from "./Config";
 import { getInitProjects } from "./Projects";
 import { closeKubectlDrawer } from "./Kubectl";
-import { Configuration, V0alpha2Api } from '@ory/kratos-client'
+import { Configuration, V0alpha2Api } from "@ory/kratos-client";
 
 export function userSignup(user) {
   return function (dispatch) {
@@ -29,14 +29,14 @@ export const newKratosSdk = () => {
         withCredentials: true,
 
         // Timeout after 5 seconds.
-        timeout: 10000
-      }
+        timeout: 10000,
+      },
     }),
-    '',
+    ""
     // Ensure that we are using the axios client with retry.
     // axios
-  )
-}
+  );
+};
 
 export function userLogin(user) {
   return function (dispatch) {
