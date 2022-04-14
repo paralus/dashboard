@@ -49,13 +49,13 @@ const ClusterConfig = ({
   const handleOnScroll = () => {
     let tabValue = 0;
     if (generalSection) {
-      const { top } = generalSection.current?.getBoundingClientRect();
+      const { top } = generalSection?.current?.getBoundingClientRect();
       if (top > 100) {
         tabValue = 0;
       }
     }
     if (advancedSection) {
-      const { top } = advancedSection.current?.getBoundingClientRect();
+      const { top } = advancedSection?.current?.getBoundingClientRect();
       if (top < 300) {
         tabValue = 1;
       }
@@ -85,38 +85,20 @@ const ClusterConfig = ({
   };
 
   useEffect((_) => {
-    const edge = match.params.edge;
-    getEdgeDetail(edge).then((res) => {
+    const cluster = match.params.cluster;
+    getEdgeDetail(cluster).then((res) => {
       const edgeObj = res.data;
-      if (
-        edgeObj?.provision_params?.state === "PROVISION" &&
-        edgeObj.auto_create &&
-        !isEdit
-      ) {
-        history.push(`/app/edges/${edgeObj.id}/auto-provision`);
-      }
-      if (edgeObj?.edge_provider_params?.params?.length > 0) {
-        edgeObj.edge_provider_params.params = JSON.parse(
-          edgeObj.edge_provider_params.params
+      if (edgeObj?.spec?.edge_provider_params?.params?.length > 0) {
+        edgeObj.spec.edge_provider_params.params = JSON.parse(
+          edgeObj.spec.edge_provider_params.params
         );
       }
-      if (!edgeObj.Metro) {
-        edgeObj.Metro = { name: "" };
+      if (!edgeObj.spec.Metro) {
+        edgeObj.spec.Metro = { name: "" };
       }
-      if (
-        ["OVA"].includes(edgeObj?.provision_params?.provisionPackageType) &&
-        ["ONPREM"].includes(edgeObj?.provision_params?.provisionEnvironment)
-      ) {
-        delete edgeObj.storage_class_map.GlusterFs;
-        edgeObj.auto_approve_nodes = true;
+      if (!edgeObj.spec.proxy_config) {
+        edgeObj.spec.proxy_config = {};
       }
-      if (!edgeObj.proxy_config) {
-        edgeObj.proxy_config = {};
-      }
-      if (edgeObj.cluster_type === "imported") {
-        edgeObj.cluster_blueprint = "minimal";
-      }
-
       setEdge(edgeObj);
       setLoading(false);
     });
@@ -127,55 +109,50 @@ const ClusterConfig = ({
   }, []);
 
   const handleEdgeChange = (name) => (event) => {
-    if (
-      [
-        "httpProxy",
-        "httpsProxy",
-        "noProxy",
-        "proxyAuth",
-        "bootstrapCA",
-      ].includes(name)
-    ) {
-      setEdge({
-        ...edge,
-        proxy_config: {
-          ...edge.proxy_config,
-          [name]: event.target.value,
-        },
-      });
+    if (name === "httpProxy") {
+      edge.spec.proxyConfig.httpProxy = event.target.value;
+      setEdge({ ...edge });
       return;
     }
-    if (["allowInsecureBootstrap", "enabled"].includes(name)) {
-      setEdge({
-        ...edge,
-        proxy_config: {
-          ...edge.proxy_config,
-          [name]: event.target.checked,
-        },
-      });
+    if (name === "httpsProxy") {
+      edge.spec.proxyConfig.httpsProxy = event.target.value;
+      setEdge({ ...edge });
       return;
     }
-    if (name === "HostPath") {
-      setEdge({
-        ...edge,
-        storage_class_map: {
-          ...edge.storage_class_map,
-          HostPath: event.target.value,
-        },
-      });
+    if (name === "noProxy") {
+      edge.spec.proxyConfig.noProxy = event.target.value;
+      setEdge({ ...edge });
       return;
     }
-    if (name === "metro") {
-      let metro = null;
-      if (event) {
-        metro = {
+    if (name === "proxyAuth") {
+      edge.spec.proxyConfig.proxyAuth = event.target.value;
+      setEdge({ ...edge });
+      return;
+    }
+    if (name === "bootstrapCA") {
+      edge.spec.proxyConfig.bootstrapCA = event.target.value;
+      setEdge({ ...edge });
+      return;
+    }
+    if (name === "allowInsecureBootstrap") {
+      edge.spec.proxyConfig.allowInsecureBootstrap = event.target.checked;
+      setEdge({ ...edge });
+      return;
+    }
+    if (name === "enabled") {
+      edge.spec.proxyConfig.enabled = event.target.checked;
+      setEdge({ ...edge });
+      return;
+    }
+    if (name === "metro" && event) {
+      if (edge.spec.metro) {
+        edge.spec.metro.name = event.value;
+      } else {
+        edge.spec.metro = {
           name: event.value,
         };
       }
-      setEdge({
-        ...edge,
-        [name]: event.target.value,
-      });
+      setEdge({ ...edge });
       return;
     }
   };
@@ -190,14 +167,13 @@ const ClusterConfig = ({
 
   const handleSaveConfig = (_) => {
     if (
-      edge.spec.proxy_config &&
-      edge.spec.proxy_config.enabled &&
-      (testProtocol(edge?.spec.proxy_config?.httpProxy) ||
-        testProtocol(edge?.spec.proxy_config?.httpsProxy))
+      edge.spec.proxyConfig &&
+      edge.spec.proxyConfig.enabled &&
+      (testProtocol(edge?.spec.proxyConfig?.httpProxy) ||
+        testProtocol(edge?.spec.proxyConfig?.httpsProxy))
     ) {
       return;
     }
-    alert(JSON.stringify(edge));
     if (!edge.spec.metro) {
       edge.spec.metro = { name: "" };
     }
@@ -310,16 +286,16 @@ const ClusterConfig = ({
                     Discard Changes &amp; Exit
                   </Button>
                 </div>
-              </div>
-              <div className="next d-flex align-items-center">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSaveConfig}
-                  type="submit"
-                >
-                  <span>Continue</span>
-                </Button>
+                <div className="next d-flex align-items-center">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSaveConfig}
+                    type="submit"
+                  >
+                    <span>Continue</span>
+                  </Button>
+                </div>
               </div>
             </div>
           </Paper>
@@ -329,11 +305,10 @@ const ClusterConfig = ({
   );
 };
 
-const mapStateToProps = ({ settingsOps, Projects }) => {
-  const { drawerType, providers } = settingsOps;
-  const { edges } = settingsOps;
+const mapStateToProps = ({ settings, Projects }) => {
+  const { edges } = settings;
   const { currentProject } = Projects;
-  return { drawerType, providers, edges, currentProject };
+  return { edges, currentProject };
 };
 export default withRouter(
   connect(mapStateToProps, {

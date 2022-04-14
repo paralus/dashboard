@@ -26,7 +26,6 @@ const Shell = ({
 
   const loc = window.location;
   let wsURL = `wss://${loc.host}`;
-  wsURL = "ws://localhost:7009";
   if (isLogsOnly) {
     wsURL += `/v2/debug/getlogs/project/${project}/cluster/${clusterName}`;
   } else {

@@ -79,9 +79,7 @@ function getStatus({ edge }) {
     [R.T, R.always("textSecondary")],
   ]);
   if (!edge) return false;
-  alert(JSON.stringify(edge));
   let status = getClusterStatus(edge);
-  alert(status);
   return (
     <Typography display="inline" color={getStatusColor(status)}>
       {status || "NOT_READY"}
@@ -89,8 +87,13 @@ function getStatus({ edge }) {
   );
 }
 
-function getHealth({ health, reason, health_status_modified_at }, classes) {
-  const isHealthy = health === 1;
+function getHealth(edge, classes) {
+  const { health, reason, health_status_modified_at } = edge;
+  let isHealthy = health === 1;
+  //check cluster status
+  if (!isHealthy) {
+    isHealthy = getClusterStatus(edge) === "READY";
+  }
   const lastUpdated = health_status_modified_at
     ? moment(health_status_modified_at).fromNow()
     : "N/A";

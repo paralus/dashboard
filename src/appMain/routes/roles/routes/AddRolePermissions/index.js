@@ -176,13 +176,18 @@ class AddRolePermissions extends React.Component {
   render() {
     let rolePermissionsList = [];
     const { list, roleName, roleId, showError, deleteError } = this.state;
-    const { permissions, drawerType } = this.props;
+    const { permissions, roleDetail, drawerType } = this.props;
     if (list) {
       rolePermissionsList = list;
     }
     let allPermissions = [];
-    if (permissions) {
+    if (permissions && roleDetail) {
       allPermissions = this.arrayObjectRemove(permissions, "ops_star.all");
+      allPermissions = permissions.filter(function (ele) {
+        return (
+          ele.spec.scope.toLowerCase() === roleDetail.spec.scope.toLowerCase()
+        );
+      });
     }
     const config = {
       links: [

@@ -167,6 +167,7 @@ class ResourceListTable extends React.Component {
           <IconButton
             aria-label="edit"
             className="m-0"
+            disabled={data.spec.builtin}
             onClick={(event) =>
               this.handleGoToRoleDetail(event, data.metadata.name.toLowerCase())
             }
@@ -179,7 +180,7 @@ class ResourceListTable extends React.Component {
           button={{
             type: "danger-icon",
             label: "Delete",
-            disabled: data.spec.isGlobal,
+            disabled: data.spec.builtin,
             confirmText: (
               <span>
                 Are you sure you want to delete

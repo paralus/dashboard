@@ -350,7 +350,9 @@ class PrivateEdgeList extends React.Component {
         clusterType: "import",
       },
     };
-    this.state.edge.spec.params = {};
+    this.state.edge.spec.params = {
+      state: "CONFIG",
+    };
     this.setState({ ...this.state });
   };
 

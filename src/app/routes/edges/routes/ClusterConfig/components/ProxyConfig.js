@@ -18,7 +18,6 @@ const ProxyConfig = (props) => {
 
   return (
     <Paper className="p-3">
-      {/* <h3 className="mt-2">Proxy Config</h3> */}
       <h3
         style={{ color: "teal", cursor: "pointer" }}
         onClick={(_) => setOpen(!open)}

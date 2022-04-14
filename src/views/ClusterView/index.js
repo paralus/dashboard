@@ -60,8 +60,8 @@ const isAnOlderComponent = (location) => {
 
 const isConfigState = (edge) => {
   if (!edge) return false;
-  if (!edge.params) return false;
-  return edge.params.state === "CONFIG";
+  if (!edge.spec) return false;
+  return edge.spec.params?.state === "CONFIG";
 };
 
 function mapStateToProps(state) {
