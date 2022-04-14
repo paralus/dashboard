@@ -92,7 +92,7 @@ function getHealth(edge, classes) {
   let isHealthy = health === 1;
   //check cluster status
   if (!isHealthy) {
-    isHealthy = getClusterStatus(edge) === "READY"
+    isHealthy = getClusterStatus(edge) === "READY";
   }
   const lastUpdated = health_status_modified_at
     ? moment(health_status_modified_at).fromNow()

@@ -62,7 +62,8 @@ const ClusterActions = ({
         ready =
           edge.spec.clusterData.cluster_status.conditions[index].type ===
             "ClusterReady" &&
-          edge.spec.clusterData.cluster_status.conditions[index].status === "Success";
+          edge.spec.clusterData.cluster_status.conditions[index].status ===
+            "Success";
         if (ready) {
           return ready;
         }

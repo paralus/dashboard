@@ -184,7 +184,9 @@ class AddRolePermissions extends React.Component {
     if (permissions && roleDetail) {
       allPermissions = this.arrayObjectRemove(permissions, "ops_star.all");
       allPermissions = permissions.filter(function (ele) {
-        return ele.spec.scope.toLowerCase() === roleDetail.spec.scope.toLowerCase();
+        return (
+          ele.spec.scope.toLowerCase() === roleDetail.spec.scope.toLowerCase()
+        );
       });
     }
     const config = {

@@ -111,37 +111,37 @@ const ClusterConfig = ({
   const handleEdgeChange = (name) => (event) => {
     if (name === "httpProxy") {
       edge.spec.proxyConfig.httpProxy = event.target.value;
-      setEdge({...edge});
+      setEdge({ ...edge });
       return;
     }
     if (name === "httpsProxy") {
       edge.spec.proxyConfig.httpsProxy = event.target.value;
-      setEdge({...edge});
+      setEdge({ ...edge });
       return;
     }
     if (name === "noProxy") {
       edge.spec.proxyConfig.noProxy = event.target.value;
-      setEdge({...edge});
+      setEdge({ ...edge });
       return;
     }
     if (name === "proxyAuth") {
       edge.spec.proxyConfig.proxyAuth = event.target.value;
-      setEdge({...edge});
+      setEdge({ ...edge });
       return;
     }
     if (name === "bootstrapCA") {
       edge.spec.proxyConfig.bootstrapCA = event.target.value;
-      setEdge({...edge});
+      setEdge({ ...edge });
       return;
     }
     if (name === "allowInsecureBootstrap") {
       edge.spec.proxyConfig.allowInsecureBootstrap = event.target.checked;
-      setEdge({...edge});
+      setEdge({ ...edge });
       return;
     }
     if (name === "enabled") {
       edge.spec.proxyConfig.enabled = event.target.checked;
-      setEdge({...edge});
+      setEdge({ ...edge });
       return;
     }
     if (name === "metro" && event) {
@@ -149,10 +149,10 @@ const ClusterConfig = ({
         edge.spec.metro.name = event.value;
       } else {
         edge.spec.metro = {
-          name: event.value
+          name: event.value,
         };
       }
-      setEdge({...edge});
+      setEdge({ ...edge });
       return;
     }
   };
