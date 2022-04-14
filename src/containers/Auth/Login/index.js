@@ -165,12 +165,13 @@ class Login extends Component {
         password: this.state.password,
       })
       .then(({ data }) => Promise.resolve(data))
-      .then((session) => {
-        setSession(session);
-        setTimeout(() => {
-          navigation.navigate("Home");
-        }, 100);
-      })
+      // .then((session) => {
+      // //   // setSession(session);
+      // //   console.log(session);
+      // //   setTimeout(() => {
+      // //     navigation.navigate("Home");
+      // //   }, 100);
+      // })
       .catch((err) => console.log(err));
   };
 
@@ -489,9 +490,9 @@ class Login extends Component {
       // if (UserSession.visibleInfra || UserSession.visibleAdmin) {
       //   return <Redirect to="/app/edges" />;
       // }
-      if (UserSession.visibleApps) {
-        return <Redirect to="/app/workloads" />;
-      }
+      // if (UserSession.visibleApps) {
+      //   return <Redirect to="/app/workloads" />;
+      // }
       if (!userAndRoleDetail?.account?.require_change_password)
         return <Redirect to="/main" />;
     }

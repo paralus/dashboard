@@ -6,9 +6,9 @@ import { connect } from "react-redux";
 import T from "i18n-react";
 
 import {
-  //   initializeApp,
+    initializeApp,
   getUserSessionInfo,
-  //   getInitProjects,
+    getInitProjects,
 } from "actions/index";
 import { SnackbarProvider } from "utils/useSnack";
 import RafaySuspense from "components/RafaySuspense";
@@ -41,9 +41,9 @@ class App extends Component {
   componentDidMount() {
     const { initializeApp, getUserSessionInfo, getInitProjects, lang } =
       this.props;
-    // initializeApp();
+    initializeApp();
     getUserSessionInfo();
-    // getInitProjects();
+    getInitProjects();
     this.timeout = setInterval(() => getUserSessionInfo(), 60000 * 5);
     T.setTexts(require(`./locale/${lang}.json`));
   }
@@ -114,7 +114,7 @@ const mapStateToProps = ({ settings, UserSession }) => {
 };
 
 export default connect(mapStateToProps, {
-  // initializeApp,
+  initializeApp,
   getUserSessionInfo,
-  // getInitProjects,
+  getInitProjects,
 })(App);
