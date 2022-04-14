@@ -81,16 +81,9 @@ export function updateEdge(
   const cachedProject = JSON.parse(
     window?.localStorage.getItem("currentProject")
   );
-  if (params.metadata.labels) {
-    const labelMap = new Map();
-    params.metadata.labels.forEach((data, index) => {
-      labelMap[data.key] = data.value;
-    });
-    params.metadata.labels = labelMap;
-  }
   return function (dispatch) {
     return http("infra")
-      .put(`project/${cachedProject}/cluster/${params.metadata.name}/`, params)
+      .put(`project/${cachedProject}/cluster/${params.metadata.name}`, params)
       .then((response) => {
         if (response.data.metadata.labels) {
           const labelArray = [];
