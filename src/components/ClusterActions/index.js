@@ -62,7 +62,7 @@ const ClusterActions = ({
         ready =
           edge.spec.clusterData.cluster_status.conditions[index].type ===
             "ClusterReady" &&
-          edge.spec.clusterData.cluster_status.conditions[index].status === 3;
+          edge.spec.clusterData.cluster_status.conditions[index].status === "Success";
         if (ready) {
           return ready;
         }
@@ -77,7 +77,6 @@ const ClusterActions = ({
       return (
         DEFAULT_MENU_ITEMS.includes(item) ||
         (!isDetails && item === "View") ||
-        (isImportedOrV2 && item === "Configure Ingress IPs") ||
         (UserSession.visibleAdmin && item === "Manage Cluster Sharing")
       );
     });

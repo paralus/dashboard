@@ -167,6 +167,7 @@ class ResourceListTable extends React.Component {
           <IconButton
             aria-label="edit"
             className="m-0"
+            disabled={data.spec.isGlobal}
             onClick={(event) =>
               this.handleGoToRoleDetail(event, data.metadata.name.toLowerCase())
             }
