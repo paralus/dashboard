@@ -195,7 +195,7 @@ class AppMain extends React.Component {
           )}
           {!this.props.kubectlOpen && <Footer />}
         </div>
-        {hasAccess && currentProject?.id && <MiniKubectl />}
+        {hasAccess && currentProject?.metadata.name && <MiniKubectl />}
       </div>
     );
   }

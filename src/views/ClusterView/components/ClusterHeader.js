@@ -193,7 +193,7 @@ export default function ClusterHeader({
           alignItems="flex-end"
         >
           <KubeCtlShellAccess
-            projectId={edge.project_id}
+            projectId={edge.metadata.project}
             clusterName={edge.metadata.name}
           />
         </Grid>
