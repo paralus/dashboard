@@ -61,12 +61,12 @@ export default function ShellAndLogs({
       () =>
         dispatch(
           openKubectlDrawer(
-            edge.project_id,
-            edge.name,
+            edge?.metadata.project,
+            edge?.metadata.name,
             namespace,
             btoa(cmd),
             "namespace",
-            edge?.edge_id,
+            edge?.metadata.id,
             isLogsOnly
           )
         ),

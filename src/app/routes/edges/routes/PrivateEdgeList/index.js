@@ -1112,7 +1112,7 @@ class PrivateEdgeList extends React.Component {
     setTimeout(
       () =>
         this.props.openKubectlDrawer(
-          this.props.currentProject.metadata.id,
+          this.props.currentProject.metadata.name,
           name
         ),
       500
