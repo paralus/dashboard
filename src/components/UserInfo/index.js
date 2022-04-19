@@ -13,7 +13,7 @@ import {
   resetCliDownload,
 } from "actions/index";
 import HelpOutline from "@material-ui/icons/HelpOutline";
-import { getPartnerDetails } from "actions/Partner";
+// import { getPartnerDetails } from "actions/Partner";
 import Profile from "./Profile";
 
 class UserInfo extends React.Component {

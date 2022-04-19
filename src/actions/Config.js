@@ -7,6 +7,7 @@ export default function http(type, version = "v3", noTrailingSlash = false) {
     baseURL = `/${type}`;
   }
   const instance = axios.create({
+    withCredentials: true,
     timeout: 60000 * 2,
     baseURL,
     headers: {

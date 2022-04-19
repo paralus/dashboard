@@ -28,6 +28,9 @@ const AppMain = React.lazy(() =>
 const FullScreenKubectl = React.lazy(() =>
   import("containers/K8sConsole/FullScreenKubectl")
 );
+const Login = React.lazy(() =>
+  import(/* webpackPrefetch: true */ "./Auth/Login")
+);
 
 class App extends Component {
   constructor() {
@@ -48,7 +51,7 @@ class App extends Component {
   render() {
     //This is the starting point for console app, continue to post code from console ..
     const { match, location, isSessionExpired, UserSession } = this.props;
-    if (isSessionExpired === "UNKNOWN") return null;
+    // if (isSessionExpired === "UNKNOWN") return null;
 
     if (isSessionExpired) {
       if (
@@ -75,6 +78,7 @@ class App extends Component {
               <RafaySuspense>
                 <Route path={`${match.url}main`} component={AppMain} />
                 <Route path={`${match.url}app`} component={MainApp} />
+                <Route path={`${match.url}login`} component={Login} />
                 <Route
                   path={`${match.url}console/:projectId/:clusterName`}
                   component={FullScreenKubectl}

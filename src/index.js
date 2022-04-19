@@ -4,11 +4,12 @@ import { createBrowserHistory } from "history";
 import { ConnectedRouter, routerMiddleware } from "connected-react-router";
 import { applyMiddleware, compose, createStore } from "redux";
 import { Provider } from "react-redux";
-import { Route, HashRouter } from "react-router-dom";
+import { Route, HashRouter, BrowserRouter, Switch } from "react-router-dom";
 import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
 import App from "./containers/App";
+import KratosSettings from "./containers/Auth/KratosSettings";
 
 const logger = createLogger({ collapsed: true });
 
@@ -28,9 +29,16 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <HashRouter>
-        <Route path="/" component={App} />
-      </HashRouter>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/ksettings" component={KratosSettings} />
+          <Route path="/">
+            <HashRouter>
+              <Route path="/" component={App} />
+            </HashRouter>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("app-site")

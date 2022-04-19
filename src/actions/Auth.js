@@ -1,6 +1,7 @@
 import http from "./Config";
 import { getInitProjects } from "./Projects";
 import { closeKubectlDrawer } from "./Kubectl";
+import { Configuration, V0alpha2Api } from "@ory/kratos-client";
 
 export function userSignup(user) {
   return function (dispatch) {
@@ -17,6 +18,25 @@ export function userSignup(user) {
       });
   };
 }
+
+export const newKratosSdk = () => {
+  return new V0alpha2Api(
+    new Configuration({
+      basePath: window.env?.KRATOS_URL || `https://${window.location.host}`,
+      baseOptions: {
+        // Setting this is very important as axios will send the CSRF cookie otherwise
+        // which causes problems with ORY Kratos' security detection.
+        withCredentials: true,
+
+        // Timeout after 5 seconds.
+        timeout: 10000,
+      },
+    }),
+    ""
+    // Ensure that we are using the axios client with retry.
+    // axios
+  );
+};
 
 export function userLogin(user) {
   return function (dispatch) {
@@ -51,17 +71,19 @@ export function userLogin(user) {
 
 export function userLogout(idle) {
   return function (dispatch) {
-    let url = "logout/";
-    if (idle) {
-      url = "logout/?idle";
-    }
-    http("auth")
-      .get(url)
-      .then((response) => {
+    newKratosSdk()
+      .createSelfServiceLogoutFlowUrlForBrowsers()
+      .then(({ data: logoutUrl }) => {
         dispatch({ type: "reset_project" });
         dispatch({ type: "user_session_expired" });
         dispatch({ type: "reset_usersession" });
         dispatch(closeKubectlDrawer());
+        newKratosSdk()
+          .submitSelfServiceLogoutFlow(logoutUrl.logout_token)
+          .catch((error) => {
+            console.error(error);
+            dispatch({ type: "user_session_expired", payload: error });
+          });
       })
       .catch((error) => {
         dispatch({ type: "user_session_expired", payload: error });
@@ -121,7 +143,7 @@ export function getUserSessionInfo() {
         console.log(error);
         dispatch({ type: "get_user_failed", payload: error.response });
         dispatch({ type: "user_session_expired" });
-        if (error.response.status === 403) {
+        if (error.response?.status === 403) {
           dispatch({ type: "user_session_expired" });
         }
       });

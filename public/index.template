@@ -38,7 +38,7 @@
     left: 10px;
    }
   </style>
-
+<script src="%PUBLIC_URL%/config.js"></script>
 </head>
 
 <body id="body">
