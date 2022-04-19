@@ -71,17 +71,19 @@ export function userLogin(user) {
 
 export function userLogout(idle) {
   return function (dispatch) {
-    let url = "logout/";
-    if (idle) {
-      url = "logout/?idle";
-    }
-    http("auth")
-      .get(url)
-      .then((response) => {
+    newKratosSdk()
+      .createSelfServiceLogoutFlowUrlForBrowsers()
+      .then(({ data: logoutUrl }) => {
         dispatch({ type: "reset_project" });
         dispatch({ type: "user_session_expired" });
         dispatch({ type: "reset_usersession" });
         dispatch(closeKubectlDrawer());
+        newKratosSdk()
+          .submitSelfServiceLogoutFlow(logoutUrl.logout_token)
+          .catch((error) => {
+            console.error(error);
+            dispatch({ type: "user_session_expired", payload: error });
+          });
       })
       .catch((error) => {
         dispatch({ type: "user_session_expired", payload: error });
