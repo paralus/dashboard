@@ -19,20 +19,20 @@ const AuditLogsTable = (props) => {
   const parseRowData = (data, index) => [
     {
       type: "regular",
-      value: <DateFormat date={data._source.ts} />,
-      stringValue: data._source.ts,
+      value: <DateFormat date={data._source.json.ts} />,
+      stringValue: data._source.json.ts,
     },
     {
       type: "regular",
-      value: data._source.un || "-",
+      value: data._source.json.un || "-",
     },
     {
       type: "regular",
-      value: data._source.cn || "-",
+      value: data._source.json.cn || "-",
     },
     {
       type: "regular",
-      value: data._source.ns || "-",
+      value: data._source.json.ns || "-",
     },
     {
       type: "regular",
@@ -40,22 +40,22 @@ const AuditLogsTable = (props) => {
         <>
           <div>
             <b className="mr-2">Name:</b>
-            <span>{data._source.n || "-"}</span>
+            <span>{data._source.json.n || "-"}</span>
           </div>
           <div>
             <b className="mr-2">Kind:</b>
-            <span>{data._source.k || "-"}</span>
+            <span>{data._source.json.k || "-"}</span>
           </div>
         </>
       ),
     },
     {
       type: "regular",
-      value: data._source.m || "-",
+      value: data._source.json.m || "-",
     },
     {
       type: "regular",
-      value: data._source.st || "-",
+      value: data._source.json.st || "-",
     },
     {
       type: "regular",
@@ -64,23 +64,23 @@ const AuditLogsTable = (props) => {
         <>
           <div>
             <b className="mr-2">APIVersion:</b>
-            <span>{data._source.av || "-"}</span>
+            <span>{data._source.json.av || "-"}</span>
           </div>
           <div>
             <b className="mr-2">Query:</b>
-            <span>{data._source.q || "-"}</span>
+            <span>{data._source.json.q || "-"}</span>
           </div>
           <div>
             <b className="mr-2">RemoteAddr:</b>
-            <span>{data._source.ra || "-"}</span>
+            <span>{data._source.json.ra || "-"}</span>
           </div>
           <div>
             <b className="mr-2">StatusCode:</b>
-            <span>{data._source.sc || "-"}</span>
+            <span>{data._source.json.sc || "-"}</span>
           </div>
           <div>
             <b className="mr-2">Duration (secs):</b>
-            <span>{data._source.d || "-"}</span>
+            <span>{data._source.json.d || "-"}</span>
           </div>
         </>
       ),

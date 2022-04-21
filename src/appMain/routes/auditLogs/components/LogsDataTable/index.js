@@ -52,40 +52,40 @@ const LogsDataTable = (props) => {
     [
       {
         type: "regular",
-        value: <DateFormat date={data._source.timestamp} />,
-        stringValue: data._source.timestamp,
+        value: <DateFormat date={data._source.json.timestamp} />,
+        stringValue: data._source.json.timestamp,
       },
       {
         type: "regular",
-        value: eventActorEmail(data._source),
+        value: eventActorEmail(data._source.json),
       },
       {
         type: "regular",
-        value: getProjectName(data._source),
+        value: getProjectName(data._source.json),
       },
       {
         type: "regular",
-        value: eventActorGroups(data._source),
+        value: eventActorGroups(data._source.json),
       },
       props.isRelayCommands && {
         type: "regular",
-        value: data._source.detail.meta?.cluster_name,
+        value: data._source.json.detail.meta?.cluster_name,
       },
       {
         type: "regular",
-        value: data._source.client.type,
+        value: data._source.json.client.type,
       },
       {
         type: "regular",
-        value: data._source.type,
+        value: data._source.json.type,
       },
       {
         type: "regular",
-        value: data._source.detail.message,
+        value: data._source.json.detail.message,
       },
       {
         type: "regular",
-        value: data._source.client.user_agent,
+        value: data._source.json.client.user_agent,
       },
     ].filter(Boolean);
 
@@ -105,7 +105,7 @@ const LogsDataTable = (props) => {
   const parseExpandedRow = (data) => {
     return (
       <div className={classes.source}>
-        <ReactJson name="source" src={data._source} />
+        <ReactJson name="source" src={data._source.json} />
       </div>
     );
   };
