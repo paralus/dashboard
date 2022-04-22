@@ -1,7 +1,10 @@
 FROM node:16 AS builder
 WORKDIR /app
-COPY . .
+COPY package.json .
+COPY yarn.lock .
 RUN yarn install --pure-lockfile
+
+COPY . .
 RUN yarn run build
 
 FROM nginx:1.21.1
