@@ -138,13 +138,6 @@ const DataTableToolbar = (props) => {
             options={groupOptions}
             value={filters?.group_name}
           />
-          <TableFilter
-            id="status-filter"
-            label="Status"
-            onChange={(e) => handleFilterChange("status", e.target.value)}
-            options={STATUS_OPTIONS}
-            value={filters?.status}
-          />
         </div>
       )}
     </>

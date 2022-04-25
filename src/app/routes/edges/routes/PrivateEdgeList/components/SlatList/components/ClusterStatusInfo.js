@@ -156,28 +156,6 @@ function ClusterStatusInfo({
           </div>
         </>
       )}
-      <div className="row mt-2">
-        <div className="col-md-12">
-          <span style={{ fontWeight: "500", marginRight: "5px" }}>
-            {!isClusterReady}
-            &nbsp;Status :&nbsp;
-          </span>
-          {isClusterReady && isImported && (
-            <span
-              onClick={openProvisionScreen}
-              className="ml-2"
-              style={{ cursor: "pointer" }}
-            >
-              <i
-                className="zmdi zmdi-open-in-new zmdi-hc-lg"
-                style={{
-                  color: "teal",
-                }}
-              />
-            </span>
-          )}
-        </div>
-      </div>
     </div>
   );
 }

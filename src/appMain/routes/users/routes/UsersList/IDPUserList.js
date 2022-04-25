@@ -67,7 +67,7 @@ class IDPUserList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUsers();
+    this.props.getUsers(null, null, null, "", "", { type: "oidc" });
   }
 
   getLastLogin = (data) => {
@@ -312,7 +312,7 @@ class IDPUserList extends React.Component {
           user={selectedUser}
           onClose={(_) => {
             this.setState({ openGroups: false, selectedUser: null }, (_) =>
-              this.props.getUsers()
+              this.props.getUsers(null, null, null, "", "", { type: "oidc" })
             );
           }}
         />

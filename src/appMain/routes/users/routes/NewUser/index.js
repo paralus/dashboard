@@ -34,6 +34,8 @@ class NewUser extends Component {
       alertMessage: "",
       checked: [],
       openConfirm: false,
+      showRecoveryUrl: false,
+      recoveryUrl: "",
     };
   }
 
@@ -75,8 +77,14 @@ class NewUser extends Component {
   };
 
   handleSuccessCallback = (data) => {
-    const { history } = this.props;
-    history.push("/main/users");
+    if (data.spec.recoveryUrl) {
+      this.setState({
+        showRecoveryUrl: true,
+        recoveryUrl:
+          "IMPORTANT!! Use this url to set your credentials - " +
+          data.spec.recoveryUrl,
+      });
+    }
   };
 
   handleResponseErrorClose = () => {
@@ -143,6 +151,11 @@ class NewUser extends Component {
     this.setState({ openConfirm: false }, (_) => this.handleAddUser());
   };
 
+  handleRecoveryUrlClose = (_) => {
+    const { history } = this.props;
+    history.push("/main/users");
+  };
+
   handleUserType = (event) => {
     this.setState({ ...this.state });
   };
@@ -155,6 +168,8 @@ class NewUser extends Component {
       alertMessage,
       availableGroups,
       openConfirm,
+      showRecoveryUrl,
+      recoveryUrl,
     } = this.state;
     const { drawerType } = this.props;
     const selectedGroups = [];
@@ -232,6 +247,14 @@ class NewUser extends Component {
           content="The user has not been assigned to any groups and will not have access to any resources. Are you sure you want to continue?"
           onClose={(_) => this.setState({ openConfirm: false })}
           onConfirm={this.handleConfirmSave}
+        />
+        <RafayConfirmDialog
+          open={showRecoveryUrl}
+          content={recoveryUrl}
+          onClose={(_) =>
+            this.setState({ showRecoveryUrl: false, recoveryUrl: "" })
+          }
+          onConfirm={this.handleRecoveryUrlClose}
         />
       </>
     );

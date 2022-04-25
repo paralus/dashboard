@@ -202,14 +202,14 @@ export function editUserWithCallback(params, onSuccess, onFailure) {
       // .put(`accountroles/${params.id}/`, params)
       .then((response) => {
         // dispatch({ type: "edit_user_success", payload: response });
-        dispatch(getUser(params.metadata.name));
-        onSuccess(response.data);
+        dispatch(getUserDetail(params.metadata.name));
+        onSuccess(response);
       })
       .catch((error) => {
-        if (error.response.data) {
-          onFailure(error.response.data.message);
+        if (error.response) {
+          onFailure(error.response.message);
         } else {
-          onFailure(error.response.data);
+          onFailure(error.response);
         }
         console.log(error);
       });
@@ -336,7 +336,7 @@ export function deleteApiKey(accountid, key_id) {
 export function deleteUser(user_id, onSuccess, onFailure) {
   return function (dispatch) {
     http("auth")
-      .delete(`users/${user_id}/`)
+      .delete(`user/${user_id}`)
       .then((response) => {
         dispatch({ type: "delete_user_success", payload: response });
         if (onSuccess) onSuccess();
