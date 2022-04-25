@@ -123,6 +123,7 @@ const is_super_or_partner_admin = (data) => {
     isPartnerAdmin: false,
     isOrgAdmin: false,
   };
+  // NOTE: determine admin user here
   if (data && data.spec.permissions && data.spec.permissions.length > 0) {
     for (let index = 0; index < data.spec.permissions.length; index++) {
       const element = data.spec.permissions[index];
@@ -518,7 +519,7 @@ const settings = (state = initialSettings, action) => {
       return {
         ...state,
         isAddUserSuccess: true,
-        newUser: action.payload.data.account,
+        newUser: action.payload.data.spec,
       };
     case "edit_user_success":
       return {

@@ -36,7 +36,7 @@ class Profile extends React.Component {
   componentDidMount() {
     const { onRef } = this.props;
     onRef(this);
-    // this.props.getUserSessionInfo();
+    this.props.getUserSessionInfo();
   }
 
   componentWillUnmount() {

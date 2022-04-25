@@ -14,8 +14,8 @@ const KratosSettings = (props) => {
 
   // NOTE: flow might be needed on allowing this ui to change other attributes
   const [flow, setFlow] = useState(undefined);
-  const [password, setPassword] = useState(undefined);
-  const [confirm_password, setConfirmPassword] = useState(undefined);
+  const [password, setPassword] = useState("");
+  const [confirm_password, setConfirmPassword] = useState("");
   const [csrf_token, setCSRF] = useState(undefined);
 
   const getSettingsFlow = () =>
@@ -58,10 +58,8 @@ const KratosSettings = (props) => {
     });
   };
 
-  const handlePasswordChangeAttributes = (event) => {
+  const handlePasswordChangeAttributes = (event) =>
     setPassword(event.target.value);
-    console.log(event);
-  };
 
   const handleConfirmPasswordChangeAttributes = (event) =>
     setConfirmPassword(event.target.value);
