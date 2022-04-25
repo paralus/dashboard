@@ -78,9 +78,11 @@ class NewUser extends Component {
 
   handleSuccessCallback = (data) => {
     if (data.spec.recoveryUrl) {
-      this.setState({ 
-        showRecoveryUrl: true, 
-        recoveryUrl: "IMPORTANT!! Use this url to set your credentials - " + data.spec.recoveryUrl 
+      this.setState({
+        showRecoveryUrl: true,
+        recoveryUrl:
+          "IMPORTANT!! Use this url to set your credentials - " +
+          data.spec.recoveryUrl,
       });
     }
   };
@@ -167,7 +169,7 @@ class NewUser extends Component {
       availableGroups,
       openConfirm,
       showRecoveryUrl,
-      recoveryUrl
+      recoveryUrl,
     } = this.state;
     const { drawerType } = this.props;
     const selectedGroups = [];
@@ -249,7 +251,9 @@ class NewUser extends Component {
         <RafayConfirmDialog
           open={showRecoveryUrl}
           content={recoveryUrl}
-          onClose={(_) => this.setState({ showRecoveryUrl: false, recoveryUrl: "" })}
+          onClose={(_) =>
+            this.setState({ showRecoveryUrl: false, recoveryUrl: "" })
+          }
           onConfirm={this.handleRecoveryUrlClose}
         />
       </>

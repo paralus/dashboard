@@ -171,19 +171,17 @@ export function getClusterStatus(cluster_name, projectId) {
 }
 
 export function getClusterKubectlSettings(edgeId) {
-  const orgId = JSON.parse(
-    window?.localStorage.getItem("organization_id")
+  const orgId = JSON.parse(window?.localStorage.getItem("organization_id"));
+  return http("v2/sentry/kubectl/cluster", "").get(
+    `${edgeId}/settings?opts.organization=` + orgId
   );
-  return http("v2/sentry/kubectl/cluster", "").get(`${edgeId}/settings?opts.organization=` + orgId);
 }
 
 export function setClusterKubectlSettings(edgeId, params) {
-  const orgId = JSON.parse(
-    window?.localStorage.getItem("organization_id")
-  );
+  const orgId = JSON.parse(window?.localStorage.getItem("organization_id"));
   params.opts = {
-    organization: orgId
-  }
+    organization: orgId,
+  };
   return http("v2/sentry/kubectl/cluster/", "").put(
     `${edgeId}/settings`,
     params
