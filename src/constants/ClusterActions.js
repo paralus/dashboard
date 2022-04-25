@@ -3,7 +3,6 @@ export const MENU_ITEMS = [
   "Edit Labels",
   "Download Kube Config",
   "Download Cluster Config",
-  "Manage Cluster Sharing",
   "Kubectl Settings",
   "Delete",
 ];

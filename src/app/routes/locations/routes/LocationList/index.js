@@ -378,9 +378,9 @@ class LocationList extends React.Component {
   });
 
   defaultCountryValue = () => {
-    if (this.state.location && this.state.location.cc) {
+    if (this.state.location && this.state.location.spec.country) {
       return this.countryList.find((e) => {
-        if (e.value === this.state.location.cc.toUpperCase()) {
+        if (e.label === this.state.location.spec.country) {
           return e;
         }
         return null;
