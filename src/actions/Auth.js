@@ -1,5 +1,4 @@
 import http from "./Config";
-import { getInitProjects } from "./Projects";
 import { closeKubectlDrawer } from "./Kubectl";
 import { Configuration, V0alpha2Api } from "@ory/kratos-client";
 
@@ -38,34 +37,9 @@ export const newKratosSdk = () => {
   );
 };
 
-export function userLogin(user) {
+export function userLogin() {
   return function (dispatch) {
-    http("auth")
-      .post("login/", { ...user })
-      .then((response) => {
-        if (
-          response.data &&
-          response.data.account &&
-          response.data.account.totp_required
-        ) {
-          dispatch({
-            type: "user_login_totp_required",
-            payload: response.data.account,
-          });
-        } else {
-          if (response.data.roles) {
-            dispatch({ type: "set_user_session", user: response.data });
-          }
-          dispatch({ type: "user_login_success", payload: response });
-          dispatch(getInitProjects());
-        }
-      })
-      .catch((error) => {
-        dispatch({
-          type: "user_login_error",
-          payload: error.response.data,
-        });
-      });
+    dispatch(getUserSessionInfo());
   };
 }
 

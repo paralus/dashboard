@@ -106,7 +106,7 @@ const ProjectCard = ({ data, refreshProjects }) => {
               title={data.metadata.name}
               placement="top-start"
               arrow
-              followCursor
+              followcursor="true"
               open={tooltipOpen}
             >
               <h2

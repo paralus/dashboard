@@ -677,7 +677,7 @@ class UserList extends React.Component {
           handleRemoveRole={this.handleRemoveRole}
         />
 
-        <Dialog
+        {/* <Dialog
           open={this.state.newUserOpen || false}
           onBackdropClick={() => this.setState({ newUserOpen: false })}
           maxWidth="lg"
@@ -687,6 +687,28 @@ class UserList extends React.Component {
             has been added successfully. An email has been sent to{" "}
             <a style={{ color: "teal" }}>{this.state.newUserName}</a> with
             further instructions.
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => this.setState({ newUserOpen: false })}
+              id="newUserOpen"
+              color="accent"
+            >
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog> */}
+
+        <Dialog
+          open={this.state.newUserOpen || false}
+          onBackdropClick={() => this.setState({ newUserOpen: false })}
+          maxWidth="lg"
+        >
+          <DialogContent>
+            New user, <a style={{ color: "teal" }}>{this.state.newUserName}</a>,
+            has been added successfully. Use the following link to set the
+            password:
+            <a style={{ color: "teal" }}>{this.props.newUser?.recoveryUrl}</a>
           </DialogContent>
           <DialogActions>
             <Button

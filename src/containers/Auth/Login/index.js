@@ -26,7 +26,7 @@ import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import PageLayout from "./components/PageLayout";
 import ChangePasswordForm from "./components/ChangePasswordForm";
-import { newKratosSdk } from "../../../actions/Auth";
+import { newKratosSdk } from "actions/Auth";
 
 const SESSION_TIMEOUT_MILLISECONDS = 12 * 60 * 60 * 1000 + 1 * 60 * 1000; // 12hrs + 1min
 class Login extends Component {
@@ -50,6 +50,7 @@ class Login extends Component {
       redirectUrl: undefined,
       isPreLoginError: false,
       flow: {},
+      nodes: [],
       csrf_token: undefined,
     };
     this.emailNode = null;
@@ -65,6 +66,17 @@ class Login extends Component {
         flow.ui.nodes.forEach((node) => {
           if (node.attributes.name === "csrf_token") {
             this.setState({ csrf_token: node.attributes.value });
+          }
+          if (node.group === "oidc") {
+            this.setState({
+              nodes: [
+                ...this.state.nodes,
+                {
+                  ...node.meta?.label,
+                  provider: node.meta.label.context.provider,
+                },
+              ],
+            });
           }
         });
         this.setState({
@@ -92,6 +104,13 @@ class Login extends Component {
       return this.state.change_password.password.length >= 8;
     });
     this.initializeFlow();
+    this.props.getUserSessionInfo();
+  }
+
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    };
   }
 
   UNSAFE_componentWillReceiveProps(props) {
@@ -164,15 +183,27 @@ class Login extends Component {
         password_identifier: this.state.username,
         password: this.state.password,
       })
-      .then(({ data }) => Promise.resolve(data))
-      // .then((session) => {
-      // //   // setSession(session);
-      // //   console.log(session);
-      // //   setTimeout(() => {
-      // //     navigation.navigate("Home");
-      // //   }, 100);
-      // })
+      .then((session) => {
+        setTimeout(() => this.props.history.push("/"), 100);
+      })
       .catch((err) => console.log(err));
+  };
+
+  handleOIDC = (provider) => {
+    const { auth } = this.props;
+    const { username, flow } = this.state;
+    auth.username = username;
+
+    newKratosSdk()
+      .submitSelfServiceLoginFlow(flow.id, undefined, {
+        csrf_token: this.state.csrf_token,
+        method: "oidc",
+        provider,
+      })
+      .catch((data) => data.response)
+      .then((res) => {
+        window.location.href = res.data.redirect_browser_to;
+      });
   };
 
   handleResponseErrorClose = () => {
@@ -182,29 +213,6 @@ class Login extends Component {
       isResponseError: false,
     });
   };
-
-  // TODO: replace with kratos flows
-  // handleChangePassword = () => {http://localhost/
-  //   const { change_password } = this.state;
-  //   const { userAndRoleDetail, setPassword } = this.props;
-  //   if (
-  //     change_password.password === undefined ||
-  //     change_password.password === ""
-  //   ) {
-  //     return;
-  //   }
-  //   if (change_password.password.length < 8) {
-  //     return;
-  //   }
-  //   if (change_password.password !== change_password.confirm_password) {
-  //     return;
-  //   }
-  // }
-
-  // handlePasswordChangeAttributes = name => event => {
-  //   this.state.change_password[name] = event.target.value;
-  //   this.setState({ ...this.state });
-  // };
 
   handleKeyPress = (event) => {
     if (event.key === "Enter" && this.state.usertype !== undefined) {
@@ -401,6 +409,23 @@ class Login extends Component {
                     ) : null}
                   </div>
                 </div>
+
+                <div style={{ marginTop: "25px" }}>
+                  {[...this.state.nodes].map((uiNode, i) => (
+                    <Button
+                      style={{
+                        marginBottom: 10,
+                      }}
+                      onClick={() => this.handleOIDC(uiNode.context.provider)}
+                      variant="contained"
+                      className="jr-btn text-white"
+                      color="primary"
+                      key={`login-node-{i}`}
+                    >
+                      {uiNode.text}
+                    </Button>
+                  ))}
+                </div>
               </div>
               {this.state.loading ? <LinearProgress /> : null}
               {this.state.usertype === undefined &&
@@ -493,8 +518,7 @@ class Login extends Component {
       // if (UserSession.visibleApps) {
       //   return <Redirect to="/app/workloads" />;
       // }
-      if (!userAndRoleDetail?.account?.require_change_password)
-        return <Redirect to="/main" />;
+      return <Redirect to="/main" />;
     }
 
     return (

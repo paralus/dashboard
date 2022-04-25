@@ -96,7 +96,7 @@ export function addUserWithCallback(params, onSuccess, onFailure) {
     http("auth")
       .post("users", params)
       .then((response) => {
-        // dispatch({ type: "add_user_success", payload: response });
+        dispatch({ type: "add_user_success", payload: response });
         onSuccess(response.data);
       })
       .catch((error) => {
