@@ -74,6 +74,11 @@ class NewUser extends Component {
     this.setState({ user });
   };
 
+  handleSuccessCallback = (data) => {
+    const { history } = this.props;
+    history.push("/main/users");
+  };
+
   handleResponseErrorClose = () => {
     this.setState({ showAlert: false, alertMessage: null });
   };

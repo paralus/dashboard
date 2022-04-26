@@ -54,7 +54,7 @@ class EditProject extends React.Component {
       } else {
         newState.selectedProject = projectsList.items.find(
           (p) => p.metadata.name === newState.projectId
-        ).metadata.name;
+        )?.metadata.name;
       }
     }
     return {
@@ -130,9 +130,7 @@ class EditProject extends React.Component {
     let breadcrumbLabel = "";
     if (selectedProject) {
       breadcrumbLabel =
-        selectedProject === "ALL PROJECTS"
-          ? "ALL PROJECTS"
-          : selectedProject.name;
+        selectedProject === "ALL PROJECTS" ? "ALL PROJECTS" : selectedProject;
     }
 
     const config = {

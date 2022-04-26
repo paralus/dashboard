@@ -196,7 +196,7 @@ class ResourceListTable extends React.Component {
           button={{
             type: "danger-icon",
             label: "Delete",
-            disabled: data.type !== "SYSTEM",
+            disabled: data.spec.type !== "SYSTEM",
             confirmText: (
               <span>
                 Are you sure you want to delete

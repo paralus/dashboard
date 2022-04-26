@@ -100,10 +100,6 @@ class Projects extends React.Component {
         <span> ?</span>
       </span>
     );
-    const isGroupRole = false;
-    if (data.group) {
-      const isGroupRole = true;
-    }
 
     return [
       {
@@ -126,13 +122,13 @@ class Projects extends React.Component {
           {
             type: "edit-icon",
             label: "Change Roles",
-            disabled: hasAdminRole || isGroupRole,
+            disabled: hasAdminRole || data.group,
             handleClick: () => this.handleChangeRoles(data),
           },
           {
             type: "danger-icon",
             label: "Delete",
-            disabled: hasAdminRole || isGroupRole,
+            disabled: hasAdminRole || data.group,
             confirmText,
             handleClick: () => this.handleDeleteProject(data),
           },
@@ -171,6 +167,7 @@ class Projects extends React.Component {
           tableData.push({
             project: element.project,
             roles: [element.role],
+            group: element.group,
           });
         }
       }
@@ -181,7 +178,7 @@ class Projects extends React.Component {
       userDetail.spec.projectNamespaceRoles &&
       userDetail.spec.projectNamespaceRoles.length > 0 &&
       userDetail.spec.projectNamespaceRoles.find((r) =>
-        ["ADMIN", "ADMINISTRATOR_READ_ONLY"].includes(r.role)
+        ["ADMIN", "ADMIN_READ_ONLY"].includes(r.role)
       )
     ) {
       createDisabled = true;
