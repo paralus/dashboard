@@ -105,7 +105,7 @@ export function removeGroup(name) {
   return function (dispatch) {
     http("auth")
       .delete(
-        `partner/${partner}/organization/${organization}/group/${data.metadata.name}`,
+        `partner/${partner}/organization/${organization}/group/${name}`,
         {}
       )
       .then((response) => {

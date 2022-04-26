@@ -45,7 +45,7 @@ const ProjectRoleWidget = ({
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      if (["ADMIN", "ADMINISTRATOR_READ_ONLY"].includes(value.metadata.name)) {
+      if (["ADMIN", "ADMIN_READ_ONLY"].includes(value.metadata.name)) {
         setProjectRoleDisabled(true);
         setChecked([value]);
         handleRolesChange([value]);
@@ -103,7 +103,7 @@ const ProjectRoleWidget = ({
       }
       newChecked.push(value);
     } else {
-      if (["ADMIN", "ADMINISTRATOR_READ_ONLY"].includes(value.metadata.name)) {
+      if (["ADMIN", "ADMIN_READ_ONLY"].includes(value.metadata.name)) {
         setProjectRoleDisabled(false);
         setSelectedProject("");
         onProjectChange("");

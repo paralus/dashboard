@@ -68,7 +68,7 @@ class List extends React.Component {
       props;
     if (isCreateSuccess && newGroup) {
       resetGroup();
-      history.push(`/main/groups/${newGroup.id}`);
+      history.push(`/main/groups/${newGroup.metadata.name}`);
     }
     if (groupsList && groupsList.length > 0) {
       newState.list = groupsList;
@@ -168,7 +168,7 @@ class List extends React.Component {
           </h1>
           {data.length === 0 ? (
             <p style={style.helpText} className="pt-0">
-              No gruops available at this time
+              No groups available at this time
             </p>
           ) : (
             <p style={style.helpText} className="pt-0">

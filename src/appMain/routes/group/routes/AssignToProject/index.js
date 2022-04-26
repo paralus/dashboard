@@ -64,7 +64,7 @@ class AssignToProject extends React.Component {
     const roles = [];
     selectedRoles.forEach((role) => {
       let r = {
-        project: selectedProject.metadata.name,
+        project: selectedProject,
         role: role.metadata.name,
         group: groupId,
       };
@@ -119,14 +119,18 @@ class AssignToProject extends React.Component {
   render() {
     const { groupName, groupId, showAlert, alertMessage, selectedNamespaces } =
       this.state;
-    const { drawerType, systemRoles, projectsList, groupProjects } = this.props;
+    const { drawerType, systemRoles, projectsList, groupDetail } = this.props;
     let filteredProjectsList = projectsList;
-    if (groupProjects) {
-      filteredProjectsList = projectsList.filter(
+    if (
+      groupDetail &&
+      groupDetail.spec &&
+      groupDetail.spec.projectNamespaceRoles
+    ) {
+      filteredProjectsList.items = projectsList.items.filter(
         (p) =>
-          !groupProjects.find((gp) => {
+          !groupDetail.spec.projectNamespaceRoles.find((gp) => {
             if (gp.project) {
-              return gp.project.name === p.name;
+              return gp.project === p.metadata.name;
             }
             return false;
           })

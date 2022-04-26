@@ -80,8 +80,18 @@ class Groups extends React.Component {
     const { userDetail } = this.props;
     const { editUser } = this.props;
     userDetail.spec.groups = this.arrayRemove(userDetail.spec.groups, group);
+    userDetail.spec.projectNamespaceRoles = this.pnrGroupRemove(
+      userDetail.spec.projectNamespaceRoles,
+      group
+    );
     editUser(userDetail);
   };
+
+  pnrGroupRemove(arr, value) {
+    return arr.filter(function (ele) {
+      return ele.group != value;
+    });
+  }
 
   arrayRemove(arr, value) {
     return arr.filter(function (ele) {
