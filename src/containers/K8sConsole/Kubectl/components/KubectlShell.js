@@ -25,7 +25,8 @@ const Shell = ({
   const [infoType, setInfoType] = useState("loading");
 
   const loc = window.location;
-  let wsURL = `wss://${loc.host}`;
+  const protocol = loc.protocol == "https:" ? "wss:" : "ws:";
+  let wsURL = `${protocol}//${loc.host}`;
   if (isLogsOnly) {
     wsURL += `/v2/debug/getlogs/project/${project}/cluster/${clusterName}`;
   } else {

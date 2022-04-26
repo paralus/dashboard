@@ -2,11 +2,9 @@ import http from "./Config";
 import { getFilterQuery } from "./Common";
 
 export function getAuditLogs(filter, projectId) {
-  const partner = JSON.parse(window?.localStorage.getItem("partner_id"));
-  const organization = JSON.parse(
-    window?.localStorage.getItem("organization_id")
-  );
-  filter = { ...filter, partner_id: partner, organization_id: organization };
+  const partner = JSON.parse(window?.localStorage.getItem("partner"));
+  const organization = JSON.parse(window?.localStorage.getItem("organization"));
+  filter = { ...filter, partner: partner, organization: organization };
   const query = getFilterQuery(filter);
 
   let url = "auditlog?";
@@ -26,11 +24,9 @@ export function getAuditLogs(filter, projectId) {
 }
 
 export function getKubectlLogs(filter, type = "RelayCommands") {
-  const partner = JSON.parse(window?.localStorage.getItem("partner_id"));
-  const organization = JSON.parse(
-    window?.localStorage.getItem("organization_id")
-  );
-  filter = { ...filter, partner_id: partner, organization_id: organization };
+  const partner = JSON.parse(window?.localStorage.getItem("partner"));
+  const organization = JSON.parse(window?.localStorage.getItem("organization"));
+  filter = { ...filter, partner: partner, organization: organization };
   let query = `auditType=${type}`;
   query += getFilterQuery(filter);
 
