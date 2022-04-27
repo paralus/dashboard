@@ -143,7 +143,7 @@ const CustomSelect = ({
           <MenuItem value="facebook">Facebook</MenuItem>
           <MenuItem value="microsoft">Microsoft</MenuItem>
           <MenuItem value="github">Github</MenuItem>
-          <MenuItem value="custom">Custom</MenuItem>
+          <MenuItem value="generic">Generic</MenuItem>
         </Select>
         <FormHelperText margin="dense">
           {touched[field.name] && errors[field.name] ? errors[field.name] : ""}
@@ -372,6 +372,7 @@ const RegistrationWizard = (props) => {
         clientId: data["clientId"],
         clientSecret: data["clientSecret"],
         scopes: scope,
+        issuerUrl: data["issuer_url"],
       },
     };
     return payload;
@@ -439,6 +440,7 @@ const RegistrationWizard = (props) => {
                   clientSecret: idpResponse?.spec?.clientSecret,
                   providerName: idpResponse?.spec?.providerName,
                   group_attribute_name: idpResponse?.spec?.scopes,
+                  issuer_url: idpResponse?.spec?.issuerUrl,
                 }}
                 validationSchema={SpConfigSchema}
                 render={({
@@ -533,6 +535,24 @@ const RegistrationWizard = (props) => {
                             Configure the name of the Group Attribute Statement
                             in OAuth Scopes to map to the group with assigned
                             roles in the console
+                          </FormHelperText>
+                        </div>
+
+                        <div className="d-flex flex-row mt-3">
+                          <Field
+                            name="issuer_url"
+                            component={CustomInput}
+                            className={classes.textField}
+                            fullWidth
+                            label="Issuer Url"
+                            required
+                          />
+                          <FormHelperText
+                            focused
+                            className="text-grey mt-4 ml-4"
+                          >
+                            Configure the Issuer URL that corresponds to your
+                            oidc provider.
                           </FormHelperText>
                         </div>
                       </div>
