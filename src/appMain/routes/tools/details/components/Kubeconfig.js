@@ -14,7 +14,7 @@ const Kubeconfig = ({ user }) => {
   });
 
   const handleRevokeKubeconfig = (_, user) => {
-    revokeSelfKubeconfig(user.id)
+    revokeSelfKubeconfig(user.metadata.id)
       .then((_) => {
         setAlert({
           show: true,
@@ -53,7 +53,7 @@ const Kubeconfig = ({ user }) => {
           >
             <T.span text="tools.download_kubeconfig_help" />
             <span>
-              <b>{user.username}</b>
+              <b>{user?.metadata.name}</b>
             </span>
           </div>
           <div className="col-md-12" style={{ padding: "15px" }} />
@@ -66,7 +66,7 @@ const Kubeconfig = ({ user }) => {
                   <span className="mr-2">
                     Are you sure you want to revoke kubectlconfig for
                   </span>
-                  <b>{user?.username}</b>
+                  <b>{user?.metadata.name}</b>
                 </>
               }
               tooltip="Revoke Kubeconfig"
@@ -78,7 +78,7 @@ const Kubeconfig = ({ user }) => {
           >
             Revoke Kubeconfig for&nbsp;
             <span>
-              <b>{user.username}</b>
+              <b>{user?.metadata.name}</b>
             </span>
           </div>
         </div>
