@@ -705,10 +705,13 @@ class UserList extends React.Component {
           maxWidth="lg"
         >
           <DialogContent>
-            New user, <a style={{ color: "teal" }}>{this.state.newUserName}</a>,
+            New user <a style={{ color: "teal" }}>{this.state.newUserName}</a>,
             has been added successfully. Use the following link to set the
             password:
-            <a style={{ color: "teal" }}>{this.props.newUser?.recoveryUrl}</a>
+            <br />
+            <a style={{ color: "teal" }} href={this.props.newUser?.recoveryUrl}>
+              {this.props.newUser?.recoveryUrl}
+            </a>
           </DialogContent>
           <DialogActions>
             <Button
