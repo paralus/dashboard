@@ -64,6 +64,7 @@ const KratosSettings = (props) => {
       .then(({ data }) => {
         if (data.ui.messages) {
           alert(data?.ui?.messages[0].text);
+          window.location = "/";
         }
       })
       .catch(async (err) => {
