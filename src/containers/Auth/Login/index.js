@@ -186,7 +186,12 @@ class Login extends Component {
       .then((session) => {
         setTimeout(() => this.props.history.push("/"), 100);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(
+          "The provided credentials are invalid, check for spelling mistakes in your password or username."
+        );
+      });
   };
 
   handleOIDC = (provider) => {
