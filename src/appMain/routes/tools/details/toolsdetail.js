@@ -100,7 +100,8 @@ class ToolsDetail extends React.Component {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={() => this.setState({ open: true })}
+                  href="https://github.com/RafayLabs/rcloud-cli/releases"
+                  target="_blank"
                 >
                   <T.span text="tools.download_cli_button" />
                 </Button>

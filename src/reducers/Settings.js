@@ -7,23 +7,6 @@ import {
 import { DARK_INDIGO } from "constants/Constant";
 import Cookies from "js-cookie";
 
-/*
-UserAndRoleDetail
-{"id":"7w2lnkp",
- "account":{"id":"7w2lnkp","username":"swami@rafay.co","phone":"","created_at":"2018-03-28T21:05:37.710336Z",
- "modified_at":"2018-03-28T21:15:11.833536Z","first_name":"Swami","last_name":"R","email_verified":true,
- "phone_verified":false},"role":{"id":"7w2lnkp","name":"ADMIN",
- "permissions":[{"type":"ADD_WORKLOAD","id":"q72dg2g"},
- {"type":"DELETE_ACCOUNT","id":"7dkgjkx"},
- {"type":"UPGRADE_WORKLOAD","id":"x3mxvkr"},
- {"type":"DELETE_ROLE","id":"4qkolkn"},
- {"type":"DELETE_WORKLOAD","id":"wg29ek0"},
- {"type":"ADD_ROLE","id":"rx28oml"},
- {"type":"ADD_ACCOUNT","id":"7w2lnkp"}]},
- "created_at":"2018-03-28T21:05:38.587665Z",
- "modified_at":"2018-03-28T21:05:38.587679Z","default":true}
-*/
-
 const initialSettings = {
   navCollapsed: false,
   drawerType: FIXED_DRAWER,
