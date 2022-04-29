@@ -132,12 +132,7 @@ const KratosSettings = (props) => {
               </div>
             </div>
             <div className="mb-3">
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                onClick={handleChangePassword}
-              >
+              <Button variant="contained" color="primary" type="submit">
                 Set Password
               </Button>
             </div>
