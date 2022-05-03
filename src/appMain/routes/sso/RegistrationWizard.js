@@ -526,15 +526,15 @@ const RegistrationWizard = (props) => {
                             component={CustomInput}
                             className={classes.textField}
                             fullWidth
-                            label="Group Attribute Name"
+                            label="Scopes / Group Attribute Name"
                           />
                           <FormHelperText
                             focused
                             className="text-grey mt-4 ml-4"
                           >
-                            Configure the name of the Group Attribute Statement
-                            in OAuth Scopes to map to the group with assigned
-                            roles in the console
+                            Configure all the scopes including the optional
+                            Group Attribute Name (comma seperated) which maps to
+                            the group with assigned roles in the console
                           </FormHelperText>
                         </div>
 

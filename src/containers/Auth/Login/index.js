@@ -199,6 +199,7 @@ class Login extends Component {
     const { username, flow } = this.state;
     auth.username = username;
 
+    window.localStorage.setItem("provider", provider);
     newKratosSdk()
       .submitSelfServiceLoginFlow(flow.id, undefined, {
         csrf_token: this.state.csrf_token,

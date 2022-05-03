@@ -32,8 +32,8 @@ const Projects = (state = initialData, action) => {
     case "get_projects_success":
       return {
         ...state,
-        isProjectSet: action.payload.data.items.count > 0,
-        projectsList: action.payload.data.items,
+        isProjectSet: action.payload.data.count > 0,
+        projectsList: action.payload.data,
         currentProject,
       };
     case "get_project_success":

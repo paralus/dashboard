@@ -10,7 +10,8 @@ const AutoRegister = (props) => {
   const [flow, setFlow] = useState(undefined);
   const [csrf_token, setCSRF] = useState(undefined);
 
-  const getRegistrationFlow = () =>
+  const getRegistrationFlow = () => {
+    const provider = window.localStorage.getItem("provider");
     newKratosSdk()
       .initializeSelfServiceRegistrationFlowForBrowsers(undefined)
       .then(({ data: flow }) => {
@@ -23,16 +24,17 @@ const AutoRegister = (props) => {
         });
 
         newKratosSdk()
-          .submitSelfServiceRegistrationFlow(flowid, undefined, {
+          .submitSelfServiceRegistrationFlow(flowid, {
             csrf_token,
             method: "oidc",
-            provider: "okta",
+            provider: provider,
           })
           .then(() => {
             props.history.push("/");
           });
       })
       .catch(console.error);
+  };
 
   useEffect((_) => {
     getRegistrationFlow();

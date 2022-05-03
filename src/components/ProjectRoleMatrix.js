@@ -16,7 +16,7 @@ const formatProjectRoles = (roles) => {
     if (!output[item?.project]) {
       if (["ADMIN", "ADMIN_READ_ONLY"].includes(item?.role)) {
         output["All Projects"] = {
-          [item?.group]: {
+          [item?.group || "-"]: {
             roles: [item.role],
             NS: nsarray,
           },
