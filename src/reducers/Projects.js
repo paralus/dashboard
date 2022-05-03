@@ -32,7 +32,7 @@ const Projects = (state = initialData, action) => {
     case "get_projects_success":
       return {
         ...state,
-        isProjectSet: action.payload.data.count > 0,
+        isProjectSet: action.payload.data.items.length > 0,
         projectsList: action.payload.data,
         currentProject,
       };

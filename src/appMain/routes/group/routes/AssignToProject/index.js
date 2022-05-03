@@ -62,7 +62,7 @@ class AssignToProject extends React.Component {
   transformRoles = () => {
     const { selectedRoles, selectedProject, groupId } = this.state;
     const roles = [];
-    let project = selectedProject 
+    let project = selectedProject;
     if (project !== "ALL PROJECTS") {
       project = project?.metadata?.name;
     }
