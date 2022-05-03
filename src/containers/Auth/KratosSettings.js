@@ -18,6 +18,7 @@ const KratosSettings = (props) => {
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirmPassword] = useState("");
   const [csrf_token, setCSRF] = useState(undefined);
+  let [message, setMessage] = useState("");
 
   const getSettingsFlow = () =>
     newKratosSdk()
@@ -41,6 +42,10 @@ const KratosSettings = (props) => {
       ValidatorForm.addValidationRule("passwordLength", (value) => {
         return value.length >= 8;
       });
+      ValidatorForm.addValidationRule("isPasswordOk", () => {
+        return this.message.length > 0;
+      });
+      setMessage("");
     },
     [password, confirm_password]
   );
@@ -63,15 +68,14 @@ const KratosSettings = (props) => {
       })
       .then(({ data }) => {
         if (data.ui.messages) {
-          alert(data?.ui?.messages[0].text);
-          window.location = "/";
+          setMessage(data?.ui?.messages[0].text);
         }
       })
       .catch(async (err) => {
         if (err.response?.status === 400) {
           // Yup, it is!
           if (err.response?.data.ui.nodes) {
-            alert(err.response?.data?.ui?.nodes[6].messages[0].text);
+            setMessage(err.response?.data?.ui?.nodes[6].messages[0].text);
           }
         }
       });
@@ -122,13 +126,16 @@ const KratosSettings = (props) => {
                     required
                     type="password"
                     value={confirm_password}
-                    validators={["isPasswordMatch", "required"]}
+                    validators={["isPasswordMatch", "required", "isPasswordOk"]}
                     errorMessages={[
                       "password mismatch",
                       "this field is required",
                     ]}
                     onChange={handleConfirmPasswordChangeAttributes}
                   />
+                </div>
+                <div className="col-md-12">
+                  <b>{message}</b>
                 </div>
               </div>
             </div>

@@ -13,7 +13,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import RafayConfirmIconAction from "components/RafayConfirmIconAction";
 import { changeProject, deleteProject } from "actions/index";
 import RafaySnackbar from "components/RafaySnackbar";
-import DateFormat from "components/DateFormat";
 
 const useStyles = makeStyles((theme) => ({
   title: {
