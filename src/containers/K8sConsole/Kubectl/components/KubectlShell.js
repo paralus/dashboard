@@ -4,6 +4,7 @@ import { FitAddon } from "xterm-addon-fit";
 import { AttachAddon } from "xterm-addon-attach";
 import useLocalStorage from "utils/useLocalStorage";
 import InfoCard from "./InfoCard";
+import "xterm/css/xterm.css";
 
 const Shell = ({
   project,
