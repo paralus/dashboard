@@ -42,8 +42,8 @@ const KratosSettings = (props) => {
       ValidatorForm.addValidationRule("passwordLength", (value) => {
         return value.length >= 8;
       });
-      ValidatorForm.addValidationRule("isPasswordOk", () => {
-        return this.message.length > 0;
+      ValidatorForm.addValidationRule("isPasswordOk", (value) => {
+        return value.length > 0;
       });
       setMessage("");
     },
