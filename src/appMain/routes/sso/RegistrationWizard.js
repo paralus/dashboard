@@ -361,7 +361,7 @@ const RegistrationWizard = (props) => {
       editMode && data["group_attribute_name"]
         ? data["group_attribute_name"]
         : data["group_attribute_name"]
-        ? [data["group_attribute_name"]]
+        ? data["group_attribute_name"].split(",").map((e) => e.trim())
         : [];
     let payload = {
       metadata: {
