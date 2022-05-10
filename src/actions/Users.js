@@ -10,6 +10,9 @@ export function getUsers(
 ) {
   const partner = JSON.parse(window?.localStorage.getItem("partner"));
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
+  if (!("type" in filters)) {
+    filters["type"] = "password";
+  }
   let filterQuery = "";
   const filterKeys = Object.keys(filters || {});
   filterKeys.forEach((key) => {
