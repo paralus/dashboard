@@ -78,6 +78,42 @@ export const safelyParseJSON = (text) => {
   }
 };
 
+// JSON Flatten for Reports
+export const JSONtoCSV = (
+  obj,
+  excludedColumns = [],
+  path = [],
+  headers = [],
+  headerString = null
+) => {
+  if (obj == null) return null;
+  Object.keys(obj).forEach((key) => {
+    if (excludedColumns.includes(key)) return;
+
+    let value = obj[key];
+    const header =
+      key === "id" && headerString ? [headerString, key].join("_") : key;
+
+    if (
+      Array.isArray(value) ||
+      value === null ||
+      typeof value === "string" ||
+      !isNaN(value)
+    ) {
+      headers.push(header);
+      value = isNaN(value) && value.includes(",") ? value.split(",") : value;
+      path.push(Array.isArray(value) ? value.join(" | ") : `${value}`);
+    } else {
+      JSONtoCSV(value, excludedColumns, path, headers, key);
+    }
+  });
+
+  return {
+    key: headers,
+    value: path,
+  };
+};
+
 export const JSONArrayToCSV = (jsonArray, excludedColumns = []) => {
   const values = [];
   let headers = [];
