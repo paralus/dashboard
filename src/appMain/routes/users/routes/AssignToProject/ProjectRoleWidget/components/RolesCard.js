@@ -41,7 +41,6 @@ const RolesCard = ({
       <List className={classes.list} dense component="div" role="list">
         {systemRoles &&
           systemRoles
-            .filter((r) => r.metadata.name !== "ADMIN")
             .filter((r) => r.spec.scope !== "system")
             .map((value, index) => {
               const labelId = `transfer-list-all-item-${index}-label`;
