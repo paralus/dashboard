@@ -169,7 +169,7 @@ class ResourceListTable extends React.Component {
             className="m-0"
             disabled={data.spec.builtin}
             onClick={(event) =>
-              this.handleGoToRoleDetail(event, data.metadata.name.toLowerCase())
+              this.handleGoToRoleDetail(event, data.metadata.name)
             }
           >
             <EditIcon fontSize="small" />
