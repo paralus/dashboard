@@ -63,6 +63,8 @@ class App extends Component {
         !location.pathname.startsWith("/verify")
       )
         return <Redirect to="/login" />;
+    } else if (location.pathname === "/ksettings") {
+      return <Redirect to="/ksettings" />;
     } else if (location.pathname === "/") {
       if (UserSession.noRolesUser) {
         return <Redirect to="/app/noaccess" />;

@@ -19,6 +19,7 @@ const KratosSettings = (props) => {
   const [confirm_password, setConfirmPassword] = useState("");
   const [csrf_token, setCSRF] = useState(undefined);
   let [message, setMessage] = useState("");
+  let [resetSuccess, setResetSuccess] = useState(false);
 
   const getSettingsFlow = () =>
     newKratosSdk()
@@ -68,7 +69,8 @@ const KratosSettings = (props) => {
       })
       .then(({ data }) => {
         if (data.ui.messages) {
-          setMessage(data?.ui?.messages[0].text);
+          setMessage("Your password has been reset.");
+          setResetSuccess(true);
         }
       })
       .catch(async (err) => {
@@ -136,6 +138,16 @@ const KratosSettings = (props) => {
                 </div>
                 <div className="col-md-12">
                   <b>{message}</b>
+                  {resetSuccess && (
+                    <b>
+                      {" "}
+                      Click{" "}
+                      <a style={{ color: "teal" }} href="/">
+                        here
+                      </a>{" "}
+                      to proceed to the home page.
+                    </b>
+                  )}
                 </div>
               </div>
             </div>
