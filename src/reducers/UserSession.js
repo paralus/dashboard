@@ -109,7 +109,7 @@ const createSession = (user) => {
   const roles = user.spec.permissions;
   // TODO: Check user.spec.permissions.[].permissions to determine if admin or not
   // Which permissions to check to determine admin-ness?
-  if (roles && roles.length === 0) {
+  if (roles == undefined || (roles && roles.length === 0)) {
     data.noRolesUser = true;
   } else if (
     roles?.find((r) => ["ADMIN", "ADMIN_READ_ONLY"].includes(r.role))

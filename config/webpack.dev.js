@@ -31,6 +31,14 @@ module.exports = merge(common, {
     hot: isFastRefresh ? "only" : true,
     proxy: [
       {
+        context: ["/debug"],
+        target: "http://localhost:7009",
+      },
+      {
+        context: ["/self-service"],
+        target: "http://127.0.0.1:4433",
+      },
+      {
         context: [
           "/auth",
           "/infra",

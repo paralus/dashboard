@@ -2,7 +2,11 @@ import React from "react";
 import { Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { toggleCollapsedNav, getOrgKubeconfigSettings } from "actions/index";
+import {
+  toggleCollapsedNav,
+  getOrgKubeconfigSettings,
+  userLogout,
+} from "actions/index";
 
 import Header from "components/Header/index";
 import Sidebar from "containers/SideNav/index";
@@ -54,7 +58,7 @@ class App extends React.Component {
     if (!UserSession.visibleApps) {
       hasAccess =
         hasAccess &&
-        !ConsolePaths.app.some((path) => currentPath.indexOf(path) === 0);
+        !ConsolePaths.system.some((path) => currentPath.indexOf(path) === 0);
     }
     if (!UserSession.visibleInfra) {
       hasAccess =
@@ -246,5 +250,6 @@ export default withRouter(
   connect(mapStateToProps, {
     toggleCollapsedNav,
     getOrgKubeconfigSettings,
+    userLogout,
   })(App)
 );
