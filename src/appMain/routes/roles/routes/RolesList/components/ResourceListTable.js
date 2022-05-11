@@ -140,10 +140,12 @@ class ResourceListTable extends React.Component {
 
   getCollapsedRow = (data) => {
     return (
-      <PermissionList
-        permissions={data.spec.rolepermissions}
-        showExpandedList
-      ></PermissionList>
+      <div className="p-3">
+        <PermissionList
+          permissions={data.spec.rolepermissions}
+          showExpandedList
+        ></PermissionList>
+      </div>
     );
   };
 
