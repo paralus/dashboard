@@ -99,7 +99,7 @@ class NewUser extends Component {
     const { user, availableGroups } = this.state;
     const { addUserWithCallback } = this.props;
     const postParams = { ...user };
-    if (!user.groups) {
+    if (!user.spec.groups) {
       const defaultUsers = availableGroups.find(
         (g) => g.spec.type === "DEFAULT_USERS"
       );
@@ -116,13 +116,13 @@ class NewUser extends Component {
   handleSaveClick = () => {
     const { user, availableGroups } = this.state;
     const postParams = { ...user };
-    if (!user.groups) {
+    if (!user.spec.groups) {
       const defaultUsers = availableGroups.find(
         (g) => g.spec.type === "DEFAULT_USERS"
       );
-      postParams.groups = [defaultUsers.metadata.name];
+      postParams.spec.groups = [defaultUsers.metadata.name];
     }
-    if (postParams.groups.length === 1) {
+    if (postParams.spec.groups.length === 1) {
       this.setState({ openConfirm: true });
       return;
     }
@@ -131,10 +131,14 @@ class NewUser extends Component {
 
   handleChecked = (checked) => {
     const { user } = this.state;
+    const groups = checked.map((g) => g.metadata.name);
     this.setState({
       user: {
         ...user,
-        groups: [...checked],
+        spec: {
+          ...user.spec,
+          groups: groups,
+        },
       },
     });
   };
