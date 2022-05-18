@@ -777,8 +777,9 @@ const RegistrationWizard = (props) => {
                       metadata_url:
                         idpPayload?.spec?.providerName === "generic"
                           ? idpResponse?.spec?.mapperUrl
-                          : `https://github.com/rafaylabs/rcloud-conf/provider/mapperconf/` +
-                            idpPayload?.spec?.providerName,
+                          : `https://github.com/RafayLabs/rcloud-base/blob/main/_kratos/conf/` +
+                            idpPayload?.spec?.providerName +
+                            ".jsonnet",
                     }}
                     validationSchema={MetaDataUrlSchema}
                     innerRef={secondStep}
