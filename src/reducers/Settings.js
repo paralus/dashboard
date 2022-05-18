@@ -124,7 +124,7 @@ const changeValuePosition = (array) => {
   if (!array) {
     return [];
   }
-  const from = array.findIndex((x) => x.name === "ADMINISTRATOR_READ_ONLY");
+  const from = array.findIndex((x) => x.name === "ADMIN_READ_ONLY");
   array.splice(1, 0, ...array.splice(from));
   return array;
 };

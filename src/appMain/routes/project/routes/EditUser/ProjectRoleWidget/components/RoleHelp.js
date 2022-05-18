@@ -15,7 +15,7 @@ const RoleHelp = {
     </span>
   ),
 
-  ADMINISTRATOR_READ_ONLY: (
+  ADMIN_READ_ONLY: (
     <span className="mb-0">
       <i>
         User can view all your application and infrastructure resources across

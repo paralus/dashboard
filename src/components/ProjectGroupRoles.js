@@ -64,7 +64,7 @@ const formatProjects = (roles, group) => {
   );
 
   roles.forEach((r, i) => {
-    if (["ADMIN", "ADMINISTRATOR_READ_ONLY"].includes(r.role.name)) {
+    if (["ADMIN", "ADMIN_READ_ONLY"].includes(r.role.name)) {
       if (r.group) {
         allProjects.push(
           <div key={`arow-${i}`} className="d-flex flex-row mb-2">

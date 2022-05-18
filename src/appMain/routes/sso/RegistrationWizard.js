@@ -41,20 +41,27 @@ import RafayWizard from "components/RafayWizard";
 import { downloadCertificate } from "./util";
 import UploadMetadata from "./UploadMetadata";
 
-const SpConfigSchema = Yup.object().shape({
-  name: Yup.string()
-    .max(256, `Can't be longer than 256`)
-    .required("Organization is required"),
-  clientId: Yup.string()
-    .max(256, `Can't be longer than 256`)
-    .required("Client identifier is required"),
-  clientSecret: Yup.string()
-    .max(256, `Can't be longer than 256`)
-    .required("Client secret is required"),
-  providerName: Yup.string()
-    .max(256, `Can't be longer than 256`)
-    .required("Idp name is required"),
-});
+const getSpConfigSchema = (editMode) => {
+  let shape = {
+    name: Yup.string()
+      .max(256, `Can't be longer than 256`)
+      .required("Organization is required"),
+    clientId: Yup.string()
+      .max(256, `Can't be longer than 256`)
+      .required("Client identifier is required"),
+    providerName: Yup.string()
+      .max(256, `Can't be longer than 256`)
+      .required("Client secret is required"),
+  };
+  if (editMode) {
+    shape["clientSecret"] = Yup.string().max(256, `Can't be longer than 256`);
+  } else {
+    shape["clientSecret"] = Yup.string()
+      .max(256, `Can't be longer than 256`)
+      .required("Client secret is required");
+  }
+  Yup.object().shape(shape);
+};
 
 const R = require("ramda");
 
@@ -78,10 +85,9 @@ const idpModeConfig = {
 
 const ignoreConfigList = [
   "group_attribute_name",
-  "mapperUrl",
-  "issuerUrl",
-  "authUrl",
-  "tokenUrl",
+  "metadata_url",
+  "token_url",
+  "auth_url",
 ];
 
 const ignoreConfigListUpdate = [
@@ -373,6 +379,9 @@ const RegistrationWizard = (props) => {
         clientSecret: data["clientSecret"],
         scopes: scope,
         issuerUrl: data["issuer_url"],
+        mapperUrl: data["metadata_url"],
+        tokenUrl: data["token_url"],
+        authUrl: data["auth_url"],
       },
     };
     return payload;
@@ -441,8 +450,11 @@ const RegistrationWizard = (props) => {
                   providerName: idpResponse?.spec?.providerName,
                   group_attribute_name: idpResponse?.spec?.scopes,
                   issuer_url: idpResponse?.spec?.issuerUrl,
+                  auth_url: idpResponse?.spec?.authUrl,
+                  token_url: idpResponse?.spec?.tokenUrl,
+                  metadata_url: idpResponse?.spec?.mapperUrl, // used by PUT after first stage
                 }}
-                validationSchema={SpConfigSchema}
+                validationSchema={getSpConfigSchema(editMode)}
                 render={({
                   submitForm,
                   isSubmitting,
@@ -461,6 +473,7 @@ const RegistrationWizard = (props) => {
                             label="Name"
                             name="name"
                             size="medium"
+                            disabled={editMode}
                             required
                           />
                           <FormHelperText
@@ -488,7 +501,7 @@ const RegistrationWizard = (props) => {
                             component={CustomInput}
                             className={classes.textField}
                             fullWidth
-                            label="client identifier"
+                            label="Client ID"
                             required
                           />
                           <FormHelperText
@@ -503,13 +516,13 @@ const RegistrationWizard = (props) => {
                         <div className="d-flex flex-row mt-3">
                           <Field
                             name="clientSecret"
-                            placeholder="6779ef20e75817b79602"
+                            placeholder="********************"
                             component={CustomInput}
                             className={classes.textField}
+                            type="password"
                             fullWidth
-                            label="secret"
+                            label="Client Secret"
                             required
-                            disabled={editMode}
                           />
                           <FormHelperText
                             focused
@@ -526,15 +539,14 @@ const RegistrationWizard = (props) => {
                             component={CustomInput}
                             className={classes.textField}
                             fullWidth
-                            label="Scopes / Group Attribute Name"
+                            label="Scopes"
                           />
                           <FormHelperText
                             focused
                             className="text-grey mt-4 ml-4"
                           >
-                            Configure all the scopes including the optional
-                            Group Attribute Name (comma seperated) which maps to
-                            the group with assigned roles in the console
+                            Configure scope to be used for your OIDC provider
+                            (comma separated).
                           </FormHelperText>
                         </div>
 
@@ -552,7 +564,39 @@ const RegistrationWizard = (props) => {
                             className="text-grey mt-4 ml-4"
                           >
                             Configure the Issuer URL that corresponds to your
-                            oidc provider.
+                            OIDC provider.
+                          </FormHelperText>
+                        </div>
+
+                        <div className="d-flex flex-row mt-3">
+                          <Field
+                            name="auth_url"
+                            component={CustomInput}
+                            className={classes.textField}
+                            fullWidth
+                            label="Auth Url"
+                          />
+                          <FormHelperText
+                            focused
+                            className="text-grey mt-4 ml-4"
+                          >
+                            Authentication endpoint for your OIDC provider
+                          </FormHelperText>
+                        </div>
+
+                        <div className="d-flex flex-row mt-3">
+                          <Field
+                            name="token_url"
+                            component={CustomInput}
+                            className={classes.textField}
+                            fullWidth
+                            label="Token Url"
+                          />
+                          <FormHelperText
+                            focused
+                            className="text-grey mt-4 ml-4"
+                          >
+                            Token endpoint for your OIDC provider
                           </FormHelperText>
                         </div>
                       </div>
@@ -730,7 +774,12 @@ const RegistrationWizard = (props) => {
                   <Formik
                     key="second"
                     initialValues={{
-                      metadata_url: idpResponse?.spec?.mapperUrl,
+                      metadata_url:
+                        idpPayload?.spec?.providerName === "generic"
+                          ? idpResponse?.spec?.mapperUrl
+                          : `https://github.com/RafayLabs/rcloud-base/blob/main/_kratos/conf/` +
+                            idpPayload?.spec?.providerName +
+                            ".jsonnet",
                     }}
                     validationSchema={MetaDataUrlSchema}
                     innerRef={secondStep}
@@ -740,6 +789,10 @@ const RegistrationWizard = (props) => {
                       values,
                       setFieldValue,
                     }) => {
+                      // TODO: disable the field once we have a hosted mapper spec
+                      // const disabled =
+                      //   idpPayload?.spec?.providerName !== "generic";
+                      const disabled = false;
                       return (
                         <Form>
                           <Field
@@ -749,7 +802,7 @@ const RegistrationWizard = (props) => {
                             fullWidth
                             label="Mapper Link"
                             size="small"
-                            disabled={false}
+                            disabled={disabled}
                           />
                         </Form>
                       );
@@ -770,7 +823,7 @@ const RegistrationWizard = (props) => {
         return "Unknown step";
     }
   }
-  const steps = ["IdP Creation", "SP Configuration", "Submit Request"];
+  const steps = ["IdP Creation", "RP Configuration", "Submit Request"];
 
   const handleNext = () => {
     if (activeStep === 0) {
@@ -838,7 +891,7 @@ const RegistrationWizard = (props) => {
                 panel: getStepContent(0),
               },
               {
-                label: "SP Configuration",
+                label: "RP Configuration",
                 panel: getStepContent(1),
               },
               {

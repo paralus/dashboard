@@ -104,7 +104,7 @@ class Projects extends React.Component {
     const uniqueDataRoles = [...new Set(dataRoles)];
     const hasAdminRole = uniqueDataRoles.indexOf("ADMIN") !== -1;
     const hasAdminReadOnlyRole =
-      uniqueDataRoles.indexOf("ADMINISTRATOR_READ_ONLY") !== -1;
+      uniqueDataRoles.indexOf("ADMIN_READ_ONLY") !== -1;
     const confirmText = (
       <span>
         <span>

@@ -127,37 +127,14 @@ class ResourceListTable extends React.Component {
   };
 
   getName = (data) => {
-    if (data.spec.type === "DEFAULT_USERS") {
-      return (
-        <>
-          <div style={style.nameLabel}>{data.metadata.name}</div>
-          <div className="text-muted" style={style.nameLabelDescription}>
-            Default group for all local users
-          </div>
-        </>
-      );
-    }
-    if (data.spec.type === "DEFAULT_ADMINS") {
-      return (
-        <>
-          <div style={style.nameLabel}>{data.metadata.name}</div>
-          <div className="text-muted" style={style.nameLabelDescription}>
-            Default group for all Organization Admins
-          </div>
-        </>
-      );
-    }
-    if (data.spec.type === "DEFAULT_READONLY_ADMINS") {
-      return (
-        <>
-          <div style={style.nameLabel}>{data.metadata.name}</div>
-          <div className="text-muted" style={style.nameLabelDescription}>
-            Default group for all Organization Read Only
-          </div>
-        </>
-      );
-    }
-    return data.metadata.name;
+    return (
+      <>
+        <div style={style.nameLabel}>{data.metadata.name}</div>
+        <div className="text-muted" style={style.nameLabelDescription}>
+          {data.metadata.description}
+        </div>
+      </>
+    );
   };
 
   getCollapsedRow = (data) => {

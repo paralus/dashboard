@@ -82,7 +82,7 @@ const RoleHelp = {
       </span>
     </span>
   ),
-  ADMINISTRATOR_READ_ONLY: (
+  ADMIN_READ_ONLY: (
     <span className="mb-0">
       <i>
         Group users can view all your application and infrastructure resources

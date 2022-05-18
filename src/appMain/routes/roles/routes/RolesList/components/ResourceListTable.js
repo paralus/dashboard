@@ -115,35 +115,24 @@ class ResourceListTable extends React.Component {
   };
 
   getName = (data) => {
-    if (data.spec.scope === "system") {
-      return (
-        <>
-          <div style={style.nameLabel}>{data.metadata.name}</div>
-          <div className="text-muted" style={style.nameLabelDescription}>
-            Default role for all system admins
-          </div>
-        </>
-      );
-    }
-    if (data.spec.scope === "organization") {
-      return (
-        <>
-          <div style={style.nameLabel}>{data.metadata.name}</div>
-          <div className="text-muted" style={style.nameLabelDescription}>
-            Default role for all organization admins
-          </div>
-        </>
-      );
-    }
-    return data.metadata.name;
+    return (
+      <>
+        <div style={style.nameLabel}>{data.metadata.name}</div>
+        <div className="text-muted" style={style.nameLabelDescription}>
+          {data.metadata.description}
+        </div>
+      </>
+    );
   };
 
   getCollapsedRow = (data) => {
     return (
-      <PermissionList
-        permissions={data.spec.rolepermissions}
-        showExpandedList
-      ></PermissionList>
+      <div className="p-3">
+        <PermissionList
+          permissions={data.spec.rolepermissions}
+          showExpandedList
+        ></PermissionList>
+      </div>
     );
   };
 
@@ -169,7 +158,7 @@ class ResourceListTable extends React.Component {
             className="m-0"
             disabled={data.spec.builtin}
             onClick={(event) =>
-              this.handleGoToRoleDetail(event, data.metadata.name.toLowerCase())
+              this.handleGoToRoleDetail(event, data.metadata.name)
             }
           >
             <EditIcon fontSize="small" />
