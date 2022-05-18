@@ -51,7 +51,10 @@ class SystemLogs extends React.Component {
     if (aggregatedTypes?.length > state.types?.length)
       state.types = aggregatedTypes;
 
-    state.projects = props?.projectsList?.results || [];
+    const projectList = props?.projectsList?.items.map((p) => {
+      return { key: p?.metadata.name };
+    });
+    state.projects = projectList || [];
     state.isProjectRole = !visibleAdmin && visibleApps && visibleSystem;
     return { ...state };
   }
@@ -71,7 +74,7 @@ class SystemLogs extends React.Component {
     const { value, name } = event.target;
     const filter = { ...this.state.filter };
     filter[name] = value;
-    if (name === "project_id") filter[name] = [value];
+    if (name === "project") filter[name] = [value];
     if (value === "_ALL_") delete filter[name];
     this.setState({ filter }, this.handleRefreshClick(filter));
   };

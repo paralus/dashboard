@@ -123,11 +123,9 @@ const TableToolbar = (props) => {
           {!isProjectRole && (
             <div>
               <FilterField
-                name="project_id"
-                value={filter.project_id}
+                name="project"
+                value={filter.project}
                 list={projects}
-                optionValue="id"
-                optionLabel="name"
                 defaultLabel="All projects"
                 label="Project"
                 handleFilter={handleFilter}

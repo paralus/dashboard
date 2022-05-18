@@ -43,9 +43,8 @@ const LogsDataTable = (props) => {
   };
 
   const getProjectName = (item) => {
-    if (!item.project_id) return "N/A";
-    const project = props.projects.find((x) => x.id === item.project_id);
-    return project?.name || "N/A";
+    if (!item.project || item.project == "") return "N/A";
+    return item.project;
   };
 
   const parseRowData = (data) =>

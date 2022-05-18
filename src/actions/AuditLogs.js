@@ -1,14 +1,14 @@
 import http from "./Config";
 import { getFilterQuery } from "./Common";
 
-export function getAuditLogs(filter, projectId) {
+export function getAuditLogs(filter, project) {
   const partner = JSON.parse(window?.localStorage.getItem("partner"));
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   filter = { ...filter, partner: partner, organization: organization };
   const query = getFilterQuery(filter);
 
   let url = "auditlog?";
-  if (projectId) url = `project/${projectId}/${url}`;
+  if (project) url = `project/${project}/${url}`;
 
   return function (dispatch) {
     dispatch({ type: "load_audit_logs" });
