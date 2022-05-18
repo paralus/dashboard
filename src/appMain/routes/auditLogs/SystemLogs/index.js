@@ -37,7 +37,9 @@ class SystemLogs extends React.Component {
     const { hits = {}, aggregations = {} } = props?.auditLogsList || {};
     const { visibleApps, visibleSystem, visibleAdmin } = props.UserSession;
     state.list = hits?.hits || [];
-    state.count = hits?.total || state.list.length;
+
+    // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html (if more than 1000, hit count might be lower bound)
+    state.count = hits?.total?.value || hits?.total || state.list.length;
 
     // Comments by Zahoor
     // Issue: The following lists are derived from response hence on filtering the number of options vary
