@@ -36,9 +36,9 @@ const ClusterActionsContainer = ({ icon, menuItems, dialogs, onSelect }) => {
           key="menu-default"
           style={{ height: "0px" }}
         />
-        {menuItems.map((option) => (
+        {menuItems.map((option, i) => (
           <MenuItem
-            key={option}
+            key={i}
             selected={option === selectedOption}
             onClick={selectOption}
           >
