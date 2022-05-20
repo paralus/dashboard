@@ -129,9 +129,9 @@ class UserList extends React.Component {
       alertSeverity: "error",
       searchDelay: 500,
       filters: {
-        project_name: ["ALL"],
-        role_name: "ALL",
-        group_name: "ALL",
+        project: ["ALL"],
+        role: "ALL",
+        group: "ALL",
         status: "ALL",
       },
       userListData: [],

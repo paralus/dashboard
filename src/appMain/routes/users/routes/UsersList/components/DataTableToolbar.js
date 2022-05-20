@@ -119,24 +119,24 @@ const DataTableToolbar = (props) => {
           <TableFilter
             id="project-filter"
             label="Projects"
-            onChange={(e) => handleFilterChange("project_name", e.target.value)}
+            onChange={(e) => handleFilterChange("project", e.target.value)}
             options={projectOptions}
-            value={filters?.project_name}
+            value={filters?.project}
             multiselect
           />
           <TableFilter
             id="role-filter"
             label="Role"
-            onChange={(e) => handleFilterChange("role_name", e.target.value)}
+            onChange={(e) => handleFilterChange("role", e.target.value)}
             options={roleOptions}
-            value={filters?.role_name}
+            value={filters?.role}
           />
           <TableFilter
             id="group-filter"
             label="Group"
-            onChange={(e) => handleFilterChange("group_name", e.target.value)}
+            onChange={(e) => handleFilterChange("group", e.target.value)}
             options={groupOptions}
-            value={filters?.group_name}
+            value={filters?.group}
           />
         </div>
       )}

@@ -23,7 +23,11 @@ export function getUsers(
   });
   filterQuery += `&partner=${partner}`;
   filterQuery += `&organization=${organization}`;
-  if (rows) filterQuery += `&limit=${rows}`;
+  if (rows) {
+    filterQuery += `&limit=${rows}`;
+  } else {
+    filterQuery += `&limit=-1`;
+  }
   if (offset) filterQuery += `&offset=${offset}`;
   if (orderBy) filterQuery += `&orderBy=${orderBy}&order=${order}`;
 
