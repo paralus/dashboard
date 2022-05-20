@@ -44,7 +44,7 @@ class RelayCommands extends React.Component {
     );
 
     state.list = hits?.hits || [];
-    state.count = hits?.total || state.list?.length;
+    state.count = hits?.total?.value || hits?.total || state.list.length;
 
     // Comments by Zahoor
     // Issue: The following lists are derived from response hence on filtering the number of options vary
