@@ -71,8 +71,8 @@ class AssignToProject extends React.Component {
             role: role.metadata.name,
             namespace: ns,
           };
-          roles.push(r);    
-        })
+          roles.push(r);
+        });
       } else {
         let r = {
           project: selectedProject,
@@ -85,7 +85,8 @@ class AssignToProject extends React.Component {
   };
 
   handleSaveChanges = () => {
-    const { selectedProject, selectedRoles, userId, selectedNamespaces } = this.state;
+    const { selectedProject, selectedRoles, userId, selectedNamespaces } =
+      this.state;
     const { userDetail, editUserWithCallback } = this.props;
     if (selectedProject !== "ALL PROJECTS") {
       if (!selectedProject) {

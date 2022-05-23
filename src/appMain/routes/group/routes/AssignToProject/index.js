@@ -60,7 +60,8 @@ class AssignToProject extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedRoles, selectedProject, groupId, selectedNamespaces } = this.state;
+    const { selectedRoles, selectedProject, groupId, selectedNamespaces } =
+      this.state;
     const roles = [];
     let project = selectedProject;
     if (project !== "ALL PROJECTS") {
@@ -74,8 +75,8 @@ class AssignToProject extends React.Component {
             role: role.metadata.name,
             namespace: ns,
           };
-          roles.push(r);    
-        })
+          roles.push(r);
+        });
       } else {
         let r = {
           project: project,
@@ -89,7 +90,8 @@ class AssignToProject extends React.Component {
   };
 
   handleSaveChanges = () => {
-    const { selectedProject, selectedRoles, groupId, selectedNamespaces } = this.state;
+    const { selectedProject, selectedRoles, groupId, selectedNamespaces } =
+      this.state;
     const { groupDetail, editGroupWithCallback } = this.props;
     if (selectedProject !== "ALL PROJECTS") {
       if (!selectedProject) {

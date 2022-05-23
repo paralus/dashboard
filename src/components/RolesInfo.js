@@ -11,7 +11,7 @@ function RolesInfo({ roles, projectId, addGroupInRole = null }) {
       const { role, namespace_id } = curr;
       if (role?.name?.includes("NAMESPACE") && namespace_id) {
         const namespace = thisProjectNamespaces?.find(
-          pn => pn.metadata?.id === namespace_id
+          (pn) => pn.metadata?.id === namespace_id
         );
         if (namespace) acc.push(namespace.metadata.name);
       }
@@ -22,7 +22,7 @@ function RolesInfo({ roles, projectId, addGroupInRole = null }) {
   };
 
   useEffect(() => {
-    const dataRoles = roles?.map(r => r?.role?.name);
+    const dataRoles = roles?.map((r) => r?.role?.name);
     const uniqueDataRoles = [...new Set(dataRoles)];
     const isNamespaceRole = uniqueDataRoles?.join().includes("NAMESPACE");
 

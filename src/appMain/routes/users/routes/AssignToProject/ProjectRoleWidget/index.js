@@ -153,7 +153,7 @@ const ProjectRoleWidget = ({
   const handleTextFieldChange = (event) => {
     setSelectedNamespaces([...event.target.value]);
     onNamespacesChange([...event.target.value]);
-  }
+  };
 
   return (
     <Grid
