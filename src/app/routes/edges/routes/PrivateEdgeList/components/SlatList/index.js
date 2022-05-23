@@ -128,7 +128,10 @@ const SlatList = (props) => {
         <div className="d-flex justify-content-between align-items-center">
           <div className="mr-4">
             <h2 className="m-0">
-              <span style={{ color: "teal", cursor: "pointer" }}>
+              <span
+                style={{ color: "teal", cursor: "pointer" }}
+                onClick={handleViewClick}
+              >
                 {cluster.metadata.name}
 
                 <br />

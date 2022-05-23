@@ -51,7 +51,7 @@ export function getInitProjects() {
             );
             currentProject =
               defaultProject ||
-              response.data.items[response.data.items.count - 1];
+              response.data.items[response.data.items.length - 1];
           }
         } else {
           const defaultProject = response.data.items.find(
@@ -59,7 +59,7 @@ export function getInitProjects() {
           );
           currentProject =
             defaultProject ||
-            response.data.items[response.data.items.count - 1];
+            response.data.items[response.data.items.length - 1];
         }
         dispatch({
           type: "get_init_projects_success",

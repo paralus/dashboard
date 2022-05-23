@@ -35,7 +35,7 @@ class RelayLogs extends React.Component {
     const { hits = {}, aggregations = {} } = logs;
 
     state.list = hits?.hits || [];
-    state.count = hits?.total || state.list?.length;
+    state.count = hits?.total?.value || hits?.total || state.list.length;
 
     // Comments by Zahoor
     // Issue: The following lists are derived from response hence on filtering the number of options vary
@@ -57,7 +57,10 @@ class RelayLogs extends React.Component {
     if (aggregateMethods?.length > state.methods?.length)
       state.methods = aggregateMethods;
 
-    state.projects = props?.projectsList?.results || [];
+    const projectList = props?.projectsList?.items.map((p) => {
+      return { key: p?.metadata.name };
+    });
+    state.projects = projectList || [];
     return { ...state };
   }
 
@@ -75,7 +78,7 @@ class RelayLogs extends React.Component {
     const { value, name } = event.target;
     const filter = { ...this.state.filter };
     filter[name] = value;
-    if (name === "project_id") filter[name] = [value];
+    if (name === "project") filter[name] = [value];
     if (value === "_ALL_") delete filter[name];
     this.setState({ filter }, this.handleRefreshClick(filter));
   };

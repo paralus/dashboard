@@ -34,9 +34,9 @@ export function getFilterQuery(filter) {
   return Object.entries(filter).reduce((acc, [key, value]) => {
     if (!value) return acc;
     if (key === "timefrom") value = `now-${value}`;
-    if (key === "project_id") {
-      key = "projectIds";
-      value = value.join("&filter.projectIds=");
+    if (key === "project") {
+      key = "projects";
+      value = value.join("&filter.projects=");
     }
     if (key === "partner_id") {
       return `${acc}&metadata.partner=${value}`;
