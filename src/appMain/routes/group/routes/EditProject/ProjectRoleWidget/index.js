@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import T from "i18n-react";
 import ProjectCard from "./components/ProjectCard";
+import NamespaceCard from "components/NamespaceCard";
 import RolesCard from "./components/RolesCard";
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +41,7 @@ const ProjectRoleWidget = ({
   const [selectedProject, setSelectedProject] = React.useState("");
   const [projectRoleDisabled, setProjectRoleDisabled] = React.useState(false);
   const [roleModified, setRoleModified] = React.useState(false);
-  const [selectedNamespaces, setSelectedNamespaces] = React.useState([]);
+  const [currentNamespaces, setCurrentNamespaces] = React.useState([]);
 
   React.useEffect(() => {
     if (editRoles && systemRoles && !roleModified) {
@@ -52,6 +53,12 @@ const ProjectRoleWidget = ({
       const uniqueRoles = [...new Set(editChecked)];
       setChecked(uniqueRoles);
       handleRolesChange(uniqueRoles);
+    }
+
+    if (editRoles && editRoles.length > 0 ) {
+      const tempCurrentNamespaces = [];
+      editRoles.forEach(role => tempCurrentNamespaces.push(role.namespace));
+      setCurrentNamespaces(tempCurrentNamespaces);  
     }
   }, [editRoles]);
 
@@ -160,7 +167,6 @@ const ProjectRoleWidget = ({
   };
 
   const handleNamespacesChange = (event) => {
-    setSelectedNamespaces([...event.target.value]);
     onNamespacesChange([...event.target.value]);
   };
 
@@ -186,6 +192,20 @@ const ProjectRoleWidget = ({
           projectsList={projectsList}
           handleProjectChange={handleProjectChange}
         />
+        {namespaceChecked ? (
+          <div className="mt-3">
+            <Paper className={classes.titleCard}>
+              <h2 className="h2 mb-0">
+                <span>Select Namespace</span>
+              </h2>
+            </Paper>
+            <NamespaceCard
+              selectedProject={selectedProject}
+              selectedNamespaces={currentNamespaces}
+              onNamespacesChange={handleNamespacesChange}
+            />
+          </div>
+        ) : null}
       </Grid>
       <Grid item>
         <Paper className={classes.titleCard}>

@@ -26,6 +26,7 @@ class EditProject extends React.Component {
       selectedRoles: null,
       isRoleModified: false,
       editRoles: null,
+      selectedNamespaces: null,
     };
   }
 
@@ -76,21 +77,50 @@ class EditProject extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedProject, selectedRoles } = this.state;
+    const { selectedRoles, selectedProject, selectedNamespaces } = this.state;
     const roles = [];
-    selectedRoles.forEach((r) => {
-      let pnr = {
-        project: selectedProject,
-        role: r.metadata.name,
-      };
-      roles.push(pnr);
+    selectedRoles.forEach((role) => {
+      if (role.metadata.name.includes("NAMESPACE")) {
+        selectedNamespaces.forEach((ns) => {
+          let r = {
+            project: selectedProject,
+            role: role.metadata.name,
+            namespace: ns,
+          };
+          roles.push(r);
+        });
+      } else {
+        let r = {
+          project: selectedProject,
+          role: role.metadata.name,
+        };
+        roles.push(r);
+      }
     });
+
+    const tempNamespaces = roles.map((r) => r.namespace);
+    this.setState({ selectedNamespaces: tempNamespaces })
     return roles;
   };
 
   handleSaveChanges = () => {
     const { editUserWithCallback, userDetail } = this.props;
+    const { selectedRoles, selectedNamespaces } = this.state;
     userDetail.spec.projectNamespaceRoles = this.transformRoles();
+    let invalidNamespace = false;
+    selectedRoles.find((r) => {
+      if (r.metadata.name.includes("NAMESPACE") && selectedNamespaces.length <= 0) {
+        invalidNamespace = true;
+      }
+    });
+    if (invalidNamespace) {
+      this.setState({
+        showAlert: true,
+        alertMessage: "Please select a namespace",
+      });
+      return;
+    }
+
     editUserWithCallback(userDetail, this.successCallback, this.errorCallback);
   };
 
@@ -102,6 +132,10 @@ class EditProject extends React.Component {
     this.setState({ isRoleModified: true, selectedRoles: checked });
   };
 
+  handleNamespacesChange = (namespaces) => {
+    this.setState({ selectedNamespaces: namespaces });
+  };
+
   render() {
     const {
       username,
@@ -110,6 +144,7 @@ class EditProject extends React.Component {
       alertMessage,
       selectedProject,
       editRoles,
+      selectedNamespaces
     } = this.state;
     const { drawerType, systemRoles, projectsList } = this.props;
 
@@ -149,10 +184,12 @@ class EditProject extends React.Component {
           <ProjectRoleWidget
             onProjectChange={this.handleProjectChange}
             handleRolesChange={this.handleRolesChange}
+            onNamespacesChange={this.handleNamespacesChange}
             systemRoles={systemRoles}
             projectsList={projectsList}
             editProject={selectedProject}
             editRoles={editRoles}
+            editNamespaces={selectedNamespaces}
           />
         </div>
         <Paper

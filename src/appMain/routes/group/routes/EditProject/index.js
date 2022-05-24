@@ -80,22 +80,54 @@ class EditProject extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedProject, selectedRoles, groupId } = this.state;
+    const { selectedRoles, selectedProject, groupId, selectedNamespaces } = this.state;
     const roles = [];
-    selectedRoles.forEach((r) => {
-      let pnr = {
-        project: selectedProject,
-        role: r.metadata.name,
-        group: groupId,
-      };
-      roles.push(pnr);
+
+    selectedRoles.forEach((role) => {
+      if (role.metadata.name.includes("NAMESPACE")) {
+        selectedNamespaces.forEach((ns) => {
+          let r = {
+            project: selectedProject,
+            role: role.metadata.name,
+            group: groupId,
+            namespace: ns,
+          };
+          roles.push(r);
+        });
+      } else {
+        let r = {
+          project: selectedProject,
+          role: role.metadata.name,
+          group: groupId,
+        };
+        roles.push(r);
+      }
     });
+
+    const tempNamespaces = roles.map((r) => r.namespace);
+    this.setState({ selectedNamespaces: tempNamespaces })
     return roles;
   };
 
   handleSaveChanges = () => {
     const { groupDetail, editGroupWithCallback } = this.props;
+    const { selectedRoles, selectedNamespaces } = this.state;
     groupDetail.spec.projectNamespaceRoles = this.transformRoles();
+
+    let invalidNamespace = false;
+    selectedRoles.find((r) => {
+      if (r.metadata.name.includes("NAMESPACE") && selectedNamespaces.length <= 0) {
+        invalidNamespace = true;
+      }
+    });
+    if (invalidNamespace) {
+      this.setState({
+        showAlert: true,
+        alertMessage: "Please select a namespace",
+      });
+      return;
+    }
+    
     editGroupWithCallback(
       groupDetail,
       this.successCallback,
@@ -159,6 +191,7 @@ class EditProject extends React.Component {
             help="groups.edit_project.layout.helptext"
           />
           <ProjectRoleWidget
+            onNamespacesChange={this.handleNamespacesChange}
             onProjectChange={this.handleProjectChange}
             handleRolesChange={this.handleRolesChange}
             systemRoles={systemRoles}
