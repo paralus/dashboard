@@ -80,7 +80,7 @@ class EditProject extends React.Component {
     const { selectedRoles, selectedProject, selectedNamespaces } = this.state;
     const roles = [];
     selectedRoles.forEach((role) => {
-      if (role.metadata.name.includes("NAMESPACE")) {
+      if (role.spec.scope === "namespace") {
         selectedNamespaces.forEach((ns) => {
           let r = {
             project: selectedProject,
@@ -99,7 +99,7 @@ class EditProject extends React.Component {
     });
 
     const tempNamespaces = roles.map((r) => r.namespace);
-    this.setState({ selectedNamespaces: tempNamespaces })
+    this.setState({ selectedNamespaces: tempNamespaces });
     return roles;
   };
 
@@ -109,7 +109,7 @@ class EditProject extends React.Component {
     userDetail.spec.projectNamespaceRoles = this.transformRoles();
     let invalidNamespace = false;
     selectedRoles.find((r) => {
-      if (r.metadata.name.includes("NAMESPACE") && selectedNamespaces.length <= 0) {
+      if (r.spec.scope === "namespace" && !selectedNamespaces) {
         invalidNamespace = true;
       }
     });
@@ -144,7 +144,7 @@ class EditProject extends React.Component {
       alertMessage,
       selectedProject,
       editRoles,
-      selectedNamespaces
+      selectedNamespaces,
     } = this.state;
     const { drawerType, systemRoles, projectsList } = this.props;
 

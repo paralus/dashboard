@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button";
 const roleScopes = {
   ORGANIZATION: "ORGANIZATION",
   PROJECT: "PROJECT",
+  NAMESPACE: "NAMESPACE",
 };
 
 const scopesList = Object.keys(roleScopes).map((option) => {

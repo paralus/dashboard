@@ -56,8 +56,9 @@ const ProjectRoleWidget = ({
 
     if (editRoles && editRoles.length > 0) {
       const tempCurrentNamespaces = [];
-      editRoles.forEach(role => tempCurrentNamespaces.push(role.namespace));
+      editRoles.forEach((role) => tempCurrentNamespaces.push(role.namespace));
       setCurrentNamespaces(tempCurrentNamespaces);
+      onNamespacesChange(tempCurrentNamespaces);
     }
   }, [editRoles]);
 
@@ -154,7 +155,7 @@ const ProjectRoleWidget = ({
   };
 
   const namespaceChecked =
-    checked.findIndex((x) => x.metadata.name.includes("NAMESPACE")) !== -1;
+    checked.findIndex((x) => x.spec.scope === "namespace") !== -1;
 
   return (
     <Grid

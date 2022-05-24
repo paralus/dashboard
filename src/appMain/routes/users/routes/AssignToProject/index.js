@@ -64,7 +64,7 @@ class AssignToProject extends React.Component {
     const { selectedRoles, selectedProject, selectedNamespaces } = this.state;
     const roles = [];
     selectedRoles.forEach((role) => {
-      if (role.metadata.name.includes("NAMESPACE")) {
+      if (role.spec.scope === "namespace") {
         selectedNamespaces.forEach((ns) => {
           let r = {
             project: selectedProject,
@@ -106,7 +106,7 @@ class AssignToProject extends React.Component {
     }
     let invalidNamespace = false;
     selectedRoles.find((r) => {
-      if (r.metadata.name.includes("NAMESPACE") && !selectedNamespaces) {
+      if (r.spec.scope === "namespace" && !selectedNamespaces) {
         invalidNamespace = true;
       }
     });

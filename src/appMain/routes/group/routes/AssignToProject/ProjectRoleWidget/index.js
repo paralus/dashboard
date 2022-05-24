@@ -148,7 +148,7 @@ const ProjectRoleWidget = ({
   };
 
   const namespaceChecked =
-    checked.findIndex((x) => x.metadata.name.includes("NAMESPACE")) !== -1;
+    checked.findIndex((x) => x.spec.scope === "namespace") != -1;
 
   const handleTextFieldChange = (event) => {
     setSelectedNamespaces([...event.target.value]);

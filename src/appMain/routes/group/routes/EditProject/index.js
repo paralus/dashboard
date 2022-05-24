@@ -80,11 +80,12 @@ class EditProject extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedRoles, selectedProject, groupId, selectedNamespaces } = this.state;
+    const { selectedRoles, selectedProject, groupId, selectedNamespaces } =
+      this.state;
     const roles = [];
 
     selectedRoles.forEach((role) => {
-      if (role.metadata.name.includes("NAMESPACE")) {
+      if (role.spec.scope === "namespace") {
         selectedNamespaces.forEach((ns) => {
           let r = {
             project: selectedProject,
@@ -105,18 +106,17 @@ class EditProject extends React.Component {
     });
 
     const tempNamespaces = roles.map((r) => r.namespace);
-    this.setState({ selectedNamespaces: tempNamespaces })
+    this.setState({ selectedNamespaces: tempNamespaces });
     return roles;
   };
 
   handleSaveChanges = () => {
     const { groupDetail, editGroupWithCallback } = this.props;
     const { selectedRoles, selectedNamespaces } = this.state;
-    groupDetail.spec.projectNamespaceRoles = this.transformRoles();
 
     let invalidNamespace = false;
     selectedRoles.find((r) => {
-      if (r.metadata.name.includes("NAMESPACE") && selectedNamespaces.length <= 0) {
+      if (r.spec.scope === "namespace" && !selectedNamespaces) {
         invalidNamespace = true;
       }
     });
@@ -127,7 +127,8 @@ class EditProject extends React.Component {
       });
       return;
     }
-    
+    groupDetail.spec.projectNamespaceRoles = this.transformRoles();
+
     editGroupWithCallback(
       groupDetail,
       this.successCallback,
@@ -197,6 +198,7 @@ class EditProject extends React.Component {
             systemRoles={systemRoles}
             projectsList={projectsList}
             editProject={selectedProject}
+            editNamespaces={selectedNamespaces}
             editRoles={editRoles}
           />
         </div>
