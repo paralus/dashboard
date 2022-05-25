@@ -42,6 +42,7 @@ import {
 import { ValidatorForm } from "react-material-ui-form-validator";
 import Select from "react-select";
 import { ClusterActionsContext } from "../../../../../views/ClusterView/ClusterViewContexts";
+import { capitalizeFirstLetter } from "../../../../../utils";
 import RafayNoData from "components/RafayNoData";
 import Spinner from "components/Spinner";
 import RafaySnackbar from "components/RafaySnackbar";
@@ -549,10 +550,10 @@ class PrivateEdgeList extends React.Component {
       ) {
         return <T.span id="message-id" text="unauthorized" />;
       }
-      return <span id="message-id">{error}</span>;
+      return <span id="message-id">{capitalizeFirstLetter(error)}</span>;
     }
     if (errorMessage !== "") {
-      return <span id="message-id">{errorMessage}</span>;
+      return <span id="message-id">{capitalizeFirstLetter(errorMessage)}</span>;
     }
     return null;
   };

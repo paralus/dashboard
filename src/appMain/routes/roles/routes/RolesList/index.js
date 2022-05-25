@@ -14,6 +14,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import ResourceListTable from "./components/ResourceListTable";
 import CreateResourceDialog from "./components/CreateResourceDialog";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 const style = {
   helpText: {
@@ -200,7 +201,7 @@ class List extends React.Component {
             "aria-describedby": "message-id",
           }}
           className="mb-3"
-          message={deleteError}
+          message={capitalizeFirstLetter(deleteError)}
           action={[
             <IconButton
               key="close"

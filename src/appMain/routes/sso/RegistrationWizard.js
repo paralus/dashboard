@@ -39,6 +39,7 @@ import * as Yup from "yup";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
 import RafayWizard from "components/RafayWizard";
 import { downloadCertificate } from "./util";
+import { capitalizeFirstLetter } from "../../../utils";
 import UploadMetadata from "./UploadMetadata";
 
 const getSpConfigSchema = (editMode) => {
@@ -295,7 +296,7 @@ const RegistrationWizard = (props) => {
       .catch((error) => {
         setError(
           error.response.data
-            ? error.response.data.message
+            ? capitalizeFirstLetter(error.response.data.message)
             : "Unable to process request"
         );
         setLoading(false);
@@ -323,7 +324,7 @@ const RegistrationWizard = (props) => {
       .catch((error) => {
         setError(
           error.response.data
-            ? error.response.data.message
+            ? capitalizeFirstLetter(error.response.data.message)
             : "Unable to process request"
         );
         setLoading(false);
@@ -343,7 +344,7 @@ const RegistrationWizard = (props) => {
       .catch((error) => {
         setError(
           error.response.data && error.response.data.details.length
-            ? error.response.data.details[0].detail
+            ? capitalizeFirstLetter(error.response.data.details[0].detail)
             : "Unable to process request"
         );
         setLoading(false);
