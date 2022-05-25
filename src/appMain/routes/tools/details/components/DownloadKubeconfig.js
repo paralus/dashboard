@@ -3,6 +3,7 @@ import T from "i18n-react";
 import Button from "@material-ui/core/Button";
 import RafaySnackbar from "components/RafaySnackbar";
 import { getKubeConfig } from "actions/index";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 const DownloadKubeconfig = ({ user, withIcon }) => {
   const [config, setConfig] = useState(null);
@@ -73,7 +74,7 @@ const DownloadKubeconfig = ({ user, withIcon }) => {
       <RafaySnackbar
         open={alert.show}
         severity={alert.severity}
-        message={alert.message}
+        message={capitalizeFirstLetter(alert.message)}
         closeCallback={() =>
           setAlert({ show: false, message: "", severity: "error" })
         }

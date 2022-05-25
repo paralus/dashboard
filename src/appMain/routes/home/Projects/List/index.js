@@ -13,6 +13,7 @@ import RafaySnackbar from "components/RafaySnackbar";
 import SearchBoxV2 from "components/SearchBoxV2";
 import ProjectsTable from "./components/ProjectsTable";
 import CreateProjectDialog from "./components/CreateProjectDialog";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 const style = {
   helpText: {
@@ -215,7 +216,7 @@ class Project extends React.Component {
         <RafaySnackbar
           open={showAlert}
           severity={alertSeverity}
-          message={alertMessage}
+          message={capitalizeFirstLetter(alertMessage)}
           closeCallback={this.handleResponseErrorClose}
         />
       </div>

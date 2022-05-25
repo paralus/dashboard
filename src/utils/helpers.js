@@ -431,5 +431,6 @@ export const downloadFile = (
 };
 
 export function capitalizeFirstLetter(string) {
+  if (string === undefined || string === null) return "";
   return string.charAt(0).toUpperCase() + string.slice(1);
 }

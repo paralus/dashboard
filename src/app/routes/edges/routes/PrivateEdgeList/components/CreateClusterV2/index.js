@@ -8,6 +8,7 @@ import CreateClusterDialog from "./CreateClusterDialog";
 import StepOneContent from "./StepOneContent";
 import StepTwoContent from "./StepTwoContent";
 import InfoForm from "./InfoForm";
+import { capitalizeFirstLetter } from "../../../../../../../utils";
 
 class CreateClusterV2 extends Component {
   constructor(props) {
@@ -220,7 +221,7 @@ class CreateClusterV2 extends Component {
         />
         <RafaySnackbar
           open={alert.open}
-          message={alert.message}
+          message={capitalizeFirstLetter(alert.message)}
           severity={alert.severity}
           closeCallback={(_) => this.setState({ alert: { open: false } })}
         />

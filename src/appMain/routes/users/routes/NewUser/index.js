@@ -9,6 +9,7 @@ import RafayConfirmDialog from "components/RafayConfirmDialog";
 import GridLayout from "./components/GridLayout";
 import Profile from "./components/Profile";
 import SelectGroupList from "./components/AddToGroups/RafayTransferList/SelectGroupList";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 class NewUser extends Component {
   constructor(props) {
@@ -228,7 +229,7 @@ class NewUser extends Component {
         <RafaySnackbar
           open={showAlert}
           severity="error"
-          message={alertMessage}
+          message={capitalizeFirstLetter(alertMessage)}
           closeCallback={this.handleResponseErrorClose}
         />
         <RafayConfirmDialog

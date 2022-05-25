@@ -1483,7 +1483,7 @@ class PrivateEdgeList extends React.Component {
           </Dialog>
           <RafaySnackbar
             open={showAlert}
-            message={alertMessage}
+            message={capitalizeFirstLetter(alertMessage)}
             closeCallback={this.handleSnackbarResponseClose}
           />
         </div>

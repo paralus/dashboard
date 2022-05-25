@@ -18,6 +18,7 @@ import { getTimeFromNow } from "../../../../../utils";
 import DataTableToolbar from "./components/DataTableToolbar";
 import KubeconfigValiditySSO from "./components/KubeconfigValiditySSO";
 import SsoGroups from "./components/IDPUserGroups/SsoGroups";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 const style = {
   userNameLabel: {
@@ -298,7 +299,7 @@ class IDPUserList extends React.Component {
         <RafaySnackbar
           open={this.state.showAlert}
           severity={this.state.alertSeverity}
-          message={this.state.alertMessage}
+          message={capitalizeFirstLetter(this.state.alertMessage)}
           closeCallback={this.handleRafaySnackbarClose}
         />
         <KubeconfigValiditySSO

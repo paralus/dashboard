@@ -5,6 +5,7 @@ import RafaySnackbar from "components/RafaySnackbar";
 import RafayConfirmIconAction from "components/RafayConfirmIconAction";
 import { revokeSelfKubeconfig } from "actions/index";
 import DownloadKubeconfig from "./DownloadKubeconfig";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 const Kubeconfig = ({ user }) => {
   const [alert, setAlert] = useState({
@@ -86,7 +87,7 @@ const Kubeconfig = ({ user }) => {
       <RafaySnackbar
         open={alert.show}
         severity={alert.severity}
-        message={alert.message}
+        message={capitalizeFirstLetter(alert.message)}
         closeCallback={() =>
           setAlert({ show: false, message: "", severity: "error" })
         }

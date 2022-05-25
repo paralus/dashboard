@@ -14,6 +14,7 @@ import RafayConfirmIconAction from "components/RafayConfirmIconAction";
 import { changeProject, deleteProject } from "actions/index";
 import RafaySnackbar from "components/RafaySnackbar";
 import DateFormat from "components/DateFormat";
+import { capitalizeFirstLetter } from "../../../../../../utils";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -203,7 +204,7 @@ const ProjectCard = ({ data, refreshProjects }) => {
       <RafaySnackbar
         open={alert.show}
         severity={alert.severity}
-        message={alert.message}
+        message={capitalizeFirstLetter(alert.message)}
         closeCallback={(_) => setAlert({ show: false })}
       />
     </div>

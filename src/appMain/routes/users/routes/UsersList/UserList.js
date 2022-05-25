@@ -644,7 +644,7 @@ class UserList extends React.Component {
         <RafaySnackbar
           open={this.state.showAlert}
           severity={this.state.alertSeverity}
-          message={this.state.alertMessage}
+          message={capitalizeFirstLetter(this.state.alertMessage)}
           closeCallback={this.handleRafaySnackbarClose}
         />
         <Snackbar

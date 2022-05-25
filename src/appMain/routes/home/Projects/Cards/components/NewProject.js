@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import RafaySnackbar from "components/RafaySnackbar";
 import { createProject } from "actions/index";
+import { capitalizeFirstLetter } from "../../../../../../utils";
 
 const NewProject = ({ refreshProjects }) => {
   const [open, setOpen] = useState(false);
@@ -132,7 +133,7 @@ const NewProject = ({ refreshProjects }) => {
       <RafaySnackbar
         open={alert.open}
         severity={alert.severity}
-        message={alert.message}
+        message={capitalizeFirstLetter(alert.message)}
         closeCallback={(_) => setAlert({ open: false })}
       />
     </div>

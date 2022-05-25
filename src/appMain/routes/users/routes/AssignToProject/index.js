@@ -11,6 +11,7 @@ import RafaySnackbar from "components/RafaySnackbar";
 import RafayPageHeader from "components/RafayPageHeader";
 import ProjectRoleWidget from "./ProjectRoleWidget";
 import { parseError } from "utils";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 class AssignToProject extends React.Component {
   constructor(props, context) {
@@ -230,7 +231,7 @@ class AssignToProject extends React.Component {
         <RafaySnackbar
           open={showAlert}
           severity="error"
-          message={alertMessage}
+          message={capitalizeFirstLetter(alertMessage)}
           closeCallback={this.handleResponseErrorClose}
         />
       </>
