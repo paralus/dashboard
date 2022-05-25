@@ -42,12 +42,6 @@ const General = (props) => {
                 metroNotConfigured={props.metroNotConfigured}
               />
             </div>
-            <div className="col-md-6 text-muted pl-4 pt-4">
-              <T.span
-                text="Indicate geo-location of cluster if you wish to use location based policies"
-                style={{ fontStyle: "italic", fontSize: "smaller" }}
-              />
-            </div>
           </div>
         )}
       </div>

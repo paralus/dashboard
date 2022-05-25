@@ -20,9 +20,6 @@ import RafaySuspense from "components/RafaySuspense";
 import { ConsolePaths } from "constants/ConsolePaths";
 import Cluster from "./routes/cluster";
 
-const Locations = React.lazy(() =>
-  import(/* webpackPrefetch: true */ "./routes/locations")
-);
 const Edges = React.lazy(() =>
   import(/* webpackPrefetch: true */ "./routes/edges")
 );
@@ -207,10 +204,6 @@ class App extends React.Component {
                   {/* <Route exact path={`${match.url}`} component={Home} /> */}
                   <Route path={`${match.url}/clusters`} component={Cluster} />
                   <Route path={`${match.url}/edges`} component={Edges} />
-                  <Route
-                    path={`${match.url}/locations`}
-                    component={Locations}
-                  />
                 </RafaySuspense>
               </div>
             </main>

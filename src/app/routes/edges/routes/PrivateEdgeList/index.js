@@ -50,7 +50,6 @@ import ClusterActions from "components/ClusterActions/index";
 import CreateClusterV2 from "./components/CreateClusterV2";
 import SlatList from "./components/SlatList";
 import DataTableToolbar from "./components/DataTableToolbar";
-import EdgeLocation from "./components/EdgeLocation.js";
 
 const styles = (theme) => ({
   clusterHeading: {
@@ -853,13 +852,6 @@ class PrivateEdgeList extends React.Component {
     this.setState(this.state);
   };
 
-  getEdgeLocation = (edge) => {
-    if (edge.Metro) {
-      return edge.Metro.name;
-    }
-    return "N/A";
-  };
-
   getLastSeen = (edge) => {
     let result = "";
     const lastSeenDate = new Date(edge.health_status_modified_at);
@@ -1348,7 +1340,6 @@ class PrivateEdgeList extends React.Component {
                   isUpdateEndpointsSuccess={this.props.isUpdateEndpointsSuccess}
                   isUpdateEndpointsError={this.props.isUpdateEndpointsError}
                   UpdateEndpointsError={this.props.UpdateEndpointsError}
-                  getEdgeLocation={this.getEdgeLocation}
                   statusColorStyle={this.statusColorStyle}
                   history={this.props.history}
                   handleOpenKubectl={() =>
@@ -1469,7 +1460,6 @@ class PrivateEdgeList extends React.Component {
             <DialogTitle>
               {this.state.edge && this.state.edge.metadata?.name}
             </DialogTitle>
-            <EdgeLocation edge={this.state.edge} {...this.props} />
             <DialogActions>
               <Button
                 color="primary"
