@@ -37,7 +37,10 @@ function RolesInfo({
   const getRoleStrings = () => {
     const parsedRoles = roles.map((role) => {
       let roleString = RoleTypes[role];
-      if (role.includes("NAMESPACE"))
+      if (roleString === undefined) {
+        roleString = role;
+      }
+      if (role.includes("NAMESPACE") || namespacesList.length > 0)
         roleString += ` [ ${namespacesList.join(", ")} ]`;
       if (addGroupInRole && role.group) roleString += ` [ GROUP: ${role} ]`;
       return roleString;
