@@ -363,12 +363,9 @@ const RegistrationWizard = (props) => {
   };
 
   const transformRequest = (data) => {
-    let scope =
-      editMode && data["group_attribute_name"]
-        ? data["group_attribute_name"]
-        : data["group_attribute_name"]
-        ? data["group_attribute_name"].split(",").map((e) => e.trim())
-        : [];
+    let scope = data["group_attribute_name"]
+      ? data["group_attribute_name"].split(",").map((e) => e.trim())
+      : [];
     let payload = {
       metadata: {
         name: data["name"],
@@ -448,7 +445,7 @@ const RegistrationWizard = (props) => {
                   clientId: idpResponse?.spec?.clientId,
                   clientSecret: idpResponse?.spec?.clientSecret,
                   providerName: idpResponse?.spec?.providerName,
-                  group_attribute_name: idpResponse?.spec?.scopes,
+                  group_attribute_name: idpResponse?.spec?.scopes.join(","),
                   issuer_url: idpResponse?.spec?.issuerUrl,
                   auth_url: idpResponse?.spec?.authUrl,
                   token_url: idpResponse?.spec?.tokenUrl,
@@ -774,12 +771,13 @@ const RegistrationWizard = (props) => {
                   <Formik
                     key="second"
                     initialValues={{
-                      metadata_url:
-                        idpPayload?.spec?.providerName === "generic"
-                          ? idpResponse?.spec?.mapperUrl
-                          : `https://github.com/RafayLabs/rcloud-base/blob/main/_kratos/conf/` +
-                            idpPayload?.spec?.providerName +
-                            ".jsonnet",
+                      metadata_url: idpResponse?.spec?.mapperUrl
+                        ? idpResponse?.spec?.mapperUrl
+                        : idpPayload?.spec?.providerName === "generic"
+                        ? idpResponse?.spec?.mapperUrl
+                        : `https://raw.githubusercontent.com/RafayLabs/rcloud-base/main/_kratos/oidc-mappers/` +
+                          idpPayload?.spec?.providerName +
+                          ".jsonnet",
                     }}
                     validationSchema={MetaDataUrlSchema}
                     innerRef={secondStep}
