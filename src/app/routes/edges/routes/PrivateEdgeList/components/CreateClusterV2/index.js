@@ -107,7 +107,7 @@ class CreateClusterV2 extends Component {
         this.props.handleCloseCluster(res?.data);
       })
       .catch((e) => {
-        let message = e?.response?.data;
+        let message = e?.response?.data?.message;
         this.setState({
           alert: { open: true, severity: "error", message },
         });
