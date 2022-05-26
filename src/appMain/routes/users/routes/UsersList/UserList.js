@@ -743,7 +743,7 @@ class UserList extends React.Component {
         >
           <DialogContent>
             Password reset link for user{" "}
-            <a style={{ color: "teal" }}>{this.state.passwordResetUserName}</a>
+            <a style={{ color: "teal" }}>{this.state.passwordResetUserName}</a>{" "}
             has been generated successfully. Use the following link to set the
             new password:
             <br />
