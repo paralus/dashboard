@@ -742,9 +742,10 @@ class UserList extends React.Component {
           maxWidth="lg"
         >
           <DialogContent>
-            Password reset link for user <a style={{ color: "teal" }}>{this.state.passwordResetUserName}</a>
-             has been generated successfully. Use the following link to set the new
-            password:
+            Password reset link for user{" "}
+            <a style={{ color: "teal" }}>{this.state.passwordResetUserName}</a>
+            has been generated successfully. Use the following link to set the
+            new password:
             <br />
             <a style={{ color: "teal" }} href={this.state.recoveryLink}>
               {this.state.recoveryLink}
@@ -752,7 +753,13 @@ class UserList extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button
-              onClick={() => this.setState({ resetPasswordOpen: false, passwordResetLink: null, passwordResetUserName: null})}
+              onClick={() =>
+                this.setState({
+                  resetPasswordOpen: false,
+                  passwordResetLink: null,
+                  passwordResetUserName: null,
+                })
+              }
               id="resetPasswordOpen"
               color="accent"
             >

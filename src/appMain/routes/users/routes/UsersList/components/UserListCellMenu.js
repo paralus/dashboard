@@ -79,12 +79,12 @@ const UserListCellMenu = ({
         </MenuItem>
         <MenuItem disableRipple>
           <RafayConfirmIconAction
-            icon={<SettingsIcon/>}
+            icon={<SettingsIcon />}
             action={(_) => handleActionClose(data, handleResetPassword)}
             confirmText={
               <>
                 <span className="mr-2">
-                  Are you sure you want to reset the password for {" "}
+                  Are you sure you want to reset the password for{" "}
                   <b>{data.metadata?.name}</b> ?
                 </span>
               </>
