@@ -5,6 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import SettingsIcon from "@material-ui/icons/Settings";
 import DesktopAccessDisabledIcon from "@material-ui/icons/DesktopAccessDisabled";
 import RafayConfirmIconAction from "components/RafayConfirmIconAction";
 
@@ -12,6 +13,7 @@ const UserListCellMenu = ({
   data,
   handleRevokeKubeconfig,
   handleGoToManageKeys,
+  handleResetPassword,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { userRole } = useSelector((state) => state?.settings);
@@ -73,6 +75,22 @@ const UserListCellMenu = ({
             }
             tooltip="Revoke Kubeconfig"
             labelText="Revoke Kubeconfig"
+          />
+        </MenuItem>
+        <MenuItem disableRipple>
+          <RafayConfirmIconAction
+            icon={<SettingsIcon/>}
+            action={(_) => handleActionClose(data, handleResetPassword)}
+            confirmText={
+              <>
+                <span className="mr-2">
+                  Are you sure you want to reset the password for {" "}
+                  <b>{data.metadata?.name}</b> ?
+                </span>
+              </>
+            }
+            tooltip="Reset Password"
+            labelText="Reset Password"
           />
         </MenuItem>
       </Menu>
