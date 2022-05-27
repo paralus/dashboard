@@ -99,7 +99,7 @@ class NewUser extends Component {
     const { user, availableGroups } = this.state;
     const { addUserWithCallback } = this.props;
     const postParams = { ...user };
-    if (!user.spec.groups) {
+    if (user.spec.groups.length === 0) {
       const defaultUsers = availableGroups.find(
         (g) => g.spec.type === "DEFAULT_USERS"
       );

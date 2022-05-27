@@ -51,10 +51,7 @@ const RolesCard = ({
                     value.metadata.name
                   )) ||
                 (hasProjectRole &&
-                  ["ADMIN", "ADMIN_READ_ONLY"].includes(value.metadata.name)) ||
-                ["NAMESPACE_ADMIN", "NAMESPACE_READ_ONLY"].includes(
-                  value.metadata.name
-                );
+                  ["ADMIN", "ADMIN_READ_ONLY"].includes(value.metadata.name));
               return (
                 <ListItem
                   key={index}

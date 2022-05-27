@@ -113,6 +113,7 @@ class Projects extends React.Component {
             roles={data?.roles}
             projectId={data?.project}
             addGroupInRole
+            namespaceNames={data?.namespaces}
           />
         ),
       },
@@ -163,11 +164,16 @@ class Projects extends React.Component {
           const roles = new Set(found.role);
           roles.add(element.role);
           found = [...roles];
+
+          const namespaces = new Set(found.namespaces);
+          namespaces.add(element.namespace);
+          found.namespaces = [...namespaces];
         } else {
           tableData.push({
             project: element.project,
             roles: [element.role],
             group: element.group,
+            namespaces: [element.namespace],
           });
         }
       }

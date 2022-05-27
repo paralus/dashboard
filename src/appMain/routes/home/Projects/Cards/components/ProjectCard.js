@@ -13,6 +13,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import RafayConfirmIconAction from "components/RafayConfirmIconAction";
 import { changeProject, deleteProject } from "actions/index";
 import RafaySnackbar from "components/RafaySnackbar";
+import DateFormat from "components/DateFormat";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -123,6 +124,12 @@ const ProjectCard = ({ data, refreshProjects }) => {
                 {data.metadata.name}
               </h2>
             </Tooltip>
+            <div className={classes.created}>
+              <span className="mr-1">Created :</span>
+              <span>
+                <DateFormat timestamp={data.metadata.createdAt} />
+              </span>
+            </div>
             <div className="p-3">
               {(isAdmin || permissions?.visibleInfra) && (
                 <div>

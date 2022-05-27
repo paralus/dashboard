@@ -119,7 +119,13 @@ class Projects extends React.Component {
       },
       {
         type: "regular",
-        value: <RolesInfo roles={data?.roles} projectId={data?.project} />,
+        value: (
+          <RolesInfo
+            roles={data?.roles}
+            projectId={data?.project}
+            namespaceNames={data?.namespaces}
+          />
+        ),
       },
       {
         type: "buttons",
@@ -168,10 +174,15 @@ class Projects extends React.Component {
           const roles = new Set(found.roles);
           roles.add(element.role);
           found.roles = [...roles];
+
+          const namespaces = new Set(found.namespaces);
+          namespaces.add(element.namespace);
+          found.namespaces = [...namespaces];
         } else {
           tableData.push({
             project: element.project,
             roles: [element.role],
+            namespaces: [element.namespace],
           });
         }
       }

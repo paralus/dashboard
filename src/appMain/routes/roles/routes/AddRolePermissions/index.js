@@ -183,11 +183,16 @@ class AddRolePermissions extends React.Component {
     let allPermissions = [];
     if (permissions && roleDetail) {
       allPermissions = this.arrayObjectRemove(permissions, "ops_star.all");
-      allPermissions = permissions.filter(function (ele) {
-        return (
-          ele.spec.scope.toLowerCase() === roleDetail.spec.scope.toLowerCase()
+      if (roleDetail.spec.scope.toLowerCase() != "namespace") {
+        allPermissions = this.arrayObjectRemove(
+          allPermissions,
+          "kubectl.namespace.read"
         );
-      });
+        allPermissions = this.arrayObjectRemove(
+          allPermissions,
+          "kubectl.namespace.write"
+        );
+      }
     }
     const config = {
       links: [

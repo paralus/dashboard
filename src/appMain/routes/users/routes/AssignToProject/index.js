@@ -61,20 +61,32 @@ class AssignToProject extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedRoles, selectedProject } = this.state;
+    const { selectedRoles, selectedProject, selectedNamespaces } = this.state;
     const roles = [];
     selectedRoles.forEach((role) => {
-      let r = {
-        project: selectedProject,
-        role: role.metadata.name,
-      };
-      roles.push(r);
+      if (role.spec.scope === "namespace") {
+        selectedNamespaces.forEach((ns) => {
+          let r = {
+            project: selectedProject,
+            role: role.metadata.name,
+            namespace: ns,
+          };
+          roles.push(r);
+        });
+      } else {
+        let r = {
+          project: selectedProject,
+          role: role.metadata.name,
+        };
+        roles.push(r);
+      }
     });
     return roles;
   };
 
   handleSaveChanges = () => {
-    const { selectedProject, selectedRoles, userId } = this.state;
+    const { selectedProject, selectedRoles, userId, selectedNamespaces } =
+      this.state;
     const { userDetail, editUserWithCallback } = this.props;
     if (selectedProject !== "ALL PROJECTS") {
       if (!selectedProject) {
@@ -89,6 +101,19 @@ class AssignToProject extends React.Component {
       this.setState({
         showAlert: true,
         alertMessage: "Please select a role",
+      });
+      return;
+    }
+    let invalidNamespace = false;
+    selectedRoles.find((r) => {
+      if (r.spec.scope === "namespace" && !selectedNamespaces) {
+        invalidNamespace = true;
+      }
+    });
+    if (invalidNamespace) {
+      this.setState({
+        showAlert: true,
+        alertMessage: "Please select a namespace",
       });
       return;
     }
