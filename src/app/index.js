@@ -135,9 +135,11 @@ class App extends React.Component {
           <title>{title}</title>
           <link rel="icon" type="image/x-icon" href={favicon_src} />
         </Helmet>
+          {/*
         {hasAccess && !UserSession.noRolesUser && (
           <Sidebar onToggleCollapsedNav={this.onToggleCollapsedNav} />
         )}
+           */}
         <div className="app-main-container">
           <Header
             drawerType={drawerType}
