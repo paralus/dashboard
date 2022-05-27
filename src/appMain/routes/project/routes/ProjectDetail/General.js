@@ -3,6 +3,7 @@ import { Paper, TextField, Button } from "@material-ui/core";
 import { useParams } from "react-router";
 import RafaySnackbar from "components/RafaySnackbar";
 import { updateProject } from "actions/index";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 const GeneralProject = ({ project }) => {
   const [alert, setAlert] = useState({
@@ -126,7 +127,7 @@ const GeneralProject = ({ project }) => {
       <RafaySnackbar
         open={alert.show}
         severity={alert.severity}
-        message={alert.message}
+        message={capitalizeFirstLetter(alert.message)}
         closeCallback={closeAlert}
       />
     </Paper>

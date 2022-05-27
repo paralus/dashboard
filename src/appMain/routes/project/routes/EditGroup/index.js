@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
 import RafaySnackbar from "components/RafaySnackbar";
 import ProjectRoleWidget from "./ProjectRoleWidget";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 class EditGroup extends React.Component {
   constructor(props, context) {
@@ -212,7 +213,7 @@ class EditGroup extends React.Component {
         <RafaySnackbar
           open={showAlert}
           severity="error"
-          message={alertMessage}
+          message={capitalizeFirstLetter(alertMessage)}
           closeCallback={this.handleResponseErrorClose}
         />
       </>

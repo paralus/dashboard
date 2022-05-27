@@ -14,6 +14,7 @@ import DataTableToolbar from "components/RafayTable/DataTableToolbar";
 import DataTable from "components/RafayTable/DataTable";
 import RafaySnackbar from "components/RafaySnackbar";
 import RafayInfoCard from "components/RafayInfoCard";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 const style = {
   nameLabel: {
@@ -222,7 +223,7 @@ class Groups extends React.Component {
         </Paper>
         <RafaySnackbar
           open={alertOpen}
-          message={alertMessage}
+          message={capitalizeFirstLetter(alertMessage)}
           severity={alertSeverity}
           closeCallback={this.handleResponseErrorClose}
         />

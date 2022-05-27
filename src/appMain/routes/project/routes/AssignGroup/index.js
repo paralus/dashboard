@@ -15,6 +15,7 @@ import ResourceBreadCrumb from "components/ResourceBreadCrumb";
 import RafaySnackbar from "components/RafaySnackbar";
 import RafayPageHeader from "components/RafayPageHeader";
 import ProjectRoleWidget from "./ProjectRoleWidget";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 class AssignGroup extends React.Component {
   constructor(props, context) {
@@ -216,7 +217,7 @@ class AssignGroup extends React.Component {
         <RafaySnackbar
           open={showAlert}
           severity="error"
-          message={alertMessage}
+          message={capitalizeFirstLetter(alertMessage)}
           closeCallback={this.handleResponseErrorClose}
         />
       </>

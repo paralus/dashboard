@@ -10,6 +10,7 @@ import {
 import RafaySnackbar from "components/RafaySnackbar";
 import { useDispatch } from "react-redux";
 import { getOrgKubeconfigSettings } from "actions/index";
+import { capitalizeFirstLetter } from "../../../../../../utils";
 
 const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
   if (!settings) return null;
@@ -180,7 +181,7 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
       <RafaySnackbar
         open={alert.show}
         severity={alert.severity}
-        message={alert.message}
+        message={capitalizeFirstLetter(alert.message)}
         closeCallback={closeAlert}
       />
     </Paper>

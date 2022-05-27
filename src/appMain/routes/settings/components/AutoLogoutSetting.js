@@ -3,6 +3,7 @@ import { TextField, Paper, Button, Switch } from "@material-ui/core";
 import RafaySnackbar from "components/RafaySnackbar";
 import { updateOragnization } from "actions/index";
 import * as R from "ramda";
+import { capitalizeFirstLetter } from "../../../../utils";
 
 function AutoLogoutSetting({ partner, organization }) {
   const [alert, setAlert] = useState({
@@ -104,7 +105,7 @@ function AutoLogoutSetting({ partner, organization }) {
       <RafaySnackbar
         open={alert.show}
         severity={alert.severity}
-        message={alert.message}
+        message={capitalizeFirstLetter(alert.message)}
         closeCallback={closeAlert}
       />
     </Paper>

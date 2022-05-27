@@ -14,6 +14,7 @@ import DataTableToolbar from "components/RafayTable/DataTableToolbar";
 import DataTable from "components/RafayTable/DataTable";
 import RafayInfoCard from "components/RafayInfoCard";
 import RolesInfo from "components/RolesInfo";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 class AssignedUsers extends React.Component {
   constructor(props, context) {
@@ -205,7 +206,7 @@ class AssignedUsers extends React.Component {
         </Paper>
         <RafaySnackbar
           open={showError}
-          message={deleteError}
+          message={capitalizeFirstLetter(deleteError)}
           closeCallback={this.handleResponseErrorClose}
         />
       </div>

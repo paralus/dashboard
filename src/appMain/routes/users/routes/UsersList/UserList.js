@@ -34,7 +34,7 @@ import {
   USER_TYPE_LABELS,
 } from "constants/Constant";
 import Spinner from "components/Spinner/Spinner";
-import { parseError, getTimeFromNow } from "utils";
+import { parseError, getTimeFromNow, capitalizeFirstLetter } from "utils";
 import DataTableDynamic from "components/RafayTable/DataTableDynamic";
 import StatusIndicator from "components/StatusIndicator";
 import DataTableToolbar from "./components/DataTableToolbar";
@@ -400,7 +400,11 @@ class UserList extends React.Component {
       return null;
     }
     if (typeof this.props.users.error === "string") {
-      return <span id="message-id">{this.props.users.error}</span>;
+      return (
+        <span id="message-id">
+          {capitalizeFirstLetter(this.props.users.error)}
+        </span>
+      );
     }
     alert("getErroMessage " + JSON.stringify(this.props.users.error));
     if (typeof this.props.users.error === {}) {
@@ -640,7 +644,7 @@ class UserList extends React.Component {
         <RafaySnackbar
           open={this.state.showAlert}
           severity={this.state.alertSeverity}
-          message={this.state.alertMessage}
+          message={capitalizeFirstLetter(this.state.alertMessage)}
           closeCallback={this.handleRafaySnackbarClose}
         />
         <Snackbar

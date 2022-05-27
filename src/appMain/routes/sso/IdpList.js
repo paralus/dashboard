@@ -9,6 +9,7 @@ import RafayInfoCard from "components/RafayInfoCard";
 import DataTableToolbar from "components/RafayTable/DataTableToolbar";
 import DataTable from "components/RafayTable/DataTable";
 import { deleteIdentityProvider, getAllIdentityProviders } from "actions/IDPs";
+import { capitalizeFirstLetter } from "../../../utils";
 
 const style = {
   helpText: {
@@ -211,7 +212,7 @@ class IdpList extends React.Component {
           </Paper>
           <RafaySnackbar
             open={alertOpen}
-            message={alertMessage}
+            message={capitalizeFirstLetter(alertMessage)}
             severity={alertSeverity}
             closeCallback={this.handleResponseErrorClose}
           />

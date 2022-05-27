@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import RafaySnackbar from "components/RafaySnackbar";
 import TransferList from "./RafayTransferList/index";
 import SelectGroupList from "./RafayTransferList/SelectGroupList";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 class AddToGroups extends React.Component {
   constructor(props, context) {
@@ -103,7 +104,7 @@ class AddToGroups extends React.Component {
         <RafaySnackbar
           open={showError}
           severity="error"
-          message={deleteError}
+          message={capitalizeFirstLetter(deleteError)}
           closeCallback={this.handleResponseErrorClose}
         />
       </>

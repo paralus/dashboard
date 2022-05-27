@@ -14,6 +14,7 @@ import ResourceBreadCrumb from "components/ResourceBreadCrumb";
 import RafaySnackbar from "components/RafaySnackbar";
 import RafayPageHeader from "components/RafayPageHeader";
 import TransferList from "./RafayTransferList/index";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 class AddRolePermissions extends React.Component {
   constructor(props, context) {
@@ -260,7 +261,7 @@ class AddRolePermissions extends React.Component {
         <RafaySnackbar
           open={showError}
           severity="error"
-          message={deleteError}
+          message={capitalizeFirstLetter(deleteError)}
           closeCallback={this.handleResponseErrorClose}
         />
       </>

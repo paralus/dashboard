@@ -10,6 +10,7 @@ import {
 import RafaySnackbar from "components/RafaySnackbar";
 import Profile from "./components/Profile";
 import KubeconfigValidity from "./components/KubeconfigValidity";
+import { capitalizeFirstLetter } from "../../../../../utils";
 
 class UserProfile extends Component {
   constructor(props) {
@@ -163,7 +164,7 @@ class UserProfile extends Component {
         <RafaySnackbar
           open={showAlert}
           severity={alertSeverity}
-          message={alertMessage}
+          message={capitalizeFirstLetter(alertMessage)}
           closeCallback={this.handleResponseErrorClose}
         />
       </>

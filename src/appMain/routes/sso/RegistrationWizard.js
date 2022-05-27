@@ -39,6 +39,7 @@ import * as Yup from "yup";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
 import RafayWizard from "components/RafayWizard";
 import { downloadCertificate } from "./util";
+import { capitalizeFirstLetter } from "../../../utils";
 import UploadMetadata from "./UploadMetadata";
 
 const getSpConfigSchema = (editMode) => {
@@ -295,7 +296,7 @@ const RegistrationWizard = (props) => {
       .catch((error) => {
         setError(
           error.response.data
-            ? error.response.data.message
+            ? capitalizeFirstLetter(error.response.data.message)
             : "Unable to process request"
         );
         setLoading(false);
@@ -323,7 +324,7 @@ const RegistrationWizard = (props) => {
       .catch((error) => {
         setError(
           error.response.data
-            ? error.response.data.message
+            ? capitalizeFirstLetter(error.response.data.message)
             : "Unable to process request"
         );
         setLoading(false);
@@ -343,7 +344,7 @@ const RegistrationWizard = (props) => {
       .catch((error) => {
         setError(
           error.response.data && error.response.data.details.length
-            ? error.response.data.details[0].detail
+            ? capitalizeFirstLetter(error.response.data.details[0].detail)
             : "Unable to process request"
         );
         setLoading(false);
@@ -363,12 +364,9 @@ const RegistrationWizard = (props) => {
   };
 
   const transformRequest = (data) => {
-    let scope =
-      editMode && data["group_attribute_name"]
-        ? data["group_attribute_name"]
-        : data["group_attribute_name"]
-        ? data["group_attribute_name"].split(",").map((e) => e.trim())
-        : [];
+    let scope = data["group_attribute_name"]
+      ? data["group_attribute_name"].split(",").map((e) => e.trim())
+      : [];
     let payload = {
       metadata: {
         name: data["name"],
@@ -448,7 +446,7 @@ const RegistrationWizard = (props) => {
                   clientId: idpResponse?.spec?.clientId,
                   clientSecret: idpResponse?.spec?.clientSecret,
                   providerName: idpResponse?.spec?.providerName,
-                  group_attribute_name: idpResponse?.spec?.scopes,
+                  group_attribute_name: idpResponse?.spec?.scopes.join(","),
                   issuer_url: idpResponse?.spec?.issuerUrl,
                   auth_url: idpResponse?.spec?.authUrl,
                   token_url: idpResponse?.spec?.tokenUrl,
@@ -774,12 +772,13 @@ const RegistrationWizard = (props) => {
                   <Formik
                     key="second"
                     initialValues={{
-                      metadata_url:
-                        idpPayload?.spec?.providerName === "generic"
-                          ? idpResponse?.spec?.mapperUrl
-                          : `https://github.com/RafayLabs/rcloud-base/blob/main/_kratos/conf/` +
-                            idpPayload?.spec?.providerName +
-                            ".jsonnet",
+                      metadata_url: idpResponse?.spec?.mapperUrl
+                        ? idpResponse?.spec?.mapperUrl
+                        : idpPayload?.spec?.providerName === "generic"
+                        ? idpResponse?.spec?.mapperUrl
+                        : `https://raw.githubusercontent.com/RafayLabs/rcloud-base/main/_kratos/oidc-mappers/` +
+                          idpPayload?.spec?.providerName +
+                          ".jsonnet",
                     }}
                     validationSchema={MetaDataUrlSchema}
                     innerRef={secondStep}

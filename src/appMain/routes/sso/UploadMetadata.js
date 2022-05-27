@@ -28,6 +28,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { uploadMetaDataFile } from "actions/IDPs";
 import RafaySnackbar from "components/RafaySnackbar";
+import { capitalizeFirstLetter } from "../../../utils";
 
 class UploadMedaData extends React.Component {
   constructor(props) {
@@ -122,7 +123,7 @@ class UploadMedaData extends React.Component {
         <RafaySnackbar
           open={showAlert}
           severity={alertSeverity}
-          message={alertMessage}
+          message={capitalizeFirstLetter(alertMessage)}
           closeCallback={this.handleResponseErrorClose}
         />
       </div>
