@@ -415,6 +415,10 @@ export function revokeSelfKubeconfig(accountId) {
   return http(`v2/sentry/kubeconfig/revoke`, "", true).post("", req);
 }
 
+export function resetPassword(email) {
+  return http("auth").get(`user/${email}/forgotpassword`);
+}
+
 export function resetUser() {
   return { type: "reset_user" };
 }

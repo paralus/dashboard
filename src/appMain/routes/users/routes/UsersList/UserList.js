@@ -1,5 +1,4 @@
 import React from "react";
-
 import keycode from "keycode";
 import { Dialog, DialogActions, DialogContent } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
@@ -23,6 +22,7 @@ import {
   deleteUser,
   resetUserDeleteResponse,
   revokeKubeconfig,
+  resetPassword,
   getGroups,
 } from "actions/index";
 import ProjectList from "components/ProjectList";
@@ -137,6 +137,9 @@ class UserList extends React.Component {
       userListData: [],
       isTotpEnabled: false,
       columnLabels: [],
+      resetPasswordOpen: false,
+      passwordResetLink: null,
+      passwordResetUserName: null,
     };
   }
 
@@ -395,6 +398,36 @@ class UserList extends React.Component {
     }
   };
 
+  handleResetPassword = (user) => {
+    if (user?.metadata.name) {
+      resetPassword(user.metadata.name)
+        .then((resp) => {
+          const recoveryLink = resp?.data?.recoveryLink;
+          this.setState({
+            showAlert: true,
+            resetPasswordOpen: true,
+            recoveryLink,
+            passwordResetUserName: user.metadata.name,
+            alertMessage: (
+              <>
+                <span className="mr-2">Password reset link generated for</span>
+                <b>{user.metadata.name}</b>
+              </>
+            ),
+            alertSeverity: "success",
+          });
+        })
+        .catch((error) => {
+          this.setState({
+            showAlert: true,
+            recoveryLink: null,
+            alertMessage: parseError(error) || "Unexpected Error",
+            alertSeverity: "error",
+          });
+        });
+    }
+  };
+
   getErrorMessage = () => {
     if (!this.props.users.error) {
       return null;
@@ -545,6 +578,7 @@ class UserList extends React.Component {
           data={data}
           handleRevokeKubeconfig={this.handleRevokeKubeconfig}
           handleGoToManageKeys={this.handleGoToManageKeys}
+          handleResetPassword={this.handleResetPassword}
         />
       </div>
     );
@@ -699,6 +733,38 @@ class UserList extends React.Component {
             <Button
               onClick={() => this.setState({ newUserOpen: false })}
               id="newUserOpen"
+              color="accent"
+            >
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog
+          open={this.state.resetPasswordOpen || false}
+          onBackdropClick={() => this.setState({ resetPasswordOpen: false })}
+          maxWidth="lg"
+        >
+          <DialogContent>
+            Password reset link for user{" "}
+            <a style={{ color: "teal" }}>{this.state.passwordResetUserName}</a>{" "}
+            has been generated successfully. Use the following link to set the
+            new password:
+            <br />
+            <a style={{ color: "teal" }} href={this.state.recoveryLink}>
+              {this.state.recoveryLink}
+            </a>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() =>
+                this.setState({
+                  resetPasswordOpen: false,
+                  passwordResetLink: null,
+                  passwordResetUserName: null,
+                })
+              }
+              id="resetPasswordOpen"
               color="accent"
             >
               Close
