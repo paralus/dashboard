@@ -41,7 +41,7 @@ export function getInitProjects() {
         let currentProject = null;
         if (cachedProject) {
           const found = response.data?.items?.find(
-            (p) => p.metadata.id === cachedProject
+            (p) => p.metadata.name === cachedProject
           );
           if (found) {
             currentProject = found;
@@ -68,7 +68,7 @@ export function getInitProjects() {
         });
         dispatch({
           type: "set_session_current_project",
-          payload: currentProject.id,
+          payload: currentProject,
         });
       })
       .catch((error) => {
