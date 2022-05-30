@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { RoleTypes } from "constants/RoleTypes";
+// import { RoleTypes } from "constants/RoleTypes";
 
 function RolesInfo({
-  roles,
   projectId,
   addGroupInRole = null,
-  namespaceNames = [],
+  roleInfo,
 }) {
-  const [namespacesList, setNamespacesList] = useState(namespaceNames);
+  const [namespacesList, setNamespacesList] = useState([]);
 
   const getNamespaceNames = () => {
-    if (!roles?.length) return [];
+    if (!roleInfo?.length) return [];
 
-    const selectedNamespaces = roles?.reduce((acc, curr) => {
-      const { role, namespace_id } = curr;
-      if (role?.name?.includes("NAMESPACE") && namespace_id) {
+    const selectedNamespaces = roleInfo?.reduce((acc, curr) => {
+      const { roleName, namespace_id } = curr;
+      if (roleName.includes("NAMESPACE") && namespace_id) {
         const namespace = thisProjectNamespaces?.find(
           (pn) => pn.metadata?.id === namespace_id
         );
@@ -27,21 +26,20 @@ function RolesInfo({
   };
 
   useEffect(() => {
-    const dataRoles = roles?.map((r) => r?.role?.name);
+    const dataRoles = roleInfo?.map((r) => r?.roleName);
     const uniqueDataRoles = [...new Set(dataRoles)];
     const isNamespaceRole = uniqueDataRoles?.join().includes("NAMESPACE");
 
     if (isNamespaceRole) setNamespacesList(getNamespaceNames());
-  }, [roles]);
+  }, [roleInfo]);
 
   const getRoleStrings = () => {
-    const parsedRoles = roles.map((role) => {
-      let roleString = RoleTypes[role];
+    const parsedRoles = roleInfo.map((role) => {
+      let roleString = role.roleName;
       if (roleString === undefined) {
         roleString = role;
       }
-      if (role.includes("NAMESPACE") || namespacesList.length > 0)
-        roleString += ` [ ${namespacesList.join(", ")} ]`;
+        roleString += ` [ ${role.namespaces.join(", ")} ]`;
       if (addGroupInRole && role.group) roleString += ` [ GROUP: ${role} ]`;
       return roleString;
     });
