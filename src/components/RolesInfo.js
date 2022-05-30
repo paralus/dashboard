@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { RoleTypes } from "constants/RoleTypes";
 
-function RolesInfo({
-  projectId,
-  addGroupInRole = null,
-  roleInfo,
-}) {
+function RolesInfo({ projectId, addGroupInRole = null, roleInfo }) {
   const [namespacesList, setNamespacesList] = useState([]);
 
   const getNamespaceNames = () => {
@@ -39,7 +35,7 @@ function RolesInfo({
       if (roleString === undefined) {
         roleString = role;
       }
-        roleString += ` [ ${role.namespaces.join(", ")} ]`;
+      roleString += ` [ ${role.namespaces.join(", ")} ]`;
       if (addGroupInRole && role.group) roleString += ` [ GROUP: ${role} ]`;
       return roleString;
     });

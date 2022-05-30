@@ -122,10 +122,10 @@ class Projects extends React.Component {
         type: "regular",
         value: (
           <RolesInfo
-          projectId={data?.project}
-          addGroupInRole
-          roleInfo = {data?.roleInfo}
-        />
+            projectId={data?.project}
+            addGroupInRole
+            roleInfo={data?.roleInfo}
+          />
         ),
       },
       {
@@ -164,8 +164,10 @@ class Projects extends React.Component {
     data.shift();
 
     if (data.length > 0) {
-      data.forEach(e => {
-        let similarElement = processed.find(element => (element.project === e.project && element.role === e.role));
+      data.forEach((e) => {
+        let similarElement = processed.find(
+          (element) => element.project === e.project && element.role === e.role
+        );
         if (!similarElement) {
           processed.push({
             project: e.project ? e.project : "ALL PROJECTS",
@@ -173,10 +175,12 @@ class Projects extends React.Component {
             group: e?.group,
             namespaces: e.namespace ? [e.namespace] : [],
           });
-        }
-        else {
-          const SimilarElementIndex = processed.findIndex(object => {
-            return object.project === similarElement.project && object.role === similarElement.role;
+        } else {
+          const SimilarElementIndex = processed.findIndex((object) => {
+            return (
+              object.project === similarElement.project &&
+              object.role === similarElement.role
+            );
           });
           similarElement.namespaces.push(e.namespace);
           processed[SimilarElementIndex] = similarElement;
@@ -184,7 +188,7 @@ class Projects extends React.Component {
       });
     }
     return processed;
-  }
+  };
 
   processProjectWithRoles = (data) => {
     let processed = [];
@@ -193,34 +197,37 @@ class Projects extends React.Component {
     processed.push({
       project: data[0]?.project,
       group: data[0]?.group,
-      roleInfo: [{ roleName: data[0].role, namespaces: data[0].namespaces }]
+      roleInfo: [{ roleName: data[0].role, namespaces: data[0].namespaces }],
     });
 
     // remove 1st element from data array
     data.shift();
 
     if (data.length > 0) {
-      data.forEach(e => {
-        let similarElement = processed.find(element => (element.project === e.project));
+      data.forEach((e) => {
+        let similarElement = processed.find(
+          (element) => element.project === e.project
+        );
         if (!similarElement) {
           processed.push({
             project: e.project,
             group: e?.group,
-            roleInfo: [{ roleName: e.role, namespaces: e.namespaces }]
+            roleInfo: [{ roleName: e.role, namespaces: e.namespaces }],
           });
-        }
-        else {
-          const SimilarElementIndex = processed.findIndex(object => {
+        } else {
+          const SimilarElementIndex = processed.findIndex((object) => {
             return object.project === similarElement.project;
           });
-          similarElement.roleInfo.push({ roleName: e.role, namespaces: e.namespaces });
+          similarElement.roleInfo.push({
+            roleName: e.role,
+            namespaces: e.namespaces,
+          });
           processed[SimilarElementIndex] = similarElement;
         }
       });
     }
     return processed;
-  }
-
+  };
 
   render() {
     const { showError, deleteError } = this.state;
@@ -231,8 +238,9 @@ class Projects extends React.Component {
       groupDetail.spec.projectNamespaceRoles &&
       groupDetail.spec.projectNamespaceRoles.length > 0
     ) {
-
-      tableData = this.processProjectWithNamespaces(groupDetail.spec.projectNamespaceRoles);
+      tableData = this.processProjectWithNamespaces(
+        groupDetail.spec.projectNamespaceRoles
+      );
       if (tableData.length > 0)
         tableData = this.processProjectWithRoles(tableData);
     }
