@@ -108,7 +108,7 @@ class Header extends React.Component {
     return (
       <AppBar className="app-main-header">
         <Toolbar className="app-toolbar" disableGutters={false}>
-            {/*
+          {/*
           {!this.props.hideMenuIcon && (
             <IconButton
               aria-label="Delete"

@@ -9,16 +9,12 @@ const Footer = ({ name }) => {
     history.push(`/app/edges${edge ? `/${name}` : ""}`);
   };
   const footerStyle = {
-      height: "60px",
-      marginLeft: "-1rem"
+    height: "60px",
+    marginLeft: "-1rem",
   };
 
   return (
-    <Paper
-      className={`nav-footer`}
-      style={footerStyle}
-      elevation={10}
-    >
+    <Paper className={`nav-footer`} style={footerStyle} elevation={10}>
       <div className="d-flex justify-content-between h-100 p-0">
         <div />
         <div className="d-flex align-items-center">
