@@ -188,8 +188,6 @@ const settings = (state = initialSettings, action) => {
         isChangeOrgSuccess: true,
       };
     case "user_login_error":
-      // console.log('user_login_error : ');
-      // console.log(action.payload);
       state.auth.error = action.payload;
       state.isLoginFailed = true;
       return { ...state };
@@ -328,7 +326,6 @@ const settings = (state = initialSettings, action) => {
         clusterStatusData: action.payload.data,
       };
     case "get_metro_list_success":
-      console.log("get_metro_list_success", action.payload);
       return {
         ...state,
         metroList: action.payload.data.items,
@@ -510,7 +507,6 @@ const settings = (state = initialSettings, action) => {
         isEditUserSuccess: true,
       };
     case "user_response_error":
-      // console.log('user_response_error');
       state.users.error = action.payload;
       state.users.isUserResponseError = true;
       state.isUserResponseError = true;
