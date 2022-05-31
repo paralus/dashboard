@@ -105,10 +105,6 @@ const SideNavContent = (_) => {
             href: "#/app/edges",
             label: "Clusters",
           },
-          {
-            href: "#/app/locations",
-            label: "Locations",
-          },
         ]}
       />
       <div style={{ paddingBottom: "500px" }} />

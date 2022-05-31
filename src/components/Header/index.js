@@ -108,6 +108,7 @@ class Header extends React.Component {
     return (
       <AppBar className="app-main-header">
         <Toolbar className="app-toolbar" disableGutters={false}>
+          {/*
           {!this.props.hideMenuIcon && (
             <IconButton
               aria-label="Delete"
@@ -120,6 +121,7 @@ class Header extends React.Component {
               />
             </IconButton>
           )}
+             */}
           <div className="text-center" style={{ minWidth: "143px" }}>
             <a
               className="app-logo"

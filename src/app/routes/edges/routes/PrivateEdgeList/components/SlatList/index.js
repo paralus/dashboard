@@ -200,25 +200,6 @@ const SlatList = (props) => {
                 </div>
               </div>
             )}
-            <div className="row mt-2">
-              <div className="col-md-12">
-                <span style={{ fontWeight: "500", marginRight: "5px" }}>
-                  Location :{" "}
-                </span>
-                <span style={{ fontSize: "12px" }}>
-                  {props.getEdgeLocation(cluster)}
-                </span>
-                <i
-                  className="zmdi zmdi-gps-dot"
-                  onClick={() => props.callEdgeLocation(cluster)}
-                  style={{
-                    marginLeft: "5px",
-                    cursor: "pointer",
-                    color: "teal",
-                  }}
-                />
-              </div>
-            </div>
           </div>
 
           <div className="col-md-1 p-0">

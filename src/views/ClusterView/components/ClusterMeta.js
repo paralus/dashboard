@@ -16,7 +16,6 @@ import LabelItem from "./LabelTaintItem";
 import ClusterLabelEditor from "./ClusterLabelEditor";
 import { ClusterViewContext } from "../ClusterViewContexts";
 import HideTheChildren from "../../../components/HideTheChildren";
-import EditLocation from "./EditLocation";
 import { safelyParseJSON, transformLabelsObject, useSnack } from "utils";
 import TruncatedTextWithCopy from "./TruncatedTextWithCopy";
 
@@ -75,48 +74,6 @@ const getImage = (i) => (type) => {
   }
 };
 
-const GetLocation = ({ edge, setOpenEditLocation }) => {
-  if (!edge) return null;
-  const metro = edge.spec.Metro;
-  const OpenBtn = ({ label }) => (
-    <Button
-      variant="contained"
-      dense="true"
-      size="small"
-      color="primary"
-      onClick={(_) => setOpenEditLocation(true)}
-    >
-      <span>{label}</span>
-    </Button>
-  );
-  if (!metro) return <OpenBtn label="Add" />;
-
-  const [show, setShow] = useState(false);
-  const toggleLocation = (e) => {
-    e.preventDefault();
-    setShow((s) => !s);
-  };
-
-  return (
-    <React.Fragment>
-      <Link component="button" onClick={toggleLocation}>
-        {metro.name}
-      </Link>
-      {show && (
-        <React.Fragment>
-          <div>
-            {metro.city}, {metro.country}
-          </div>
-          <div>
-            {metro.latitude}, {metro.longitude} (Lat, Lon)
-          </div>
-          {edge.spec.clusterType === "manual" && <OpenBtn label="Edit" />}
-        </React.Fragment>
-      )}
-    </React.Fragment>
-  );
-};
-
 function getPublicIps(edge) {
   const publicIps = [];
   edge.nodes.forEach((node) => {
@@ -156,7 +113,6 @@ function ClusterMeta({ edge, refreshEdge, dispatch }) {
   const { a, c, i, fromOps } = useContext(ClusterViewContext);
   const classes = useStyles();
   const [edgeObj, setEdgeObj] = useState({ ...edge });
-  const [openEditLocation, setOpenEditLocation] = useState(false);
   const [metroNotConfigured, setMetroNotConfigured] = useState(false);
   const [openLabelEditor, setOpenLabelEditor] = useState(false);
   const type = getType(edge.spec.clusterType);
@@ -183,7 +139,6 @@ function ClusterMeta({ edge, refreshEdge, dispatch }) {
     }
     if (edgeObj.metadata.name) {
       a.updateCluster(edgeObj).then(() => {
-        setOpenEditLocation(false);
         refreshEdge();
       });
     }
@@ -225,15 +180,6 @@ function ClusterMeta({ edge, refreshEdge, dispatch }) {
                 params: edge.spec.params,
               })}
             </div>
-          }
-        />
-        <MetaItem
-          label="Location"
-          value={
-            <GetLocation
-              edge={edge}
-              setOpenEditLocation={setOpenEditLocation}
-            />
           }
         />
 
@@ -292,16 +238,6 @@ function ClusterMeta({ edge, refreshEdge, dispatch }) {
             refreshEdge={refreshEdge}
           />
         </HideTheChildren>
-        <EditLocation
-          open={openEditLocation}
-          locationField={React.createElement(c.LocationField, {
-            edge: edgeObj,
-            handleEdgeChange,
-            metroNotConfigured,
-          })}
-          handleClose={(_) => setOpenEditLocation(false)}
-          handleSave={handleEdgeSave}
-        />
       </Grid>
     </Box>
   );

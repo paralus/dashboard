@@ -1,22 +1,20 @@
 import React from "react";
 import { Paper, Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 const Footer = ({ name }) => {
-  const drawerType = useSelector((s) => s.settings.drawerType);
   const history = useHistory();
   const handleExit = (edge) => {
     history.push(`/app/edges${edge ? `/${name}` : ""}`);
   };
+  const footerStyle = {
+    height: "60px",
+    marginLeft: "-1rem",
+  };
 
   return (
-    <Paper
-      className={`nav-footer ${drawerType}`}
-      style={{ height: "60px" }}
-      elevation={10}
-    >
+    <Paper className={`nav-footer`} style={footerStyle} elevation={10}>
       <div className="d-flex justify-content-between h-100 p-0">
         <div />
         <div className="d-flex align-items-center">
