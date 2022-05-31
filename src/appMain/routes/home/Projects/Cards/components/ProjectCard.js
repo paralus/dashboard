@@ -75,7 +75,7 @@ const ProjectCard = ({ data, refreshProjects }) => {
     refreshProjects();
     setAlert({
       show: true,
-      message: "Project Delete Sucessful",
+      message: "Project Delete Successful",
       severity: "success",
     });
   };

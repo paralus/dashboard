@@ -114,7 +114,6 @@ export function getUserSessionInfo() {
       .catch((error) => {
         console.log(error);
         dispatch({ type: "get_user_failed", payload: error.response });
-        dispatch({ type: "user_session_expired" });
         if (error.response?.status === 403) {
           dispatch({ type: "user_session_expired" });
         }
