@@ -45,9 +45,8 @@ class EditProject extends React.Component {
     const { groupDetail, projectsList } = props;
     if (groupDetail) {
       newState.groupName = groupDetail.metadata.name;
-      if (!newState.editRoles) {
+      if (groupDetail && !state.isRoleModified)
         newState.editRoles = groupDetail.spec.projectNamespaceRoles;
-      }
     }
     if (projectsList && !newState.selectedProject) {
       if (newState.projectId === "all") {
@@ -106,7 +105,11 @@ class EditProject extends React.Component {
       }
     });
 
-    const tempNamespaces = roles.map((r) => r.namespace);
+    const tempNamespaces = [];
+    roles.forEach((role) => {
+      if (role.namespace && role.namespace !== undefined)
+        tempNamespaces.push(role.namespace);
+    });
     this.setState({ selectedNamespaces: tempNamespaces });
     return roles;
   };
@@ -117,9 +120,11 @@ class EditProject extends React.Component {
 
     let invalidNamespace = false;
     selectedRoles.find((r) => {
-      if (r.spec.scope === "namespace" && !selectedNamespaces) {
+      if (
+        r.spec.scope === "namespace" &&
+        (!selectedNamespaces || selectedNamespaces.length < 1)
+      )
         invalidNamespace = true;
-      }
     });
     if (invalidNamespace) {
       this.setState({
@@ -129,7 +134,6 @@ class EditProject extends React.Component {
       return;
     }
     groupDetail.spec.projectNamespaceRoles = this.transformRoles();
-
     editGroupWithCallback(
       groupDetail,
       this.successCallback,

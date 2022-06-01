@@ -27,6 +27,12 @@ class Projects extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { getUserDetail } = this.props;
+    const { userId } = this.state;
+    getUserDetail(userId);
+  }
+
   static getDerivedStateFromProps(props, state) {
     const { isAddUserError, error, resetProjectError } = props;
     if (isAddUserError) {

@@ -64,7 +64,6 @@ export function getUserDetail(name) {
     http("auth")
       .get(`user/${name}`)
       .then((response) => {
-        console.log(response);
         dispatch({ type: "get_user_detail_success", payload: response });
       })
       .catch((error) => {

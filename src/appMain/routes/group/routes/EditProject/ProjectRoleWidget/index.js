@@ -56,8 +56,12 @@ const ProjectRoleWidget = ({
     }
 
     if (editRoles && editRoles.length > 0) {
-      const tempCurrentNamespaces = [];
-      editRoles.forEach((role) => tempCurrentNamespaces.push(role.namespace));
+      let tempCurrentNamespaces = [];
+      editRoles.forEach((role) => {
+        if (role.namespace && role.namespace !== undefined)
+          tempCurrentNamespaces.push(role.namespace);
+      });
+      tempCurrentNamespaces = [...new Set(tempCurrentNamespaces)];
       setCurrentNamespaces(tempCurrentNamespaces);
       onNamespacesChange(tempCurrentNamespaces);
     }

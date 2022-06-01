@@ -34,6 +34,7 @@ const ProjectRoleWidget = ({
   handleRolesChange,
   editRoles,
   editProject,
+  setSelectedRoles,
 }) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
@@ -51,14 +52,25 @@ const ProjectRoleWidget = ({
         });
       const uniqueRoles = [...new Set(editChecked)];
       setChecked(uniqueRoles);
-      handleRolesChange(uniqueRoles);
+      // handleRolesChange(uniqueRoles);
     }
 
     if (editRoles && editRoles.length > 0) {
       const tempCurrentNamespaces = [];
-      editRoles.forEach((role) => tempCurrentNamespaces.push(role.namespace));
+      editRoles.forEach((role) => {
+        if (role.namespace && role.namespace !== undefined)
+          tempCurrentNamespaces.push(role.namespace);
+      });
       setCurrentNamespaces(tempCurrentNamespaces);
       onNamespacesChange(tempCurrentNamespaces);
+
+      const editChecked = editRoles
+        .filter((r) => r.project === editProject)
+        .map((ar) => {
+          return systemRoles.find((r) => r.metadata.name === ar.role);
+        });
+      const uniqueRoles = [...new Set(editChecked)];
+      setSelectedRoles(uniqueRoles);
     }
   }, [editRoles]);
 
