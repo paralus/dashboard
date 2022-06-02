@@ -51,7 +51,7 @@ class App extends Component {
   render() {
     //This is the starting point for console app, continue to post code from console ..
     const { match, location, isSessionExpired, UserSession } = this.props;
-    if (isSessionExpired === "UNKNOWN") return null;
+    //if (isSessionExpired === "UNKNOWN") return null;
 
     if (isSessionExpired) {
       if (
