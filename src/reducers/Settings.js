@@ -540,7 +540,7 @@ const settings = (state = initialSettings, action) => {
       return {
         ...state,
         partnerDetail: action.payload,
-        isSessionExpired: false
+        isSessionExpired: false,
       };
     case "user_forgotpassword_success":
       return {
