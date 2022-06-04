@@ -19,7 +19,6 @@ const manageNamespaces = (namespaceArray) => {
 const formatProjectRoles = (roles) => {
   const output = {};
   (roles || []).forEach((item) => {
-    // const nsarray = item?.project;
     const nsarray = [item?.namespace];
     if (!output[item?.project]) {
       if (["ADMIN", "ADMIN_READ_ONLY"].includes(item?.role)) {

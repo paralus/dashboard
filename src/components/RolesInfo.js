@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { RoleTypes } from "constants/RoleTypes";
 
 function RolesInfo({ projectId, addGroupInRole = null, roleInfo }) {
   const [namespacesList, setNamespacesList] = useState([]);

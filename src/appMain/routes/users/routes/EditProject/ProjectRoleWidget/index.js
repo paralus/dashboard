@@ -52,7 +52,6 @@ const ProjectRoleWidget = ({
         });
       const uniqueRoles = [...new Set(editChecked)];
       setChecked(uniqueRoles);
-      // handleRolesChange(uniqueRoles);
     }
 
     if (editRoles && editRoles.length > 0) {
