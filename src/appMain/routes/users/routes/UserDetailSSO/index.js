@@ -6,7 +6,7 @@ import { getUserDetail, resetUser } from "actions/index";
 
 import T from "i18n-react";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafayTabLayout from "components/RafayTabLayout";
+import TabsLayout from "components/TabsLayout";
 import Groups from "./Groups";
 
 const UserDetailSSO = () => {
@@ -33,7 +33,7 @@ const UserDetailSSO = () => {
   };
 
   return (
-    <RafayTabLayout
+    <TabsLayout
       // title={groupName}
       breadcrumb={<ResourceBreadCrumb config={config} />}
       help="users.user_detail.layout.helptext"

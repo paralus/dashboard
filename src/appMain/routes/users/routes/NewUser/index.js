@@ -8,7 +8,7 @@ import AppSnackbar from "components/AppSnackbar";
 import ConfirmDialog from "components/ConfirmDialog";
 import GridLayout from "./components/GridLayout";
 import Profile from "./components/Profile";
-import SelectGroupList from "./components/AddToGroups/RafayTransferList/SelectGroupList";
+import SelectGroupList from "./components/AddToGroups/ProjectTransferList/SelectGroupList";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
 class NewUser extends Component {

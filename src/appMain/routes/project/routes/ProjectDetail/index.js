@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getProject } from "actions/index";
 
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafayTabLayout from "components/RafayTabLayout";
+import TabsLayout from "components/TabsLayout";
 import AssignedUsers from "./AssignedUsers";
 import AssignedGroups from "./AssignedGroups";
 import General from "./General";
@@ -56,7 +56,7 @@ class ProjectDetail extends Component {
       ],
     };
     return (
-      <RafayTabLayout
+      <TabsLayout
         // title={projectName}
         breadcrumb={<ResourceBreadCrumb config={config} />}
         help="projects.project_detail.layout.helptext"

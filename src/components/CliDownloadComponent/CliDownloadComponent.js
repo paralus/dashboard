@@ -1,20 +1,17 @@
 import React from "react";
 import {
   Dialog,
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   List,
   ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-} from "@material-ui/core";
+  ListItemText } from "@material-ui/core";
 
 // import Button from '@material-ui/core/Button';
 import T from "i18n-react";
 
-class RafayCliDownload extends React.Component {
+class CliDownloadComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +44,7 @@ class RafayCliDownload extends React.Component {
   };
 
   open = () => {
-    this.props.getRafayCliDownloadOptions();
+    this.props.getCliDownloadOptions();
   };
 
   render() {
@@ -82,4 +79,4 @@ class RafayCliDownload extends React.Component {
   }
 }
 
-export default RafayCliDownload;
+export default CliDownloadComponent;

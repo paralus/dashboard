@@ -11,8 +11,8 @@ import {
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import AppSnackbar from "components/AppSnackbar";
-import TransferList from "./RafayTransferList/index";
-import SelectGroupList from "./RafayTransferList/SelectGroupList";
+import TransferList from "./ProjectTransferList/index";
+import SelectGroupList from "./ProjectTransferList/SelectGroupList";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
 class AddToGroups extends React.Component {

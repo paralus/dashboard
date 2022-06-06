@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getGroupDetail, resetGroup } from "actions/index";
 import T from "i18n-react";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafayTabLayout from "components/RafayTabLayout";
+import TabsLayout from "components/TabsLayout";
 import Projects from "./Projects";
 import Users from "./Users";
 
@@ -62,7 +62,7 @@ class GroupDetail extends Component {
       ],
     };
     return (
-      <RafayTabLayout
+      <TabsLayout
         breadcrumb={<ResourceBreadCrumb config={config} />}
         help="groups.group_detail.layout.helptext"
         tabs={[

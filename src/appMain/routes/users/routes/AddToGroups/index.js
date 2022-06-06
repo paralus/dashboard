@@ -14,7 +14,7 @@ import T from "i18n-react";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
 import AppSnackbar from "components/AppSnackbar";
 import PageHeader from "components/PageHeader";
-import TransferList from "./RafayTransferList/index";
+import TransferList from "./ProjectTransferList/index";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
 class AddToGroups extends React.Component {

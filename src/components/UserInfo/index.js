@@ -9,7 +9,7 @@ import {
   getLang,
   changePassword,
   organizationLogin,
-  getRafayCliDownloadOptions,
+  getCliDownloadOptions,
   resetCliDownload,
 } from "actions/index";
 import HelpOutline from "@material-ui/icons/HelpOutline";
@@ -205,7 +205,7 @@ export default withRouter(
     getLang,
     changePassword,
     organizationLogin,
-    getRafayCliDownloadOptions,
+    getCliDownloadOptions,
     resetCliDownload,
   })(UserInfo)
 );

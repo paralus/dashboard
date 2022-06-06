@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import GetAppIcon from "@material-ui/icons/GetApp";
 
 import T from "i18n-react";
-import { getRafayCliDownloadOptions } from "actions/index";
+import { getCliDownloadOptions } from "actions/index";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import linux_logo from "./images/linux_logo1.png";
@@ -36,7 +36,7 @@ class DownloadCli extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getRafayCliDownloadOptions();
+    this.props.getCliDownloadOptions();
   }
 
   UNSAFE_componentWillReceiveProps(props) {
@@ -354,5 +354,5 @@ const mapStateToProps = ({ settings }) => {
   };
 };
 export default withRouter(
-  connect(mapStateToProps, { getRafayCliDownloadOptions })(DownloadCli)
+  connect(mapStateToProps, { getCliDownloadOptions })(DownloadCli)
 );
