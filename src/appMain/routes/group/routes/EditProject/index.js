@@ -82,8 +82,11 @@ class EditProject extends React.Component {
   transformRoles = () => {
     const { selectedRoles, selectedProject, groupId, selectedNamespaces } =
       this.state;
-    const roles = [];
+    const { groupDetail } = this.props;
 
+    const roles = groupDetail.spec.projectNamespaceRoles.filter(
+      (e) => e.project !== selectedProject
+    );
     selectedRoles.forEach((role) => {
       if (role.spec.scope === "namespace") {
         selectedNamespaces.forEach((ns) => {
