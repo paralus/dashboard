@@ -40,7 +40,7 @@ const DEFAULT_LABEL = "No Data Available!";
 const DEFAULT_LABEL_DESCRIPTION =
   "Currently we don't have any results to display.";
 
-const RafayPlaceholder = ({
+const ApplicationPlaceholder = ({
   label = DEFAULT_LABEL,
   description = DEFAULT_LABEL_DESCRIPTION,
 }) => {
@@ -56,4 +56,4 @@ const RafayPlaceholder = ({
   );
 };
 
-export default RafayPlaceholder;
+export default ApplicationPlaceholder;

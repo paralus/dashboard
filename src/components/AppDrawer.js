@@ -3,7 +3,7 @@ import React from "react";
 import { Drawer, IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
-const RafayDrawer = ({ open, onClose, children, title, width, actions }) => {
+const AppDrawer = ({ open, onClose, children, title, width, actions }) => {
   const windowWidth = width || window.innerWidth * 0.5;
   return (
     <div>
@@ -37,4 +37,4 @@ const RafayDrawer = ({ open, onClose, children, title, width, actions }) => {
   );
 };
 
-export default RafayDrawer;
+export default AppDrawer;

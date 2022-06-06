@@ -10,7 +10,7 @@ import {
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
-import RafayDelete from "components/RafayDelete";
+import DeleteIconComponent from "components/DeleteIconComponent";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import usePrevious from "utils/usePrevious";
@@ -76,7 +76,7 @@ const DataTableRowCollapsible = ({
                 <div className="float-right">
                   {n.buttons.map((b, i) => {
                     if (["danger", "danger-icon"].includes(b.type)) {
-                      return <RafayDelete key={i} button={b} />;
+                      return <DeleteIconComponent key={i} button={b} />;
                     }
                     if (b.type === "edit-icon") {
                       return (

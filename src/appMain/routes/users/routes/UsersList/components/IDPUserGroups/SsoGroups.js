@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RafayDrawer from "components/RafayDrawer";
+import AppDrawer from "components/AppDrawer";
 import { getSSOUserDetail } from "actions/index";
 import IDPGroups from "./IDPGroups";
 import OverrideGroups from "./OverrideGroups";
@@ -20,7 +20,7 @@ const SsoGroups = ({ open, user, onClose }) => {
   );
   return (
     <div>
-      <RafayDrawer
+      <AppDrawer
         open={open}
         onClose={onClose}
         title={`Manage Groups - ${user?.metadata.name}`}
@@ -32,7 +32,7 @@ const SsoGroups = ({ open, user, onClose }) => {
           user={user}
           refershGroups={(_) => fetchGroups()}
         />
-      </RafayDrawer>
+      </AppDrawer>
     </div>
   );
 };

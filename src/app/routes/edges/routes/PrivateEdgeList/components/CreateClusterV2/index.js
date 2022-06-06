@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { interpret } from "xstate";
 import { createCluster } from "actions/index";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import { wizardConfig } from "./CreateClusterConfig";
 import CreateClusterDialog from "./CreateClusterDialog";
 import StepOneContent from "./StepOneContent";
@@ -219,7 +219,7 @@ class CreateClusterV2 extends Component {
             },
           }}
         />
-        <RafaySnackbar
+        <AppSnackbar
           open={alert.open}
           message={capitalizeFirstLetter(alert.message)}
           severity={alert.severity}

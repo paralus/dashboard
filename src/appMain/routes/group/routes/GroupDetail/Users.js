@@ -5,10 +5,10 @@ import { getGroupDetail, updateGroup, resetGroupUsers } from "actions/index";
 import T from "i18n-react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayInfoCard from "components/RafayInfoCard";
-import DataTableToolbar from "components/RafayTable/DataTableToolbar";
-import DataTable from "components/RafayTable/DataTable";
+import AppSnackbar from "components/AppSnackbar";
+import InfoCardComponent from "components/InfoCardComponent";
+import DataTableToolbar from "components/TableComponents/DataTableToolbar";
+import DataTable from "components/TableComponents/DataTable";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
 class Users extends React.Component {
@@ -137,7 +137,7 @@ class Users extends React.Component {
     );
     if (list && !list.length) {
       return (
-        <RafayInfoCard
+        <InfoCardComponent
           title={<T.span text="groups.group_detail.no_users.title" />}
           linkHelper={<T.span text="groups.group_detail.no_users.helptext" />}
           link={AddUsersButton}
@@ -164,7 +164,7 @@ class Users extends React.Component {
             parseRowData={this.parseRowData}
           />
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={alertOpen}
           message={capitalizeFirstLetter(alertMessage)}
           severity={alertSeverity}

@@ -10,7 +10,7 @@ import {
 } from "actions/index";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import TransferList from "./RafayTransferList/index";
 import SelectGroupList from "./RafayTransferList/SelectGroupList";
 import { capitalizeFirstLetter } from "../../../../../utils";
@@ -100,8 +100,7 @@ class AddToGroups extends React.Component {
             handleRemoved={this.handleRemoved}
           />
         </div>
-
-        <RafaySnackbar
+        <AppSnackbar
           open={showError}
           severity="error"
           message={capitalizeFirstLetter(deleteError)}

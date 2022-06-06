@@ -7,7 +7,7 @@ import Footer from "components/Footer";
 import MiniKubectl from "containers/K8sConsole/MiniKubectl";
 import { Helmet } from "react-helmet";
 import { Container, Button } from "@material-ui/core";
-import RafayInfoCard from "components/RafayInfoCard";
+import InfoCardComponent from "components/InfoCardComponent";
 import { ConsolePaths } from "constants/ConsolePaths";
 
 import Header from "./components/Header";
@@ -115,7 +115,7 @@ class AppMain extends React.Component {
           <Header partnerDetail={partnerDetail} />
           {UserSession.noRolesUser && (
             <div style={{ paddingTop: "75px" }}>
-              <RafayInfoCard
+              <InfoCardComponent
                 title={<span>No Access</span>}
                 linkHelper={
                   <span>
@@ -141,7 +141,7 @@ class AppMain extends React.Component {
           )}
           {!hasAccess && !UserSession.noRolesUser && (
             <div style={{ paddingTop: "75px" }}>
-              <RafayInfoCard
+              <InfoCardComponent
                 title={<span>No Access</span>}
                 linkHelper={
                   <span>

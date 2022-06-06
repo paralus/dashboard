@@ -7,8 +7,8 @@ import T from "i18n-react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayPageHeader from "components/RafayPageHeader";
+import AppSnackbar from "components/AppSnackbar";
+import PageHeader from "components/PageHeader";
 import ProjectRoleWidget from "./ProjectRoleWidget";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
@@ -192,7 +192,7 @@ class AssignToProject extends React.Component {
     return (
       <>
         <div className="m-4">
-          <RafayPageHeader
+          <PageHeader
             breadcrumb={<ResourceBreadCrumb config={config} />}
             title="groups.assign_to_project.layout.title"
             help="groups.assign_to_project.layout.helptext"
@@ -238,7 +238,7 @@ class AssignToProject extends React.Component {
             </div>
           </div>
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={showAlert}
           severity="error"
           message={capitalizeFirstLetter(alertMessage)}

@@ -15,8 +15,8 @@ import MiniKubectl from "containers/K8sConsole/MiniKubectl";
 import { COLLAPSED_DRAWER, FIXED_DRAWER } from "constants/ActionTypes";
 import { Helmet } from "react-helmet";
 import Button from "@material-ui/core/Button";
-import RafayInfoCard from "components/RafayInfoCard";
-import RafaySuspense from "components/RafaySuspense";
+import InfoCardComponent from "components/InfoCardComponent";
+import SuspenseComponent from "components/SuspenseComponent";
 import { ConsolePaths } from "constants/ConsolePaths";
 import Cluster from "./routes/cluster";
 
@@ -148,7 +148,7 @@ class App extends React.Component {
           />
           {UserSession.noRolesUser && (
             <div style={{ paddingTop: "75px" }}>
-              <RafayInfoCard
+              <InfoCardComponent
                 title={<span>No Access</span>}
                 linkHelper={
                   <span>
@@ -174,7 +174,7 @@ class App extends React.Component {
           )}
           {!hasAccess && !UserSession.noRolesUser && (
             <div style={{ paddingTop: "75px" }}>
-              <RafayInfoCard
+              <InfoCardComponent
                 title={<span>No Access</span>}
                 linkHelper={
                   <span>
@@ -202,11 +202,11 @@ class App extends React.Component {
           {hasAccess && currentProject && currentProject.metadata.name && (
             <main className="app-main-content-wrapper">
               <div className="app-main-content">
-                <RafaySuspense>
+                <SuspenseComponent>
                   {/* <Route exact path={`${match.url}`} component={Home} /> */}
                   <Route path={`${match.url}/clusters`} component={Cluster} />
                   <Route path={`${match.url}/edges`} component={Edges} />
-                </RafaySuspense>
+                </SuspenseComponent>
               </div>
             </main>
           )}

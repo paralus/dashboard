@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Paper } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafayPageHeader from "components/RafayPageHeader";
+import PageHeader from "components/PageHeader";
 import { useQuery } from "../../../utils";
 import TabLayout from "./components/TabLayout";
 import SystemLogs from "./SystemLogs";
@@ -28,7 +28,7 @@ function AuditLogs() {
   if (isProjectRole)
     return (
       <Box p={2}>
-        <RafayPageHeader
+        <PageHeader
           title="System Logs"
           help="Your system audit logs are listed below"
         />

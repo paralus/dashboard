@@ -1,5 +1,4 @@
 import {
-  Divider,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -16,9 +15,7 @@ import {
   MenuItem,
   Snackbar,
   Step,
-  Stepper,
   Tooltip,
-  StepLabel,
   Radio,
   RadioGroup,
 } from "@material-ui/core";
@@ -37,8 +34,8 @@ import { Field, Form, Formik } from "formik";
 import React, { useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafayWizard from "components/RafayWizard";
-import { downloadCertificate } from "./util";
+import WizardComponent from "components/WizardComponent";
+// import { downloadCertificate } from "./util";
 import { capitalizeFirstLetter } from "../../../utils";
 import UploadMetadata from "./UploadMetadata";
 
@@ -881,7 +878,7 @@ const RegistrationWizard = (props) => {
       <div className="py-2">
         <div className={classes.root}>
           {redirect ? <Redirect to="/main/sso" /> : null}
-          <RafayWizard
+          <WizardComponent
             breadcrumb={<ResourceBreadCrumb config={config} />}
             help=""
             tabs={[

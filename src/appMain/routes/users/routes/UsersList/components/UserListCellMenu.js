@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SettingsIcon from "@material-ui/icons/Settings";
 import DesktopAccessDisabledIcon from "@material-ui/icons/DesktopAccessDisabled";
-import RafayConfirmIconAction from "components/RafayConfirmIconAction";
+import ConfirmIconAction from "components/ConfirmIconAction";
 
 const UserListCellMenu = ({
   data,
@@ -62,7 +62,7 @@ const UserListCellMenu = ({
           Manage Keys
         </MenuItem>
         <MenuItem disableRipple>
-          <RafayConfirmIconAction
+          <ConfirmIconAction
             icon={<DesktopAccessDisabledIcon />}
             action={(_) => handleActionClose(data, handleRevokeKubeconfig)}
             confirmText={
@@ -78,7 +78,7 @@ const UserListCellMenu = ({
           />
         </MenuItem>
         <MenuItem disableRipple>
-          <RafayConfirmIconAction
+          <ConfirmIconAction
             icon={<SettingsIcon />}
             action={(_) => handleActionClose(data, handleResetPassword)}
             confirmText={

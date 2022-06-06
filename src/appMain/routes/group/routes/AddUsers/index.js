@@ -11,8 +11,8 @@ import {
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayPageHeader from "components/RafayPageHeader";
+import AppSnackbar from "components/AppSnackbar";
+import PageHeader from "components/PageHeader";
 import TransferList from "./RafayTransferList/index";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
@@ -186,7 +186,7 @@ class AddUsers extends React.Component {
     return (
       <>
         <div className="m-4">
-          <RafayPageHeader
+          <PageHeader
             breadcrumb={<ResourceBreadCrumb config={config} />}
             title="groups.add_users.layout.title"
             help="groups.add_users.layout.helptext"
@@ -229,7 +229,7 @@ class AddUsers extends React.Component {
             </div>
           </div>
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={showError}
           severity="error"
           message={capitalizeFirstLetter(deleteError)}

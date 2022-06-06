@@ -16,9 +16,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import ProjectRoleMatrix from "components/ProjectRoleMatrix";
 import DateFormat from "components/DateFormat";
 import ProjectList from "components/ProjectList";
-import RafayDelete from "components/RafayDelete";
+import DeleteIconComponent from "components/DeleteIconComponent";
 import { GROUP_COLUMN_HEADER_CONFIG } from "constants/Constant";
-import DataTableDynamic from "components/RafayTable/DataTableDynamic";
+import DataTableDynamic from "components/TableComponents/DataTableDynamic";
 import TableToolbar from "./TableToolbar";
 import DataTableHead from "./DataTableHead";
 import GroupRoles from "./GroupRoles";
@@ -168,7 +168,7 @@ class ResourceListTable extends React.Component {
             <EditIcon fontSize="small" />
           </IconButton>
         </Tooltip>
-        <RafayDelete
+        <DeleteIconComponent
           key={data.metadata.id}
           button={{
             type: "danger-icon",

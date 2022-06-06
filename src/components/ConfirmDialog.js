@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
-const RafayConfirmDialog = ({ open, title, content, onClose, onConfirm }) => {
+const ConfirmDialog = ({ open, title, content, onClose, onConfirm }) => {
   return (
     <>
       <Dialog open={open} onClose={onClose} maxWidth="md">
@@ -24,4 +24,4 @@ const RafayConfirmDialog = ({ open, title, content, onClose, onConfirm }) => {
   );
 };
 
-export default RafayConfirmDialog;
+export default ConfirmDialog;

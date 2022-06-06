@@ -1,7 +1,7 @@
 import React from "react";
 import { Snack } from "utils/useSnack";
 
-const RafaySnackbar = ({
+const AppSnackbar = ({
   open = false,
   severity = "error", // error/warning/info/success
   message = "",
@@ -17,4 +17,4 @@ const RafaySnackbar = ({
   );
 };
 
-export default RafaySnackbar;
+export default AppSnackbar;

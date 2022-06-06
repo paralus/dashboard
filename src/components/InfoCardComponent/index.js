@@ -40,7 +40,7 @@ const useStyles = makeStyles({
   },
 });
 
-const RafayInfoCard = ({ title, linkHelper, link }) => {
+const InfoCardComponent = ({ title, linkHelper, link }) => {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
@@ -60,4 +60,4 @@ const RafayInfoCard = ({ title, linkHelper, link }) => {
   );
 };
 
-export default RafayInfoCard;
+export default InfoCardComponent;

@@ -9,7 +9,7 @@ import {
 } from "actions/index";
 import { Paper } from "@material-ui/core";
 import { ValidatorForm } from "react-material-ui-form-validator";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import SearchBoxV2 from "components/SearchBoxV2";
 import ProjectsTable from "./components/ProjectsTable";
 import CreateProjectDialog from "./components/CreateProjectDialog";
@@ -213,7 +213,7 @@ class Project extends React.Component {
           open={open}
           project={project}
         />
-        <RafaySnackbar
+        <AppSnackbar
           open={showAlert}
           severity={alertSeverity}
           message={capitalizeFirstLetter(alertMessage)}

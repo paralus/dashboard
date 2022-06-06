@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "@material-ui/core";
 import Spinner from "components/Spinner";
-import RafayNoData from "components/RafayNoData";
+import AppNoData from "components/AppNoData";
 import DataTableFooter from "./DataTableFooter";
 import DataTableHead from "./DataTableHead";
 import DataTableBody from "./DataTableBody";
@@ -62,7 +62,7 @@ const DataTable = ({
             </Table>
           </div>
         ) : (
-          <RafayNoData />
+          <AppNoData />
         )}
       </Spinner>
     </div>

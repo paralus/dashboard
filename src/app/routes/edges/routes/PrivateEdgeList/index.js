@@ -43,9 +43,9 @@ import { ValidatorForm } from "react-material-ui-form-validator";
 import Select from "react-select";
 import { ClusterActionsContext } from "../../../../../views/ClusterView/ClusterViewContexts";
 import { capitalizeFirstLetter } from "../../../../../utils";
-import RafayNoData from "components/RafayNoData";
+import AppNoData from "components/AppNoData";
 import Spinner from "components/Spinner";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import ClusterActions from "components/ClusterActions/index";
 import CreateClusterV2 from "./components/CreateClusterV2";
 import SlatList from "./components/SlatList";
@@ -1240,7 +1240,7 @@ class PrivateEdgeList extends React.Component {
               userAndRoleDetail={this.props.userAndRoleDetail}
               data={data}
             />
-            {!data.length && <RafayNoData label="No cluster available!" />}
+            {!data.length && <AppNoData label="No cluster available!" />}
             {!!(this.state.renderInTable && data.length) && (
               <div className="flex-auto">
                 <div className="table-responsive-material">
@@ -1471,7 +1471,7 @@ class PrivateEdgeList extends React.Component {
               </Button>
             </DialogActions>
           </Dialog>
-          <RafaySnackbar
+          <AppSnackbar
             open={showAlert}
             message={capitalizeFirstLetter(alertMessage)}
             closeCallback={this.handleSnackbarResponseClose}

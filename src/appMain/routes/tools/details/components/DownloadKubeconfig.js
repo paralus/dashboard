@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import T from "i18n-react";
 import Button from "@material-ui/core/Button";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import { getKubeConfig } from "actions/index";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
@@ -71,7 +71,7 @@ const DownloadKubeconfig = ({ user, withIcon }) => {
           <T.span text="tools.download_kubeconfig_button" />
         </Button>
       )}
-      <RafaySnackbar
+      <AppSnackbar
         open={alert.show}
         severity={alert.severity}
         message={capitalizeFirstLetter(alert.message)}

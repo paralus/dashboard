@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { TextField, Paper, Button, Switch } from "@material-ui/core";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import { updateOragnization } from "actions/index";
 import * as R from "ramda";
 import { capitalizeFirstLetter } from "../../../../utils";
@@ -135,7 +135,7 @@ function LockoutSetting({ organization }) {
           <span>Save</span>
         </Button>
       </div>
-      <RafaySnackbar
+      <AppSnackbar
         open={alert.show}
         severity={alert.severity}
         message={capitalizeFirstLetter(alert.message)}

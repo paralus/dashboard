@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import ReactJson from "react-json-view";
 import DateFormat from "components/DateFormat";
-import DataTable from "components/RafayTable/DataTable";
+import DataTable from "components/TableComponents/DataTable";
 import TableToolbar from "./TableToolbar";
 
 const useStyles = makeStyles({

@@ -1,7 +1,7 @@
 import React from "react";
 import { Paper } from "@material-ui/core";
 import DateFormat from "components/DateFormat";
-import DataTable from "components/RafayTable/DataTable";
+import DataTable from "components/TableComponents/DataTable";
 import TableToolbar from "./TableToolbar";
 
 const columnLabels = [

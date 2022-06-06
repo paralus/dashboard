@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import { createProject } from "actions/index";
 import { capitalizeFirstLetter } from "../../../../../../utils";
 
@@ -130,7 +130,7 @@ const NewProject = ({ refreshProjects }) => {
           </DialogActions>
         </ValidatorForm>
       </Dialog>
-      <RafaySnackbar
+      <AppSnackbar
         open={alert.open}
         severity={alert.severity}
         message={capitalizeFirstLetter(alert.message)}

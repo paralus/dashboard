@@ -95,7 +95,7 @@ ul.nav-menu {
 ul.nav-menu > li.open > a,
 ul.nav-menu > li > a:hover,
 ul.nav-menu > li > a:focus {
-  background-color: $rafay-sidebar-highlight-hover;
+  background-color: $project-sidebar-highlight-hover;
   color: $sidebar-hover-color;
 }
 
@@ -105,7 +105,7 @@ ul.nav-menu li.menu > a {
 
 ul.nav-menu li.menu.open.no-arrow > a {
   border-color: $warning;
-  background-color: $rafay-sidebar-highlight;
+  background-color: $project-sidebar-highlight;
 }
 ul.nav-menu li.menu.open > a {
   border-color: $warning;
@@ -179,7 +179,7 @@ ul.nav-menu li.menu.active > a:before {
 }
 
 ul.nav-menu li.menu.open .sub-menu li.active > a {
-  background-color: $rafay-sidebar-highlight;
+  background-color: $project-sidebar-highlight;
   color: $sidebar-hover-color;
 }
 
@@ -188,7 +188,7 @@ ul.nav-menu li.menu .sub-menu li > a:focus,
 ul.nav-menu li.menu.open .sub-menu li.active > a:before,
 ul.nav-menu li.menu .sub-menu li > a:focus:before,
 ul.nav-menu li.menu .sub-menu li > a:hover:before {
-  background-color: $rafay-sidebar-highlight;
+  background-color: $project-sidebar-highlight;
   color: $sidebar-hover-color;
 }
 

@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import RafayTrailText from "../../containers/locale/RafayTrailText.js";
 
 class Footer extends Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class Footer extends Component {
             <div>
               <span>
                 {this.props.partnerDetail?.settings?.copyright || (
-                  <>Copyright Rafay Systems &copy; {new Date().getFullYear()}</>
+                  <>Copyright Paralus &copy; {new Date().getFullYear()}</>
                 )}
               </span>
               {this.props.organization?.detail?.spec.type !== "paid" && (
@@ -90,7 +89,6 @@ class Footer extends Component {
           maxWidth="xl"
         >
           <DialogContent>
-            <RafayTrailText />
           </DialogContent>
           <DialogActions>
             <Button

@@ -112,11 +112,10 @@ class UserInfo extends React.Component {
         </div>
         <a
           style={{ color: "#ff9800" }}
-          target="_blank"
           href={
             this.props.partnerDetail?.settings?.docs_link?.length > 0
               ? this.props.partnerDetail.settings.docs_link
-              : "https://docs.rafay.co"
+              : "#"
           }
         >
           <HelpOutline style={{ cursor: "pointer", marginLeft: "20px" }} />

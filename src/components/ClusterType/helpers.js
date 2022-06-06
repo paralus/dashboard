@@ -6,7 +6,6 @@ import K8s from "assets/images/k8s.png";
 import AKS from "assets/images/aks.png";
 import GKE from "assets/images/gke.png";
 import Rafay from "assets/images/rafay.png";
-import Rafay2 from "assets/images/rafay2.png";
 import RKE from "assets/images/rke.png";
 import Paris from "assets/images/eksd.png";
 import OpenShift from "assets/images/openshift.png";

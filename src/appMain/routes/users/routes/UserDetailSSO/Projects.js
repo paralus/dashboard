@@ -9,10 +9,10 @@ import {
 import T from "i18n-react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import RafaySnackbar from "components/RafaySnackbar";
-import DataTableToolbar from "components/RafayTable/DataTableToolbar";
-import DataTable from "components/RafayTable/DataTable";
-import RafayInfoCard from "components/RafayInfoCard";
+import AppSnackbar from "components/AppSnackbar";
+import DataTableToolbar from "components/TableComponents/DataTableToolbar";
+import DataTable from "components/TableComponents/DataTable";
+import InfoCardComponent from "components/InfoCardComponent";
 import RolesInfo from "components/RolesInfo";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
@@ -203,7 +203,7 @@ class Projects extends React.Component {
     if (!tableData.length) {
       return (
         <>
-          <RafayInfoCard
+          <InfoCardComponent
             title={<T.span text="users.user_detail.no_projects.title" />}
             linkHelper={
               <T.span text="users.user_detail.no_projects.helptext" />
@@ -236,7 +236,7 @@ class Projects extends React.Component {
             parseRowData={this.parseRowData}
           />
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={showError}
           message={capitalizeFirstLetter(deleteError)}
           closeCallback={this.handleResponseErrorClose}

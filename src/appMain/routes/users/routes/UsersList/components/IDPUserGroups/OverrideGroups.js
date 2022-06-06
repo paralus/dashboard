@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import DataTable from "components/RafayTable/DataTable";
-import DataTableToolbar from "components/RafayTable/DataTableToolbar";
+import DataTable from "components/TableComponents/DataTable";
+import DataTableToolbar from "components/TableComponents/DataTableToolbar";
 import { useSnack } from "utils/useSnack";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -13,7 +13,7 @@ import {
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
-import RafayDelete from "components/RafayDelete";
+import DeleteIconComponent from "components/DeleteIconComponent";
 import TableToolbar from "./TableToolbar";
 import DataTableHead from "./DataTableHead";
 
@@ -123,7 +123,7 @@ class ProjectsTable extends React.Component {
                           <EditIcon fontSize="small" />
                         </IconButton>
                       </Tooltip>
-                      <RafayDelete
+                      <DeleteIconComponent
                         key={index}
                         button={{
                           type: "danger-icon",

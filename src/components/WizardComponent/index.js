@@ -8,7 +8,7 @@ const TabPanel = ({ children, value, index }) => {
   return value === index && <>{children}</>;
 };
 
-const RafayWizard = ({ title, help, breadcrumb, tabs, step, handleChange }) => {
+const WizardComponent = ({ title, help, breadcrumb, tabs, step, handleChange }) => {
   const handleStepChange = (_, newValue) => {
     if (handleChange) handleChange(newValue);
   };
@@ -55,4 +55,4 @@ const RafayWizard = ({ title, help, breadcrumb, tabs, step, handleChange }) => {
   );
 };
 
-export default RafayWizard;
+export default WizardComponent;

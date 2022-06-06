@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Table } from "@material-ui/core";
-import RafayNoData from "components/RafayNoData";
+import AppNoData from "components/AppNoData";
 import Spinner from "components/Spinner";
 import DataTableFooter from "./DataTableFooter";
 import DataTableHead from "./DataTableHead";
@@ -126,7 +126,7 @@ const DataTableDynamic = ({
           </div>
         </div>
       ) : (
-        <RafayNoData />
+        <AppNoData />
       )}
     </Spinner>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Paper, TextField, Button } from "@material-ui/core";
 import { useParams } from "react-router";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import { updateProject } from "actions/index";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
@@ -124,7 +124,7 @@ const GeneralProject = ({ project }) => {
           <span>Save</span>
         </Button>
       </div>
-      <RafaySnackbar
+      <AppSnackbar
         open={alert.show}
         severity={alert.severity}
         message={capitalizeFirstLetter(alert.message)}

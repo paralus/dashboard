@@ -10,9 +10,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SettingsIcon from "@material-ui/icons/Settings";
 import useLocalStorage from "utils/useLocalStorage";
 import Tooltip from "@material-ui/core/Tooltip";
-import RafayConfirmIconAction from "components/RafayConfirmIconAction";
+import ConfirmIconAction from "components/ConfirmIconAction";
 import { changeProject, deleteProject } from "actions/index";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import DateFormat from "components/DateFormat";
 import { capitalizeFirstLetter } from "../../../../../../utils";
 
@@ -182,7 +182,7 @@ const ProjectCard = ({ data, refreshProjects }) => {
                     <PeopleIcon />
                   </IconButton>
                 </Tooltip>
-                <RafayConfirmIconAction
+                <ConfirmIconAction
                   icon={<DeleteIcon />}
                   action={handleDeleteProject}
                   disabled={data.spec.default}
@@ -201,7 +201,7 @@ const ProjectCard = ({ data, refreshProjects }) => {
           </div>
         </div>
       </Paper>
-      <RafaySnackbar
+      <AppSnackbar
         open={alert.show}
         severity={alert.severity}
         message={capitalizeFirstLetter(alert.message)}

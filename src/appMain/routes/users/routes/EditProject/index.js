@@ -11,8 +11,8 @@ import {
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayPageHeader from "components/RafayPageHeader";
+import AppSnackbar from "components/AppSnackbar";
+import PageHeader from "components/PageHeader";
 import ProjectRoleWidget from "./ProjectRoleWidget";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
@@ -177,7 +177,7 @@ class EditProject extends React.Component {
     return (
       <>
         <div className="m-4">
-          <RafayPageHeader
+          <PageHeader
             breadcrumb={<ResourceBreadCrumb config={config} />}
             title="users.edit_project.layout.title"
             help="users.edit_project.layout.helptext"
@@ -224,7 +224,7 @@ class EditProject extends React.Component {
             </div>
           </div>
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={showAlert}
           severity="error"
           message={capitalizeFirstLetter(alertMessage)}

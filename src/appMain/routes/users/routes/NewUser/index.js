@@ -4,8 +4,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { addUserWithCallback, getGroups } from "actions/index";
 import { Button, Paper } from "@material-ui/core";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayConfirmDialog from "components/RafayConfirmDialog";
+import AppSnackbar from "components/AppSnackbar";
+import ConfirmDialog from "components/ConfirmDialog";
 import GridLayout from "./components/GridLayout";
 import Profile from "./components/Profile";
 import SelectGroupList from "./components/AddToGroups/RafayTransferList/SelectGroupList";
@@ -226,13 +226,13 @@ class NewUser extends Component {
             </div>
           </div>
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={showAlert}
           severity="error"
           message={capitalizeFirstLetter(alertMessage)}
           closeCallback={this.handleResponseErrorClose}
         />
-        <RafayConfirmDialog
+        <ConfirmDialog
           open={openConfirm}
           content="The user has not been assigned to any groups and will not have access to any resources. Are you sure you want to continue?"
           onClose={(_) => this.setState({ openConfirm: false })}
