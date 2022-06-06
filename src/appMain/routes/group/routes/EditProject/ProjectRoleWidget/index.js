@@ -45,8 +45,12 @@ const ProjectRoleWidget = ({
 
   React.useEffect(() => {
     if (editRoles && systemRoles && !roleModified) {
+      const ifAllProjects = editRoles.filter(
+        (r) => r.role && r.role !== "" && r.project === undefined
+      );
       const editChecked = editRoles
         .filter((r) => r.project === editProject)
+        .concat(ifAllProjects)
         .map((ar) => {
           return systemRoles.find((r) => r.metadata.name === ar.role);
         });
@@ -55,6 +59,7 @@ const ProjectRoleWidget = ({
       handleRolesChange(uniqueRoles);
     }
 
+    // Handling namespaces here
     if (editRoles && editRoles.length > 0) {
       let tempCurrentNamespaces = [];
       editRoles.forEach((role) => {
