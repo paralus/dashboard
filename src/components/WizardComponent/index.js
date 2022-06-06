@@ -8,7 +8,14 @@ const TabPanel = ({ children, value, index }) => {
   return value === index && <>{children}</>;
 };
 
-const WizardComponent = ({ title, help, breadcrumb, tabs, step, handleChange }) => {
+const WizardComponent = ({
+  title,
+  help,
+  breadcrumb,
+  tabs,
+  step,
+  handleChange,
+}) => {
   const handleStepChange = (_, newValue) => {
     if (handleChange) handleChange(newValue);
   };

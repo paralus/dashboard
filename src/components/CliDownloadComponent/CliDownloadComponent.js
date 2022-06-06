@@ -6,7 +6,8 @@ import {
   DialogTitle,
   List,
   ListItem,
-  ListItemText } from "@material-ui/core";
+  ListItemText,
+} from "@material-ui/core";
 
 // import Button from '@material-ui/core/Button';
 import T from "i18n-react";

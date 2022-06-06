@@ -88,8 +88,7 @@ class Footer extends Component {
           key="terms-services"
           maxWidth="xl"
         >
-          <DialogContent>
-          </DialogContent>
+          <DialogContent></DialogContent>
           <DialogActions>
             <Button
               onClick={() => this.setState({ open: false })}
