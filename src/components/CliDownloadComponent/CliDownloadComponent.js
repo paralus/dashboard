@@ -49,9 +49,9 @@ class CliDownloadComponent extends React.Component {
   };
 
   render() {
-    let rafayClidownloadOptions = [];
-    if (this.props.rafayClidownloadOptions) {
-      rafayClidownloadOptions = this.props.rafayClidownloadOptions;
+    let paralusClidownloadOptions = [];
+    if (this.props.paralusClidownloadOptions) {
+      paralusClidownloadOptions = this.props.paralusClidownloadOptions;
     }
 
     return (
@@ -65,7 +65,7 @@ class CliDownloadComponent extends React.Component {
           </DialogContentText>
           <div className="row mt-4">
             <List>
-              {rafayClidownloadOptions.map((n) => (
+              {paralusClidownloadOptions.map((n) => (
                 <a href={n[0]} download={n[3]}>
                   <ListItem key={n[3]} button dense>
                     <ListItemText primary={n[3]} />

@@ -40,8 +40,8 @@ class DownloadCli extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(props) {
-    if (props.isDownloadOptionsSucess && props.rafayClidownloadOptions) {
-      props.rafayClidownloadOptions.forEach((clioption) => {
+    if (props.isDownloadOptionsSucess && props.paralusClidownloadOptions) {
+      props.paralusClidownloadOptions.forEach((clioption) => {
         const key = `${clioption.type}_${clioption.arch}`;
         this.state.clioptions[key] = clioption;
       });
@@ -345,12 +345,12 @@ const mapStateToProps = ({ settings }) => {
   const {
     isDownloadOptionsSucess,
     isDownloadOptionsFailure,
-    rafayClidownloadOptions,
+    paralusClidownloadOptions,
   } = settings;
   return {
     isDownloadOptionsSucess,
     isDownloadOptionsFailure,
-    rafayClidownloadOptions,
+    paralusClidownloadOptions,
   };
 };
 export default withRouter(

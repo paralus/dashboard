@@ -7,9 +7,9 @@ export const LABEL_REGEX = new RegExp(
 const labelSchema = {
   key: Yup.string()
     .test(
-      "is-rafay.dev/",
-      "prefix can't be rafay.dev/",
-      (value) => !value?.startsWith("rafay.dev/")
+      "is-paralus.dev/",
+      "prefix can't be paralus.dev/",
+      (value) => !value?.startsWith("paralus.dev/")
     )
     .test("required-key", "required", (value) => !!value)
     .test("validate-key", "invalid key", (value) => {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Footer from "components/Footer";
+import Paralus from "assets/images/paralus.png";
 
 const capitalize = (string) => {
   if (!string) {
@@ -29,8 +30,7 @@ const PageTitle = ({ partnerDetail }) => {
 const LoginHeader = ({ partnerDetail }) => {
   if (!partnerDetail) return null;
   const { logo_link } = partnerDetail;
-  const image_src =
-    "https://rafay-image.s3-us-west-2.amazonaws.com/rafay-logo-transparent.png";
+  const image_src = {Paralus}
   return (
     <div className="login-header mb-4">
       <a className="app-logo" href="#/" title="">

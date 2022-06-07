@@ -21,7 +21,7 @@ class Footer extends Component {
   render() {
     return (
       <footer className="app-footer">
-        {this.props.partnerDetail?.name === "Rafay Cloud" && (
+        {this.props.partnerDetail?.name === "Paralus" && (
           <div className="d-flex flex-row justify-content-between">
             <div>
               <span>
@@ -56,15 +56,14 @@ class Footer extends Component {
               )}
               <a
                 style={{ color: "teal", marginLeft: "10px" }}
-                href="https://rafay.co/privacy-policy/"
-                target="_blank"
+                href=""
               >
                 Privacy Policy
               </a>
             </div>
           </div>
         )}
-        {this.props.partnerDetail?.name !== "Rafay Cloud" && (
+        {this.props.partnerDetail?.name !== "Paralus" && (
           <div className="d-flex flex-row justify-content-between">
             <div>
               <span>{this.props.partnerDetail?.settings?.copyright}</span>

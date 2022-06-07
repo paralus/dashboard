@@ -2,13 +2,14 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import UserInfo from "components/UserInfo";
+import Paralus from "assets/images/paralus.png";
 import TopNavBar from "./TopNavBar";
 
 const Header = ({ partnerDetail }) => {
   let image_src = "";
   if (partnerDetail) {
     image_src =
-      "https://rafay-image.s3-us-west-2.amazonaws.com/rafay-logo-transparent.png";
+      Paralus
   }
   if (partnerDetail && partnerDetail.logo_link) {
     image_src = partnerDetail.logo_link;

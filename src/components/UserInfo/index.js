@@ -64,7 +64,7 @@ class UserInfo extends React.Component {
 
   handleDownloadCli = (event) => {
     this.setState({ open: false });
-    this.rafaycliDownloadDialog.open();
+    this.paraluscliDownloadDialog.open();
   };
 
   handleProfileClick = (event) => {
