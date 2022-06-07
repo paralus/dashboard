@@ -8,8 +8,7 @@ import TopNavBar from "./TopNavBar";
 const Header = ({ partnerDetail }) => {
   let image_src = "";
   if (partnerDetail) {
-    image_src =
-      Paralus
+    image_src = Paralus;
   }
   if (partnerDetail && partnerDetail.logo_link) {
     image_src = partnerDetail.logo_link;

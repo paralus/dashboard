@@ -30,7 +30,7 @@ const PageTitle = ({ partnerDetail }) => {
 const LoginHeader = ({ partnerDetail }) => {
   if (!partnerDetail) return null;
   const { logo_link } = partnerDetail;
-  const image_src = {Paralus}
+  const image_src = { Paralus };
   return (
     <div className="login-header mb-4">
       <a className="app-logo" href="#/" title="">

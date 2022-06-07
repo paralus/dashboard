@@ -54,10 +54,7 @@ class Footer extends Component {
                   )}
                 </>
               )}
-              <a
-                style={{ color: "teal", marginLeft: "10px" }}
-                href=""
-              >
+              <a style={{ color: "teal", marginLeft: "10px" }} href="">
                 Privacy Policy
               </a>
             </div>
