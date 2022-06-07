@@ -105,11 +105,11 @@ class EditProject extends React.Component {
           roles.push(r);
         });
       } else if (
-        (ifAllProjectsSelected.length < 1) ||
+        ifAllProjectsSelected.length < 1 ||
         (role.metadata.name !== "ADMIN" &&
           role.metadata.name !== "ADMIN_READ_ONLY")
-      ) { 
-          let r = {
+      ) {
+        let r = {
           project: selectedProject,
           role: role.metadata.name,
         };
