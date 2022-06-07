@@ -90,7 +90,7 @@ const ProjectRoleWidget = ({
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      if (value.metadata.name === "ADMIN") {
+      if (value.spec.scope === "organization") {
         setProjectRoleDisabled(true);
         setChecked([value]);
         handleRolesChange([value]);

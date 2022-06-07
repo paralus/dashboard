@@ -87,6 +87,16 @@ class EditProject extends React.Component {
     const roles = groupDetail.spec.projectNamespaceRoles.filter(
       (e) => e.project !== selectedProject
     );
+    const ifAllProjectsSelected = roles.filter(
+      (e) =>
+        e.group &&
+        e.group !== "" &&
+        e.role &&
+        e.role !== "" &&
+        (e.role === "ADMIN" || e.role === "ADMIN_READ_ONLY") &&
+        e.project === undefined
+    );
+
     selectedRoles.forEach((role) => {
       if (role.spec.scope === "namespace") {
         selectedNamespaces.forEach((ns) => {
@@ -99,8 +109,9 @@ class EditProject extends React.Component {
           roles.push(r);
         });
       } else if (
-        !role.spec.scope === "organization" &&
-        role.spec.scope === "namespace"
+        (ifAllProjectsSelected.length < 1) ||
+        (role.metadata.name !== "ADMIN" &&
+          role.metadata.name !== "ADMIN_READ_ONLY")
       ) {
         let r = {
           project: selectedProject,
