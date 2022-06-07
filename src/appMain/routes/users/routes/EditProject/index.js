@@ -94,7 +94,10 @@ class EditProject extends React.Component {
           };
           roles.push(r);
         });
-      } else {
+      } else if (
+        !role.spec.scope === "organization" &&
+        role.spec.scope === "namespace"
+      ) {
         let r = {
           project: selectedProject,
           role: role.metadata.name,
