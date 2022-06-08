@@ -45,9 +45,8 @@ class EditProject extends React.Component {
     const { groupDetail, projectsList } = props;
     if (groupDetail) {
       newState.groupName = groupDetail.metadata.name;
-      if (!newState.editRoles) {
+      if (groupDetail && !state.isRoleModified)
         newState.editRoles = groupDetail.spec.projectNamespaceRoles;
-      }
     }
     if (projectsList && !newState.selectedProject) {
       if (newState.projectId === "all") {
@@ -83,7 +82,20 @@ class EditProject extends React.Component {
   transformRoles = () => {
     const { selectedRoles, selectedProject, groupId, selectedNamespaces } =
       this.state;
-    const roles = [];
+    const { groupDetail } = this.props;
+
+    const roles = groupDetail.spec.projectNamespaceRoles.filter(
+      (e) => e.project !== selectedProject
+    );
+    const ifAllProjectsSelected = roles.filter(
+      (e) =>
+        e.group &&
+        e.group !== "" &&
+        e.role &&
+        e.role !== "" &&
+        (e.role === "ADMIN" || e.role === "ADMIN_READ_ONLY") &&
+        e.project === undefined
+    );
 
     selectedRoles.forEach((role) => {
       if (role.spec.scope === "namespace") {
@@ -96,7 +108,11 @@ class EditProject extends React.Component {
           };
           roles.push(r);
         });
-      } else {
+      } else if (
+        ifAllProjectsSelected.length < 1 ||
+        (role.metadata.name !== "ADMIN" &&
+          role.metadata.name !== "ADMIN_READ_ONLY")
+      ) {
         let r = {
           project: selectedProject,
           role: role.metadata.name,
@@ -106,7 +122,11 @@ class EditProject extends React.Component {
       }
     });
 
-    const tempNamespaces = roles.map((r) => r.namespace);
+    const tempNamespaces = [];
+    roles.forEach((role) => {
+      if (role.namespace && role.namespace !== undefined)
+        tempNamespaces.push(role.namespace);
+    });
     this.setState({ selectedNamespaces: tempNamespaces });
     return roles;
   };
@@ -117,9 +137,11 @@ class EditProject extends React.Component {
 
     let invalidNamespace = false;
     selectedRoles.find((r) => {
-      if (r.spec.scope === "namespace" && !selectedNamespaces) {
+      if (
+        r.spec.scope === "namespace" &&
+        (!selectedNamespaces || selectedNamespaces.length < 1)
+      )
         invalidNamespace = true;
-      }
     });
     if (invalidNamespace) {
       this.setState({
@@ -129,7 +151,6 @@ class EditProject extends React.Component {
       return;
     }
     groupDetail.spec.projectNamespaceRoles = this.transformRoles();
-
     editGroupWithCallback(
       groupDetail,
       this.successCallback,

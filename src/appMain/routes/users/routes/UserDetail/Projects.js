@@ -27,6 +27,12 @@ class Projects extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { getUserDetail } = this.props;
+    const { userId } = this.state;
+    getUserDetail(userId);
+  }
+
   static getDerivedStateFromProps(props, state) {
     const { isAddUserError, error, resetProjectError } = props;
     if (isAddUserError) {
@@ -111,10 +117,9 @@ class Projects extends React.Component {
         type: "regular",
         value: (
           <RolesInfo
-            roles={data?.roles}
             projectId={data?.project}
             addGroupInRole
-            namespaceNames={data?.namespaces}
+            roleInfo={data?.roleInfo}
           />
         ),
       },
@@ -139,45 +144,99 @@ class Projects extends React.Component {
     ];
   };
 
+  processProjectWithNamespaces = (data) => {
+    let processed = [];
+
+    // pushing 1 project-role element into output array
+    processed.push({
+      project: data[0].project ? data[0].project : "ALL PROJECTS",
+      role: data[0].role,
+      group: data[0]?.group,
+      namespaces: data[0].namespace ? [data[0].namespace] : [],
+    });
+
+    // remove 1st element from data array
+    data.shift();
+
+    if (data.length > 0) {
+      data.forEach((e) => {
+        let similarElement = processed.find(
+          (element) => element.project === e.project && element.role === e.role
+        );
+        if (!similarElement) {
+          processed.push({
+            project: e.project ? e.project : "ALL PROJECTS",
+            role: e.role,
+            group: e?.group,
+            namespaces: e.namespace ? [e.namespace] : [],
+          });
+        } else {
+          const SimilarElementIndex = processed.findIndex((object) => {
+            return (
+              object.project === similarElement.project &&
+              object.role === similarElement.role
+            );
+          });
+          similarElement.namespaces.push(e.namespace);
+          processed[SimilarElementIndex] = similarElement;
+        }
+      });
+    }
+    return processed;
+  };
+
+  processProjectWithRoles = (data) => {
+    let processed = [];
+
+    // pushing 1 project-role element into processed array
+    processed.push({
+      project: data[0]?.project,
+      group: data[0]?.group,
+      roleInfo: [{ roleName: data[0].role, namespaces: data[0].namespaces }],
+    });
+
+    // remove 1st element from data array
+    data.shift();
+
+    if (data.length > 0) {
+      data.forEach((e) => {
+        let similarElement = processed.find(
+          (element) => element.project === e.project
+        );
+        if (!similarElement) {
+          processed.push({
+            project: e.project,
+            group: e?.group,
+            roleInfo: [{ roleName: e.role, namespaces: e.namespaces }],
+          });
+        } else {
+          const SimilarElementIndex = processed.findIndex((object) => {
+            return object.project === similarElement.project;
+          });
+          similarElement.roleInfo.push({
+            roleName: e.role,
+            namespaces: e.namespaces,
+          });
+          processed[SimilarElementIndex] = similarElement;
+        }
+      });
+    }
+    return processed;
+  };
+
   render() {
     const { showError, deleteError } = this.state;
     const { userDetail } = this.props;
-    const tableData = [];
+    let tableData = [];
     if (
       userDetail.spec.projectNamespaceRoles &&
       userDetail.spec.projectNamespaceRoles.length > 0
     ) {
-      for (
-        let index = 0;
-        index < userDetail.spec.projectNamespaceRoles.length;
-        index++
-      ) {
-        const element = userDetail.spec.projectNamespaceRoles[index];
-        let found = null;
-        if (element.project) {
-          found = tableData.find((d) => d.project === element.project);
-        } else {
-          found = tableData.find((d) => d.project === "ALL PROJECTS");
-          element.project = "ALL PROJECTS";
-        }
-
-        if (found) {
-          const roles = new Set(found.role);
-          roles.add(element.role);
-          found = [...roles];
-
-          const namespaces = new Set(found.namespaces);
-          namespaces.add(element.namespace);
-          found.namespaces = [...namespaces];
-        } else {
-          tableData.push({
-            project: element.project,
-            roles: [element.role],
-            group: element.group,
-            namespaces: [element.namespace],
-          });
-        }
-      }
+      tableData = this.processProjectWithNamespaces(
+        userDetail.spec.projectNamespaceRoles
+      );
+      if (tableData.length > 0)
+        tableData = this.processProjectWithRoles(tableData);
     }
 
     let createDisabled = false;

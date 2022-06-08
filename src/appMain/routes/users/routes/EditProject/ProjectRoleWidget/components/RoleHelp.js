@@ -9,18 +9,18 @@ const RoleHelp = {
       </i>
       <br />
       <span style={{ color: "dodgerblue", fontSize: "12px" }}>
-        {"Gives Read/Write access to Workloads, Namespaces, " +
-          "Registries, Clusters"}
+        {
+          "Gives Read/Write access to Users, Groups, Clusters, Roles, Role association & Namespaces"
+        }
       </span>
     </span>
   ),
-
   PROJECT_ADMIN: (
     <span className="mb-0">
       <i>Group users can view and manage all your application resources.</i>
       <br />
       <span style={{ color: "dodgerblue", fontSize: "12px" }}>
-        {"Gives Read/Write access to Workloads, Namespaces, " + "Registries"}
+        {"Gives Read/Write access to Clusters, Namespaces"}
       </span>
     </span>
   ),
@@ -29,29 +29,10 @@ const RoleHelp = {
       <i>Group users can only view your application resources.</i>
       <br />
       <span style={{ color: "dodgerblue", fontSize: "12px" }}>
-        {"Gives Read-Only access to Workloads, Namespaces, " + "Registries"}
+        {"Gives Read-Only access to Clusters, Namespaces"}
       </span>
     </span>
   ),
-  INFRA_ADMIN: (
-    <span className="mb-0">
-      <i>Group users can view and manage all your Infrastructure resources.</i>
-      <br />
-      <span style={{ color: "dodgerblue", fontSize: "12px" }}>
-        {"Gives Read/Write access to Clusters, Namespaces "}
-      </span>
-    </span>
-  ),
-  INFRA_READ_ONLY: (
-    <span className="mb-0">
-      <i>Group users can only view your Infrastructure resources.</i>
-      <br />
-      <span style={{ color: "dodgerblue", fontSize: "12px" }}>
-        {"Gives Read-Only access to Clusters, Namespaces "}
-      </span>
-    </span>
-  ),
-
   NAMESPACE_ADMIN: (
     <span className="mb-0">
       <i>Group users can only can publish workloads in assiged namespaces.</i>
@@ -87,7 +68,8 @@ const RoleHelp = {
       </i>
       <br />
       <span style={{ color: "dodgerblue", fontSize: "12px" }}>
-        Gives Read Only access to Workloads, Namespaces, Registries, Clusters
+        Gives Read/Write access to Users, Groups, Clusters, Roles, Role
+        association & Namespaces
       </span>
     </span>
   ),
