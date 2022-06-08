@@ -46,7 +46,7 @@ const ProjectRoleWidget = ({
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      if (["ADMIN", "ADMIN_READ_ONLY"].includes(value.metadata.name)) {
+      if (value.spec.scope === "organization") {
         setProjectRoleDisabled(true);
         setChecked([value]);
         handleRolesChange([value]);

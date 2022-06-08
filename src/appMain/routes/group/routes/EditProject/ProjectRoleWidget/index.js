@@ -45,8 +45,12 @@ const ProjectRoleWidget = ({
 
   React.useEffect(() => {
     if (editRoles && systemRoles && !roleModified) {
+      const ifAllProjects = editRoles.filter(
+        (r) => r.role && r.role !== "" && r.project === undefined
+      );
       const editChecked = editRoles
         .filter((r) => r.project === editProject)
+        .concat(ifAllProjects)
         .map((ar) => {
           return systemRoles.find((r) => r.metadata.name === ar.role);
         });
@@ -55,9 +59,18 @@ const ProjectRoleWidget = ({
       handleRolesChange(uniqueRoles);
     }
 
+    // Handling namespaces here
     if (editRoles && editRoles.length > 0) {
-      const tempCurrentNamespaces = [];
-      editRoles.forEach((role) => tempCurrentNamespaces.push(role.namespace));
+      let tempCurrentNamespaces = [];
+      editRoles.forEach((role) => {
+        if (
+          role.namespace &&
+          role.namespace !== undefined &&
+          role.project === editProject
+        )
+          tempCurrentNamespaces.push(role.namespace);
+      });
+      tempCurrentNamespaces = [...new Set(tempCurrentNamespaces)];
       setCurrentNamespaces(tempCurrentNamespaces);
       onNamespacesChange(tempCurrentNamespaces);
     }
@@ -71,7 +84,7 @@ const ProjectRoleWidget = ({
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      if (value.metadata.name === "ADMIN") {
+      if (value.spec.scope === "organization") {
         setProjectRoleDisabled(true);
         setChecked([value]);
         handleRolesChange([value]);

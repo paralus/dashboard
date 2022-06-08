@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+// import React, { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import {
   Table,
   TableCell,
@@ -8,11 +9,17 @@ import {
   TableBody,
 } from "@material-ui/core";
 
+const manageNamespaces = (namespaceArray) => {
+  let namespaces = `[ `;
+  namespaces += namespaceArray.join(",");
+  namespaces += `]`;
+  return namespaces;
+};
+
 const formatProjectRoles = (roles) => {
   const output = {};
   (roles || []).forEach((item) => {
-    const nsarray = item?.project;
-
+    const nsarray = [item?.namespace];
     if (!output[item?.project]) {
       if (["ADMIN", "ADMIN_READ_ONLY"].includes(item?.role)) {
         output["All Projects"] = {
@@ -91,7 +98,11 @@ const getRoleProjectRowList = (role, config, clx) => (
       )}
     </TableCell>
     <TableCell className="section-item">
-      {<span className="no-result-list">-</span>}
+      {config && config.NS && config.NS.length > 0 ? (
+        <span className="no-result-list">{manageNamespaces(config.NS)}</span>
+      ) : (
+        <span className="no-result-list">-</span>
+      )}
     </TableCell>
   </>
 );

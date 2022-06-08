@@ -79,7 +79,21 @@ class EditProject extends React.Component {
 
   transformRoles = () => {
     const { selectedRoles, selectedProject, selectedNamespaces } = this.state;
-    const roles = [];
+    const { userDetail } = this.props;
+
+    const roles = userDetail.spec.projectNamespaceRoles.filter(
+      (e) => e.project !== selectedProject
+    );
+    const ifAllProjectsSelected = roles.filter(
+      (e) =>
+        e.group &&
+        e.group !== "" &&
+        e.role &&
+        e.role !== "" &&
+        (e.role === "ADMIN" || e.role === "ADMIN_READ_ONLY") &&
+        e.project === undefined
+    );
+
     selectedRoles.forEach((role) => {
       if (role.spec.scope === "namespace") {
         selectedNamespaces.forEach((ns) => {
@@ -90,7 +104,11 @@ class EditProject extends React.Component {
           };
           roles.push(r);
         });
-      } else {
+      } else if (
+        ifAllProjectsSelected.length < 1 ||
+        (role.metadata.name !== "ADMIN" &&
+          role.metadata.name !== "ADMIN_READ_ONLY")
+      ) {
         let r = {
           project: selectedProject,
           role: role.metadata.name,
@@ -99,7 +117,11 @@ class EditProject extends React.Component {
       }
     });
 
-    const tempNamespaces = roles.map((r) => r.namespace);
+    let tempNamespaces = [];
+    roles.forEach((role) => {
+      if (role.namespace && role.namespace !== undefined)
+        tempNamespaces.push(role.namespace);
+    });
     this.setState({ selectedNamespaces: tempNamespaces });
     return roles;
   };
@@ -107,12 +129,14 @@ class EditProject extends React.Component {
   handleSaveChanges = () => {
     const { editUserWithCallback, userDetail } = this.props;
     const { selectedRoles, selectedNamespaces } = this.state;
-    userDetail.spec.projectNamespaceRoles = this.transformRoles();
+
     let invalidNamespace = false;
     selectedRoles.find((r) => {
-      if (r.spec.scope === "namespace" && !selectedNamespaces) {
+      if (
+        r.spec.scope === "namespace" &&
+        (!selectedNamespaces || selectedNamespaces.length < 1)
+      )
         invalidNamespace = true;
-      }
     });
     if (invalidNamespace) {
       this.setState({
@@ -121,7 +145,7 @@ class EditProject extends React.Component {
       });
       return;
     }
-
+    userDetail.spec.projectNamespaceRoles = this.transformRoles();
     editUserWithCallback(userDetail, this.successCallback, this.errorCallback);
   };
 
@@ -131,6 +155,10 @@ class EditProject extends React.Component {
 
   handleRolesChange = (checked) => {
     this.setState({ isRoleModified: true, selectedRoles: checked });
+  };
+
+  setSelectedRoles = (checked) => {
+    this.setState({ selectedRoles: checked });
   };
 
   handleNamespacesChange = (namespaces) => {
@@ -191,6 +219,7 @@ class EditProject extends React.Component {
             editProject={selectedProject}
             editRoles={editRoles}
             editNamespaces={selectedNamespaces}
+            setSelectedRoles={this.setSelectedRoles}
           />
         </div>
         <Paper
