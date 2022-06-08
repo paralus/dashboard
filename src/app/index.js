@@ -227,7 +227,7 @@ const mapStateToProps = ({ settings, Projects, UserSession, Kubectl }) => {
     userAndRoleDetail = {},
   } = settings;
   const { currentProject } = Projects;
-  const { organization = {} } = userAndRoleDetail;
+  const organization = userAndRoleDetail?.organization || {};
   const kubectlOpen = Kubectl?.open;
   return {
     navCollapsed,
