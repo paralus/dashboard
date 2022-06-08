@@ -13,8 +13,7 @@ const capitalize = (string) => {
 const PageTitle = ({ partnerDetail }) => {
   if (!partnerDetail) return null;
   const { fav_icon_link, name } = partnerDetail;
-  const favicon_src =
-    "https://pbs.twimg.com/profile_images/934706849508573186/_l78sPtc_400x400.jpg";
+  let favicon_src = Paralus;
   return (
     <Helmet>
       <title>{capitalize(name)}</title>
