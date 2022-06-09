@@ -53,7 +53,7 @@ module.exports = merge(common, {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "../src/assesets/images/paralus.png"),
+          from: path.resolve(__dirname, "../public/favicon.ico"),
           to: path.resolve(__dirname, "../dist")
         },
         {
