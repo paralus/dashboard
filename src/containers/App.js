@@ -51,7 +51,15 @@ class App extends Component {
   render() {
     //This is the starting point for console app, continue to post code from console ..
     const { match, location, isSessionExpired, UserSession } = this.props;
-    //if (isSessionExpired === "UNKNOWN") return null;
+
+    // When the user first lands on the page, isSessionExpired will be
+    // set to "UNKNOWN" from the initial state in the reducer.
+    // If the user is already logged in (which is detected by doing a
+    // userinfo), we then set the isSessionExpired to `false` and then
+    // continue with business as usual but in the case that the user is
+    // not logged in, we have to redirect them to the login page.
+
+    if (isSessionExpired === "UNKNOWN") return null;
 
     if (isSessionExpired) {
       if (
