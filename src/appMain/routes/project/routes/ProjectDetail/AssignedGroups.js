@@ -110,7 +110,13 @@ class AssignedGroups extends React.Component {
       },
       {
         type: "regular",
-        value: <RolesInfo roles={data?.roles} projectId={projectId} />,
+        value: (
+          <RolesInfo
+            roles={data?.roles}
+            projectId={projectId}
+            roleInfo={data?.roleInfo}
+          />
+        ),
       },
       {
         type: "buttons",
@@ -131,6 +137,92 @@ class AssignedGroups extends React.Component {
         ],
       },
     ];
+  };
+
+  processGroupsWithNamespaces = (data) => {
+    let processed = [];
+    const firstElement = data[0];
+
+    // pushing 1 project-role element into output array
+    processed.push({
+      project: firstElement.project,
+      role: firstElement.role,
+      group: firstElement.group,
+      namespaces: firstElement.namespace ? [firstElement.namespace] : [],
+    });
+
+    // remove 1st element from data array
+    data = data.filter((element) => element !== firstElement);
+
+    if (data.length > 0) {
+      data.forEach((e) => {
+        let similarElement = processed.find(
+          (element) =>
+            element.project === e.project &&
+            element.group === e.group &&
+            element.role === e.role
+        );
+        if (!similarElement) {
+          processed.push({
+            project: e.project,
+            role: e.role,
+            group: e?.group,
+            namespaces: e.namespace ? [e.namespace] : [],
+          });
+        } else {
+          const SimilarElementIndex = processed.findIndex((object) => {
+            return (
+              object.project === similarElement.project &&
+              object.role === similarElement.role &&
+              object.group === similarElement.group
+            );
+          });
+          similarElement.namespaces.push(e.namespace);
+          processed[SimilarElementIndex] = similarElement;
+        }
+      });
+    }
+    return processed;
+  };
+
+  processGroupsWithRoles = (data) => {
+    let processed = [];
+
+    // pushing 1 project-role element into processed array
+    processed.push({
+      project: data[0]?.project,
+      group: data[0]?.group,
+      roleInfo: [{ roleName: data[0].role, namespaces: data[0].namespaces }],
+    });
+
+    // remove 1st element from data array
+    data.shift();
+
+    if (data.length > 0) {
+      data.forEach((e) => {
+        let similarElement = processed.find(
+          (element) =>
+            element.project === e.project && element.group === e.group
+        );
+        if (!similarElement) {
+          processed.push({
+            project: e.project,
+            group: e?.group,
+            roleInfo: [{ roleName: e.role, namespaces: e.namespaces }],
+          });
+        } else {
+          const SimilarElementIndex = processed.findIndex((object) => {
+            return object.project === similarElement.project;
+          });
+          similarElement.roleInfo.push({
+            roleName: e.role,
+            namespaces: e.namespaces,
+          });
+          processed[SimilarElementIndex] = similarElement;
+        }
+      });
+    }
+    return processed;
   };
 
   render() {
@@ -165,22 +257,12 @@ class AssignedGroups extends React.Component {
       );
     }
 
-    const tableData = [];
-    for (let index = 0; index < projGroups.length; index++) {
-      const element = projGroups[index];
-      let found = null;
-      found = tableData.find((d) => d.group === element.group);
+    let tableData = [];
+    if (projGroups && projGroups.length > 0) {
+      tableData = this.processGroupsWithNamespaces(projGroups);
 
-      if (found) {
-        const roles = new Set(found.roles);
-        roles.add(element.role);
-        found.roles = [...roles];
-      } else {
-        tableData.push({
-          group: element.group,
-          roles: [element.role],
-        });
-      }
+      if (tableData.length > 0)
+        tableData = this.processGroupsWithRoles(tableData);
     }
 
     const columnLabels = [

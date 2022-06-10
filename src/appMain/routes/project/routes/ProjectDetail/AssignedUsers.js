@@ -107,7 +107,13 @@ class AssignedUsers extends React.Component {
       },
       {
         type: "regular",
-        value: <RolesInfo roles={data?.roles} projectId={projectId} />,
+        value: (
+          <RolesInfo
+            roles={data?.roles}
+            projectId={projectId}
+            roleInfo={data?.roleInfo}
+          />
+        ),
       },
       {
         type: "buttons",
@@ -128,6 +134,88 @@ class AssignedUsers extends React.Component {
         ],
       },
     ];
+  };
+
+  processUsersWithNamespaces = (data) => {
+    let processed = [];
+    const firstElement = data[0];
+
+    // pushing 1 project-role element into output array
+    processed.push({
+      user: firstElement.user,
+      role: firstElement.role,
+      namespaces: firstElement.namespace ? [firstElement.namespace] : [],
+    });
+
+    // remove 1st element from data array
+    data = data.filter((element) => element !== firstElement);
+
+    if (data.length > 0) {
+      data.forEach((e) => {
+        let similarElement = processed.find(
+          (element) => element.user === e.user && element.role === e.role
+        );
+        if (!similarElement) {
+          processed.push({
+            role: e.role,
+            user: e?.user,
+            namespaces: e.namespace ? [e.namespace] : [],
+          });
+        } else {
+          const SimilarElementIndex = processed.findIndex((object) => {
+            return (
+              object.role === similarElement.role &&
+              object.user === similarElement.user
+            );
+          });
+          similarElement.namespaces.push(e.namespace);
+          processed[SimilarElementIndex] = similarElement;
+        }
+      });
+    }
+    return processed;
+  };
+
+  processUsersWithRoles = (data) => {
+    let processed = [];
+
+    // pushing 1 project-role element into processed array
+    processed.push({
+      user: data[0]?.user,
+      roleInfo: [
+        {
+          roleName: data[0].role,
+          namespaces: data[0].namespaces ? data[0].namespaces : [],
+        },
+      ],
+    });
+
+    // remove 1st element from data array
+    data.shift();
+
+    if (data.length > 0) {
+      data.forEach((e) => {
+        let similarElement = processed.find(
+          (element) => element.user === e.user
+        );
+        if (!similarElement) {
+          processed.push({
+            user: e?.user,
+            roleInfo: [{ roleName: e.role, namespaces: e.namespaces }],
+          });
+        } else {
+          const SimilarElementIndex = processed.findIndex((object) => {
+            return object.user === similarElement.user;
+          });
+          similarElement.roleInfo.push({
+            roleName: e.role,
+            namespaces: e.namespaces,
+          });
+          processed[SimilarElementIndex] = similarElement;
+        }
+      });
+    }
+    return processed;
   };
 
   render() {
@@ -164,22 +252,12 @@ class AssignedUsers extends React.Component {
       );
     }
 
-    const tableData = [];
-    for (let index = 0; index < projUsers.length; index++) {
-      const element = projUsers[index];
-      let found = null;
-      found = tableData.find((d) => d.user === element.user);
+    let tableData = [];
+    if (projUsers && projUsers.length > 0) {
+      tableData = this.processUsersWithNamespaces(projUsers);
 
-      if (found) {
-        const roles = new Set(found.roles);
-        roles.add(element.role);
-        found.roles = [...roles];
-      } else {
-        tableData.push({
-          user: element.user,
-          roles: [element.role],
-        });
-      }
+      if (tableData.length > 0)
+        tableData = this.processUsersWithRoles(tableData);
     }
 
     const columnLabels = [
