@@ -157,9 +157,8 @@ class EditUser extends React.Component {
   };
 
   handleNamespacesChange = (namespace) => {
-    this.setState({ selectedNamespaces: namespace })
-  }
-
+    this.setState({ selectedNamespaces: namespace });
+  };
 
   render() {
     const {

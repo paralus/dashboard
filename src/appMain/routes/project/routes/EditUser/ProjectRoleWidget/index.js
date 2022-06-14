@@ -183,7 +183,6 @@ const ProjectRoleWidget = ({
   const namespaceChecked =
     checked.findIndex((x) => x.spec.scope === "namespace") !== -1;
 
-
   return (
     <Grid
       container
