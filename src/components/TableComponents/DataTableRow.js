@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
-import RafayDelete from "components/RafayDelete";
+import DeleteIconComponent from "components/DeleteIconComponent";
 
 const useStyles = makeStyles((theme) => ({
   menuList: {
@@ -48,7 +48,7 @@ const DataTableRow = ({ rowIndex, data, parseRowData }) => {
               <div className="float-right">
                 {n.buttons.map((b, i) => {
                   if (["danger", "danger-icon"].includes(b.type)) {
-                    return <RafayDelete key={i} button={b} />;
+                    return <DeleteIconComponent key={i} button={b} />;
                   }
                   if (b.type === "edit-icon") {
                     return (

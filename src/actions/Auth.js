@@ -197,7 +197,7 @@ export function verifySignup(params) {
   };
 }
 
-export function getRafayCliDownloadOptions() {
+export function getCliDownloadOptions() {
   return function (dispatch) {
     http("auth")
       .get(`cli/download/`)

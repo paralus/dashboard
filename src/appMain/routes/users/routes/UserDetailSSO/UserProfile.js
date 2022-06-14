@@ -7,7 +7,7 @@ import {
   getKubeconfigValidity,
   setKubeconfigValidity,
 } from "actions/index";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import Profile from "./components/Profile";
 import KubeconfigValidity from "./components/KubeconfigValidity";
 import { capitalizeFirstLetter } from "../../../../../utils";
@@ -145,8 +145,7 @@ class UserProfile extends Component {
             onSave={this.handleSaveValidity}
           />
         </div>
-
-        <RafaySnackbar
+        <AppSnackbar
           open={showAlert}
           severity={alertSeverity}
           message={capitalizeFirstLetter(alertMessage)}

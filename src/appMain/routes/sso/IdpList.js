@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import T from "i18n-react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayInfoCard from "components/RafayInfoCard";
-import DataTableToolbar from "components/RafayTable/DataTableToolbar";
-import DataTable from "components/RafayTable/DataTable";
+import AppSnackbar from "components/AppSnackbar";
+import InfoCardComponent from "components/InfoCardComponent";
+import DataTableToolbar from "components/TableComponents/DataTableToolbar";
+import DataTable from "components/TableComponents/DataTable";
 import { deleteIdentityProvider, getAllIdentityProviders } from "actions/IDPs";
 import { capitalizeFirstLetter } from "../../../utils";
 
@@ -195,7 +195,7 @@ class IdpList extends React.Component {
             organization to single sign on to the console
           </p>
           {/* {!tableData.length && (
-            <RafayInfoCard
+            <InfoCardComponent
               title={<T.span text="idps.idp_list.no_idps.title" />}
               linkHelper={<T.span text="idps.idp_list.no_idps.helptext" />}
               link={AddIdpsButton}
@@ -210,7 +210,7 @@ class IdpList extends React.Component {
               loading={this.state.loading}
             />
           </Paper>
-          <RafaySnackbar
+          <AppSnackbar
             open={alertOpen}
             message={capitalizeFirstLetter(alertMessage)}
             severity={alertSeverity}

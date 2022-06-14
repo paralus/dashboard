@@ -16,7 +16,7 @@ const TooltipWithDisable = ({ title, disabled, children }) => {
   return <Tooltip title={title}>{children}</Tooltip>;
 };
 
-const RafayDelete = ({ button }) => {
+const DeleteIconComponent = ({ button }) => {
   const [open, setOpen] = React.useState(false);
   const handleConfirm = () => {
     setOpen(false);
@@ -67,4 +67,4 @@ const RafayDelete = ({ button }) => {
   );
 };
 
-export default RafayDelete;
+export default DeleteIconComponent;

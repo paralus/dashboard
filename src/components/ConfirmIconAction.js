@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RafayConfirmIconAction = ({
+const ConfirmIconAction = ({
   icon,
   buttonText,
   labelText,
@@ -107,4 +107,4 @@ const RafayConfirmIconAction = ({
   );
 };
 
-export default RafayConfirmIconAction;
+export default ConfirmIconAction;

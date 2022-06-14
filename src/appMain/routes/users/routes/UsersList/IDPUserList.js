@@ -10,15 +10,14 @@ import GroupIcon from "@material-ui/icons/Group";
 import { getUsers, revokeKubeconfig } from "actions/index";
 import ProjectList from "components/ProjectList";
 import ProjectRoleMatrix from "components/ProjectRoleMatrix";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayConfirmIconAction from "components/RafayConfirmIconAction";
-import DataTable from "components/RafayTable/DataTable";
+import AppSnackbar from "components/AppSnackbar";
+import ConfirmIconAction from "components/ConfirmIconAction";
+import DataTable from "components/TableComponents/DataTable";
 import { IDP_USER_COLUMN_HEADER_CONFIG } from "constants/Constant";
 import { getTimeFromNow } from "../../../../../utils";
 import DataTableToolbar from "./components/DataTableToolbar";
 import KubeconfigValiditySSO from "./components/KubeconfigValiditySSO";
 import SsoGroups from "./components/IDPUserGroups/SsoGroups";
-import { capitalizeFirstLetter } from "../../../../../utils";
 
 const style = {
   userNameLabel: {
@@ -111,7 +110,7 @@ class IDPUserList extends React.Component {
     }
   };
 
-  handleRafaySnackbarClose = () => {
+  handleAppSnackbarClose = () => {
     this.setState({ showAlert: false, alertMessage: null });
   };
 
@@ -202,7 +201,7 @@ class IDPUserList extends React.Component {
             <AvTimerIcon />
           </IconButton>
         </Tooltip>
-        <RafayConfirmIconAction
+        <ConfirmIconAction
           icon={<DesktopAccessDisabledIcon />}
           action={(event) => this.handleRevokeKubeconfig(event, data)}
           confirmText={
@@ -296,11 +295,11 @@ class IDPUserList extends React.Component {
             parseRowData={this.parseRowData}
           />
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={this.state.showAlert}
           severity={this.state.alertSeverity}
           message={this.state.alertMessage}
-          closeCallback={this.handleRafaySnackbarClose}
+          closeCallback={this.handleAppSnackbarClose}
         />
         <KubeconfigValiditySSO
           open={this.state.kubeconfigValidityOpen}

@@ -5,7 +5,7 @@ import { getUserDetail, resetUser } from "actions/index";
 
 import T from "i18n-react";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafayTabLayout from "components/RafayTabLayout";
+import TabsLayout from "components/TabsLayout";
 import Projects from "./Projects";
 import Groups from "./Groups";
 import UserProfile from "./UserProfile";
@@ -36,7 +36,7 @@ class UserDetail extends Component {
       ],
     };
     return (
-      <RafayTabLayout
+      <TabsLayout
         // title={groupName}
         breadcrumb={<ResourceBreadCrumb config={config} />}
         help="users.user_detail.layout.helptext"

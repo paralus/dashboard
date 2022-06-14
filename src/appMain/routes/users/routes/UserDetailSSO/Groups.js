@@ -9,10 +9,10 @@ import {
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import T from "i18n-react";
-import DataTableToolbar from "components/RafayTable/DataTableToolbar";
-import DataTable from "components/RafayTable/DataTable";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayInfoCard from "components/RafayInfoCard";
+import DataTableToolbar from "components/TableComponents/DataTableToolbar";
+import DataTable from "components/TableComponents/DataTable";
+import AppSnackbar from "components/AppSnackbar";
+import InfoCardComponent from "components/InfoCardComponent";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
 const style = {
@@ -159,7 +159,7 @@ class Groups extends React.Component {
     if (!userGroups.length) {
       return (
         <>
-          <RafayInfoCard
+          <InfoCardComponent
             title={<T.span text="users.user_detail.no_groups.title" />}
             linkHelper={<T.span text="users.user_detail.no_groups.helptext" />}
             link={ManageMembershipButton}
@@ -187,7 +187,7 @@ class Groups extends React.Component {
             parseRowData={this.parseRowData}
           />
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={alertOpen}
           message={capitalizeFirstLetter(alertMessage)}
           severity={alertSeverity}

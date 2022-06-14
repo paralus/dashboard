@@ -1,5 +1,6 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
+import Paralus from "assets/images/paralus.png";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import { connect } from "react-redux";
@@ -68,8 +69,7 @@ class Header extends React.Component {
     }
     let image_src = "";
     if (partnerDetail) {
-      image_src =
-        "https://rafay-image.s3-us-west-2.amazonaws.com/rafay-logo-transparent.png";
+      image_src = Paralus;
     }
     if (partnerDetail && partnerDetail.logo_link) {
       image_src = partnerDetail.logo_link;

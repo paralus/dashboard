@@ -11,7 +11,7 @@ import {
   getInitProjects,
 } from "actions/index";
 import { SnackbarProvider } from "utils/useSnack";
-import RafaySuspense from "components/RafaySuspense";
+import SuspenseComponent from "components/SuspenseComponent";
 import ErrorFallback from "utils/ErrorFallback";
 import tealTheme from "./themes/tealTheme";
 import "styles/bootstrap.scss";
@@ -85,7 +85,7 @@ class App extends Component {
         <MuiThemeProvider theme={this.applyTheme}>
           <div className="app-main">
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <RafaySuspense>
+              <SuspenseComponent>
                 <Route path={`${match.url}main`} component={AppMain} />
                 <Route path={`${match.url}app`} component={MainApp} />
                 <Route path={`${match.url}login`} component={Login} />
@@ -93,7 +93,7 @@ class App extends Component {
                   path={`${match.url}console/:projectId/:clusterName`}
                   component={FullScreenKubectl}
                 />
-              </RafaySuspense>
+              </SuspenseComponent>
             </ErrorBoundary>
           </div>
         </MuiThemeProvider>

@@ -9,7 +9,7 @@ import {
   getLang,
   changePassword,
   organizationLogin,
-  getRafayCliDownloadOptions,
+  getCliDownloadOptions,
   resetCliDownload,
 } from "actions/index";
 import HelpOutline from "@material-ui/icons/HelpOutline";
@@ -64,7 +64,7 @@ class UserInfo extends React.Component {
 
   handleDownloadCli = (event) => {
     this.setState({ open: false });
-    this.rafaycliDownloadDialog.open();
+    this.paraluscliDownloadDialog.open();
   };
 
   handleProfileClick = (event) => {
@@ -112,11 +112,10 @@ class UserInfo extends React.Component {
         </div>
         <a
           style={{ color: "#ff9800" }}
-          target="_blank"
           href={
             this.props.partnerDetail?.settings?.docs_link?.length > 0
               ? this.props.partnerDetail.settings.docs_link
-              : "https://docs.rafay.co"
+              : "#"
           }
         >
           <HelpOutline style={{ cursor: "pointer", marginLeft: "20px" }} />
@@ -206,7 +205,7 @@ export default withRouter(
     getLang,
     changePassword,
     organizationLogin,
-    getRafayCliDownloadOptions,
+    getCliDownloadOptions,
     resetCliDownload,
   })(UserInfo)
 );

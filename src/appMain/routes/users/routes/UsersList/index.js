@@ -1,5 +1,5 @@
 import React from "react";
-import RafayTabLayout from "./components/RafayTabLayout";
+import TabsLayout from "./components/TabsLayout";
 import UserList from "./UserList";
 import IDPUserList from "./IDPUserList";
 
@@ -26,7 +26,7 @@ const UsersList = () => {
         users by accessing the correponding ACTIONS menu, or you can create a
         new user by clicking on the NEW USER button.
       </p>
-      <RafayTabLayout
+      <TabsLayout
         tabs={[
           {
             label: "Local Users",

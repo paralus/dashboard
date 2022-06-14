@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CardBox from "components/CardBox/index";
 import T from "i18n-react";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayConfirmIconAction from "components/RafayConfirmIconAction";
+import AppSnackbar from "components/AppSnackbar";
+import ConfirmIconAction from "components/ConfirmIconAction";
 import { revokeSelfKubeconfig } from "actions/index";
 import DownloadKubeconfig from "./DownloadKubeconfig";
 import { capitalizeFirstLetter } from "../../../../../utils";
@@ -60,7 +60,7 @@ const Kubeconfig = ({ user }) => {
           </div>
           <div className="col-md-12" style={{ padding: "15px" }} />
           <div className="col-md-12">
-            <RafayConfirmIconAction
+            <ConfirmIconAction
               buttonText="Revoke Kubeconfig"
               action={(event) => handleRevokeKubeconfig(event, user)}
               confirmText={
@@ -85,7 +85,7 @@ const Kubeconfig = ({ user }) => {
           </div>
         </div>
       </CardBox>
-      <RafaySnackbar
+      <AppSnackbar
         open={alert.show}
         severity={alert.severity}
         message={capitalizeFirstLetter(alert.message)}

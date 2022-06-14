@@ -1,7 +1,7 @@
 import React from "react";
 import T from "i18n-react";
 
-const RafayPageHeader = ({ title, help, breadcrumb }) => {
+const PageHeader = ({ title, help, breadcrumb }) => {
   return (
     <>
       {breadcrumb ? (
@@ -25,4 +25,4 @@ const RafayPageHeader = ({ title, help, breadcrumb }) => {
   );
 };
 
-export default RafayPageHeader;
+export default PageHeader;

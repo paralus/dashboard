@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import RafayTrailText from "../../containers/locale/RafayTrailText.js";
 
 class Footer extends Component {
   constructor(props) {
@@ -22,12 +21,12 @@ class Footer extends Component {
   render() {
     return (
       <footer className="app-footer">
-        {this.props.partnerDetail?.name === "Rafay Cloud" && (
+        {this.props.partnerDetail?.name === "Paralus" && (
           <div className="d-flex flex-row justify-content-between">
             <div>
               <span>
                 {this.props.partnerDetail?.settings?.copyright || (
-                  <>Copyright Rafay Systems &copy; {new Date().getFullYear()}</>
+                  <>Copyright Paralus &copy; {new Date().getFullYear()}</>
                 )}
               </span>
               {this.props.organization?.detail?.spec.type !== "paid" && (
@@ -55,17 +54,13 @@ class Footer extends Component {
                   )}
                 </>
               )}
-              <a
-                style={{ color: "teal", marginLeft: "10px" }}
-                href="https://rafay.co/privacy-policy/"
-                target="_blank"
-              >
+              <a style={{ color: "teal", marginLeft: "10px" }} href="">
                 Privacy Policy
               </a>
             </div>
           </div>
         )}
-        {this.props.partnerDetail?.name !== "Rafay Cloud" && (
+        {this.props.partnerDetail?.name !== "Paralus" && (
           <div className="d-flex flex-row justify-content-between">
             <div>
               <span>{this.props.partnerDetail?.settings?.copyright}</span>
@@ -89,9 +84,7 @@ class Footer extends Component {
           key="terms-services"
           maxWidth="xl"
         >
-          <DialogContent>
-            <RafayTrailText />
-          </DialogContent>
+          <DialogContent></DialogContent>
           <DialogActions>
             <Button
               onClick={() => this.setState({ open: false })}

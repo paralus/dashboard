@@ -7,7 +7,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@material-ui/core";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import { useDispatch } from "react-redux";
 import { getOrgKubeconfigSettings } from "actions/index";
 import { capitalizeFirstLetter } from "../../../../../utils";
@@ -178,7 +178,7 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
           <span>Save</span>
         </Button>
       </div>
-      <RafaySnackbar
+      <AppSnackbar
         open={alert.show}
         severity={alert.severity}
         message={capitalizeFirstLetter(alert.message)}

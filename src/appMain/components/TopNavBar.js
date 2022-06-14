@@ -214,7 +214,7 @@ const TopNavBar = () => {
   });
   const hide = !UserSession.visibleAdmin;
   const docs_link =
-    partnerDetail?.settings?.docs_link || "https://docs-rafaylabs.vercel.app/";
+    partnerDetail?.settings?.docs_link || "https://www.paralus.io/docs";
 
   return (
     <div>

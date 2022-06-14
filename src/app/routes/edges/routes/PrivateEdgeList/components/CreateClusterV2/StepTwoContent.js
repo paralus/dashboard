@@ -6,7 +6,6 @@ import EKS from "assets/images/amazon-eks.png";
 import GKE from "assets/images/gke.png";
 import AKS from "assets/images/aks.png";
 import Azure from "assets/images/azure.png";
-import Rafay from "assets/images/rafay.png";
 import Linux from "assets/images/linux.png";
 // import Import from "assets/images/import.png";
 import Ova from "assets/images/ova.png";
@@ -208,7 +207,7 @@ const StepTwoContent = ({
               <>
                 <ButtonRow
                   title="Select Kubernetes Distribution"
-                  helptext="Rafay will provision your managed Kubernetes cluster in your account and install management agent"
+                  helptext="Paralus will provision your managed Kubernetes cluster in your account and install management agent"
                   buttons={[
                     {
                       type: "EKS",
@@ -262,7 +261,7 @@ const StepTwoContent = ({
               <>
                 <ButtonRow
                   title="Select Kubernetes Distribution"
-                  helptext="Rafay will provision your managed Kubernetes cluster in your account and install management agent"
+                  helptext="Paralus will provision your managed Kubernetes cluster in your account and install management agent"
                   buttons={[
                     {
                       type: "OPENSHIFT",

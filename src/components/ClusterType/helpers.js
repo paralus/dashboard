@@ -5,8 +5,7 @@ import EKS from "assets/images/amazon-eks.png";
 import K8s from "assets/images/k8s.png";
 import AKS from "assets/images/aks.png";
 import GKE from "assets/images/gke.png";
-import Rafay from "assets/images/rafay.png";
-import Rafay2 from "assets/images/rafay2.png";
+import Paralus from "assets/images/paralus.png";
 import RKE from "assets/images/rke.png";
 import Paris from "assets/images/eksd.png";
 import OpenShift from "assets/images/openshift.png";
@@ -73,7 +72,7 @@ export function getClusterType(params) {
         if (environmentProvider === "AZURE") {
           label = "Upstream Kubernetes (Azure)";
         }
-        src = <TypeImg src={Rafay} />;
+        src = <TypeImg src={Paralus} />;
       }
       if (kubernetesProvider === "GKE" && environmentProvider === "GCP") {
         label = "Google GKE";
@@ -94,7 +93,7 @@ export function getClusterType(params) {
       if (provisionPackageType === "QCOW2") {
         label = "Upstream Kubernetes (Openstack QCOW2)";
       }
-      src = <TypeImg src={Rafay} />;
+      src = <TypeImg src={Paralus} />;
       if (kubernetesProvider === "EKSD") {
         label = "Amazon EKS Distro";
         src = <TypeImg src={Paris} />;

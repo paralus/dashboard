@@ -143,7 +143,7 @@ export function getDownloadBootstrapYAML(name) {
     window?.localStorage.getItem("currentProject")
   );
   return http(`infra/v3/project/${cachedProject}/cluster/`, false, {
-    "content-type": "application/x-rafay-yaml",
+    "content-type": "application/x-paralus-yaml",
   }).get(`${name}/download`);
 }
 

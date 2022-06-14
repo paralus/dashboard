@@ -704,7 +704,7 @@ const settings = (state = initialSettings, action) => {
     case "cli_download_options_success":
       return {
         ...state,
-        rafayClidownloadOptions: action.payload.data,
+        paralusClidownloadOptions: action.payload.data,
         isDownloadOptionsSucess: true,
         isDownloadOptionsFailure: false,
       };

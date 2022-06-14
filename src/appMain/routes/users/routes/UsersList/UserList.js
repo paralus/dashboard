@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ContainerHeader from "components/ContainerHeader/index";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
-import RafayDelete from "components/RafayDelete";
+import DeleteIconComponent from "components/DeleteIconComponent";
 import Tooltip from "@material-ui/core/Tooltip";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
@@ -27,7 +27,7 @@ import {
 } from "actions/index";
 import ProjectList from "components/ProjectList";
 import ProjectRoleMatrix from "components/ProjectRoleMatrix";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import {
   COLUMN_HEADER_CONFIG,
   MFA_LABELS,
@@ -35,7 +35,7 @@ import {
 } from "constants/Constant";
 import Spinner from "components/Spinner/Spinner";
 import { parseError, getTimeFromNow, capitalizeFirstLetter } from "utils";
-import DataTableDynamic from "components/RafayTable/DataTableDynamic";
+import DataTableDynamic from "components/TableComponents/DataTableDynamic";
 import StatusIndicator from "components/StatusIndicator";
 import DataTableToolbar from "./components/DataTableToolbar";
 import CreateUserDialog from "./components/CreateUserDialog";
@@ -478,7 +478,7 @@ class UserList extends React.Component {
     history.push(`${history.location.pathname}/${id}/keys`);
   };
 
-  handleRafaySnackbarClose = () => {
+  handleAppSnackbarClose = () => {
     this.setState({ showAlert: false, alertMessage: null });
   };
 
@@ -558,7 +558,7 @@ class UserList extends React.Component {
             <EditIcon fontSize="small" />
           </IconButton>
         </Tooltip>
-        <RafayDelete
+        <DeleteIconComponent
           key={data.metadata.name}
           button={{
             type: "danger-icon",
@@ -675,11 +675,11 @@ class UserList extends React.Component {
             />
           </Spinner>
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={this.state.showAlert}
           severity={this.state.alertSeverity}
           message={this.state.alertMessage}
-          closeCallback={this.handleRafaySnackbarClose}
+          closeCallback={this.handleAppSnackbarClose}
         />
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "right" }}

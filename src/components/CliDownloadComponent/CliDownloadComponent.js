@@ -1,20 +1,18 @@
 import React from "react";
 import {
   Dialog,
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   List,
   ListItem,
   ListItemText,
-  ListItemSecondaryAction,
 } from "@material-ui/core";
 
 // import Button from '@material-ui/core/Button';
 import T from "i18n-react";
 
-class RafayCliDownload extends React.Component {
+class CliDownloadComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,13 +45,13 @@ class RafayCliDownload extends React.Component {
   };
 
   open = () => {
-    this.props.getRafayCliDownloadOptions();
+    this.props.getCliDownloadOptions();
   };
 
   render() {
-    let rafayClidownloadOptions = [];
-    if (this.props.rafayClidownloadOptions) {
-      rafayClidownloadOptions = this.props.rafayClidownloadOptions;
+    let paralusClidownloadOptions = [];
+    if (this.props.paralusClidownloadOptions) {
+      paralusClidownloadOptions = this.props.paralusClidownloadOptions;
     }
 
     return (
@@ -67,7 +65,7 @@ class RafayCliDownload extends React.Component {
           </DialogContentText>
           <div className="row mt-4">
             <List>
-              {rafayClidownloadOptions.map((n) => (
+              {paralusClidownloadOptions.map((n) => (
                 <a href={n[0]} download={n[3]}>
                   <ListItem key={n[3]} button dense>
                     <ListItemText primary={n[3]} />
@@ -82,4 +80,4 @@ class RafayCliDownload extends React.Component {
   }
 }
 
-export default RafayCliDownload;
+export default CliDownloadComponent;

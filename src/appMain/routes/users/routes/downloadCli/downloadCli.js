@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import GetAppIcon from "@material-ui/icons/GetApp";
 
 import T from "i18n-react";
-import { getRafayCliDownloadOptions } from "actions/index";
+import { getCliDownloadOptions } from "actions/index";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import linux_logo from "./images/linux_logo1.png";
@@ -36,12 +36,12 @@ class DownloadCli extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getRafayCliDownloadOptions();
+    this.props.getCliDownloadOptions();
   }
 
   UNSAFE_componentWillReceiveProps(props) {
-    if (props.isDownloadOptionsSucess && props.rafayClidownloadOptions) {
-      props.rafayClidownloadOptions.forEach((clioption) => {
+    if (props.isDownloadOptionsSucess && props.paralusClidownloadOptions) {
+      props.paralusClidownloadOptions.forEach((clioption) => {
         const key = `${clioption.type}_${clioption.arch}`;
         this.state.clioptions[key] = clioption;
       });
@@ -345,14 +345,14 @@ const mapStateToProps = ({ settings }) => {
   const {
     isDownloadOptionsSucess,
     isDownloadOptionsFailure,
-    rafayClidownloadOptions,
+    paralusClidownloadOptions,
   } = settings;
   return {
     isDownloadOptionsSucess,
     isDownloadOptionsFailure,
-    rafayClidownloadOptions,
+    paralusClidownloadOptions,
   };
 };
 export default withRouter(
-  connect(mapStateToProps, { getRafayCliDownloadOptions })(DownloadCli)
+  connect(mapStateToProps, { getCliDownloadOptions })(DownloadCli)
 );

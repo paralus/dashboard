@@ -12,9 +12,9 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import T from "i18n-react";
 import ResourceBreadCrumb from "components/ResourceBreadCrumb";
-import RafaySnackbar from "components/RafaySnackbar";
-import RafayPageHeader from "components/RafayPageHeader";
-import TransferList from "./RafayTransferList/index";
+import AppSnackbar from "components/AppSnackbar";
+import PageHeader from "components/PageHeader";
+import TransferList from "./ProjectTransferList/index";
 import { capitalizeFirstLetter } from "../../../../../utils";
 
 class AddToGroups extends React.Component {
@@ -156,7 +156,7 @@ class AddToGroups extends React.Component {
     return (
       <>
         <div className="m-4">
-          <RafayPageHeader
+          <PageHeader
             breadcrumb={<ResourceBreadCrumb config={config} />}
             title="users.add_to_group.layout.title"
             help="users.add_to_group.layout.helptext"
@@ -199,7 +199,7 @@ class AddToGroups extends React.Component {
             </div>
           </div>
         </Paper>
-        <RafaySnackbar
+        <AppSnackbar
           open={alertOpen}
           severity="error"
           message={capitalizeFirstLetter(alertMessage)}

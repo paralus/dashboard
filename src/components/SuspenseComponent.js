@@ -7,7 +7,7 @@ const Loading = () => (
   </div>
 );
 
-const RafaySuspense = (props) => {
+const SuspenseComponent = (props) => {
   return <Suspense fallback={<Loading />}>{props.children}</Suspense>;
 };
-export default RafaySuspense;
+export default SuspenseComponent;

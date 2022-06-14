@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { getProjects, createProject, deleteProject } from "actions/index";
 import { ValidatorForm } from "react-material-ui-form-validator";
-import RafaySnackbar from "components/RafaySnackbar";
+import AppSnackbar from "components/AppSnackbar";
 import ProjectsTable from "./components/ProjectsTable";
 import CreateProjectDialog from "./components/CreateProjectDialog";
 import { capitalizeFirstLetter } from "../../../../../utils";
@@ -183,7 +183,7 @@ class Project extends React.Component {
           open={open}
           project={project}
         />
-        <RafaySnackbar
+        <AppSnackbar
           open={showAlert}
           severity={alertSeverity}
           message={capitalizeFirstLetter(capitalizeFirstLetter(alertMessage))}

@@ -8,7 +8,7 @@ const TabPanel = ({ children, value, index }) => {
   return value === index && <>{children}</>;
 };
 
-const RafayTabLayout = ({ title, help, breadcrumb, tabs, noPadding }) => {
+const TabsLayout = ({ title, help, breadcrumb, tabs, noPadding }) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -57,4 +57,4 @@ const RafayTabLayout = ({ title, help, breadcrumb, tabs, noPadding }) => {
   );
 };
 
-export default RafayTabLayout;
+export default TabsLayout;

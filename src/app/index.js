@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-
+import Paralus from "assets/images/paralus.png";
 import {
   toggleCollapsedNav,
   getOrgKubeconfigSettings,
@@ -15,8 +15,8 @@ import MiniKubectl from "containers/K8sConsole/MiniKubectl";
 import { COLLAPSED_DRAWER, FIXED_DRAWER } from "constants/ActionTypes";
 import { Helmet } from "react-helmet";
 import Button from "@material-ui/core/Button";
-import RafayInfoCard from "components/RafayInfoCard";
-import RafaySuspense from "components/RafaySuspense";
+import InfoCardComponent from "components/InfoCardComponent";
+import SuspenseComponent from "components/SuspenseComponent";
 import { ConsolePaths } from "constants/ConsolePaths";
 import Cluster from "./routes/cluster";
 
@@ -109,8 +109,7 @@ class App extends React.Component {
     } else {
       drawerStyle = "mini-drawer";
     }
-    let favicon_src =
-      "https://pbs.twimg.com/profile_images/934706849508573186/_l78sPtc_400x400.jpg";
+    let favicon_src = Paralus;
     if (partnerDetail && partnerDetail.spec && partnerDetail.spec.favIconLink) {
       favicon_src = partnerDetail.spec.favIconLink;
     }
@@ -148,7 +147,7 @@ class App extends React.Component {
           />
           {UserSession.noRolesUser && (
             <div style={{ paddingTop: "75px" }}>
-              <RafayInfoCard
+              <InfoCardComponent
                 title={<span>No Access</span>}
                 linkHelper={
                   <span>
@@ -174,7 +173,7 @@ class App extends React.Component {
           )}
           {!hasAccess && !UserSession.noRolesUser && (
             <div style={{ paddingTop: "75px" }}>
-              <RafayInfoCard
+              <InfoCardComponent
                 title={<span>No Access</span>}
                 linkHelper={
                   <span>
@@ -202,11 +201,11 @@ class App extends React.Component {
           {hasAccess && currentProject && currentProject.metadata.name && (
             <main className="app-main-content-wrapper">
               <div className="app-main-content">
-                <RafaySuspense>
+                <SuspenseComponent>
                   {/* <Route exact path={`${match.url}`} component={Home} /> */}
                   <Route path={`${match.url}/clusters`} component={Cluster} />
                   <Route path={`${match.url}/edges`} component={Edges} />
-                </RafaySuspense>
+                </SuspenseComponent>
               </div>
             </main>
           )}

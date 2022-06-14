@@ -1,5 +1,5 @@
 import React from "react";
-import DataTable from "components/RafayTable/DataTable";
+import DataTable from "components/TableComponents/DataTable";
 import HeaderCard from "./HeaderCard";
 
 const IDPGroups = ({ groups }) => {
