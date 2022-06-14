@@ -1,68 +1,68 @@
-# Getting Started with Create React App
+# Dasboard
 
-This project was bootstrapped with [Create React App](https://create-react-app.dev/docs/getting-started).
+Dashboard is the web UI that allows users to interact with paralus. Built using react, the dashboard is responsive, faste and feature loaded. It allows you to easily work with your clusters. The intuitive UI helps you manage your organization, projects and clusters along with user permissions and access. It makes importing clusters and managing access to it easier and quicker.
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+<img src="https://raw.githubusercontent.com/paralus/paralus/845812b5f7f2e0f69f4645eb8c9016e6b250c4c7/paralus.gif?token=GHSAT0AAAAAABPXWZYZAJMCUKQICMJT6UYCYVIHS5A" alt="Paralus Dashboard" height="50%" width="50%"/>
 
-### `npm start`
+<hr>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Development Setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Setup Paralus core
 
-### `npm test`
+Follow the [development setup guide](https://github.com/paralus/paralus/blob/main/CONTRIBUTING.md#development-setup) to start Paralus core. The dashboard requires core to be running.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://create-react-app.dev/docs/running-tests/) for more information.
+### Install Dependencies
 
-### `npm run build`
+```bash
+yarn install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Start Dashboard Development Server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+yarn run start
+```
 
-See the section about [deployment](https://create-react-app.dev/docs/deployment/) for more information.
+Open http://localhost:3000 to access the dashboard.
 
-### `npm run eject`
+### Setup Admin User Account
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Run following command inside root directory of `paralus/paralus`:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```go
+go run scripts/initialize/main.go \
+        --org DefaultOrg \
+        --partner DefaultPartner \
+        --partner-host paralus.local \
+        --admin-email admin@paralus.local \
+        --admin-first-name Admin \
+        --admin-last-name User
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+You will get the admin account password set link, like this:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+Org Admin signup URL:  http://127.0.0.1:4433/self-service/recovery?flow=7c85618b-cc38-4f4f-895c-3540f1fe5149&token=sf7fHWXDW664Y1DAMg5QIJ6Hqg97Huu7
+```
 
-## Learn More
+Open link in browser and set the password.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Now you can login to the dashboard using email (`admin@paralus.local`) and password you have provided.
 
-### Code Splitting
+## Community & Support
 
-This section has moved here: [https://create-react-app.dev/docs/code-splitting/]
+- Visit [Paralus website](https://paralus.io) for the complete documentation and helpful links.
+- Join our [Slack channel](https://join.slack.com/t/paralus/shared_invite/zt-1a9x6y729-ySmAq~I3tjclEG7nDoXB0A) to post your queries and discuss features.
+- Tweet to [@paralus_](https://twitter.com/paralus_/) on Twitter.
+- Create [GitHub Issues](https://github.com/paralus/dashboard/issues) to report bugs or request features.
 
-### Analyzing the Bundle Size
+## Contributing
 
-This section has moved here: [https://create-react-app.dev/docs/analyzing-the-bundle-size/]
+The easiest way to start is to look at existing issues and see if there’s something there that you’d like to work on. You can filter issues with the label “Good first issue” which are relatively self sufficient issues and great for first time contributors.
 
-### Making a Progressive Web App
+Once you decide on an issue, please comment on it so that all of us know that you’re on it.
 
-This section has moved here: [https://create-react-app.dev/docs/making-a-progressive-web-app/]
-
-### Advanced Configuration
-
-This section has moved here: [https://create-react-app.dev/docs/advanced-configuration/]
-
-### Deployment
-
-This section has moved here: [https://create-react-app.dev/docs/deployment/]
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://create-react-app.dev/docs/troubleshooting/#npm-run-build-fails-to-minify]
+If you’re looking to add a new feature, raise a [new issue](https://github.com/paralus/dashboard/issues) and start a discussion with the community. Engage with the maintainers of the project and work your way through.
