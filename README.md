@@ -1,6 +1,6 @@
 # Dashboard
 
-Dashboard is the web UI that allows users to interact with paralus. Built using react, the dashboard is responsive, faste and feature loaded. It allows you to easily work with your clusters. The intuitive UI helps you manage your organization, projects and clusters along with user permissions and access. It makes importing clusters and managing access to it easier and quicker.
+Dashboard is the web UI that allows users to interact with paralus. Built using react, the dashboard is responsive, fast and feature loaded. It allows you to easily work with your clusters. The intuitive UI helps you manage your organization, projects and clusters along with user permissions and access. It makes importing clusters and managing access to it easier and quicker.
 
 <br>
 
