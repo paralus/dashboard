@@ -859,10 +859,10 @@
   },
   "tools": {
     "title": "Tools",
-    "helptext": "Use the RCTL CLI to securely interact with the Controller through command line. Use RCTL to integrate the with your existing automation pipelines.",
+    "helptext": "Use the PCTL CLI to securely interact with the Controller through command line. Use PCTL to integrate the with your existing automation pipelines.",
     "cli_section": "Command Line Interface ( CLI )",
     "download_cli_button": "Download Cli",
-    "download_cli_help": "RCTL CLI can be used on Windows, Linux and macOS.",
+    "download_cli_help": "PCTL CLI can be used on Windows, Linux and macOS.",
     "download_cli_config_button": "Download Cli Config",
     "download_cli_config_text": "Generates new credentials for the logged in user.",
     "kubeconfig_section": "Kubectl Access",
@@ -1034,12 +1034,12 @@
     },
     "detail": {
       "title1": "Provide the configuration for a new version of the addon.",
-      "title2": "NOTE: All operations related to lifecycle of addons can be automated using the RCTL CLI.",
+      "title2": "NOTE: All operations related to lifecycle of addons can be automated using the PCTL CLI.",
       "no_versions_help": "Create a new version of a cluster blueprint"
     },
     "list": {
       "title1": "Create, view and manage custom cluster blueprints.",
-      "title2": "NOTE: All operations related to lifecycle of blueprints can also performed using the RCTL CLI via an automation pipeline."
+      "title2": "NOTE: All operations related to lifecycle of blueprints can also performed using the PCTL CLI via an automation pipeline."
     },
     "search": {
       "placeholder": "Search for name"
@@ -1054,7 +1054,7 @@
     },
     "detail": {
       "title1": "Create and view current and historic versions of configured addons.",
-      "title2": "NOTE: All operations related to lifecycle of addons can also be embedded into an automation pipeline using the RCTL CLI.",
+      "title2": "NOTE: All operations related to lifecycle of addons can also be embedded into an automation pipeline using the PCTL CLI.",
       "no_versions_help": "Click on \"New Version\" to create a new version of the addon"
     },
     "version": {
@@ -1070,7 +1070,7 @@
       },
       "system": {
         "header1": "Provide the configuration for a new version of the addon.",
-        "header2": "NOTE: All operations related to lifecycle of addons can be automated using the RCTL CLI.",
+        "header2": "NOTE: All operations related to lifecycle of addons can be automated using the PCTL CLI.",
         "version_name": "Provide a unique version name for version control purposes",
         "helm": "Provide the Helm Chart tgz file for the addon",
         "values": "Provide the values.yaml files to be used with the Helm chart",
@@ -1209,12 +1209,12 @@
       },
       "detail": {
         "title1": "Provide the configuration for a new version of the gatekeeper config.",
-        "title2": "NOTE: All operations related to lifecycle of gatekeeper config can be automated using the RCTL CLI.",
+        "title2": "NOTE: All operations related to lifecycle of gatekeeper config can be automated using the PCTL CLI.",
         "no_versions_help": "Create a new version of a gatekeeper config"
       },
       "list": {
         "title1": "Create, view and manage custom gatekeeper configs.",
-        "title2": "NOTE: All operations related to lifecycle of blueprints can also performed using the RCTL CLI via an automation pipeline."
+        "title2": "NOTE: All operations related to lifecycle of blueprints can also performed using the PCTL CLI via an automation pipeline."
       },
       "search": {
         "placeholder": "Search for name"
