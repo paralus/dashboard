@@ -145,8 +145,9 @@ const CustomSelect = ({
         <Select {...Field} {...props}>
           <MenuItem value="google">Google</MenuItem>
           <MenuItem value="facebook">Facebook</MenuItem>
-          <MenuItem value="microsoft">Microsoft</MenuItem>
-          <MenuItem value="github">Github</MenuItem>
+          <MenuItem value="github">GitHub</MenuItem>
+          <MenuItem value="gitlab">GitLab</MenuItem>
+          <MenuItem value="slack">Slack</MenuItem>
           <MenuItem value="generic">Generic</MenuItem>
         </Select>
         <FormHelperText margin="dense">
