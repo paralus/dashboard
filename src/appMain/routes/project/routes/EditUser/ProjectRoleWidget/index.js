@@ -5,6 +5,7 @@ import { Grid, Paper } from "@material-ui/core";
 import { useParams } from "react-router";
 import UserCard from "./components/UserCard";
 import RolesCard from "./components/RolesCard";
+import NamespaceCard from "components/NamespaceCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +42,7 @@ const ProjectRoleWidget = ({
   const [selectedUser, setSelectedUser] = React.useState("");
   const [projectRoleDisabled, setProjectRoleDisabled] = React.useState(false);
   const [roleModified, setRoleModified] = React.useState(false);
-  const [selectedNamespaces, setSelectedNamespaces] = React.useState([]);
+  const [currentNamespaces, setCurrentNamespaces] = React.useState([]);
 
   React.useEffect(() => {
     if (editRoles && systemRoles && !roleModified) {
@@ -57,8 +58,18 @@ const ProjectRoleWidget = ({
   }, [editRoles]);
 
   React.useEffect(() => {
-    setSelectedNamespaces(editNamespaces || []);
-  }, [editNamespaces]);
+    // Handling namespaces here
+    if (editRoles && editRoles.length > 0) {
+      let tempCurrentNamespaces = [];
+      editRoles.forEach((role) => {
+        if (role.namespace && role.namespace !== undefined)
+          tempCurrentNamespaces.push(role.namespace);
+      });
+      tempCurrentNamespaces = [...new Set(tempCurrentNamespaces)];
+      setCurrentNamespaces(tempCurrentNamespaces);
+      onNamespacesChange(tempCurrentNamespaces);
+    }
+  }, []);
 
   const handleToggle = (value) => () => {
     setRoleModified(true);
@@ -165,12 +176,12 @@ const ProjectRoleWidget = ({
   };
 
   const handleNamespacesChange = (event) => {
-    setSelectedNamespaces([...event.target.value]);
+    setCurrentNamespaces(event.target.value);
     onNamespacesChange([...event.target.value]);
   };
 
   const namespaceChecked =
-    checked.findIndex((x) => x.metadata.name.includes("NAMESPACE")) !== -1;
+    checked.findIndex((x) => x.spec.scope === "namespace") !== -1;
 
   return (
     <Grid
@@ -189,6 +200,22 @@ const ProjectRoleWidget = ({
           usersList={usersList}
           handleUserChange={handleUserChange}
         />
+
+        {namespaceChecked ? (
+          <div className="mt-3">
+            <Paper className={classes.titleCard}>
+              <h2 className="h2 mb-0">
+                {/* <T.span text="users.assign_to_project.widget_labels.select_project" /> */}
+                <span>Select Namespace</span>
+              </h2>
+            </Paper>
+            <NamespaceCard
+              selectedProject={projectId}
+              selectedNamespaces={currentNamespaces}
+              onNamespacesChange={handleNamespacesChange}
+            />
+          </div>
+        ) : null}
       </Grid>
       <Grid item>
         <Paper className={classes.titleCard}>

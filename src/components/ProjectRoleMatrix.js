@@ -47,9 +47,8 @@ const formatProjectRoles = (roles) => {
           )
             referenceObj.groups.push(item.group);
           else referenceObj.groups = [item.group];
-
-        if (nsarray && Array.isArray(referenceObj.NS))
-          referenceObj.NS.push(nsarray);
+        if (nsarray && Array.isArray(referenceObj?.NS))
+          referenceObj?.NS.push(nsarray);
         else referenceObj.NS = nsarray;
 
         output["All Projects"][item.group] = { ...referenceObj };
@@ -70,8 +69,8 @@ const formatProjectRoles = (roles) => {
           referenceObj.roles.push(item.role);
         else referenceObj.roles = [item.role];
 
-      if (nsarray && Array.isArray(referenceObj.NS))
-        referenceObj.NS.push(nsarray);
+      if (nsarray && Array.isArray(referenceObj?.NS))
+        referenceObj?.NS.push(nsarray);
       else referenceObj.NS = nsarray;
 
       output[item?.project][item?.group] = { ...referenceObj };

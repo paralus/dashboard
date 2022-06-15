@@ -80,21 +80,64 @@ class EditGroup extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedGroup, selectedRoles, projectId } = this.state;
-    const roles = [];
+    const { selectedRoles, groupId, projectId, selectedNamespaces } =
+      this.state;
+    const { projectDetail } = this.props;
+
+    const roles = projectDetail.spec.projectNamespaceRoles.filter(
+      (e) => e.project !== projectId
+    );
+
     selectedRoles.forEach((role) => {
-      let pnr = {
-        project: projectId,
-        role: role.metadata.name,
-        group: selectedGroup,
-      };
-      roles.push(pnr);
+      if (role.spec.scope === "namespace") {
+        selectedNamespaces.forEach((ns) => {
+          let r = {
+            project: projectId,
+            role: role.metadata.name,
+            group: groupId,
+            namespace: ns,
+          };
+          roles.push(r);
+        });
+      } else {
+        let r = {
+          project: projectId,
+          role: role.metadata.name,
+          group: groupId,
+        };
+        roles.push(r);
+      }
     });
+
+    const tempNamespaces = [];
+    roles.forEach((role) => {
+      if (role.namespace && role.namespace !== undefined)
+        tempNamespaces.push(role.namespace);
+    });
+    this.setState({ selectedNamespaces: tempNamespaces });
     return roles;
   };
 
   handleSaveChanges = () => {
     const { editProjectWithCallback, projectDetail } = this.props;
+    const { selectedRoles, selectedNamespaces } = this.state;
+
+    let invalidNamespace = false;
+    selectedRoles.find((r) => {
+      if (
+        r.spec.scope === "namespace" &&
+        (!selectedNamespaces || selectedNamespaces.length < 1)
+      )
+        invalidNamespace = true;
+    });
+    if (invalidNamespace) {
+      this.setState({
+        showAlert: true,
+        alertMessage: "Please select a namespace",
+      });
+      return;
+    }
+
     projectDetail.spec.projectNamespaceRoles = this.transformRoles();
     editProjectWithCallback(
       projectDetail,

@@ -82,20 +82,64 @@ class EditUser extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedUser, selectedRoles } = this.state;
-    const roles = [];
-    selectedRoles.forEach((r) => {
-      let ur = {
-        user: selectedUser,
-        role: r.metadata.name,
-      };
-      roles.push(ur);
+    const { selectedRoles, selectedUser, projectId, selectedNamespaces } =
+      this.state;
+    const { projectDetail } = this.props;
+
+    const roles = projectDetail.spec.projectNamespaceRoles.filter(
+      (e) => e.project !== projectId
+    );
+
+    selectedRoles.forEach((role) => {
+      if (role.spec.scope === "namespace") {
+        selectedNamespaces.forEach((ns) => {
+          const ur = {
+            project: projectId,
+            role: role.metadata.name,
+            user: selectedUser,
+            namespace: ns,
+          };
+          roles.push(ur);
+        });
+      } else {
+        const ur = {
+          project: projectId,
+          role: role.metadata.name,
+          user: selectedUser,
+        };
+        roles.push(ur);
+      }
     });
+
+    const tempNamespaces = [];
+    roles.forEach((role) => {
+      if (role.namespace && role.namespace !== undefined)
+        tempNamespaces.push(role.namespace);
+    });
+    this.setState({ selectedNamespaces: tempNamespaces });
     return roles;
   };
 
   handleSaveChanges = () => {
     const { editProjectWithCallback, projectDetail } = this.props;
+    const { selectedRoles, selectedNamespaces } = this.state;
+
+    let invalidNamespace = false;
+    selectedRoles.find((r) => {
+      if (
+        r.spec.scope === "namespace" &&
+        (!selectedNamespaces || selectedNamespaces.length < 1)
+      )
+        invalidNamespace = true;
+    });
+    if (invalidNamespace) {
+      this.setState({
+        showAlert: true,
+        alertMessage: "Please select a namespace",
+      });
+      return;
+    }
+
     projectDetail.spec.userRoles = this.transformRoles();
     editProjectWithCallback(
       projectDetail,
@@ -110,6 +154,10 @@ class EditUser extends React.Component {
 
   handleRolesChange = (checked) => {
     this.setState({ selectedRoles: checked });
+  };
+
+  handleNamespacesChange = (namespace) => {
+    this.setState({ selectedNamespaces: namespace });
   };
 
   render() {
