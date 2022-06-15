@@ -5,7 +5,7 @@ import EKS from "assets/images/amazon-eks.png";
 import K8s from "assets/images/k8s.png";
 import AKS from "assets/images/aks.png";
 import GKE from "assets/images/gke.png";
-import Paralus from "assets/images/paralus.png";
+import ParalusMark from "assets/images/paralus-mark.png";
 import RKE from "assets/images/rke.png";
 import Paris from "assets/images/eksd.png";
 import OpenShift from "assets/images/openshift.png";
@@ -72,7 +72,7 @@ export function getClusterType(params) {
         if (environmentProvider === "AZURE") {
           label = "Upstream Kubernetes (Azure)";
         }
-        src = <TypeImg src={Paralus} />;
+        src = <TypeImg src={ParalusMark} />;
       }
       if (kubernetesProvider === "GKE" && environmentProvider === "GCP") {
         label = "Google GKE";

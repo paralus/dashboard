@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import Paralus from "assets/images/paralus.png";
+import ParalusMark from "assets/images/paralus-mark.png";
 import {
   toggleCollapsedNav,
   getOrgKubeconfigSettings,
@@ -109,7 +109,7 @@ class App extends React.Component {
     } else {
       drawerStyle = "mini-drawer";
     }
-    let favicon_src = Paralus;
+    let favicon_src = ParalusMark;
     if (partnerDetail && partnerDetail.spec && partnerDetail.spec.favIconLink) {
       favicon_src = partnerDetail.spec.favIconLink;
     }

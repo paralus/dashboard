@@ -1,6 +1,6 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-import Paralus from "assets/images/paralus.png";
+import ParalusLogo from "assets/images/paralus-logo.png";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import { connect } from "react-redux";
@@ -69,7 +69,7 @@ class Header extends React.Component {
     }
     let image_src = "";
     if (partnerDetail) {
-      image_src = Paralus;
+      image_src = ParalusLogo;
     }
     if (partnerDetail && partnerDetail.logo_link) {
       image_src = partnerDetail.logo_link;
