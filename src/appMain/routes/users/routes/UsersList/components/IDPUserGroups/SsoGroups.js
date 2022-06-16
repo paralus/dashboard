@@ -14,7 +14,7 @@ const SsoGroups = ({ open, user, onClose }) => {
       setGroupDetails(res.data.spec.groups);
 
       let idpGroups = res.data.spec.idpGroups;
-      idpGroups = idpGroups.filter((g)=> g!== "");
+      idpGroups = idpGroups.filter((g) => g !== "");
       setIdpGroups(idpGroups);
     });
   };
