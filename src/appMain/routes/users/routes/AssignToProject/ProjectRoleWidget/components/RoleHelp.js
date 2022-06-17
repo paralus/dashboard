@@ -71,7 +71,7 @@ const RoleHelp = {
   ),
   NAMESPACE_ADMIN: (
     <span className="mb-0">
-      <i>User can only can publish workloads in assiged namespaces.</i>
+      <i>User can only can publish workloads in assigned namespaces.</i>
       <br />
       <span style={{ color: "dodgerblue", fontSize: "12px" }}>
         Gives Read/Write access to k8s resources in Namespace
