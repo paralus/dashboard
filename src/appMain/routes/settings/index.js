@@ -19,8 +19,6 @@ import {
 } from "actions/index";
 import Spinner from "../../../components/Spinner";
 import KubeconfigValidity from "../users/routes/UserDetail/components/KubeconfigValidity";
-import LockoutSetting from "./components/LockoutSetting";
-import AutoLogoutSetting from "./components/AutoLogoutSetting";
 
 class Settings extends React.Component {
   constructor(props, context) {
@@ -155,12 +153,6 @@ class Settings extends React.Component {
           >
             Specify additional information about this Organization.
           </p>
-          <div className="row col-md-12 mb-3">
-            <LockoutSetting organization={organization} />
-          </div>
-          <div className="row col-md-12 mb-3">
-            <AutoLogoutSetting organization={organization} />
-          </div>
           <div className="row col-md-12 mb-3">
             <KubeconfigValidity
               settings={this.state.kubectlSettings}
