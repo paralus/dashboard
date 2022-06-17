@@ -57,7 +57,7 @@ const RoleHelp = {
   ),
   NAMESPACE_ADMIN: (
     <span className="mb-0">
-      <i>Group users can only can publish workloads in assiged namespaces.</i>
+      <i>Group users can only can publish workloads in assigned namespaces.</i>
       <br />
       <span style={{ color: "dodgerblue", fontSize: "12px" }}>
         Gives Read/Write access to assigned Namespaces
