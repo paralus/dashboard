@@ -10,6 +10,7 @@ import thunk from "redux-thunk";
 import reducers from "./reducers";
 import App from "./containers/App";
 import KratosSettings from "./containers/Auth/KratosSettings";
+import ErrorPage from "./containers/Auth/ErrorPage";
 import AutoRegister from "./containers/Auth/AutoRegister";
 
 const logger = createLogger({ collapsed: true });
@@ -32,6 +33,7 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <BrowserRouter>
         <Switch>
+          <Route exact path="/error-page" component={ErrorPage} />
           <Route exact path="/ksettings" component={KratosSettings} />
           <Route exact path="/registeroidc" component={AutoRegister} />
           <Route path="/">
