@@ -215,8 +215,9 @@ const TopNavBar = () => {
   const hide = !UserSession.visibleAdmin;
   const docs_link =
     partnerDetail?.settings?.docs_link || "https://www.paralus.io/docs";
-  const api_docs = partnerDetail?.settings?.docs_link || 
-      "https://www.paralus.io/docs/references/api-reference"
+  const api_docs =
+    partnerDetail?.settings?.docs_link ||
+    "https://www.paralus.io/docs/references/api-reference";
 
   return (
     <div>
