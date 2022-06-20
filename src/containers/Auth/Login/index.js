@@ -392,15 +392,7 @@ class Login extends Component {
                       : "justify-content-center"
                   } align-items-center`}
                 >
-                  <div>
-                    <a
-                      href="#/forgotpassword"
-                      title="Reset Password"
-                      style={{ fontWeight: 500, color: "#009688" }}
-                    >
-                      <span>Forgot password?</span>
-                    </a>
-                  </div>
+                  <div></div>
                   <div>
                     {this.state.usertype === undefined ||
                     this.state.usertype === "internal" ? (
