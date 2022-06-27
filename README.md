@@ -4,7 +4,7 @@ Dashboard is the web UI that allows users to interact with paralus. Built using 
 
 <br>
 
-<img src="https://raw.githubusercontent.com/paralus/paralus/845812b5f7f2e0f69f4645eb8c9016e6b250c4c7/paralus.gif?token=GHSAT0AAAAAABPXWZYZAJMCUKQICMJT6UYCYVIHS5A" alt="Paralus Dashboard" height="50%" width="50%"/>
+<img src="https://raw.githubusercontent.com/paralus/paralus/main/paralus.gif" alt="Paralus Dashboard" height="50%" width="50%"/>
 
 <hr>
 
