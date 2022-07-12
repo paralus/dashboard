@@ -1,7 +1,7 @@
 import http from "./Config";
 import getInitOrganization from "./Organization";
 
-export function initializeApp() {
+export function initializeApp(callback) {
   return function (dispatch) {
     http("auth")
       .get("partner")
@@ -18,7 +18,7 @@ export function initializeApp() {
           "partner",
           JSON.stringify(response.data.metadata.name)
         );
-        dispatch(getInitOrganization(response.data.metadata.name));
+        dispatch(getInitOrganization(response.data.metadata.name, callback));
       })
       .catch((error) => {
         console.log(error);

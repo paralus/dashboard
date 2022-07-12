@@ -43,7 +43,6 @@ class App extends Component {
       this.props;
     initializeApp();
     getUserSessionInfo();
-    getInitProjects();
     this.timeout = setInterval(() => getUserSessionInfo(), 60000 * 5);
     T.setTexts(require(`./locale/${lang}.json`));
   }

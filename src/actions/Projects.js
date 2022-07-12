@@ -25,7 +25,7 @@ export function getProjectList(limit = 25, offset = 0) {
   );
 }
 
-export function getInitProjects() {
+export function getInitProjects(callback) {
   const partner = JSON.parse(window?.localStorage.getItem("partner"));
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   return function (dispatch) {
@@ -70,6 +70,9 @@ export function getInitProjects() {
           type: "set_session_current_project",
           payload: currentProject,
         });
+        if (callback) {
+          callback();
+        }
       })
       .catch((error) => {
         console.log(error);

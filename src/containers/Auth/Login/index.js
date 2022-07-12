@@ -19,6 +19,7 @@ import {
   setPassword,
   userLogin,
   getUserSessionInfo,
+  initializeApp,
 } from "actions/index";
 import React, { Component } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
@@ -183,8 +184,11 @@ class Login extends Component {
         password_identifier: this.state.username,
         password: this.state.password,
       })
-      .then((session) => {
-        setTimeout(() => this.props.history.push("/"), 100);
+      .then(() => {
+        const { initializeApp } = this.props;
+        initializeApp(() => {
+          window.location.href = "/";
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -208,7 +212,9 @@ class Login extends Component {
       })
       .catch((data) => data.response)
       .then((res) => {
-        window.location.href = res.data.redirect_browser_to;
+        initializeApp(() => {
+          window.location.href = res.data.redirect_browser_to;
+        });
       });
   };
 
@@ -607,5 +613,6 @@ export default withRouter(
     setPassword,
     resetPasswordError,
     getUserSessionInfo,
+    initializeApp,
   })(Login)
 );
