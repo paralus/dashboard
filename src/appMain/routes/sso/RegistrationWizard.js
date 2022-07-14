@@ -196,6 +196,9 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     paddingLeft: "15px",
     paddingRight: "15px",
+    minHeight: "40px",
+    display: "flex",
+    alignItems: "center",
   },
   helpText: {
     marginBottom: "0px",
@@ -431,6 +434,13 @@ const RegistrationWizard = (props) => {
       }
     }, []);
 
+    // Due to some security concerns we cannot always access the
+    // clipboard api (https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
+    const copyable =
+      window.location.protocol === "https:" ||
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "localhost";
+
     switch (step) {
       case 0:
         return (
@@ -623,23 +633,25 @@ const RegistrationWizard = (props) => {
                 <div className="">
                   <div className={classes.urlCopy}>
                     {spConfig?.spec?.callbackUrl}
-                    <Tooltip
-                      title={toolTip}
-                      id="clip"
-                      onClose={props.resetClipboardCopyTooltip}
-                    >
-                      <IconButton
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            `${spConfig?.spec?.callbackUrl}`
-                          );
-                          setToolTip("Copied");
-                        }}
-                        aria-label="copy"
+                    {copyable && (
+                      <Tooltip
+                        title={toolTip}
+                        id="clip"
+                        onClose={props.resetClipboardCopyTooltip}
                       >
-                        <FileCopyOutlined />
-                      </IconButton>
-                    </Tooltip>
+                        <IconButton
+                          onClick={() => {
+                            navigator.clipboard.writeText(
+                              `${spConfig?.spec?.callbackUrl}`
+                            );
+                            setToolTip("Copied");
+                          }}
+                          aria-label="copy"
+                        >
+                          <FileCopyOutlined />
+                        </IconButton>
+                      </Tooltip>
+                    )}
                   </div>
                 </div>
               </div>
@@ -653,23 +665,25 @@ const RegistrationWizard = (props) => {
                 <div className="">
                   <div className={classes.urlCopy}>
                     {spConfig?.spec?.issuerUrl}
-                    <Tooltip
-                      title={toolTip}
-                      id="clip"
-                      onClose={props.resetClipboardCopyTooltip}
-                    >
-                      <IconButton
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            `${spConfig?.spec?.issuerUrl}`
-                          );
-                          setToolTip("Copied");
-                        }}
-                        aria-label="copy"
+                    {copyable && (
+                      <Tooltip
+                        title={toolTip}
+                        id="clip"
+                        onClose={props.resetClipboardCopyTooltip}
                       >
-                        <FileCopyOutlined />
-                      </IconButton>
-                    </Tooltip>
+                        <IconButton
+                          onClick={() => {
+                            navigator.clipboard.writeText(
+                              `${spConfig?.spec?.issuerUrl}`
+                            );
+                            setToolTip("Copied");
+                          }}
+                          aria-label="copy"
+                        >
+                          <FileCopyOutlined />
+                        </IconButton>
+                      </Tooltip>
+                    )}
                   </div>
                 </div>
               </div>
@@ -683,23 +697,25 @@ const RegistrationWizard = (props) => {
                 <div className="">
                   <div className={classes.urlCopy}>
                     {spConfig?.spec?.authUrl}
-                    <Tooltip
-                      title={toolTip}
-                      id="clip"
-                      onClose={props.resetClipboardCopyTooltip}
-                    >
-                      <IconButton
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            `${spConfig?.spec?.authUrl}`
-                          );
-                          setToolTip("Copied");
-                        }}
-                        aria-label="copy"
+                    {copyable && (
+                      <Tooltip
+                        title={toolTip}
+                        id="clip"
+                        onClose={props.resetClipboardCopyTooltip}
                       >
-                        <FileCopyOutlined />
-                      </IconButton>
-                    </Tooltip>
+                        <IconButton
+                          onClick={() => {
+                            navigator.clipboard.writeText(
+                              `${spConfig?.spec?.authUrl}`
+                            );
+                            setToolTip("Copied");
+                          }}
+                          aria-label="copy"
+                        >
+                          <FileCopyOutlined />
+                        </IconButton>
+                      </Tooltip>
+                    )}
                   </div>
                 </div>
               </div>
@@ -713,23 +729,25 @@ const RegistrationWizard = (props) => {
                 <div className="">
                   <div className={classes.urlCopy}>
                     {spConfig?.spec?.tokenUrl}
-                    <Tooltip
-                      title={toolTip}
-                      id="clip"
-                      onClose={props.resetClipboardCopyTooltip}
-                    >
-                      <IconButton
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            `${spConfig?.spec?.tokenUrl}`
-                          );
-                          setToolTip("Copied");
-                        }}
-                        aria-label="copy"
+                    {copyable && (
+                      <Tooltip
+                        title={toolTip}
+                        id="clip"
+                        onClose={props.resetClipboardCopyTooltip}
                       >
-                        <FileCopyOutlined />
-                      </IconButton>
-                    </Tooltip>
+                        <IconButton
+                          onClick={() => {
+                            navigator.clipboard.writeText(
+                              `${spConfig?.spec?.tokenUrl}`
+                            );
+                            setToolTip("Copied");
+                          }}
+                          aria-label="copy"
+                        >
+                          <FileCopyOutlined />
+                        </IconButton>
+                      </Tooltip>
+                    )}
                   </div>
                 </div>
               </div>
