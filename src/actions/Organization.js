@@ -1,4 +1,5 @@
 import http from "./Config";
+import { getInitProjects } from "./Projects";
 
 export function getOrganization(partner, name) {
   if (partner === "") {
@@ -30,7 +31,7 @@ export function getOrganization(partner, name) {
   };
 }
 
-export default function getInitOrganization(partner) {
+export default function getInitOrganization(partner, callback) {
   return function (dispatch) {
     http("auth")
       .get(`partner/${partner}/organizations`)
@@ -47,6 +48,7 @@ export default function getInitOrganization(partner) {
           "organization",
           JSON.stringify(response.data.items[0].metadata.name)
         );
+        dispatch(getInitProjects(callback));
       })
       .catch((error) => {
         console.log(error);
