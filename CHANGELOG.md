@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Added
 ### Changed
+- Hide copy button on non https webpages from [meain](https://github.com/meain)
 ### Fixed
 - Fix blank screen on initial login from [meain](https://github.com/meain)
 
