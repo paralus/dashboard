@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 ### Changed
 - Hide copy button on non https webpages from [meain](https://github.com/meain)
+- Removed building images to registry on pull requests [niravparikh05](https://github.com/niravparikh05)
 ### Fixed
 - Fix blank screen on initial login from [meain](https://github.com/meain)
 
