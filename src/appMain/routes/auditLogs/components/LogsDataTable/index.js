@@ -51,7 +51,7 @@ const LogsDataTable = (props) => {
     [
       {
         type: "regular",
-        value: <DateFormat date={data._source.json.timestamp} />,
+        value: <DateFormat timestamp={data._source.json.timestamp} />,
         stringValue: data._source.json.timestamp,
       },
       {
