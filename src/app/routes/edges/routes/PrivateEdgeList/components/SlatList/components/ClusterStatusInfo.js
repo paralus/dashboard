@@ -30,17 +30,9 @@ function isClusterAvailable(cluster) {
 
 function getClusterLastCheckedIn(cluster) {
   let ready = false;
-  if (
-    cluster?.spec.clusterData &&
-    cluster?.spec.clusterData.cluster_status &&
-    cluster?.spec.clusterData.cluster_status.conditions &&
-    cluster?.spec.clusterData.cluster_status.conditions.length > 0
-  ) {
-    for (
-      let index = 0;
-      index < cluster?.spec.clusterData?.cluster_status?.conditions?.length;
-      index++
-    ) {
+  if (cluster?.spec?.clusterData?.cluster_status?.conditions?.length > 0) {
+    let len = cluster.spec.clusterData.cluster_status.conditions.length;
+    for (let index = 0; index < len; index++) {
       ready =
         cluster.spec.clusterData.cluster_status.conditions[index].type ===
           "ClusterReady" &&
