@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fix blank screen on initial login from [meain](https://github.com/meain)
 - Fix time/date rendering in audit logs from [meain](https://github.com/meain)
+- Invalid date displayed on cluster page [niravparikh05](https://github.com/niravparikh05)
 
 ## [0.1.0] - 2022-06-22
 ### Added

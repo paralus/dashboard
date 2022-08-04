@@ -28,6 +28,25 @@ function isClusterAvailable(cluster) {
   return ready;
 }
 
+function getClusterLastCheckedIn(cluster) {
+  let ready = false;
+  if (cluster?.spec?.clusterData?.cluster_status?.conditions?.length > 0) {
+    let len = cluster.spec.clusterData.cluster_status.conditions.length;
+    for (let index = 0; index < len; index++) {
+      ready =
+        cluster.spec.clusterData.cluster_status.conditions[index].type ===
+          "ClusterReady" &&
+        cluster.spec.clusterData.cluster_status.conditions[index].status ===
+          "Success";
+      if (ready) {
+        return cluster.spec.clusterData.cluster_status.conditions[index]
+          .lastUpdated;
+      }
+    }
+  }
+  return null;
+}
+
 function ClusterStatusInfo({
   cluster,
   isClusterReady,
@@ -36,6 +55,7 @@ function ClusterStatusInfo({
 }) {
   if (!cluster) return null;
   const isImported = cluster.clusterType === "imported";
+  let lastCheckedIn = getClusterLastCheckedIn(cluster);
   return (
     <div>
       {isClusterReady && (
@@ -61,8 +81,15 @@ function ClusterStatusInfo({
                   }}
                 >
                   Last check in&nbsp;
-                  {cluster.metadata.modifiedAt ? (
-                    <span>{Moment(cluster.metadata.modifiedAt).fromNow()}</span>
+                  {lastCheckedIn != null ? (
+                    <span>
+                      {Moment(
+                        new Date(
+                          lastCheckedIn.seconds * 1000 +
+                            lastCheckedIn.nanos / 1e6
+                        )
+                      ).fromNow()}
+                    </span>
                   ) : (
                     <span>Unknown</span>
                   )}
