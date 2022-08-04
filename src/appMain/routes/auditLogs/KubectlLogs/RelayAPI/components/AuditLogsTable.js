@@ -19,7 +19,7 @@ const AuditLogsTable = (props) => {
   const parseRowData = (data, index) => [
     {
       type: "regular",
-      value: <DateFormat date={data._source.json.ts} />,
+      value: <DateFormat timestamp={data._source.json.ts} />,
       stringValue: data._source.json.ts,
     },
     {
