@@ -40,10 +40,20 @@ const RolesCard = ({
       <List className={classes.list} dense component="div" role="list">
         {systemRoles &&
           systemRoles
-            .filter((r) => r.spec.scope !== "system")
+            .filter(
+              (r) =>
+                r.spec.scope !== "system" && r.spec.scope !== "organization"
+            )
             .map((value, index) => {
               const labelId = `transfer-list-all-item-${index}-label`;
-
+              const adminDisabled =
+                (projectRoleDisabled &&
+                  !["ADMIN", "ADMIN_READ_ONLY"].includes(
+                    value.metadata.name
+                  )) ||
+                ["NAMESPACE_ADMIN", "NAMESPACE_READ_ONLY"].includes(
+                  value.metadata.name
+                );
               return (
                 <ListItem
                   key={index}
@@ -51,9 +61,7 @@ const RolesCard = ({
                   button
                   onClick={handleToggle(value)}
                   className={classes.listItem}
-                  disabled={
-                    projectRoleDisabled && value.metadata.name === "ADMIN"
-                  }
+                  disabled={adminDisabled}
                 >
                   <ListItemIcon>
                     <Checkbox

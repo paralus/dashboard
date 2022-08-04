@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import { useParams } from "react-router";
 import UserCard from "./components/UserCard";
+import NamespaceCard from "components/NamespaceCard";
 import RolesCard from "./components/RolesCard";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +32,8 @@ const ProjectRoleWidget = ({
   onNamespacesChange,
   onUserChange,
   handleRolesChange,
+  selectedProject,
+  editNamespaces,
 }) => {
   const classes = useStyles();
   const { projectId } = useParams();
@@ -146,7 +149,7 @@ const ProjectRoleWidget = ({
   };
 
   const namespaceChecked =
-    checked.findIndex((x) => x.metadata.name.includes("NAMESPACE")) !== -1;
+    checked.findIndex((x) => x.spec.scope === "namespace") !== -1;
 
   return (
     <Grid
@@ -165,6 +168,21 @@ const ProjectRoleWidget = ({
           usersList={usersList}
           handleUserChange={handleUserChange}
         />
+        {namespaceChecked ? (
+          <div className="mt-3">
+            <Paper className={classes.titleCard}>
+              <h2 className="h2 mb-0">
+                {/* <T.span text="users.assign_to_project.widget_labels.select_project" /> */}
+                <span>Select Namespace</span>
+              </h2>
+            </Paper>
+            <NamespaceCard
+              selectedProject={selectedProject}
+              selectedNamespaces={selectedNamespaces}
+              onNamespacesChange={handleNamespacesChange}
+            />
+          </div>
+        ) : null}
       </Grid>
       <Grid item>
         <Paper className={classes.titleCard}>

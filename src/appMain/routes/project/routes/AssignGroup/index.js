@@ -74,21 +74,34 @@ class AssignGroup extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedGroup, selectedRoles, projectId } = this.state;
+    const { selectedGroup, selectedRoles, projectId, selectedNamespaces } =
+      this.state;
     const roles = [];
     selectedRoles.forEach((role) => {
-      let r = {
-        project: projectId,
-        role: role.metadata.name,
-        group: selectedGroup,
-      };
-      roles.push(r);
+      if (role.spec.scope === "namespace") {
+        selectedNamespaces.forEach((ns) => {
+          let r = {
+            project: projectId,
+            role: role.metadata.name,
+            group: selectedGroup,
+            namespace: ns,
+          };
+          roles.push(r);
+        });
+      } else {
+        let r = {
+          project: projectId,
+          role: role.metadata.name,
+          group: selectedGroup,
+        };
+        roles.push(r);
+      }
     });
     return roles;
   };
 
   handleSaveChanges = () => {
-    const { selectedGroup, selectedRoles } = this.state;
+    const { selectedGroup, selectedRoles, selectedNamespaces } = this.state;
     const { editProjectWithCallback, projectDetail } = this.props;
     if (!selectedGroup) {
       this.setState({
@@ -101,6 +114,19 @@ class AssignGroup extends React.Component {
       this.setState({
         showAlert: true,
         alertMessage: "Please select a role",
+      });
+      return;
+    }
+    let invalidNamespace = false;
+    selectedRoles.find((r) => {
+      if (r.spec.scope === "namespace" && !selectedNamespaces) {
+        invalidNamespace = true;
+      }
+    });
+    if (invalidNamespace) {
+      this.setState({
+        showAlert: true,
+        alertMessage: "Please select a namespace",
       });
       return;
     }
@@ -181,6 +207,7 @@ class AssignGroup extends React.Component {
             systemRoles={systemRoles}
             editNamespaces={selectedNamespaces}
             groupsList={filteredGroupList}
+            selectedProject={projectId}
           />
         </div>
         <Paper

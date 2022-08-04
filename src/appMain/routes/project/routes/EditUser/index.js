@@ -47,6 +47,7 @@ class EditUser extends React.Component {
     const { projectDetail, userDetail } = props;
     if (projectDetail) {
       newState.projectName = projectDetail.metadata.name;
+      newState.editRoles = projectDetail.spec.userRoles;
     }
     if (userDetail) {
       newState.selectedUser = userDetail.metadata.name;
