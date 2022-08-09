@@ -67,20 +67,31 @@ class AssignUser extends React.Component {
   };
 
   transformRoles = () => {
-    const { selectedUser, selectedRoles } = this.state;
+    const { selectedUser, selectedRoles, selectedNamespaces } = this.state;
     const roles = [];
     selectedRoles.forEach((role) => {
-      let r = {
-        user: selectedUser.metadata.name,
-        role: role.metadata.name,
-      };
-      roles.push(r);
+      if (role.spec.scope === "namespace") {
+        selectedNamespaces.forEach((ns) => {
+          let r = {
+            user: selectedUser.metadata.name,
+            role: role.metadata.name,
+            namespace: ns,
+          };
+          roles.push(r);
+        });
+      } else {
+        let r = {
+          user: selectedUser.metadata.name,
+          role: role.metadata.name,
+        };
+        roles.push(r);
+      }
     });
     return roles;
   };
 
   handleSaveChanges = () => {
-    const { selectedUser, selectedRoles } = this.state;
+    const { selectedUser, selectedRoles, selectedNamespaces } = this.state;
     const { editProjectWithCallback, projectDetail } = this.props;
     if (!selectedUser) {
       this.setState({
@@ -93,6 +104,19 @@ class AssignUser extends React.Component {
       this.setState({
         showAlert: true,
         alertMessage: "Please select a role",
+      });
+      return;
+    }
+    let invalidNamespace = false;
+    selectedRoles.find((r) => {
+      if (r.spec.scope === "namespace" && !selectedNamespaces) {
+        invalidNamespace = true;
+      }
+    });
+    if (invalidNamespace) {
+      this.setState({
+        showAlert: true,
+        alertMessage: "Please select a namespace",
       });
       return;
     }
@@ -121,7 +145,13 @@ class AssignUser extends React.Component {
   };
 
   render() {
-    const { projectName, projectId, showAlert, alertMessage } = this.state;
+    const {
+      projectName,
+      projectId,
+      showAlert,
+      alertMessage,
+      selectedNamespaces,
+    } = this.state;
     const { drawerType, systemRoles, usersList } = this.props;
     let filteredUsersList = usersList
       .filter((u) =>
@@ -169,6 +199,8 @@ class AssignUser extends React.Component {
             handleRolesChange={this.handleRolesChange}
             systemRoles={systemRoles}
             usersList={filteredUsersList}
+            selectedProject={projectId}
+            editNamespaces={selectedNamespaces}
           />
         </div>
         <Paper

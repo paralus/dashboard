@@ -63,20 +63,18 @@ class AssignedUsers extends React.Component {
   errorCallback = (error) => {
     this.setState({
       showError: true,
-      deleteError: error.message,
+      alertMessage: error,
     });
   };
 
   handleDeleteUser = (data) => {
-    const { editProjectWithCallback } = this.props;
-    const { projectId } = this.state;
+    const { editProjectWithCallback, projectDetail } = this.props;
 
-    const params = {
-      user: data.user,
-    };
+    projectDetail.spec.userRoles = projectDetail.spec.userRoles.filter(
+      (r) => r.user != data.user
+    );
     editProjectWithCallback(
-      projectId,
-      params,
+      projectDetail,
       this.successCallback,
       this.errorCallback
     );

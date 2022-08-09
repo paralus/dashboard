@@ -47,6 +47,9 @@ class EditUser extends React.Component {
     const { projectDetail, userDetail } = props;
     if (projectDetail) {
       newState.projectName = projectDetail.metadata.name;
+      newState.editRoles = projectDetail.spec.userRoles.filter(
+        (r) => r.user == newState.userId
+      );
     }
     if (userDetail) {
       newState.selectedUser = userDetail.metadata.name;
@@ -86,8 +89,8 @@ class EditUser extends React.Component {
       this.state;
     const { projectDetail } = this.props;
 
-    const roles = projectDetail.spec.projectNamespaceRoles.filter(
-      (e) => e.project !== projectId
+    const roles = projectDetail.spec.userRoles.filter(
+      (e) => e.user !== selectedUser
     );
 
     selectedRoles.forEach((role) => {

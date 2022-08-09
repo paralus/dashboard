@@ -72,19 +72,21 @@ class AssignedGroups extends React.Component {
   errorCallback = (error) => {
     this.setState({
       showError: true,
-      deleteError: error.details[0].detail,
+      alertMessage: error,
     });
   };
 
   handleDeleteProject = (data) => {
-    const { editProjectWithCallback } = this.props;
-    const { roles } = data;
-    const { group, project } = roles[0];
-    const params = {
-      project,
-      roles,
-    };
-    editProjectWithCallback(params, this.successCallback, this.errorCallback);
+    const { editProjectWithCallback, projectDetail } = this.props;
+    projectDetail.spec.projectNamespaceRoles =
+      projectDetail.spec.projectNamespaceRoles.filter(
+        (r) => r.group != data.group
+      );
+    editProjectWithCallback(
+      projectDetail,
+      this.successCallback,
+      this.errorCallback
+    );
   };
 
   handleChangeRoles = (data) => {
@@ -226,8 +228,10 @@ class AssignedGroups extends React.Component {
   };
 
   render() {
-    const { projGroups, showError, deleteError } = this.state;
-    const { UserSession } = this.props;
+    const { showError, deleteError } = this.state;
+    const { projectDetail, UserSession } = this.props;
+
+    const projGroups = projectDetail?.spec?.projectNamespaceRoles || [];
 
     const AddToProjectButton = (
       <Button
