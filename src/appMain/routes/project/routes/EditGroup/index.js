@@ -45,7 +45,8 @@ class EditGroup extends React.Component {
       newState.groupName = projectDetail.metadata.name;
       if (projectDetail.spec.projectNamespaceRoles) {
         newState.editRoles = projectDetail.spec.projectNamespaceRoles.filter(
-          (pnr) => pnr.group && pnr.group.length > 0
+          (pnr) =>
+            pnr.group && pnr.group.length > 0 && pnr.group === newState.groupId
         );
       }
     }
@@ -85,7 +86,7 @@ class EditGroup extends React.Component {
     const { projectDetail } = this.props;
 
     const roles = projectDetail.spec.projectNamespaceRoles.filter(
-      (e) => e.project !== projectId
+      (e) => e.group !== groupId
     );
 
     selectedRoles.forEach((role) => {

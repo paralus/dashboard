@@ -54,52 +54,19 @@ const ProjectRoleWidget = ({
         onProjectChange("ALL PROJECTS");
         return;
       }
-      if (value.metadata.name === "PROJECT_ADMIN") {
-        const proi = checked.findIndex(
-          (element) => element.metadata.name === "PROJECT_READ_ONLY"
-        );
-        if (proi !== -1) {
-          newChecked.splice(proi, 1);
-        }
-      }
-      if (value.metadata.name === "PROJECT_READ_ONLY") {
-        const pai = checked.findIndex(
-          (element) => element.metadata.name === "PROJECT_ADMIN"
-        );
-        if (pai !== -1) {
-          newChecked.splice(pai, 1);
-        }
-      }
-      if (value.metadata.name === "INFRA_ADMIN") {
-        const proi = checked.findIndex(
-          (element) => element.metadata.name === "INFRA_READ_ONLY"
-        );
-        if (proi !== -1) {
-          newChecked.splice(proi, 1);
-        }
-      }
-      if (value.metadata.name === "INFRA_READ_ONLY") {
-        const pai = checked.findIndex(
-          (element) => element.metadata.name === "INFRA_ADMIN"
-        );
-        if (pai !== -1) {
-          newChecked.splice(pai, 1);
-        }
-      }
-      if (value.metadata.name === "NAMESPACE_ADMIN") {
-        const pai = checked.findIndex(
-          (element) => element.metadata.name === "NAMESPACE_READ_ONLY"
-        );
-        if (pai !== -1) {
-          newChecked.splice(pai, 1);
-        }
-      }
-      if (value.metadata.name === "NAMESPACE_READ_ONLY") {
-        const pai = checked.findIndex(
-          (element) => element.metadata.name === "NAMESPACE_ADMIN"
-        );
-        if (pai !== -1) {
-          newChecked.splice(pai, 1);
+      const pairs = ["PROJECT", "INFRA", "NAMESPACE"]
+        .map((e) => [
+          [e + "_ADMIN", e + "_READ_ONLY"],
+          [e + "_READ_ONLY", e + "_ADMIN"],
+        ])
+        .reduce((a, b) => [...a, ...b], []);
+
+      for (let pair of pairs) {
+        if (value.metadata.name === pair[0]) {
+          const item = checked.findIndex(
+            (element) => element.metadata.name === pair[1]
+          );
+          if (item !== -1) newChecked.splice(item, 1);
         }
       }
       newChecked.push(value);
