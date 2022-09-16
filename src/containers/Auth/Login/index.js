@@ -250,6 +250,10 @@ class Login extends Component {
     return (
       <>
         <>
+          <img
+            src="/logolarge.png"
+            className="login-logo img-fluid mb-4"
+          />
           <ValidatorForm onSubmit={this.handleSubmit} instantValidate={false}>
             <fieldset>
               <div style={{ marginTop: "25px", marginBottom: "25px" }}>
