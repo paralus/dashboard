@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Hide copy button on non https webpages from [meain](https://github.com/meain)
 - Removed building images to registry on pull requests from [niravparikh05](https://github.com/niravparikh05)
-- Added logo to the main login page from an empty from [plagzee](https://github.com/plagzee)
+- Added logo to the main login page empty from [plagzee](https://github.com/plagzee)
 
 ### Fixed
 - Fix blank screen on initial login from [meain](https://github.com/meain)
