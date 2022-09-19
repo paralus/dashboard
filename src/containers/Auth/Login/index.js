@@ -29,7 +29,6 @@ import PageLayout from "./components/PageLayout";
 import ChangePasswordForm from "./components/ChangePasswordForm";
 import { newKratosSdk } from "actions/Auth";
 
-
 const SESSION_TIMEOUT_MILLISECONDS = 12 * 60 * 60 * 1000 + 1 * 60 * 1000; // 12hrs + 1min
 class Login extends Component {
   constructor(props) {
@@ -251,7 +250,11 @@ class Login extends Component {
     return (
       <>
         <>
-          <img src="/logolarge.png" alt="logo" className="login-logo img-fluid mb-4" />
+          <img
+            src="/logolarge.png"
+            alt="logo"
+            className="login-logo img-fluid mb-4"
+          />
           <ValidatorForm onSubmit={this.handleSubmit} instantValidate={false}>
             <fieldset>
               <div style={{ marginTop: "25px", marginBottom: "25px" }}>
@@ -410,7 +413,7 @@ class Login extends Component {
                         color="primary"
                         onClick={this.handleSubmit}
                       >
-                        Login 
+                        Login
                       </Button>
                     ) : null}
                   </div>

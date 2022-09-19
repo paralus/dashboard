@@ -123,7 +123,7 @@ const KratosSettings = (props) => {
                 </div>
                 <div className="col-md-12">
                   <TextValidator
-                    label="Repeat password"
+                    label="Repeat Password"
                     name="confirm_password"
                     fullWidth
                     required
