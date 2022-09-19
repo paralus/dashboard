@@ -61,7 +61,7 @@ const ClusterHeaderImported = (props) => {
   return (
     <Paper className="row py-3 mx-0 mb-2">
       <div className="col-md-6">
-        <h2 className="text-teal">{edge.name}</h2>
+        <h2 className="text-teal">{edge.metadata.name}</h2>
 
         <div>
           Status :&nbsp;

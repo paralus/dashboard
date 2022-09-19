@@ -12,8 +12,7 @@ const BreadCrumb = ({ edge }) => {
               href: "#/app/edges",
             },
             {
-              label: `${edge?.name || ""}`,
-              href: `#/app/edges/${edge?.id}`,
+              label: `${edge?.metadata.name || ""}`,
             },
             {
               label: "Provision",

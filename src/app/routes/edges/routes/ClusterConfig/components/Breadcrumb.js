@@ -10,7 +10,7 @@ const Breadcrumb = ({ edge }) => {
       href: "#/app/edges",
     },
     {
-      label: `${edge.name || "..."}`,
+      label: `${edge.metadata.name || "..."}`,
       href: `#/app/edges/${edge.id}`,
       current: true,
     },
