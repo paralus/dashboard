@@ -102,6 +102,7 @@ const KratosSettings = (props) => {
             autoComplete="off"
             onSubmit={handleChangePassword}
           >
+            <img src="/logolarge.png" alt="logo" className="img-fluid" />
             <div style={{ marginTop: "25px", marginBottom: "25px" }}>
               <div className="row mt-4">
                 <div className="col-md-12">
