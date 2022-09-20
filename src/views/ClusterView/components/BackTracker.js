@@ -14,7 +14,7 @@ function getRoutes(edgeId) {
 }
 
 function getCrumbs({ path, params, url }, edge) {
-  const edgeName = edge.name || "...";
+  const edgeName = edge?.metadata?.name || "...";
   const routes = getRoutes(edge.id);
   const nodeName = ((edge.nodes || []).find((x) => x.id === params.node) || {})
     .name;

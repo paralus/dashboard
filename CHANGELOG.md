@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+- Ui cleanups in cluster lister, import and config screens from [niravparikh05](https://github.com/niravparikh05)
+
 ## [0.1.1] - 2022-08-09
 ### Changed
 - Hide copy button on non https webpages from [meain](https://github.com/meain)

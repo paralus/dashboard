@@ -111,15 +111,8 @@ function getHealth(edge, classes) {
         placement="top"
         title={reason ? <Typography variant="body2">{reason}</Typography> : ""}
       >
-        <span>{isHealthy ? "Healthy" : "Unhealthy"}</span>
+        <span>{isHealthy ? "Imported" : "Unavailable"}</span>
       </Tooltip>
-      <Typography
-        variant="caption"
-        color="textSecondary"
-        style={{ marginLeft: 12 }}
-      >
-        Last Check in {lastUpdated}
-      </Typography>
     </React.Fragment>
   );
 }
