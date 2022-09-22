@@ -28,6 +28,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import PageLayout from "./components/PageLayout";
 import ChangePasswordForm from "./components/ChangePasswordForm";
 import { newKratosSdk } from "actions/Auth";
+import paraluslogo from "../../../assets/images/logolarge.png";
 
 const SESSION_TIMEOUT_MILLISECONDS = 12 * 60 * 60 * 1000 + 1 * 60 * 1000; // 12hrs + 1min
 class Login extends Component {
@@ -251,7 +252,7 @@ class Login extends Component {
       <>
         <>
           <img
-            src="/logolarge.png"
+            src={paraluslogo}
             alt="logo"
             className="login-logo img-fluid mb-4"
           />

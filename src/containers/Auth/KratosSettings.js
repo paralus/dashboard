@@ -8,6 +8,7 @@ import { useQuery } from "utils/helpers";
 import PageLayout from "./Login/components/PageLayout";
 import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import tealTheme from "../themes/tealTheme";
+import paraluslogo from "../../assets/images/logolarge.png";
 
 const KratosSettings = (props) => {
   const { query } = useQuery();
@@ -102,7 +103,7 @@ const KratosSettings = (props) => {
             autoComplete="off"
             onSubmit={handleChangePassword}
           >
-            <img src="/logolarge.png" alt="logo" className="img-fluid" />
+            <img src={paraluslogo} alt="logo" className="img-fluid" />
             <div style={{ marginTop: "25px", marginBottom: "25px" }}>
               <div className="row mt-4">
                 <div className="col-md-12">
