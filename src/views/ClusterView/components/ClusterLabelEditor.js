@@ -114,12 +114,6 @@ function ClusterLabelEditor({ isOpen, onOpen, labels, edge, refreshEdge }) {
         style={{ borderBottom: "1px solid lightgray" }}
       >
         Edit Cluster's Custom Labels
-        <div>
-          <span className={classes.cautionText}>Caution: </span>
-          <span className={classes.messageText}>
-            Editing or Deleting a Label may impact Workload Placement
-          </span>
-        </div>
       </DialogTitle>
       <Formik
         initialValues={{ labels: customLabels || [] }}

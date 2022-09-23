@@ -40,6 +40,7 @@ import StatusIndicator from "components/StatusIndicator";
 import DataTableToolbar from "./components/DataTableToolbar";
 import CreateUserDialog from "./components/CreateUserDialog";
 import UserListCellMenu from "./components/UserListCellMenu";
+import { FileCopyOutlined, ArrowBack } from "@material-ui/icons";
 
 const style = {
   helpText: {
@@ -89,6 +90,20 @@ const style = {
   noResult: {
     textAlign: "center",
     margin: "0 2rem",
+  },
+  urlCopy: {
+    position: "relative",
+    borderRadius: "3px",
+    backgroundColor: "whitesmoke",
+    borderStyle: "solid",
+    borderWidth: "1px",
+    borderColor: "grey",
+    color: "black",
+    paddingLeft: "15px",
+    paddingRight: "15px",
+    minHeight: "40px",
+    display: "flex",
+    alignItems: "center",
   },
 };
 
@@ -725,9 +740,26 @@ class UserList extends React.Component {
             has been added successfully. Use the following link to set the
             password:
             <br />
-            <a style={{ color: "teal" }} href={this.props.newUser?.recoveryUrl}>
-              {this.props.newUser?.recoveryUrl}
-            </a>
+            <div className={style.urlCopy}>
+              <a
+                style={{ color: "teal" }}
+                href={this.props.newUser?.recoveryUrl}
+              >
+                {this.props.newUser?.recoveryUrl}
+              </a>
+              <Tooltip title={"Copy"} id="clip">
+                <IconButton
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      `${this.props.newUser?.recoveryUrl}`
+                    );
+                  }}
+                  aria-label="copy"
+                >
+                  <FileCopyOutlined />
+                </IconButton>
+              </Tooltip>
+            </div>
           </DialogContent>
           <DialogActions>
             <Button
@@ -751,9 +783,21 @@ class UserList extends React.Component {
             has been generated successfully. Use the following link to set the
             new password:
             <br />
-            <a style={{ color: "teal" }} href={this.state.recoveryLink}>
-              {this.state.recoveryLink}
-            </a>
+            <div className={style.urlCopy}>
+              <a style={{ color: "teal" }} href={this.state.recoveryLink}>
+                {this.state.recoveryLink}
+              </a>
+              <Tooltip title={"Copy"} id="clip">
+                <IconButton
+                  onClick={() => {
+                    navigator.clipboard.writeText(`${this.state.recoveryLink}`);
+                  }}
+                  aria-label="copy"
+                >
+                  <FileCopyOutlined />
+                </IconButton>
+              </Tooltip>
+            </div>
           </DialogContent>
           <DialogActions>
             <Button

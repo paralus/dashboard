@@ -135,7 +135,7 @@ class ToolsDetail extends React.Component {
           <CardBox
             styleName="col-lg-6"
             childrenStyle="d-flex"
-            heading={<T.span text="API &amp; Registry Keys" />}
+            heading={<T.span text="API Keys" />}
           >
             <div className="row w-100">
               <div className="col-md-6 pt-2">
@@ -154,7 +154,7 @@ class ToolsDetail extends React.Component {
                     style={{ color: "rgb(117, 117, 117)" }}
                   >
                     Manage <b>{this.props.userAndRoleDetail.metadata.name}</b>
-                    's API keys and Registry Authorization keys.
+                    's API keys.
                   </div>
                 )}
             </div>

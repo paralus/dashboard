@@ -50,6 +50,11 @@ import ClusterActions from "components/ClusterActions/index";
 import CreateClusterV2 from "./components/CreateClusterV2";
 import SlatList from "./components/SlatList";
 import DataTableToolbar from "./components/DataTableToolbar";
+import DateFormat from "components/DateFormat";
+import SettingsIcon from "@material-ui/icons/Settings";
+import DeleteIconComponent from "components/DeleteIconComponent";
+import KubectlSettings from "components/ClusterActions/KubectlSettings";
+import ClusterActionDialog from "components/ClusterActions/ClusterActionDialog";
 
 const styles = (theme) => ({
   clusterHeading: {
@@ -149,7 +154,12 @@ const styles = (theme) => ({
 
 let columnData = [
   { id: "name", numeric: false, disablePadding: false, label: "Name" },
-  { id: "loc", numeric: false, disablePadding: false, label: "Location" },
+  {
+    id: "createdAt",
+    numeric: false,
+    disablePadding: false,
+    label: "Created At",
+  },
   { id: "actions", numeric: true, disablePadding: false, label: "Actions" },
 ];
 const defaultColumnData = columnData;
@@ -437,6 +447,10 @@ class PrivateEdgeList extends React.Component {
     });
   };
 
+  handleKubectlSettingsClose = () => {
+    this.setState({ kubectlSettingsOpen: false });
+  };
+
   handleEdgeChange = (name) => (event) => {
     if (name === "metro") {
       if (event) {
@@ -510,6 +524,35 @@ class PrivateEdgeList extends React.Component {
       this.props.currentProject.metadata.name,
       forceDelete
     );
+    this.callGetEdges();
+  };
+
+  handleKubectlSettings = (event, edge) => {
+    this.state.kubectlSettingsOpen = true;
+    this.state.cancelAction = {
+      isHidden: true,
+    };
+    this.state.action = {
+      isHidden: true,
+    };
+    this.state.header = (
+      <div className="w-100 d-flex justify-content-between">
+        <div>Kubectl Settings</div>
+        <div style={{ fontSize: "14px" }} className="d-flex align-items-center">
+          <div>Cluster: {edge.metadata.name}</div>
+        </div>
+      </div>
+    );
+
+    this.state.content = (
+      <KubectlSettings
+        open={this.state.kubectlSettingsOpen}
+        onClose={this.handleKubectlSettingsClose}
+        edge={edge}
+      />
+    );
+
+    this.setState({ ...this.state });
   };
 
   handleValidator = () => {
@@ -558,11 +601,7 @@ class PrivateEdgeList extends React.Component {
   };
 
   getSuccessMessage = () => {
-    if (
-      this.props.edges.isDeleteEdgeSuccess &&
-      this.state.removeEdgeObj &&
-      this.state.removeEdgeObj.clusterType === "aws-eks"
-    ) {
+    if (this.props.edges.isDeleteEdgeSuccess && this.state.removeEdgeObj) {
       return (
         <span id="message-id">
           Delete cluster request submitted successfully.
@@ -615,7 +654,7 @@ class PrivateEdgeList extends React.Component {
       clusterType: "on-prem",
       clusterCreateStep: 0,
       downloadClusterYAMLClick: false,
-      renderInTable: false,
+      renderInTable: true,
       removeEdgeObj: {},
       versionType: "control plane and nodegroups",
       selected_nodegroups: [],
@@ -623,6 +662,11 @@ class PrivateEdgeList extends React.Component {
       openDrawer: false,
       selectedEdgeForGpu: null,
       custom: false,
+      kubectlSettingsOpen: false,
+      cancelAction: null,
+      action: null,
+      header: null,
+      content: null,
     };
 
     this.reader = null;
@@ -1283,29 +1327,41 @@ class PrivateEdgeList extends React.Component {
                           <TableCell>
                             <div className="row">
                               <div className="col-md-10 order-md-1">
-                                {n.spec.metro?.name}
+                                <DateFormat timestamp={n.metadata.createdAt} />
                               </div>
                             </div>
                           </TableCell>
                           <TableCell data={n}>
                             {this.state.userRole !== "READ_ONLY_OPS" && (
-                              <ClusterActionsContext.Provider
-                                value={{
-                                  UserSession,
-                                  project: this.props.currentProject,
-                                  sshEdges,
-                                  partnerDetail,
-                                  alertsConfig: this.props.alertsConfig,
+                              <Tooltip title="Kubectl Settings">
+                                <IconButton
+                                  aria-label="edit"
+                                  className="m-0"
+                                  onClick={(event) => {
+                                    this.handleKubectlSettings(null, n);
+                                  }}
+                                >
+                                  <SettingsIcon />
+                                </IconButton>
+                              </Tooltip>
+                            )}
+                            {this.state.userRole !== "READ_ONLY_OPS" && (
+                              <DeleteIconComponent
+                                key={n.metadata.name}
+                                button={{
+                                  type: "danger-icon",
+                                  label: "Delete",
+                                  confirmText: (
+                                    <span>
+                                      Are you sure you want to delete
+                                      <b> {n.metadata.name} </b>?
+                                    </span>
+                                  ),
+                                  handleClick: () => {
+                                    this.handleRemoveEdge(null, n, true);
+                                  },
                                 }}
-                              >
-                                <ClusterActions
-                                  edge={n}
-                                  isTableView={this.state.renderInTable}
-                                  userRole={this.state.userRole}
-                                  pauseAutoRefresh={this.pauseAutoRefresh}
-                                  resumeAutoRefresh={this.resumeAutoRefresh}
-                                />
-                              </ClusterActionsContext.Provider>
+                              />
                             )}
                           </TableCell>
                         </TableRow>
@@ -1377,6 +1433,15 @@ class PrivateEdgeList extends React.Component {
               open={this.state.openAddEdge}
               handleClose={this.handleAddEdgeClose}
               handleCloseCluster={this.handleAddClusterClose}
+            />
+          )}
+          {this.state.kubectlSettingsOpen && (
+            <ClusterActionDialog
+              isOpen={this.state.kubectlSettingsOpen}
+              header={this.state.header}
+              content={this.state.content}
+              action={this.state.action}
+              cancelAction={this.state.cancelAction}
             />
           )}
           {this.state.openAddEdgeImages && (
