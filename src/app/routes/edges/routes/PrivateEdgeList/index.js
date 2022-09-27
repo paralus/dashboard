@@ -40,13 +40,10 @@ import {
   setDefaultClusterStatus,
 } from "actions/index";
 import { ValidatorForm } from "react-material-ui-form-validator";
-import Select from "react-select";
-import { ClusterActionsContext } from "../../../../../views/ClusterView/ClusterViewContexts";
 import { capitalizeFirstLetter } from "../../../../../utils";
 import AppNoData from "components/AppNoData";
 import Spinner from "components/Spinner";
 import AppSnackbar from "components/AppSnackbar";
-import ClusterActions from "components/ClusterActions/index";
 import CreateClusterV2 from "./components/CreateClusterV2";
 import SlatList from "./components/SlatList";
 import DataTableToolbar from "./components/DataTableToolbar";
@@ -155,7 +152,7 @@ const styles = (theme) => ({
 let columnData = [
   { id: "name", numeric: false, disablePadding: false, label: "Name" },
   {
-    id: "createdAt",
+    id: "created_at",
     numeric: false,
     disablePadding: false,
     label: "Created At",
@@ -283,9 +280,8 @@ class PrivateEdgeList extends React.Component {
         this.state.offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        labelQueryParams
+        this.state.orderBy,
+        this.state.order
       )
     );
   };
@@ -313,9 +309,8 @@ class PrivateEdgeList extends React.Component {
         offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        this.state.labelQueryParams
+        this.state.orderBy,
+        this.state.order
       )
     );
   };
@@ -328,12 +323,7 @@ class PrivateEdgeList extends React.Component {
       order = "asc";
     }
 
-    const data =
-      order === "desc"
-        ? this.state.data.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
-        : this.state.data.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1));
-
-    this.setState({ data, order, orderBy });
+    this.setState({ order, orderBy }, this.callGetEdges);
   };
   handleSelectAllClick = (event, checked) => {
     if (checked) {
@@ -517,14 +507,15 @@ class PrivateEdgeList extends React.Component {
     this.handleAddEdge();
   };
 
-  handleRemoveEdge = (event, edge, forceDelete) => {
+  handleRemoveEdge = (edge, forceDelete) => {
     this.state.removeEdgeObj = edge;
     this.props.removeCluster(
       edge.metadata.name,
       this.props.currentProject.metadata.name,
       forceDelete
     );
-    this.callGetEdges();
+    this.state.isResponseSuccess = true;
+    this.setState({ ...this.state });
   };
 
   handleKubectlSettings = (event, edge) => {
@@ -565,16 +556,13 @@ class PrivateEdgeList extends React.Component {
   };
 
   handleResponseErrorClose = () => {
-    this.setState(
-      {
-        ...this.state,
-        isResponseError: false,
-        isResponseSuccess: false,
-        errorMessage: "",
-        // removeEdgeObj: {}
-      },
-      () => this.props.edgeErrorReset()
-    );
+    this.setState({
+      ...this.state,
+      isResponseError: false,
+      isResponseSuccess: false,
+      errorMessage: "",
+      // removeEdgeObj: {}
+    });
   };
 
   getErrorMessage = () => {
@@ -601,7 +589,7 @@ class PrivateEdgeList extends React.Component {
   };
 
   getSuccessMessage = () => {
-    if (this.props.edges.isDeleteEdgeSuccess && this.state.removeEdgeObj) {
+    if (this.state.removeEdgeObj) {
       return (
         <span id="message-id">
           Delete cluster request submitted successfully.
@@ -809,9 +797,8 @@ class PrivateEdgeList extends React.Component {
         offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        this.state.labelQueryParams
+        this.state.orderBy,
+        this.state.order
       );
     }
 
@@ -851,9 +838,8 @@ class PrivateEdgeList extends React.Component {
         offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        this.state.labelQueryParams
+        this.state.orderBy,
+        this.state.order
       );
     }
 
@@ -864,9 +850,8 @@ class PrivateEdgeList extends React.Component {
         offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        this.state.labelQueryParams
+        this.state.orderBy,
+        this.state.order
       );
     }
   }
@@ -886,9 +871,8 @@ class PrivateEdgeList extends React.Component {
           offset,
           this.state.searchText,
           this.state.searchStatus,
-          this.state.selectedPartner,
-          this.state.selectedOrg,
-          this.state.labelQueryParams
+          this.state.orderBy,
+          this.state.order
         ),
       500
     );
@@ -950,9 +934,8 @@ class PrivateEdgeList extends React.Component {
       this.state.offset,
       this.state.searchText,
       this.state.searchStatus,
-      this.state.selectedPartner,
-      this.state.selectedOrg,
-      this.state.labelQueryParams
+      this.state.orderBy,
+      this.state.order
     );
     if (this.timeInterval) {
       clearInterval(this.timeInterval);
@@ -965,12 +948,13 @@ class PrivateEdgeList extends React.Component {
           this.state.offset,
           this.state.searchText,
           this.state.searchStatus,
-          this.state.selectedPartner,
-          this.state.selectedOrg,
-          this.state.labelQueryParams
+          this.state.orderBy,
+          this.state.order
         ),
       30000
     );
+    this.state.isResponseSuccess = false;
+    this.setState({ ...this.state });
   };
 
   pauseAutoRefresh = () => {
@@ -992,9 +976,8 @@ class PrivateEdgeList extends React.Component {
           this.state.offset,
           this.state.searchText,
           this.state.searchStatus,
-          this.state.selectedPartner,
-          this.state.selectedOrg,
-          this.state.labelQueryParams
+          this.state.orderBy,
+          this.state.order
         ),
       30000
     );
@@ -1222,7 +1205,6 @@ class PrivateEdgeList extends React.Component {
     if (this.state.edges) {
       data = this.state.edges;
     }
-
     if (
       data == null ||
       this.state.partners == null ||
@@ -1358,7 +1340,7 @@ class PrivateEdgeList extends React.Component {
                                     </span>
                                   ),
                                   handleClick: () => {
-                                    this.handleRemoveEdge(null, n, true);
+                                    this.handleRemoveEdge(n, true);
                                   },
                                 }}
                               />

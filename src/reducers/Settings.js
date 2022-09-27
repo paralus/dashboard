@@ -235,6 +235,26 @@ const settings = (state = initialSettings, action) => {
           isUpdateEdgeSuccess: false,
         },
       };
+    case "edge_delete_success":
+      return {
+        ...state,
+        edges: {
+          ...state.edges,
+          isEdgesResponseError: false,
+          isDeleteEdgeSuccess: true,
+          error: null,
+        },
+      };
+    case "edge_delete_error":
+      return {
+        ...state,
+        edges: {
+          ...state.edges,
+          isEdgesResponseError: true,
+          isDeleteEdgeSuccess: false,
+          error: action.payload,
+        },
+      };
     case "get_edge_detail_success":
       return {
         ...state,

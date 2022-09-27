@@ -5,12 +5,16 @@ export function getEdges(
   rows = 1000,
   offset = 0,
   searchText = "",
-  status = ""
+  status = "",
+  orderBy = "",
+  order = ""
 ) {
   return function (dispatch) {
+    let filterQuery = "";
+    if (orderBy) filterQuery += `&orderBy=${orderBy}&order=${order}`;
     http("infra")
       .get(
-        `project/${project}/cluster?limit=${rows}&offset=${offset}&q=${searchText}${status}`
+        `project/${project}/cluster?limit=${rows}&offset=${offset}&q=${searchText}${status}${filterQuery}`
       )
       .then((response) => {
         dispatch({ type: "get_edges_success", payload: response });

@@ -200,6 +200,11 @@ class ResourceListTable extends React.Component {
       {
         type: "regular",
         isExpandable: false,
+        value: <DateFormat timestamp={data.metadata.createdAt} />,
+      },
+      {
+        type: "regular",
+        isExpandable: false,
         value: actionDetails,
       },
     ];
