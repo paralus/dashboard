@@ -16,7 +16,7 @@ const DownloadKubeconfig = ({ user, withIcon }) => {
   useEffect(() => {
     if (config) {
       const textFileAsBlob = new Blob([config], { type: "text/plain" });
-      const fileNameToSaveAs = `kubeconfig-${user.username}.yaml`;
+      const fileNameToSaveAs = `kubeconfig-${user.metadata.name}.yaml`;
 
       const downloadLink = document.createElement("a");
       downloadLink.download = fileNameToSaveAs;

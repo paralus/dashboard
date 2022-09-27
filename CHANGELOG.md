@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+- Fix download kubeconfig file name issue from [akshay196](https://github.com/akshay196)
 
 ### Fixed
 - Ui cleanups in cluster lister, import and config screens from [niravparikh05](https://github.com/niravparikh05)
