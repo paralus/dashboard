@@ -69,7 +69,7 @@ class App extends Component {
         !location.pathname.startsWith("/loginerror") &&
         !location.pathname.startsWith("/verify")
       )
-        return <Redirect to="/login" />;
+        window.location = "/#/login";
     } else if (location.pathname === "/ksettings") {
       return <Redirect to="/ksettings" />;
     } else if (location.pathname === "/") {
