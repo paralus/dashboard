@@ -107,7 +107,7 @@ const NamespaceCard = ({
     const [namespaceTags, setNamespaceTags] = useState(props.tags);
     const [namespaceError, setNamespaceError] = useState(false);
     const [namespaehelpertext, setNamespaehelpertext] = useState(
-      "Set namespace names here."
+      "Provide namespace name(s), each followed by ENTER↵"
     );
 
     function CheckNamespaceValidation(str) {
@@ -117,7 +117,9 @@ const NamespaceCard = ({
         checkDuplicateInArray(str, namespaceTags) === false
       ) {
         setNamespaceError(false);
-        setNamespaehelpertext("Set namespace names here.");
+        setNamespaehelpertext(
+          "Provide namespace name(s), each followed by ENTER↵"
+        );
         return true;
       } else {
         setNamespaceError(true);
