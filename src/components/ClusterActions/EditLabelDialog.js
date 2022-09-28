@@ -109,17 +109,7 @@ const EditLabelDialog = ({ isOpen, onClose, edge }) => {
     setLabels(updatedLabels);
   };
 
-  const header = (
-    <h2>
-      Edit Cluster's Custom Labels
-      <div>
-        <span className={classes.cautionText}>Caution: </span>
-        <span className={classes.messageText}>
-          Editing or Deleting a Label may impact Workload Placement
-        </span>
-      </div>
-    </h2>
-  );
+  const header = <h2>Edit Cluster's Custom Labels</h2>;
 
   const content = (
     <Box className="row">

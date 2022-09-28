@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Ui cleanups in cluster lister, import and config screens from [niravparikh05](https://github.com/niravparikh05)
 - Fixed login failing right after logout from [meain](https://github.com/meain)
+- Cluster tabular list view set to default and added user recovery link copy icon [niravparikh05](https://github.com/niravparikh05)
 
 ## [0.1.1] - 2022-08-09
 ### Changed

@@ -40,16 +40,18 @@ import {
   setDefaultClusterStatus,
 } from "actions/index";
 import { ValidatorForm } from "react-material-ui-form-validator";
-import Select from "react-select";
-import { ClusterActionsContext } from "../../../../../views/ClusterView/ClusterViewContexts";
 import { capitalizeFirstLetter } from "../../../../../utils";
 import AppNoData from "components/AppNoData";
 import Spinner from "components/Spinner";
 import AppSnackbar from "components/AppSnackbar";
-import ClusterActions from "components/ClusterActions/index";
 import CreateClusterV2 from "./components/CreateClusterV2";
 import SlatList from "./components/SlatList";
 import DataTableToolbar from "./components/DataTableToolbar";
+import DateFormat from "components/DateFormat";
+import SettingsIcon from "@material-ui/icons/Settings";
+import DeleteIconComponent from "components/DeleteIconComponent";
+import KubectlSettings from "components/ClusterActions/KubectlSettings";
+import ClusterActionDialog from "components/ClusterActions/ClusterActionDialog";
 
 const styles = (theme) => ({
   clusterHeading: {
@@ -149,7 +151,12 @@ const styles = (theme) => ({
 
 let columnData = [
   { id: "name", numeric: false, disablePadding: false, label: "Name" },
-  { id: "loc", numeric: false, disablePadding: false, label: "Location" },
+  {
+    id: "created_at",
+    numeric: false,
+    disablePadding: false,
+    label: "Created At",
+  },
   { id: "actions", numeric: true, disablePadding: false, label: "Actions" },
 ];
 const defaultColumnData = columnData;
@@ -273,9 +280,8 @@ class PrivateEdgeList extends React.Component {
         this.state.offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        labelQueryParams
+        this.state.orderBy,
+        this.state.order
       )
     );
   };
@@ -303,9 +309,8 @@ class PrivateEdgeList extends React.Component {
         offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        this.state.labelQueryParams
+        this.state.orderBy,
+        this.state.order
       )
     );
   };
@@ -318,12 +323,7 @@ class PrivateEdgeList extends React.Component {
       order = "asc";
     }
 
-    const data =
-      order === "desc"
-        ? this.state.data.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
-        : this.state.data.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1));
-
-    this.setState({ data, order, orderBy });
+    this.setState({ order, orderBy }, this.callGetEdges);
   };
   handleSelectAllClick = (event, checked) => {
     if (checked) {
@@ -437,6 +437,10 @@ class PrivateEdgeList extends React.Component {
     });
   };
 
+  handleKubectlSettingsClose = () => {
+    this.setState({ kubectlSettingsOpen: false });
+  };
+
   handleEdgeChange = (name) => (event) => {
     if (name === "metro") {
       if (event) {
@@ -503,13 +507,43 @@ class PrivateEdgeList extends React.Component {
     this.handleAddEdge();
   };
 
-  handleRemoveEdge = (event, edge, forceDelete) => {
+  handleRemoveEdge = (edge, forceDelete) => {
     this.state.removeEdgeObj = edge;
     this.props.removeCluster(
       edge.metadata.name,
       this.props.currentProject.metadata.name,
       forceDelete
     );
+    this.state.isResponseSuccess = true;
+    this.setState({ ...this.state });
+  };
+
+  handleKubectlSettings = (event, edge) => {
+    this.state.kubectlSettingsOpen = true;
+    this.state.cancelAction = {
+      isHidden: true,
+    };
+    this.state.action = {
+      isHidden: true,
+    };
+    this.state.header = (
+      <div className="w-100 d-flex justify-content-between">
+        <div>Kubectl Settings</div>
+        <div style={{ fontSize: "14px" }} className="d-flex align-items-center">
+          <div>Cluster: {edge.metadata.name}</div>
+        </div>
+      </div>
+    );
+
+    this.state.content = (
+      <KubectlSettings
+        open={this.state.kubectlSettingsOpen}
+        onClose={this.handleKubectlSettingsClose}
+        edge={edge}
+      />
+    );
+
+    this.setState({ ...this.state });
   };
 
   handleValidator = () => {
@@ -522,16 +556,13 @@ class PrivateEdgeList extends React.Component {
   };
 
   handleResponseErrorClose = () => {
-    this.setState(
-      {
-        ...this.state,
-        isResponseError: false,
-        isResponseSuccess: false,
-        errorMessage: "",
-        // removeEdgeObj: {}
-      },
-      () => this.props.edgeErrorReset()
-    );
+    this.setState({
+      ...this.state,
+      isResponseError: false,
+      isResponseSuccess: false,
+      errorMessage: "",
+      // removeEdgeObj: {}
+    });
   };
 
   getErrorMessage = () => {
@@ -558,11 +589,7 @@ class PrivateEdgeList extends React.Component {
   };
 
   getSuccessMessage = () => {
-    if (
-      this.props.edges.isDeleteEdgeSuccess &&
-      this.state.removeEdgeObj &&
-      this.state.removeEdgeObj.clusterType === "aws-eks"
-    ) {
+    if (this.state.removeEdgeObj) {
       return (
         <span id="message-id">
           Delete cluster request submitted successfully.
@@ -615,7 +642,7 @@ class PrivateEdgeList extends React.Component {
       clusterType: "on-prem",
       clusterCreateStep: 0,
       downloadClusterYAMLClick: false,
-      renderInTable: false,
+      renderInTable: true,
       removeEdgeObj: {},
       versionType: "control plane and nodegroups",
       selected_nodegroups: [],
@@ -623,6 +650,11 @@ class PrivateEdgeList extends React.Component {
       openDrawer: false,
       selectedEdgeForGpu: null,
       custom: false,
+      kubectlSettingsOpen: false,
+      cancelAction: null,
+      action: null,
+      header: null,
+      content: null,
     };
 
     this.reader = null;
@@ -765,9 +797,8 @@ class PrivateEdgeList extends React.Component {
         offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        this.state.labelQueryParams
+        this.state.orderBy,
+        this.state.order
       );
     }
 
@@ -807,9 +838,8 @@ class PrivateEdgeList extends React.Component {
         offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        this.state.labelQueryParams
+        this.state.orderBy,
+        this.state.order
       );
     }
 
@@ -820,9 +850,8 @@ class PrivateEdgeList extends React.Component {
         offset,
         this.state.searchText,
         this.state.searchStatus,
-        this.state.selectedPartner,
-        this.state.selectedOrg,
-        this.state.labelQueryParams
+        this.state.orderBy,
+        this.state.order
       );
     }
   }
@@ -842,9 +871,8 @@ class PrivateEdgeList extends React.Component {
           offset,
           this.state.searchText,
           this.state.searchStatus,
-          this.state.selectedPartner,
-          this.state.selectedOrg,
-          this.state.labelQueryParams
+          this.state.orderBy,
+          this.state.order
         ),
       500
     );
@@ -906,9 +934,8 @@ class PrivateEdgeList extends React.Component {
       this.state.offset,
       this.state.searchText,
       this.state.searchStatus,
-      this.state.selectedPartner,
-      this.state.selectedOrg,
-      this.state.labelQueryParams
+      this.state.orderBy,
+      this.state.order
     );
     if (this.timeInterval) {
       clearInterval(this.timeInterval);
@@ -921,12 +948,13 @@ class PrivateEdgeList extends React.Component {
           this.state.offset,
           this.state.searchText,
           this.state.searchStatus,
-          this.state.selectedPartner,
-          this.state.selectedOrg,
-          this.state.labelQueryParams
+          this.state.orderBy,
+          this.state.order
         ),
       30000
     );
+    this.state.isResponseSuccess = false;
+    this.setState({ ...this.state });
   };
 
   pauseAutoRefresh = () => {
@@ -948,9 +976,8 @@ class PrivateEdgeList extends React.Component {
           this.state.offset,
           this.state.searchText,
           this.state.searchStatus,
-          this.state.selectedPartner,
-          this.state.selectedOrg,
-          this.state.labelQueryParams
+          this.state.orderBy,
+          this.state.order
         ),
       30000
     );
@@ -1178,7 +1205,6 @@ class PrivateEdgeList extends React.Component {
     if (this.state.edges) {
       data = this.state.edges;
     }
-
     if (
       data == null ||
       this.state.partners == null ||
@@ -1283,29 +1309,41 @@ class PrivateEdgeList extends React.Component {
                           <TableCell>
                             <div className="row">
                               <div className="col-md-10 order-md-1">
-                                {n.spec.metro?.name}
+                                <DateFormat timestamp={n.metadata.createdAt} />
                               </div>
                             </div>
                           </TableCell>
                           <TableCell data={n}>
                             {this.state.userRole !== "READ_ONLY_OPS" && (
-                              <ClusterActionsContext.Provider
-                                value={{
-                                  UserSession,
-                                  project: this.props.currentProject,
-                                  sshEdges,
-                                  partnerDetail,
-                                  alertsConfig: this.props.alertsConfig,
+                              <Tooltip title="Kubectl Settings">
+                                <IconButton
+                                  aria-label="edit"
+                                  className="m-0"
+                                  onClick={(event) => {
+                                    this.handleKubectlSettings(null, n);
+                                  }}
+                                >
+                                  <SettingsIcon />
+                                </IconButton>
+                              </Tooltip>
+                            )}
+                            {this.state.userRole !== "READ_ONLY_OPS" && (
+                              <DeleteIconComponent
+                                key={n.metadata.name}
+                                button={{
+                                  type: "danger-icon",
+                                  label: "Delete",
+                                  confirmText: (
+                                    <span>
+                                      Are you sure you want to delete
+                                      <b> {n.metadata.name} </b>?
+                                    </span>
+                                  ),
+                                  handleClick: () => {
+                                    this.handleRemoveEdge(n, true);
+                                  },
                                 }}
-                              >
-                                <ClusterActions
-                                  edge={n}
-                                  isTableView={this.state.renderInTable}
-                                  userRole={this.state.userRole}
-                                  pauseAutoRefresh={this.pauseAutoRefresh}
-                                  resumeAutoRefresh={this.resumeAutoRefresh}
-                                />
-                              </ClusterActionsContext.Provider>
+                              />
                             )}
                           </TableCell>
                         </TableRow>
@@ -1377,6 +1415,15 @@ class PrivateEdgeList extends React.Component {
               open={this.state.openAddEdge}
               handleClose={this.handleAddEdgeClose}
               handleCloseCluster={this.handleAddClusterClose}
+            />
+          )}
+          {this.state.kubectlSettingsOpen && (
+            <ClusterActionDialog
+              isOpen={this.state.kubectlSettingsOpen}
+              header={this.state.header}
+              content={this.state.content}
+              action={this.state.action}
+              cancelAction={this.state.cancelAction}
             />
           )}
           {this.state.openAddEdgeImages && (
