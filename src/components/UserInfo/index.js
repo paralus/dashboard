@@ -92,7 +92,7 @@ class UserInfo extends React.Component {
     }
 
     if (isChangeOrgSuccess) {
-      return <Redirect to="/login" />;
+      window.location = "/#/login";
     }
 
     return (
