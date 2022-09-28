@@ -53,7 +53,7 @@ const ProjectSelector = ({
     match.path === "/console/:projectId/:clusterName" &&
     match.params.projectId !== cachedProject
   ) {
-    return <Redirect to="/login" />;
+    window.location = "/#/login";
   }
 
   useEffect(() => {
