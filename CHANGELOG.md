@@ -3,9 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-- Fix download kubeconfig file name issue from [akshay196](https://github.com/akshay196)
 
+## [0.1.2] - 2022-09-30
 ### Fixed
+- Fix download kubeconfig file name issue from [akshay196](https://github.com/akshay196)
 - Ui cleanups in cluster lister, import and config screens from [niravparikh05](https://github.com/niravparikh05)
 - Fixed login failing right after logout from [meain](https://github.com/meain)
 - Cluster tabular list view set to default and added user recovery link copy icon [niravparikh05](https://github.com/niravparikh05)
@@ -27,6 +28,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/paralus/dashboard/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/paralus/dashboard/compare/v0.1.1...v0.1.0
 [0.1.0]: https://github.com/paralus/dashboard/releases/tag/v0.1.0
