@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "5px",
     marginTop: "4px",
     lineHeight: "10px",
+    height: "25px"
   },
   label: {
     marginTop: "4px",
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "2px",
   },
   root: {
-    marginTop: 42,
+    marginTop: 12,
   },
 }));
 

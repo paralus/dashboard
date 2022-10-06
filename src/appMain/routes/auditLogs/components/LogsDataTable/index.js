@@ -76,15 +76,7 @@ const LogsDataTable = (props) => {
       },
       {
         type: "regular",
-        value: data._source.json.type,
-      },
-      {
-        type: "regular",
         value: data._source.json.detail.message,
-      },
-      {
-        type: "regular",
-        value: data._source.json.client.user_agent,
       },
     ].filter(Boolean);
 
@@ -96,9 +88,7 @@ const LogsDataTable = (props) => {
     { label: "Groups", style: { minWidth: "170px" } },
     props.isRelayCommands && { label: "Cluster" },
     { label: "Client" },
-    { label: "Type" },
     { label: "Message" },
-    { label: "Agent" },
   ].filter(Boolean);
 
   const parseExpandedRow = (data) => {
