@@ -1342,10 +1342,11 @@ class PrivateEdgeList extends React.Component {
                           </TableCell>
                           <TableCell data={n}>
                             <div className="row">
-                            { isClusterReady(n) && ( 
+                              {isClusterReady(n) && (
                                 <KubeCtlShellAccess
                                   projectId={n.metadata.project}
                                   clusterName={n.metadata.name}
+                                  iconOnly={true}
                                 />
                               )}
                               {this.state.userRole !== "READ_ONLY_OPS" && (
