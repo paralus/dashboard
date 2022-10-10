@@ -466,12 +466,8 @@ class Login extends Component {
   }
 
   render() {
-    const {
-      partnerDetail,
-      isLoginSuccess,
-      userAndRoleDetail,
-      UserSession,
-    } = this.props;
+    const { partnerDetail, isLoginSuccess, userAndRoleDetail, UserSession } =
+      this.props;
     const { isResponseError } = this.state;
 
     let formContent = this.renderLoginForm();
