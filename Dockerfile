@@ -2,7 +2,10 @@ FROM node:16 AS builder
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
-RUN yarn install --pure-lockfile
+
+# Sometime yarn install in CI fail due to network timeout. Hence
+# timeout has increased to 10 min.
+RUN yarn install --pure-lockfile --network-timeout 600000
 
 COPY . .
 RUN yarn run build
