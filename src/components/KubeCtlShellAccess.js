@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: 12,
   },
+  hover: {
+    cursor: "pointer",
+  },
 }));
 
 function KubeCtlShellAccess({ projectId, clusterName, iconOnly }) {
@@ -43,7 +46,10 @@ function KubeCtlShellAccess({ projectId, clusterName, iconOnly }) {
     return (
       <Tooltip title="Web Kubectl">
         <div className={`text-teal d-flex ml-4 ${classes.root}`}>
-          <div onClick={handleOpenKubectl} className={classes.icon}>
+          <div
+            onClick={handleOpenKubectl}
+            className={`${classes.icon} ${classes.hover}`}
+          >
             {">_"}
           </div>
         </div>
