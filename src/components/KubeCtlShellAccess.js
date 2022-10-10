@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openKubectlDrawer, closeKubectlDrawer } from "actions/index";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Tooltip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "5px",
     marginTop: "4px",
     lineHeight: "10px",
+    height: "20px",
   },
   label: {
     marginTop: "4px",
@@ -24,11 +25,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "2px",
   },
   root: {
-    marginTop: 42,
+    marginTop: 12,
+  },
+  hover: {
+    cursor: "pointer",
   },
 }));
 
-function KubeCtlShellAccess({ projectId, clusterName }) {
+function KubeCtlShellAccess({ projectId, clusterName, iconOnly }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const KubectlConfig = useSelector((s) => s.Kubectl?.kubectlConfig);
@@ -38,6 +42,20 @@ function KubeCtlShellAccess({ projectId, clusterName }) {
   };
   if (KubectlConfig?.disableWebKubectl) return null;
 
+  if (iconOnly) {
+    return (
+      <Tooltip title="Web Kubectl">
+        <div className={`text-teal d-flex ml-4 ${classes.root}`}>
+          <div
+            onClick={handleOpenKubectl}
+            className={`${classes.icon} ${classes.hover}`}
+          >
+            {">_"}
+          </div>
+        </div>
+      </Tooltip>
+    );
+  }
   return (
     <div className={`text-teal d-flex ml-4 ${classes.root}`}>
       <div className={classes.icon}>{">_"}</div>

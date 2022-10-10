@@ -52,6 +52,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import DeleteIconComponent from "components/DeleteIconComponent";
 import KubectlSettings from "components/ClusterActions/KubectlSettings";
 import ClusterActionDialog from "components/ClusterActions/ClusterActionDialog";
+import KubeCtlShellAccess from "components/KubeCtlShellAccess";
 
 const styles = (theme) => ({
   clusterHeading: {
@@ -1223,6 +1224,32 @@ class PrivateEdgeList extends React.Component {
     const { history } = this.props;
     const cluster_type = cluster?.cluster_type || null;
 
+    const isClusterReady = (cluster) => {
+      let ready = false;
+      if (
+        cluster?.spec.clusterData &&
+        cluster?.spec.clusterData.cluster_status &&
+        cluster?.spec.clusterData.cluster_status.conditions &&
+        cluster?.spec.clusterData.cluster_status.conditions.length > 0
+      ) {
+        for (
+          let index = 0;
+          index < cluster?.spec.clusterData?.cluster_status?.conditions?.length;
+          index++
+        ) {
+          ready =
+            cluster.spec.clusterData.cluster_status.conditions[index].type ===
+              "ClusterReady" &&
+            cluster.spec.clusterData.cluster_status.conditions[index].status ===
+              "Success";
+          if (ready) {
+            return ready;
+          }
+        }
+      }
+      return ready;
+    };
+
     return (
       <Spinner loading={!this.state.edgesLoaded} hideChildren addHeight>
         <div>
@@ -1314,37 +1341,46 @@ class PrivateEdgeList extends React.Component {
                             </div>
                           </TableCell>
                           <TableCell data={n}>
-                            {this.state.userRole !== "READ_ONLY_OPS" && (
-                              <Tooltip title="Kubectl Settings">
-                                <IconButton
-                                  aria-label="edit"
-                                  className="m-0"
-                                  onClick={(event) => {
-                                    this.handleKubectlSettings(null, n);
+                            <div className="row">
+                              {isClusterReady(n) && (
+                                <KubeCtlShellAccess
+                                  projectId={n.metadata.project}
+                                  clusterName={n.metadata.name}
+                                  iconOnly={true}
+                                />
+                              )}
+                              {this.state.userRole !== "READ_ONLY_OPS" && (
+                                <Tooltip title="Kubectl Settings">
+                                  <IconButton
+                                    aria-label="edit"
+                                    className="m-0"
+                                    onClick={(event) => {
+                                      this.handleKubectlSettings(null, n);
+                                    }}
+                                  >
+                                    <SettingsIcon />
+                                  </IconButton>
+                                </Tooltip>
+                              )}
+                              {this.state.userRole !== "READ_ONLY_OPS" && (
+                                <DeleteIconComponent
+                                  key={n.metadata.name}
+                                  button={{
+                                    type: "danger-icon",
+                                    label: "Delete",
+                                    confirmText: (
+                                      <span>
+                                        Are you sure you want to delete
+                                        <b> {n.metadata.name} </b>?
+                                      </span>
+                                    ),
+                                    handleClick: () => {
+                                      this.handleRemoveEdge(n, true);
+                                    },
                                   }}
-                                >
-                                  <SettingsIcon />
-                                </IconButton>
-                              </Tooltip>
-                            )}
-                            {this.state.userRole !== "READ_ONLY_OPS" && (
-                              <DeleteIconComponent
-                                key={n.metadata.name}
-                                button={{
-                                  type: "danger-icon",
-                                  label: "Delete",
-                                  confirmText: (
-                                    <span>
-                                      Are you sure you want to delete
-                                      <b> {n.metadata.name} </b>?
-                                    </span>
-                                  ),
-                                  handleClick: () => {
-                                    this.handleRemoveEdge(n, true);
-                                  },
-                                }}
-                              />
-                            )}
+                                />
+                              )}
+                            </div>
                           </TableCell>
                         </TableRow>
                       ))}

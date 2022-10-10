@@ -188,6 +188,7 @@ export default function ClusterHeader({
           <KubeCtlShellAccess
             projectId={edge.metadata.project}
             clusterName={edge.metadata.name}
+            iconOnly={false}
           />
         </Grid>
       </Box>
