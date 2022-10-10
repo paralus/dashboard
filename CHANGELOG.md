@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [0.1.3]- 2022-10-10
+### Fixed
 - Added web kubectl in cluster list page and removed type agent columns from auditlogs from [niravparikh05](https://github.com/niravparikh05)
 
 ## [0.1.2] - 2022-09-30
@@ -30,7 +32,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/paralus/dashboard/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/paralus/dashboard/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/paralus/dashboard/compare/v0.1.1...v0.1.0
 [0.1.0]: https://github.com/paralus/dashboard/releases/tag/v0.1.0
