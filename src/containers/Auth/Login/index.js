@@ -178,8 +178,6 @@ class Login extends Component {
     const { username, flow } = this.state;
     auth.username = username;
 
-    this.initializeFlow();
-
     newKratosSdk()
       .submitSelfServiceLoginFlow(flow.id, undefined, {
         csrf_token: this.state.csrf_token,
@@ -470,9 +468,6 @@ class Login extends Component {
   render() {
     const {
       partnerDetail,
-      isTotpRequired,
-      isTotpVerified,
-      isLoginFailed,
       isLoginSuccess,
       userAndRoleDetail,
       UserSession,
@@ -480,15 +475,6 @@ class Login extends Component {
     const { isResponseError } = this.state;
 
     let formContent = this.renderLoginForm();
-
-    // if (
-    //   isLoginFailed &&
-    //   ["AUTH003", "AUTH004", "AUTH006"].includes(
-    //     this.props.auth.error.details[0].error_code
-    //   )
-    // ) {
-    //   return <Redirect to="/loginerror" />;
-    // }
 
     if (isLoginSuccess) {
       if (userAndRoleDetail?.account?.require_change_password) {
@@ -504,18 +490,6 @@ class Login extends Component {
           />
         );
       }
-      // TODO: Hidden. What do we do here? Why are we doing this? Also no READ_ONLY anymore
-      // if (userAndRoleDetail && userAndRoleDetail.role.name === "READ_ONLY") {
-      //   return <Redirect to="/app/workloads" />;
-      // }
-
-      // if (
-      //   userAndRoleDetail &&
-      //   userAndRoleDetail.roles &&
-      //   userAndRoleDetail.roles.length === 0
-      // ) {
-      //   return <Redirect to="/loginerror" />;
-      // }
       // Make an API call after 12hrs(+1min) which will trigger user session expiry
       setTimeout(
         this.props.getUserSessionInfo.bind(this),
@@ -524,12 +498,6 @@ class Login extends Component {
       if (UserSession.noRolesUser) {
         return <Redirect to="/app/noaccess" />;
       }
-      // if (UserSession.visibleInfra || UserSession.visibleAdmin) {
-      //   return <Redirect to="/app/edges" />;
-      // }
-      // if (UserSession.visibleApps) {
-      //   return <Redirect to="/app/workloads" />;
-      // }
       return <Redirect to="/main" />;
     }
 
