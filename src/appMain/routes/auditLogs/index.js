@@ -42,7 +42,7 @@ function AuditLogs() {
     <TabLayout
       breadcrumb={<ResourceBreadCrumb config={config} />}
       help="groups.group_detail.layout.helptext"
-      selectedTab={tab === "opa" ? 2 : 0}
+      selectedTab={tab === "opa" ? 2 : 1}
       tabs={[
         {
           label: "System",

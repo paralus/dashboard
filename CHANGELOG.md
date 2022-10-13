@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Changed
+- Hide copy button in user reset screen for non https webpages from [niravparikh05](https://github.com/niravparikh05)
+- Default to kubectl tab view in audit logs from [niravparikh05](https://github.com/niravparikh05)
+- Remove groups and client column from audit logs system and kubectl commands tab from [niravparikh05](https://github.com/niravparikh05)
+- Make user clickable in auditlogs kubectl commands tab to view user details like group from [niravparikh05](https://github.com/niravparikh05)
 
 ## [0.1.3]- 2022-10-10
 ### Fixed
