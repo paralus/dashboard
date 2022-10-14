@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+
+## [0.1.4]- 2022-10-14
 ### Changed
 - Hide copy button in user reset screen for non https webpages from [niravparikh05](https://github.com/niravparikh05)
 - Default to kubectl tab view in audit logs from [niravparikh05](https://github.com/niravparikh05)
@@ -37,7 +39,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/paralus/dashboard/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/paralus/dashboard/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/paralus/dashboard/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/paralus/dashboard/compare/v0.1.1...v0.1.0
