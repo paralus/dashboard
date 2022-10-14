@@ -622,11 +622,6 @@ class UserList extends React.Component {
       {
         type: "regular",
         isExpandable: false,
-        value: lastAccessDetails,
-      },
-      {
-        type: "regular",
-        isExpandable: false,
         value: actionDetails,
       },
     ];
