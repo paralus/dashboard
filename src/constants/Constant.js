@@ -61,7 +61,7 @@ export const COLUMN_HEADER_CONFIG = [
     id: "last_login",
     disablePadding: false,
     label: "Last Access",
-    rule: (e) => true,
+    rule: (e) => false,
   },
   {
     id: "options",
@@ -97,11 +97,6 @@ export const IDP_USER_COLUMN_HEADER_CONFIG = [
     disableSorting: true,
     disablePadding: false,
     label: "Projects",
-  },
-  {
-    id: "last_login",
-    disablePadding: false,
-    label: "Last Access",
   },
   {
     id: "options",
