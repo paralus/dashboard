@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
+import {
+  Paper,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@material-ui/core";
 import ReactJson from "react-json-view";
 import DateFormat from "components/DateFormat";
 import DataTable from "components/TableComponents/DataTable";
@@ -10,9 +17,12 @@ const useStyles = makeStyles({
   source: {
     margin: 20,
   },
+  link: { color: "teal", cursor: "pointer" },
 });
 
 const LogsDataTable = (props) => {
+  const [open, setOpen] = useState(false);
+  const [rowData, setRowData] = useState({});
   const classes = useStyles();
 
   const eventActorEmail = (item) => {
@@ -56,23 +66,25 @@ const LogsDataTable = (props) => {
       },
       {
         type: "regular",
-        value: eventActorEmail(data._source.json),
+        value: (
+          <div
+            className={classes.link}
+            onClick={(_) => {
+              setOpen(true);
+              setRowData(data);
+            }}
+          >
+            <span>{eventActorEmail(data._source.json)}</span>
+          </div>
+        ),
       },
       {
         type: "regular",
         value: getProjectName(data._source.json),
       },
-      {
-        type: "regular",
-        value: eventActorGroups(data._source.json),
-      },
       props.isRelayCommands && {
         type: "regular",
         value: data._source.json.detail.meta?.cluster_name,
-      },
-      {
-        type: "regular",
-        value: data._source.json.client.type,
       },
       {
         type: "regular",
@@ -85,9 +97,7 @@ const LogsDataTable = (props) => {
     { label: "Date" },
     { label: "User" },
     { label: "Project" },
-    { label: "Groups", style: { minWidth: "170px" } },
     props.isRelayCommands && { label: "Cluster" },
-    { label: "Client" },
     { label: "Message" },
   ].filter(Boolean);
 
@@ -100,29 +110,62 @@ const LogsDataTable = (props) => {
   };
 
   return (
-    <Paper>
-      <TableToolbar
-        handleRefreshClick={props.handleRefreshClick}
-        handleResetFilter={props.handleResetFilter}
-        handleFilter={props.handleFilter}
-        isProjectRole={props.isProjectRole}
-        users={props.users}
-        types={props.types}
-        kinds={props.kinds}
-        projects={props.projects}
-        filter={props.filter}
-        list={props?.list || []}
-        handleRemoveFilter={props?.handleRemoveFilter}
-      />
-      <DataTable
-        list={props?.list || []}
-        count={props?.count}
-        getCollapsedRow={parseExpandedRow}
-        columnLabels={columnLabels}
-        parseRowData={parseRowData}
-        loading={props?.loading}
-      />
-    </Paper>
+    <div>
+      <Paper>
+        <TableToolbar
+          handleRefreshClick={props.handleRefreshClick}
+          handleResetFilter={props.handleResetFilter}
+          handleFilter={props.handleFilter}
+          isProjectRole={props.isProjectRole}
+          users={props.users}
+          types={props.types}
+          kinds={props.kinds}
+          projects={props.projects}
+          filter={props.filter}
+          list={props?.list || []}
+          handleRemoveFilter={props?.handleRemoveFilter}
+        />
+        <DataTable
+          list={props?.list || []}
+          count={props?.count}
+          getCollapsedRow={parseExpandedRow}
+          columnLabels={columnLabels}
+          parseRowData={parseRowData}
+          loading={props?.loading}
+        />
+      </Paper>
+      <Dialog
+        open={open}
+        onClose={(_) => {
+          setOpen(false);
+          setRowData({});
+        }}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>User Groups</DialogTitle>
+        <DialogContent>
+          <div>
+            <div
+              style={{
+                border: "1px solid #00000024",
+                padding: "10px",
+                backgroundColor: "whitesmoke",
+                borderRadius: "5px",
+                minWidth: "500px",
+              }}
+            >
+              {eventActorGroups(rowData?._source?.json)}
+            </div>
+          </div>
+        </DialogContent>
+        <DialogActions style={{ marginLeft: "65%" }}>
+          <Button onClick={(_) => setOpen(false)} color="default">
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 };
 

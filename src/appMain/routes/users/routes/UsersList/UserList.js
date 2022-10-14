@@ -107,6 +107,11 @@ const style = {
   },
 };
 
+const copyable =
+  window.location.protocol === "https:" ||
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname === "localhost";
+
 class UserList extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -747,18 +752,20 @@ class UserList extends React.Component {
               >
                 {this.props.newUser?.recoveryUrl}
               </a>
-              <Tooltip title={"Copy"} id="clip">
-                <IconButton
-                  onClick={() => {
-                    navigator.clipboard.writeText(
-                      `${this.props.newUser?.recoveryUrl}`
-                    );
-                  }}
-                  aria-label="copy"
-                >
-                  <FileCopyOutlined />
-                </IconButton>
-              </Tooltip>
+              {copyable && (
+                <Tooltip title={"Copy"} id="clip">
+                  <IconButton
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        `${this.props.newUser?.recoveryUrl}`
+                      );
+                    }}
+                    aria-label="copy"
+                  >
+                    <FileCopyOutlined />
+                  </IconButton>
+                </Tooltip>
+              )}
             </div>
           </DialogContent>
           <DialogActions>
@@ -787,16 +794,20 @@ class UserList extends React.Component {
               <a style={{ color: "teal" }} href={this.state.recoveryLink}>
                 {this.state.recoveryLink}
               </a>
-              <Tooltip title={"Copy"} id="clip">
-                <IconButton
-                  onClick={() => {
-                    navigator.clipboard.writeText(`${this.state.recoveryLink}`);
-                  }}
-                  aria-label="copy"
-                >
-                  <FileCopyOutlined />
-                </IconButton>
-              </Tooltip>
+              {copyable && (
+                <Tooltip title={"Copy"} id="clip">
+                  <IconButton
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        `${this.state.recoveryLink}`
+                      );
+                    }}
+                    aria-label="copy"
+                  >
+                    <FileCopyOutlined />
+                  </IconButton>
+                </Tooltip>
+              )}
             </div>
           </DialogContent>
           <DialogActions>
