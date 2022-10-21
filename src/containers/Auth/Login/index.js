@@ -211,7 +211,22 @@ class Login extends Component {
         method: "oidc",
         provider,
       })
-      .catch((data) => data.response)
+      .catch((data) => {
+        switch (data.response?.data.error?.id) {
+          case "session_aal2_required":
+            // 2FA is enabled and enforced, but user did not perform 2fa yet!
+            window.location.href = data.response?.data.redirect_browser_to
+            return
+          case "session_refresh_required":
+            // We need to re-authenticate to perform this action
+            window.location.href = data.response?.data.redirect_browser_to
+            return
+          case "browser_location_change_required":
+            // Ory Kratos asked us to point the user to this URL.
+            window.location.href = data.response.data.redirect_browser_to
+            return
+        }
+      })
       .then((res) => {
         initializeApp(() => {
           window.location.href = res.data.redirect_browser_to;
