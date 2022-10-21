@@ -213,10 +213,6 @@ class Login extends Component {
       })
       .catch((data) => {
         switch (data.response?.data.error?.id) {
-          case "session_aal2_required":
-            // 2FA is enabled and enforced, but user did not perform 2fa yet!
-            window.location.href = data.response?.data.redirect_browser_to
-            return
           case "session_refresh_required":
             // We need to re-authenticate to perform this action
             window.location.href = data.response?.data.redirect_browser_to
