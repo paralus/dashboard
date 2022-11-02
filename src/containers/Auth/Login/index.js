@@ -125,16 +125,12 @@ class Login extends Component {
         return;
       case "self_service_flow_return_to_forbidden":
         // The flow expired, let's request a new one.
-        alert(
-          "The return_to address is not allowed."
-        );
+        alert("The return_to address is not allowed.");
         window.location.href = "/#/reload";
         return;
       case "self_service_flow_expired":
         // The flow expired, let's request a new one.
-        alert(
-          "Your interaction expired, please fill out the form again."
-        );
+        alert("Your interaction expired, please fill out the form again.");
         window.location.href = "/#/reload";
         return;
       case "security_csrf_violation":
@@ -160,8 +156,7 @@ class Login extends Component {
         history.push("/");
         return;
     }
-
-  };
+  }
 
   componentWillUnmount() {
     this.setState = (state, callback) => {
