@@ -23,7 +23,7 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import ContainerHeader from "components/ContainerHeader/index";
 import CloseIcon from "@material-ui/icons/Close";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
   getEdgeDetail,
