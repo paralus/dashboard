@@ -118,7 +118,8 @@ class Login extends Component {
         return;
       case "session_already_available":
         // User is already signed in, let's redirect them home!
-        return <Redirect to="/main" />;
+        this.props.history.push("/main");
+        return;
       case "session_refresh_required":
         // We need to re-authenticate to perform this action
         window.location.href = err.response?.data.redirect_browser_to;
@@ -126,23 +127,23 @@ class Login extends Component {
       case "self_service_flow_return_to_forbidden":
         // The flow expired, let's request a new one.
         alert("The return_to address is not allowed.");
-        window.location.href = "/#/reload";
+        this.props.history.push("/#/reload");
         return;
       case "self_service_flow_expired":
         // The flow expired, let's request a new one.
         alert("Your interaction expired, please fill out the form again.");
-        window.location.href = "/#/reload";
+        this.props.history.push("/#/reload");
         return;
       case "security_csrf_violation":
         // A CSRF violation occurred. Best to just refresh the flow!
         alert(
           "A security violation was detected, please fill out the form again."
         );
-        window.location.href = "/#/reload";
+        this.props.history.push("/#/reload");
         return;
       case "security_identity_mismatch":
         // The requested item was intended for someone else. Let's request a new flow...
-        window.location.href = "/#/reload";
+        this.props.history.push("/#/reload");
         return;
       case "browser_location_change_required":
         // Ory Kratos asked us to point the user to this URL.
@@ -153,7 +154,7 @@ class Login extends Component {
     switch (err.response?.status) {
       case 410:
         // The flow expired, let's request a new one.
-        history.push("/");
+        this.props.history.push("/");
         return;
     }
   }
