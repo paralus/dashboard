@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+- Fix wrong cluster delete success message for non-priviledged users from [niravparikh05](https://github.com/niravparikh05)
+
 ## [0.1.4]- 2022-10-14
 ### Changed
 - Hide copy button in user reset screen for non https webpages from [niravparikh05](https://github.com/niravparikh05)

@@ -23,7 +23,7 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import ContainerHeader from "components/ContainerHeader/index";
 import CloseIcon from "@material-ui/icons/Close";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
   getEdgeDetail,
@@ -508,15 +508,13 @@ class PrivateEdgeList extends React.Component {
     this.handleAddEdge();
   };
 
-  handleRemoveEdge = (edge, forceDelete) => {
-    this.state.removeEdgeObj = edge;
+  deleteEdge = (edge, forceDelete) => {
     this.props.removeCluster(
       edge.metadata.name,
       this.props.currentProject.metadata.name,
       forceDelete
     );
-    this.state.isResponseSuccess = true;
-    this.setState({ ...this.state });
+    this.props.history.push("/app/edges");
   };
 
   handleKubectlSettings = (event, edge) => {
@@ -581,7 +579,9 @@ class PrivateEdgeList extends React.Component {
       ) {
         return <T.span id="message-id" text="unauthorized" />;
       }
-      return <span id="message-id">{capitalizeFirstLetter(error)}</span>;
+      return (
+        <span id="message-id">{capitalizeFirstLetter(error.message)}</span>
+      );
     }
     if (errorMessage !== "") {
       return <span id="message-id">{capitalizeFirstLetter(errorMessage)}</span>;
@@ -1375,7 +1375,7 @@ class PrivateEdgeList extends React.Component {
                                       </span>
                                     ),
                                     handleClick: () => {
-                                      this.handleRemoveEdge(n, true);
+                                      this.deleteEdge(n, true);
                                     },
                                   }}
                                 />
