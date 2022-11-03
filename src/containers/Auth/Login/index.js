@@ -156,6 +156,10 @@ class Login extends Component {
         // The flow expired, let's request a new one.
         this.props.history.push("/");
         return;
+      case 400:
+        // bad user credentials, alert user and request for retry.
+        alert(err.response?.data?.ui?.messages[0]?.text);
+        return;
     }
   }
 
