@@ -109,6 +109,60 @@ class Login extends Component {
     this.props.getUserSessionInfo();
   }
 
+  // A small function to help us deal with errors coming from fetching a flow.
+  handleFlowError(err) {
+    switch (err.response?.data.error?.id) {
+      case "session_aal2_required":
+        // 2FA is enabled and enforced, but user did not perform 2fa yet!
+        window.location.href = err.response?.data.redirect_browser_to;
+        return;
+      case "session_already_available":
+        // User is already signed in, let's redirect them home!
+        this.props.history.push("/main");
+        return;
+      case "session_refresh_required":
+        // We need to re-authenticate to perform this action
+        window.location.href = err.response?.data.redirect_browser_to;
+        return;
+      case "self_service_flow_return_to_forbidden":
+        // The flow expired, let's request a new one.
+        alert("The return_to address is not allowed.");
+        this.props.history.push("/#/reload");
+        return;
+      case "self_service_flow_expired":
+        // The flow expired, let's request a new one.
+        alert("Your interaction expired, please fill out the form again.");
+        this.props.history.push("/#/reload");
+        return;
+      case "security_csrf_violation":
+        // A CSRF violation occurred. Best to just refresh the flow!
+        alert(
+          "A security violation was detected, please fill out the form again."
+        );
+        this.props.history.push("/#/reload");
+        return;
+      case "security_identity_mismatch":
+        // The requested item was intended for someone else. Let's request a new flow...
+        this.props.history.push("/#/reload");
+        return;
+      case "browser_location_change_required":
+        // Ory Kratos asked us to point the user to this URL.
+        window.location.href = err.response.data.redirect_browser_to;
+        return;
+    }
+
+    switch (err.response?.status) {
+      case 410:
+        // The flow expired, let's request a new one.
+        this.props.history.push("/");
+        return;
+      case 400:
+        // bad user credentials, alert user and request for retry.
+        alert(err.response?.data?.ui?.messages[0]?.text);
+        return;
+    }
+  }
+
   componentWillUnmount() {
     this.setState = (state, callback) => {
       return;
@@ -193,9 +247,7 @@ class Login extends Component {
       })
       .catch((err) => {
         console.log(err);
-        alert(
-          "The provided credentials are invalid, check for spelling mistakes in your password or username."
-        );
+        this.handleFlowError(err);
       });
   };
 
@@ -211,7 +263,9 @@ class Login extends Component {
         method: "oidc",
         provider,
       })
-      .catch((data) => data.response)
+      .catch((err) => {
+        this.handleFlowError(err);
+      })
       .then((res) => {
         initializeApp(() => {
           window.location.href = res.data.redirect_browser_to;

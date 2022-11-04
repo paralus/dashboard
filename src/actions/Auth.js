@@ -57,6 +57,9 @@ export function userLogout(idle) {
           .catch((error) => {
             console.error(error);
             dispatch({ type: "user_session_expired", payload: error });
+          })
+          .then(() => {
+            window.location.href = "/#/reload";
           });
       })
       .catch((error) => {
