@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Fix for IdP users unable to login from [niravparikh05](https://github.com/niravparikh05)
+- Fix wrong cluster delete success message for non-priviledged users from [niravparikh05](https://github.com/niravparikh05)
 
 ## [0.1.4]- 2022-10-14
 ### Changed
