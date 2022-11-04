@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+- Show last access time in users list page from [akshay196](https://github.com/akshay196)
 
 ## [0.1.4]- 2022-10-14
 ### Changed
