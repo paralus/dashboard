@@ -557,8 +557,8 @@ class UserList extends React.Component {
     const lastAccessDetails = (
       <div style={style.lastAccessValue}>
         {" "}
-        {data.spec.last_login ? (
-          getTimeFromNow(data.spec.last_login)
+        {data.spec.lastLogin ? (
+          getTimeFromNow(data.spec.lastLogin)
         ) : (
           <span style={style.noResult}>-</span>
         )}{" "}
@@ -618,6 +618,11 @@ class UserList extends React.Component {
         type: "regular",
         isExpandable: false,
         value: userTypeDetails,
+      },
+      {
+        type: "regular",
+        isExpandable: false,
+        value: lastAccessDetails,
       },
       {
         type: "regular",

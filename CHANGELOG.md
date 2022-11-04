@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+- Show last access time in users list page from [akshay196](https://github.com/akshay196)
 
 - Fix for IdP users unable to login from [niravparikh05](https://github.com/niravparikh05)
 
