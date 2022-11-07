@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+- Modified docker release to paralusci from [niravparikh05](https://github.com/niravparikh05)
+
 ## [0.1.5]- 2022-11-04
 ### Added
 - Show last access time in users list page from [akshay196](https://github.com/akshay196)
