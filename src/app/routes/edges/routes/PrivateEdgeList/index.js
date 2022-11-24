@@ -29,6 +29,7 @@ import {
   getEdgeDetail,
   getDownloadBootstrapYAML,
   getEdges,
+  getRoles,
   edgeDetailReset,
   getMetros,
   createCluster,
@@ -689,6 +690,7 @@ class PrivateEdgeList extends React.Component {
         this.handleFilter([{ label: "UNHEALTHY", value: 2, color: "red" }]);
       }
     }
+    this.props.getRoles();
   }
 
   UNSAFE_componentWillReceiveProps(props) {
@@ -1251,8 +1253,16 @@ class PrivateEdgeList extends React.Component {
 
     const hasWriteAccessInCluster = (projectName) => {
       let hasWriteAccess = false;
+      let { roles } = this.props;
+      // fetch organization scoped roles and check their names against the current logged user role and project
+      let orgWideRoleNames = roles.list
+        .filter((role) => role.spec.scope === "organization")
+        .map((item) => item.metadata.name);
       var allPermissions = this.props.userAndRoleDetail.spec.permissions
-        .filter((obj) => obj.project === projectName || obj.role === "ADMIN")
+        .filter(
+          (obj) =>
+            obj.project === projectName || orgWideRoleNames.includes(obj.role)
+        )
         .map((item) => item.permissions);
       let deduplicatedPermissions = new Set(allPermissions.flat(1));
       hasWriteAccess = deduplicatedPermissions.has("cluster.write");
@@ -1580,6 +1590,7 @@ class PrivateEdgeList extends React.Component {
 const mapStateToProps = ({ settings, Projects, UserSession }) => {
   const {
     edges,
+    roles,
     organization,
     userAndRoleDetail,
     metroList,
@@ -1591,6 +1602,7 @@ const mapStateToProps = ({ settings, Projects, UserSession }) => {
   const partnerDetail = settings.partnerDetail;
   return {
     edges,
+    roles,
     organization,
     userAndRoleDetail,
     metroList,
@@ -1610,6 +1622,7 @@ export default withRouter(
     getEdgeDetail,
     getDownloadBootstrapYAML,
     getEdges,
+    getRoles,
     edgeDetailReset,
     getMetros,
     createCluster,
