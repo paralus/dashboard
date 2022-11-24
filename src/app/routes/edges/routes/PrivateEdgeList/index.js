@@ -1198,9 +1198,6 @@ class PrivateEdgeList extends React.Component {
     const { match, UserSession, Projects, sshEdges, partnerDetail } =
       this.props;
     let data = [];
-    const roles = this.props.userAndRoleDetail.spec.permissions.map(
-      (p) => p.role
-    );
     if (!this.state.edges) {
       return null;
     }
@@ -1250,6 +1247,16 @@ class PrivateEdgeList extends React.Component {
         }
       }
       return ready;
+    };
+
+    const hasWriteAccessInCluster = (projectName) => {
+      let hasWriteAccess = false;
+      var allPermissions = this.props.userAndRoleDetail.spec.permissions
+        .filter((obj) => obj.project === projectName)
+        .map((item) => item.permissions);
+      let deduplicatedPermissions = new Set(allPermissions.flat(1));
+      hasWriteAccess = deduplicatedPermissions.has("cluster.write");
+      return hasWriteAccess;
     };
 
     return (
@@ -1351,10 +1358,7 @@ class PrivateEdgeList extends React.Component {
                                   iconOnly={true}
                                 />
                               )}
-                              {!(
-                                roles.includes("NAMESPACE_READ_ONLY") ||
-                                roles.includes("READ_ONLY_OPS")
-                              ) && (
+                              {hasWriteAccessInCluster(n.metadata.project) && (
                                 <Tooltip title="Kubectl Settings">
                                   <IconButton
                                     aria-label="edit"
@@ -1367,10 +1371,7 @@ class PrivateEdgeList extends React.Component {
                                   </IconButton>
                                 </Tooltip>
                               )}
-                              {!(
-                                roles.includes("NAMESPACE_READ_ONLY") ||
-                                roles.includes("READ_ONLY_OPS")
-                              ) && (
+                              {hasWriteAccessInCluster(n.metadata.project) && (
                                 <DeleteIconComponent
                                   key={n.metadata.name}
                                   button={{
