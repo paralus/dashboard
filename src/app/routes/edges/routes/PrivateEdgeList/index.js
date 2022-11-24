@@ -1198,7 +1198,9 @@ class PrivateEdgeList extends React.Component {
     const { match, UserSession, Projects, sshEdges, partnerDetail } =
       this.props;
     let data = [];
-    const roles = [];
+    const roles = this.props.userAndRoleDetail.spec.permissions.map(
+      (p) => p.role
+    );
     if (!this.state.edges) {
       return null;
     }
@@ -1349,7 +1351,10 @@ class PrivateEdgeList extends React.Component {
                                   iconOnly={true}
                                 />
                               )}
-                              {this.state.userRole !== "READ_ONLY_OPS" && (
+                              {!(
+                                roles.includes("NAMESPACE_READ_ONLY") ||
+                                roles.includes("READ_ONLY_OPS")
+                              ) && (
                                 <Tooltip title="Kubectl Settings">
                                   <IconButton
                                     aria-label="edit"
@@ -1362,7 +1367,10 @@ class PrivateEdgeList extends React.Component {
                                   </IconButton>
                                 </Tooltip>
                               )}
-                              {this.state.userRole !== "READ_ONLY_OPS" && (
+                              {!(
+                                roles.includes("NAMESPACE_READ_ONLY") ||
+                                roles.includes("READ_ONLY_OPS")
+                              ) && (
                                 <DeleteIconComponent
                                   key={n.metadata.name}
                                   button={{
