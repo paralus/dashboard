@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+- Fix access to cluster manage buttons shown for NAMESPACE-READ-ONLY user from [mabhi](https://github.com/mabhi)
+
 ## [0.1.5]- 2022-11-04
 ### Added
 - Show last access time in users list page from [akshay196](https://github.com/akshay196)
