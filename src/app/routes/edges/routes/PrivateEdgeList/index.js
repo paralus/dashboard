@@ -1420,7 +1420,9 @@ class PrivateEdgeList extends React.Component {
                   parentProps={{ ...this.props }}
                   index={index}
                   UserSession={this.props.UserSession}
-                  hasWriteAccessInCluster={hasWriteAccessInCluster(n.metadata.project)}
+                  hasWriteAccessInCluster={hasWriteAccessInCluster(
+                    n.metadata.project
+                  )}
                   isUpdateEndpointsSuccess={this.props.isUpdateEndpointsSuccess}
                   isUpdateEndpointsError={this.props.isUpdateEndpointsError}
                   UpdateEndpointsError={this.props.UpdateEndpointsError}

@@ -162,7 +162,7 @@ const SlatList = (props) => {
                   sshEdges,
                   partnerDetail,
                   alertsConfig,
-                  hasWriteAccessInCluster
+                  hasWriteAccessInCluster,
                 }}
               >
                 <ClusterActions

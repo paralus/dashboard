@@ -3,7 +3,7 @@ import {
   DEFAULT_MENU_ITEMS,
   MENU_ITEMS,
   NOT_READY_MENU_ITEMS,
-  CLUSTER_RO_MENU_ITEMS
+  CLUSTER_RO_MENU_ITEMS,
 } from "constants/ClusterActions";
 import { downloadFile, parseError, useSnack } from "utils";
 import {
@@ -29,9 +29,8 @@ const ClusterActions = ({
   resumeAutoRefresh = null,
   pauseAutoRefresh = null,
 }) => {
-  const { hasWriteAccessInCluster, UserSession, project, partnerDetail } = useContext(
-    ClusterActionsContext
-  );
+  const { hasWriteAccessInCluster, UserSession, project, partnerDetail } =
+    useContext(ClusterActionsContext);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -88,13 +87,12 @@ const ClusterActions = ({
         NOT_READY_MENU_ITEMS.includes(item)
       );
     // Remove actions for read-only clusters
-    if (!hasWriteAccessInCluster){
-      console.log(menuItems)
-      menuItems = menuItems.filter((item) =>
-        !CLUSTER_RO_MENU_ITEMS.includes(item)
+    if (!hasWriteAccessInCluster) {
+      menuItems = menuItems.filter(
+        (item) => !CLUSTER_RO_MENU_ITEMS.includes(item)
       );
     }
-    
+
     setMenuItems(menuItems);
   };
 

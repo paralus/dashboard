@@ -20,7 +20,4 @@ export const NOT_READY_MENU_ITEMS = [
   "Delete",
 ];
 
-export const CLUSTER_RO_MENU_ITEMS = [
-  "Edit Labels",
-  "Delete",
-  ];
+export const CLUSTER_RO_MENU_ITEMS = ["Edit Labels", "Delete"];
