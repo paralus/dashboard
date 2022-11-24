@@ -1252,7 +1252,7 @@ class PrivateEdgeList extends React.Component {
     const hasWriteAccessInCluster = (projectName) => {
       let hasWriteAccess = false;
       var allPermissions = this.props.userAndRoleDetail.spec.permissions
-        .filter((obj) => obj.project === projectName)
+        .filter((obj) => obj.project === projectName || obj.role === "ADMIN")
         .map((item) => item.permissions);
       let deduplicatedPermissions = new Set(allPermissions.flat(1));
       hasWriteAccess = deduplicatedPermissions.has("cluster.write");
