@@ -42,7 +42,7 @@ const dateFormatOptions = {
 
 const SlatList = (props) => {
   const [openClusterSharing, setOpenClusterSharing] = useState(false);
-  const { disableActions } = props;
+  const { hasWriteAccessInCluster, disableActions } = props;
   const { UserSession, Projects, sshEdges, partnerDetail, alertsConfig } =
     props.parentProps;
 
@@ -162,6 +162,7 @@ const SlatList = (props) => {
                   sshEdges,
                   partnerDetail,
                   alertsConfig,
+                  hasWriteAccessInCluster
                 }}
               >
                 <ClusterActions

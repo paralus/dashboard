@@ -19,3 +19,8 @@ export const NOT_READY_MENU_ITEMS = [
   "Download Kube Config",
   "Delete",
 ];
+
+export const CLUSTER_RO_MENU_ITEMS = [
+  "Edit Labels",
+  "Delete",
+  ];
