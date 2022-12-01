@@ -1197,6 +1197,7 @@ class PrivateEdgeList extends React.Component {
     const { order, orderBy, selected, rowsPerPage, page } = this.state;
     const { match, UserSession, Projects, sshEdges, partnerDetail } =
       this.props;
+    console.log(this.props);
     let data = [];
     if (!this.state.edges) {
       return null;
@@ -1286,6 +1287,9 @@ class PrivateEdgeList extends React.Component {
           </div>
           <Paper className="mb-4">
             <DataTableToolbar
+              hasWriteAccessInCluster={hasWriteAccessInCluster(
+                this.props.UserSession.projectId
+              )}
               renderInTable={this.state.renderInTable}
               callGetEdges={this.callGetEdges}
               setDefaultValue={this.setDefaultValue}
