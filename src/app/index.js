@@ -178,7 +178,7 @@ class App extends React.Component {
                 linkHelper={
                   <span>
                     You do not have access to this path. Please contact your
-                    administrator.
+                    administrator. okokooookokoko
                   </span>
                 }
                 link={

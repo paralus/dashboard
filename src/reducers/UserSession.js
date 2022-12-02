@@ -50,8 +50,8 @@ const parseProjectRoles = (roles) => {
           case "cluster.write":
             data.visibleInfra = true;
             break;
-          default:
-            break;
+          // default:
+          //   continue
         }
       });
       ret[item.project] = data;
@@ -131,8 +131,10 @@ const createProjectSession = (roles, projectId) => {
     visibleSystem: false,
     projectId,
   };
+  let projectedId =
+    projectId.metadata === undefined ? projectId : projectId.metadata.name;
   const projectRoles = roles.filter(
-    (r) => r.project && r.project === projectId
+    (r) => r.project && r.project === projectedId
   );
   projectRoles.forEach((ac) => {
     ac.permissions.forEach((perm) => {
@@ -157,8 +159,8 @@ const createProjectSession = (roles, projectId) => {
         case "cluster.write":
           data.visibleInfra = true;
           break;
-        default:
-          break;
+        // default:
+        //   continue
       }
     });
   });
