@@ -233,7 +233,7 @@ class Login extends Component {
     auth.username = username;
 
     newKratosSdk()
-      .submitSelfServiceLoginFlow(flow.id, undefined, {
+      .submitSelfServiceLoginFlow(flow.id, {
         csrf_token: this.state.csrf_token,
         method: "password",
         password_identifier: this.state.username,
@@ -258,7 +258,7 @@ class Login extends Component {
 
     window.localStorage.setItem("provider", provider);
     newKratosSdk()
-      .submitSelfServiceLoginFlow(flow.id, undefined, {
+      .submitSelfServiceLoginFlow(flow.id, {
         csrf_token: this.state.csrf_token,
         method: "oidc",
         provider,
