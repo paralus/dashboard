@@ -1197,7 +1197,6 @@ class PrivateEdgeList extends React.Component {
     const { order, orderBy, selected, rowsPerPage, page } = this.state;
     const { match, UserSession, Projects, sshEdges, partnerDetail } =
       this.props;
-    console.log(this.props);
     let data = [];
     if (!this.state.edges) {
       return null;
