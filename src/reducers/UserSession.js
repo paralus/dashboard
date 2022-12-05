@@ -36,22 +36,11 @@ const parseProjectRoles = (roles) => {
             data.visibleApps = true;
             data.visibleSystem = true;
             break;
-          // TODO: remove if not needed
-          // case "NAMESPACE_READ_ONLY":
-          // case "NAMESPACE_ADMIN":
-          //   data.visibleApps = true;
-          //   break;
-          // case "INFRA_READ_ONLY":
-          // case "INFRA_ADMIN":
-          //   data.visibleInfra = true;
-          //   data.visibleSystem = true;
-          //   break;
+
           case "cluster.read":
           case "cluster.write":
             data.visibleInfra = true;
             break;
-          // default:
-          //   continue
         }
       });
       ret[item.project] = data;
@@ -74,23 +63,6 @@ const parseUserRoles = (roles) => {
         case "project.admin.write":
           userRoles.projectAdmin = true;
           break;
-        // case "NAMESPACE_READ_ONLY":
-        //   userRoles.namespaceReadOnly = true;
-        //   break;
-        // case "NAMESPACE_ADMIN":
-        //   userRoles.namespaceAdmin = true;
-        //   break;
-        // case "INFRA_READ_ONLY":
-        //   userRoles.infaReadOnly = true;
-        //   break;
-        // case "INFRA_ADMIN":
-        //   userRoles.infaAdmin = true;
-        //   break;:w
-
-        // TODO: What determines admin user?
-        // case "ADMIN":
-        //   userRoles.admin = true;
-        //   break;
       }
     });
   });
@@ -131,10 +103,10 @@ const createProjectSession = (roles, projectId) => {
     visibleSystem: false,
     projectId,
   };
-  let projectedId =
+  let targetProjectId =
     projectId.metadata === undefined ? projectId : projectId.metadata.name;
   const projectRoles = roles.filter(
-    (r) => r.project && r.project === projectedId
+    (r) => r.project && r.project === targetProjectId
   );
   projectRoles.forEach((ac) => {
     ac.permissions.forEach((perm) => {
@@ -145,22 +117,11 @@ const createProjectSession = (roles, projectId) => {
           data.visibleApps = true;
           data.visibleSystem = true;
           break;
-        // TODO: remove if not needed
-        // case "NAMESPACE_READ_ONLY":
-        // case "NAMESPACE_ADMIN":
-        //   data.visibleApps = true;
-        //   break;
-        // case "INFRA_READ_ONLY":
-        // case "INFRA_ADMIN":
-        //   data.visibleInfra = true;
-        //   data.visibleSystem = true;
-        //   break;
+
         case "cluster.read":
         case "cluster.write":
           data.visibleInfra = true;
           break;
-        // default:
-        //   continue
       }
     });
   });
