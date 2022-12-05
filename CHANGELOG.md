@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Fix for switching between projects when logged in as non-admin [mabhi](https://github.com/mabhi)
+- Fix access to cluster manage buttons shown for users without cluster write permission from [mabhi](https://github.com/mabhi)
 
 ## [0.1.5]- 2022-11-04
 ### Added
