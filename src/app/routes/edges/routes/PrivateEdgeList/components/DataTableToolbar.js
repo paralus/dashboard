@@ -161,6 +161,7 @@ const DataTableToolbar = (props) => {
     callGetEdges,
     userAndRoleDetail,
     data,
+    hasWriteAccessInCluster,
   } = props;
   const isClusterListAvailable = data.length !== 0;
   const classes = useStyles();
@@ -221,15 +222,17 @@ const DataTableToolbar = (props) => {
             )}
             <div className="d-inline-block">
               <DownloadKubeconfig user={userAndRoleDetail} withIcon />
-              <Button
-                variant="contained"
-                className="jr-btn jr-btn-label left text-nowrap text-white mr-3"
-                onClick={(event) => handleCreateClick(event)}
-                color="primary"
-              >
-                <i className="zmdi zmdi-plus zmdi-hc-fw " />
-                <span>New Cluster</span>
-              </Button>
+              {hasWriteAccessInCluster && (
+                <Button
+                  variant="contained"
+                  className="jr-btn jr-btn-label left text-nowrap text-white mr-3"
+                  onClick={(event) => handleCreateClick(event)}
+                  color="primary"
+                >
+                  <i className="zmdi zmdi-plus zmdi-hc-fw " />
+                  <span>New Cluster</span>
+                </Button>
+              )}
             </div>
           </div>
         </div>

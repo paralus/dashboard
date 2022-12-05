@@ -1198,7 +1198,6 @@ class PrivateEdgeList extends React.Component {
     const { match, UserSession, Projects, sshEdges, partnerDetail } =
       this.props;
     let data = [];
-    const roles = [];
     if (!this.state.edges) {
       return null;
     }
@@ -1250,6 +1249,20 @@ class PrivateEdgeList extends React.Component {
       return ready;
     };
 
+    const hasWriteAccessInCluster = (projectName) => {
+      let hasWriteAccess = false;
+      // if user has access to the current project or the user has org wide roles
+      var allPermissions = this.props.userAndRoleDetail.spec.permissions
+        .filter(
+          (obj) => obj.project === projectName || obj.scope === "organization"
+        )
+        .map((item) => item.permissions);
+      let deduplicatedPermissions = new Set(allPermissions.flat(1));
+      // only look out for cluster write permissions
+      hasWriteAccess = deduplicatedPermissions.has("cluster.write");
+      return hasWriteAccess;
+    };
+
     return (
       <Spinner loading={!this.state.edgesLoaded} hideChildren addHeight>
         <div>
@@ -1273,6 +1286,9 @@ class PrivateEdgeList extends React.Component {
           </div>
           <Paper className="mb-4">
             <DataTableToolbar
+              hasWriteAccessInCluster={hasWriteAccessInCluster(
+                this.props.UserSession.projectId
+              )}
               renderInTable={this.state.renderInTable}
               callGetEdges={this.callGetEdges}
               setDefaultValue={this.setDefaultValue}
@@ -1349,7 +1365,7 @@ class PrivateEdgeList extends React.Component {
                                   iconOnly={true}
                                 />
                               )}
-                              {this.state.userRole !== "READ_ONLY_OPS" && (
+                              {hasWriteAccessInCluster(n.metadata.project) && (
                                 <Tooltip title="Kubectl Settings">
                                   <IconButton
                                     aria-label="edit"
@@ -1362,7 +1378,7 @@ class PrivateEdgeList extends React.Component {
                                   </IconButton>
                                 </Tooltip>
                               )}
-                              {this.state.userRole !== "READ_ONLY_OPS" && (
+                              {hasWriteAccessInCluster(n.metadata.project) && (
                                 <DeleteIconComponent
                                   key={n.metadata.name}
                                   button={{
@@ -1411,6 +1427,9 @@ class PrivateEdgeList extends React.Component {
                   parentProps={{ ...this.props }}
                   index={index}
                   UserSession={this.props.UserSession}
+                  hasWriteAccessInCluster={hasWriteAccessInCluster(
+                    n.metadata.project
+                  )}
                   isUpdateEndpointsSuccess={this.props.isUpdateEndpointsSuccess}
                   isUpdateEndpointsError={this.props.isUpdateEndpointsError}
                   UpdateEndpointsError={this.props.UpdateEndpointsError}
