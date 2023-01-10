@@ -9,6 +9,7 @@ import {
   initializeApp,
   getUserSessionInfo,
   getInitProjects,
+  getUserDetail,
 } from "actions/index";
 import { SnackbarProvider } from "utils/useSnack";
 import SuspenseComponent from "components/SuspenseComponent";
@@ -36,6 +37,10 @@ class App extends Component {
   constructor() {
     super();
     this.applyTheme = createTheme(tealTheme);
+    this.state = {
+      userDetailFetched: false,
+      moveToReset: true,
+    };
   }
 
   componentDidMount() {
@@ -45,6 +50,19 @@ class App extends Component {
     getUserSessionInfo();
     this.timeout = setInterval(() => getUserSessionInfo(), 60000 * 5);
     T.setTexts(require(`./locale/${lang}.json`));
+  }
+
+  async componentDidUpdate(prevProps) {
+    const { userAndRoleDetail, user } = prevProps;
+    if (!!userAndRoleDetail && !this.state.userDetailFetched) {
+      await this.props.getUserDetail(userAndRoleDetail.metadata.name);
+      this.setState({ userDetailFetched: true });
+    }
+
+    if (this.state.moveToReset && !!user && user.spec.forceReset) {
+      this.setState({ moveToReset: false });
+      window.location = `/ksettings?userid=${user.metadata.name}`;
+    }
   }
 
   render() {
@@ -102,7 +120,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ settings, UserSession }) => {
+const mapStateToProps = ({ settings, UserSession, Users }) => {
   const {
     themeColor,
     sideNavColor,
@@ -110,7 +128,9 @@ const mapStateToProps = ({ settings, UserSession }) => {
     partnerDetail,
     organization,
     lang,
+    userAndRoleDetail,
   } = settings;
+  const { user } = Users;
   return {
     themeColor,
     sideNavColor,
@@ -119,6 +139,8 @@ const mapStateToProps = ({ settings, UserSession }) => {
     UserSession,
     partnerDetail,
     organization,
+    userAndRoleDetail,
+    user,
   };
 };
 
@@ -126,4 +148,5 @@ export default connect(mapStateToProps, {
   initializeApp,
   getUserSessionInfo,
   getInitProjects,
+  getUserDetail,
 })(App);

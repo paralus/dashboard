@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+import { useHistory } from "react-router-dom";
+
 import Button from "@material-ui/core/Button";
 import { newKratosSdk } from "actions/Auth";
+import { connect } from "react-redux";
 import { AxiosError } from "axios";
 import T from "i18n-react";
 import { useQuery } from "utils/helpers";
@@ -9,10 +12,13 @@ import PageLayout from "./Login/components/PageLayout";
 import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import tealTheme from "../themes/tealTheme";
 import paraluslogo from "../../assets/images/logolarge.png";
+import { userLogout, updateForceReset } from "actions/index";
 
 const KratosSettings = (props) => {
   const { query } = useQuery();
   const flowid = query.get("flow");
+  const userid = query.get("userid");
+  const history = useHistory();
 
   // NOTE: flow might be needed on allowing this ui to change other attributes
   const [flow, setFlow] = useState(undefined);
@@ -21,6 +27,16 @@ const KratosSettings = (props) => {
   const [csrf_token, setCSRF] = useState(undefined);
   let [message, setMessage] = useState("");
   let [resetSuccess, setResetSuccess] = useState(false);
+  const [runLogout, setRunLogout] = useState(false);
+  const [userId, setUserId] = useState("");
+  useEffect(() => {
+    if (runLogout) {
+      const timer = setTimeout(() => {
+        props.userLogout();
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [runLogout]);
 
   const getSettingsFlow = () =>
     newKratosSdk()
@@ -34,6 +50,17 @@ const KratosSettings = (props) => {
         });
       })
       .catch(console.error);
+
+  useEffect(() => {
+    if (userid) {
+      // 👇️ delete each query param
+      setUserId(userid);
+      query.delete("userid");
+      history.replace({
+        search: query.toString(),
+      });
+    }
+  }, []);
 
   useEffect(
     (_) => {
@@ -63,25 +90,50 @@ const KratosSettings = (props) => {
       return;
     }
     newKratosSdk()
-      .submitSelfServiceSettingsFlow(flowid, undefined, {
+      .submitSelfServiceSettingsFlow(flowid ?? flow.id, {
         csrf_token,
         method: "password",
         password: password,
       })
-      .then(({ data }) => {
+      .then(async ({ data }) => {
         if (data.ui.messages) {
-          setMessage("Your password has been reset.");
-          setResetSuccess(true);
+          // flowid is present when the url contains flowid as parameter but for redirects this property is not populated.
+          // e.g. just after deployment installation instruction presents the reset password recovery link with this property as set.
+          if (!!flowid) {
+            setMessage("Your password has been reset.");
+            setResetSuccess(true);
+          } else {
+            // this bock executes for all users, when forceReset is true and users are forced to reset their password instead of using the auto generated password
+            let scb = function () {
+              setMessage(
+                "Your password has been reset. You would be redirected to login page shortly"
+              );
+              setRunLogout(true);
+            };
+            await props.updateForceReset(userId, scb, handleError);
+          }
         }
       })
       .catch(async (err) => {
-        if (err.response?.status === 400) {
-          // Yup, it is!
-          if (err.response?.data.ui.nodes) {
-            setMessage(err.response?.data?.ui?.nodes[6].messages[0].text);
-          }
-        }
+        handleError(err);
       });
+  };
+
+  const handleError = function (err) {
+    if (err.response?.status === 400) {
+      // Yup, it is!
+      if (err.response?.data.ui.nodes) {
+        setMessage(err.response?.data?.ui?.nodes[6].messages[0].text);
+      }
+      return;
+    } else if (err.response?.status === 403) {
+      // Yup, it is!
+      if (err.response?.data.error.reason) {
+        setMessage(err.response?.data?.error?.reason);
+      }
+    } else {
+      console.log(err);
+    }
   };
 
   const handlePasswordChangeAttributes = (event) =>
@@ -167,4 +219,7 @@ const KratosSettings = (props) => {
   );
 };
 
-export default KratosSettings;
+export default connect(null, {
+  userLogout,
+  updateForceReset,
+})(KratosSettings);
