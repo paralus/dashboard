@@ -186,7 +186,7 @@ class UserList extends React.Component {
     if (props.isAddUserSuccess && props.newUser) {
       this.setState({ open: false });
       this.fetchUsers();
-      this.setState({ newUserOpen: true, newUserName: props.newUser.username });
+      this.setState({ newUserOpen: true, newUserName: props.newUser.metadata.name });
     }
     if (props.isEditUserSuccess) {
       this.fetchUsers();
@@ -423,10 +423,12 @@ class UserList extends React.Component {
       resetPassword(user.metadata.name)
         .then((resp) => {
           const recoveryLink = resp?.data?.recoveryLink;
+          const recoveryPassword = resp?.data?.defaultPassword;
           this.setState({
             showAlert: true,
             resetPasswordOpen: true,
             recoveryLink,
+            recoveryPassword,
             passwordResetUserName: user.metadata.name,
             alertMessage: (
               <>
@@ -440,7 +442,8 @@ class UserList extends React.Component {
         .catch((error) => {
           this.setState({
             showAlert: true,
-            recoveryLink: null,
+            recoveryLink: null, // existing user
+            recoveryPassword: null, // new user
             alertMessage: parseError(error) || "Unexpected Error",
             alertSeverity: "error",
           });
@@ -742,22 +745,21 @@ class UserList extends React.Component {
         >
           <DialogContent>
             New user <a style={{ color: "teal" }}>{this.state.newUserName}</a>,
-            has been added successfully. Use the following link to set the
+            has been added successfully. Use the following to set the
             password:
             <br />
             <div className={style.urlCopy}>
-              <a
+              <span
                 style={{ color: "teal" }}
-                href={this.props.newUser?.recoveryUrl}
               >
-                {this.props.newUser?.recoveryUrl}
-              </a>
+                {this.props.newUser?.spec.password}
+              </span>
               {copyable && (
                 <Tooltip title={"Copy"} id="clip">
                   <IconButton
                     onClick={() => {
                       navigator.clipboard.writeText(
-                        `${this.props.newUser?.recoveryUrl}`
+                        `${this.props.newUser?.spec.password}`
                       );
                     }}
                     aria-label="copy"

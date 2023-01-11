@@ -27,17 +27,8 @@ const KratosSettings = (props) => {
   const [csrf_token, setCSRF] = useState(undefined);
   let [message, setMessage] = useState("");
   let [resetSuccess, setResetSuccess] = useState(false);
-  const [runLogout, setRunLogout] = useState(false);
   const [userId, setUserId] = useState("");
-  useEffect(() => {
-    if (runLogout) {
-      const timer = setTimeout(() => {
-        props.userLogout();
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [runLogout]);
-
+  
   const getSettingsFlow = () =>
     newKratosSdk()
       .initializeSelfServiceSettingsFlowForBrowsers(undefined)
@@ -105,10 +96,8 @@ const KratosSettings = (props) => {
           } else {
             // this bock executes for all users, when forceReset is true and users are forced to reset their password instead of using the auto generated password
             let scb = function () {
-              setMessage(
-                "Your password has been reset. You would be redirected to login page shortly"
-              );
-              setRunLogout(true);
+              setMessage("Your password has been reset.");
+              setResetSuccess(true);
             };
             await props.updateForceReset(userId, scb, handleError);
           }
@@ -128,8 +117,10 @@ const KratosSettings = (props) => {
       return;
     } else if (err.response?.status === 403) {
       // Yup, it is!
-      if (err.response?.data.error.reason) {
+      if (err.response?.data.error?.reason) {
         setMessage(err.response?.data?.error?.reason);
+      }else{
+        setMessage(err.response?.data?.message);
       }
     } else {
       console.log(err);
