@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [0.1.6]- 2022-12-29
 ### Fixed
 - Fix for switching between projects when logged in as non-admin [mabhi](https://github.com/mabhi)
 - Fix access to cluster manage buttons shown for users without cluster write permission from [mabhi](https://github.com/mabhi)
@@ -51,7 +52,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.6...HEAD
+[0.1.6]: https://github.com/paralus/dashboard/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/paralus/dashboard/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/paralus/dashboard/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/paralus/dashboard/compare/v0.1.2...v0.1.3
