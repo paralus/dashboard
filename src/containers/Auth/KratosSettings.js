@@ -28,7 +28,7 @@ const KratosSettings = (props) => {
   let [message, setMessage] = useState("");
   let [resetSuccess, setResetSuccess] = useState(false);
   const [userId, setUserId] = useState("");
-  
+
   const getSettingsFlow = () =>
     newKratosSdk()
       .initializeSelfServiceSettingsFlowForBrowsers(undefined)
@@ -119,7 +119,7 @@ const KratosSettings = (props) => {
       // Yup, it is!
       if (err.response?.data.error?.reason) {
         setMessage(err.response?.data?.error?.reason);
-      }else{
+      } else {
         setMessage(err.response?.data?.message);
       }
     } else {

@@ -58,8 +58,14 @@ class App extends Component {
       await this.props.getUserDetail(userAndRoleDetail.metadata.name);
       this.setState({ userDetailFetched: true });
     }
-    const isSameUser = user?.metadata?.name === userAndRoleDetail?.metadata?.name
-    if (this.state.moveToReset && !!user && isSameUser && user.spec.forceReset) {
+    const isSameUser =
+      user?.metadata?.name === userAndRoleDetail?.metadata?.name;
+    if (
+      this.state.moveToReset &&
+      !!user &&
+      isSameUser &&
+      user.spec.forceReset
+    ) {
       this.setState({ moveToReset: false });
       window.location = `/ksettings?userid=${user.metadata.name}`;
     }

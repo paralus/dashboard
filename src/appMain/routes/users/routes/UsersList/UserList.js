@@ -186,7 +186,10 @@ class UserList extends React.Component {
     if (props.isAddUserSuccess && props.newUser) {
       this.setState({ open: false });
       this.fetchUsers();
-      this.setState({ newUserOpen: true, newUserName: props.newUser.metadata.name });
+      this.setState({
+        newUserOpen: true,
+        newUserName: props.newUser.metadata.name,
+      });
     }
     if (props.isEditUserSuccess) {
       this.fetchUsers();
@@ -745,13 +748,10 @@ class UserList extends React.Component {
         >
           <DialogContent>
             New user <a style={{ color: "teal" }}>{this.state.newUserName}</a>,
-            has been added successfully. Use the following to set the
-            password:
+            has been added successfully. Use the following to set the password:
             <br />
             <div className={style.urlCopy}>
-              <span
-                style={{ color: "teal" }}
-              >
+              <span style={{ color: "teal" }}>
                 {this.props.newUser?.spec.password}
               </span>
               {copyable && (
