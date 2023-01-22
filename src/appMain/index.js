@@ -86,12 +86,19 @@ class AppMain extends React.Component {
       UserSession,
       userLogout,
       organization,
+      userAndRoleDetail,
+      user,
     } = this.props;
     let favicon_src = ParalusMark;
     if (partnerDetail && partnerDetail.fav_icon_link) {
       favicon_src = partnerDetail.fav_icon_link;
     }
     const hasAccess = this.userHasAccess();
+    const forceResetEnabledForUser =
+      user === null ||
+      (!!user && !user.spec.forceReset) ||
+      (user.spec.forceReset &&
+        user.metadata.name !== userAndRoleDetail.metadata.name);
     if (
       !hasAccess &&
       !UserSession.noRolesUser &&
@@ -165,33 +172,43 @@ class AppMain extends React.Component {
               />
             </div>
           )}
-          {hasAccess && currentProject && currentProject.metadata.name && (
-            <main className="app-main-content-wrapper">
-              <div className="app-main-content">
-                <Container maxWidth="lg">
-                  <Route exact path={`${match.url}`} component={Home} />
-                  <Route path={`${match.url}/users`} component={Users} />
-                  <Route path={`${match.url}/settings`} component={Settings} />
-                  <Route path={`${match.url}/tools`} component={Tools} />
-                  <Route path={`${match.url}/audit`} component={AuditLogs} />
-                  <Route path={`${match.url}/projects`} component={Project} />
-                  <Route path={`${match.url}/groups`} component={Group} />
-                  <Route path={`${match.url}/roles`} component={Roles} />
-                  <Route
-                    exact
-                    path={`${match.url}/sso/new`}
-                    component={RegistrationWizard}
-                  />
-                  <Route
-                    exact
-                    path={`${match.url}/sso/update/:ssoId`}
-                    component={RegistrationWizard}
-                  />
-                  <Route exact path={`${match.url}/sso`} component={IdpList} />
-                </Container>
-              </div>
-            </main>
-          )}
+          {hasAccess &&
+            currentProject &&
+            currentProject.metadata.name &&
+            forceResetEnabledForUser && (
+              <main className="app-main-content-wrapper">
+                <div className="app-main-content">
+                  <Container maxWidth="lg">
+                    <Route exact path={`${match.url}`} component={Home} />
+                    <Route path={`${match.url}/users`} component={Users} />
+                    <Route
+                      path={`${match.url}/settings`}
+                      component={Settings}
+                    />
+                    <Route path={`${match.url}/tools`} component={Tools} />
+                    <Route path={`${match.url}/audit`} component={AuditLogs} />
+                    <Route path={`${match.url}/projects`} component={Project} />
+                    <Route path={`${match.url}/groups`} component={Group} />
+                    <Route path={`${match.url}/roles`} component={Roles} />
+                    <Route
+                      exact
+                      path={`${match.url}/sso/new`}
+                      component={RegistrationWizard}
+                    />
+                    <Route
+                      exact
+                      path={`${match.url}/sso/update/:ssoId`}
+                      component={RegistrationWizard}
+                    />
+                    <Route
+                      exact
+                      path={`${match.url}/sso`}
+                      component={IdpList}
+                    />
+                  </Container>
+                </div>
+              </main>
+            )}
           {!this.props.kubectlOpen && <Footer />}
         </div>
         {hasAccess && currentProject?.metadata.name && <MiniKubectl />}
@@ -200,11 +217,19 @@ class AppMain extends React.Component {
   }
 }
 
-const mapStateToProps = ({ settings, Projects, UserSession, Kubectl }) => {
+const mapStateToProps = ({
+  settings,
+  Projects,
+  UserSession,
+  Kubectl,
+  Users,
+}) => {
   const { organization, partnerDetail, reloadApp, userAndRoleDetail } =
     settings;
   const { currentProject } = Projects;
   const kubectlOpen = Kubectl?.open;
+  const { user } = Users;
+
   return {
     partnerDetail,
     currentProject,
@@ -212,6 +237,8 @@ const mapStateToProps = ({ settings, Projects, UserSession, Kubectl }) => {
     organization,
     UserSession,
     kubectlOpen,
+    userAndRoleDetail,
+    user,
   };
 };
 

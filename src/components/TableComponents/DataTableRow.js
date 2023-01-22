@@ -53,15 +53,19 @@ const DataTableRow = ({ rowIndex, data, parseRowData }) => {
                   if (b.type === "edit-icon") {
                     return (
                       <Tooltip key={i} title="Edit">
-                        <IconButton
-                          key={i}
-                          aria-label="edit"
-                          disabled={b.disabled}
-                          className="m-0"
-                          onClick={b.handleClick}
-                        >
-                          <EditIcon fontSize="small" />
-                        </IconButton>
+                        {b.disabled ? (
+                          <span></span>
+                        ) : (
+                          <IconButton
+                            key={i}
+                            aria-label="edit"
+                            disabled={b.disabled}
+                            className="m-0"
+                            onClick={b.handleClick}
+                          >
+                            <EditIcon fontSize="small" />
+                          </IconButton>
+                        )}
                       </Tooltip>
                     );
                   }

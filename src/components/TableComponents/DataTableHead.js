@@ -44,9 +44,9 @@ const DataTableHead = ({
           >
             {isSortEnabled && !column.disableSorting ? (
               <TableSortLabel
-                active={orderBy && orderBy === column.id}
+                active={!!orderBy && orderBy === column.id}
                 disabled={column.disableSorting || false}
-                direction={orderBy && orderBy === column.id ? order : "asc"}
+                direction={!!orderBy && orderBy === column.id ? order : "asc"}
                 onClick={createSortHandler(column.id)}
               >
                 {column.label}
