@@ -9,7 +9,6 @@ import {
   initializeApp,
   getUserSessionInfo,
   getInitProjects,
-  getUserDetail,
 } from "actions/index";
 import { SnackbarProvider } from "utils/useSnack";
 import SuspenseComponent from "components/SuspenseComponent";
@@ -52,22 +51,15 @@ class App extends Component {
     T.setTexts(require(`./locale/${lang}.json`));
   }
 
-  async componentDidUpdate(prevProps) {
-    const { userAndRoleDetail, user } = prevProps;
-    if (!!userAndRoleDetail && !this.state.userDetailFetched) {
-      await this.props.getUserDetail(userAndRoleDetail.metadata.name);
-      this.setState({ userDetailFetched: true });
-    }
-    const isSameUser =
-      user?.metadata?.name === userAndRoleDetail?.metadata?.name;
+  componentDidUpdate(prevProps) {
+    const { userAndRoleDetail } = prevProps;
     if (
       this.state.moveToReset &&
-      !!user &&
-      isSameUser &&
-      user.spec.forceReset
+      !!userAndRoleDetail &&
+      userAndRoleDetail.spec.forceReset
     ) {
       this.setState({ moveToReset: false });
-      window.location = `/ksettings?userid=${user.metadata.name}`;
+      window.location = `/ksettings?userid=${userAndRoleDetail.metadata.name}`;
     }
   }
 
@@ -136,7 +128,6 @@ const mapStateToProps = ({ settings, UserSession, Users }) => {
     lang,
     userAndRoleDetail,
   } = settings;
-  const { user } = Users;
   return {
     themeColor,
     sideNavColor,
@@ -146,7 +137,6 @@ const mapStateToProps = ({ settings, UserSession, Users }) => {
     partnerDetail,
     organization,
     userAndRoleDetail,
-    user,
   };
 };
 
@@ -154,5 +144,4 @@ export default connect(mapStateToProps, {
   initializeApp,
   getUserSessionInfo,
   getInitProjects,
-  getUserDetail,
 })(App);

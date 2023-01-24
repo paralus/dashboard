@@ -12,7 +12,11 @@ import PageLayout from "./Login/components/PageLayout";
 import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import tealTheme from "../themes/tealTheme";
 import paraluslogo from "../../assets/images/logolarge.png";
-import { userLogout, updateForceReset } from "actions/index";
+import {
+  userLogout,
+  updateForceReset,
+  getUserSessionInfo,
+} from "actions/index";
 
 const KratosSettings = (props) => {
   const { query } = useQuery();
@@ -43,6 +47,7 @@ const KratosSettings = (props) => {
       .catch(console.error);
 
   useEffect(() => {
+    props.getUserSessionInfo();
     if (userid) {
       // 👇️ delete each query param
       setUserId(userid);
@@ -99,7 +104,9 @@ const KratosSettings = (props) => {
               setMessage("Your password has been reset.");
               setResetSuccess(true);
             };
-            await props.updateForceReset(userId, scb, handleError);
+            const { userAndRoleDetail } = props;
+            console.log(userAndRoleDetail);
+            await props.updateForceReset(userAndRoleDetail, scb, handleError);
           }
         }
       })
@@ -210,7 +217,14 @@ const KratosSettings = (props) => {
   );
 };
 
-export default connect(null, {
+const mapStateToProps = ({ settings }) => {
+  const { userAndRoleDetail } = settings;
+  return {
+    userAndRoleDetail,
+  };
+};
+export default connect(mapStateToProps, {
   userLogout,
+  getUserSessionInfo,
   updateForceReset,
 })(KratosSettings);

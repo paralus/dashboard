@@ -190,27 +190,13 @@ export function editUser(params) {
   };
 }
 
-export function updateForceReset(name, successcb, errcb) {
+export function updateForceReset(ud, successcb, errcb) {
+  ud.spec.forceReset = false;
   http("auth")
-    .get(`user/${name}`)
-    .then((response) => {
-      const partner = JSON.parse(window?.localStorage.getItem("partner"));
-      const organization = JSON.parse(
-        window?.localStorage.getItem("organization")
-      );
-      let ud = response.data;
-      ud.metadata.partner = partner;
-      ud.metadata.organization = organization;
-      ud.spec.forceReset = false;
-      http("auth")
-        .put(`user/${name}`, ud)
-        .then((editresponse) => {
-          console.log(editresponse);
-          successcb();
-        })
-        .catch((error) => {
-          errcb(error);
-        });
+    .put(`user/${ud.metadata.name}/reset`, ud)
+    .then((editresponse) => {
+      console.log(editresponse);
+      successcb();
     })
     .catch((error) => {
       errcb(error);

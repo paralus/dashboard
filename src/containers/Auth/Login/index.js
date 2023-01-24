@@ -240,10 +240,12 @@ class Login extends Component {
         password: this.state.password,
       })
       .then(() => {
-        const { initializeApp } = this.props;
+        // const { initializeApp } = this.props;
+        /*
         initializeApp(() => {
-          window.location.href = "/";
         });
+        */
+        window.location.href = "/";
       })
       .catch((err) => {
         console.log(err);
