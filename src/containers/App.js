@@ -59,7 +59,7 @@ class App extends Component {
       userAndRoleDetail.spec.forceReset
     ) {
       this.setState({ moveToReset: false });
-      window.location = `/ksettings?userid=${userAndRoleDetail.metadata.name}`;
+      window.location = `/ksettings`;
     }
   }
 

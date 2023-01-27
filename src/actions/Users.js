@@ -190,10 +190,9 @@ export function editUser(params) {
   };
 }
 
-export function updateForceReset(ud, successcb, errcb) {
-  ud.spec.forceReset = false;
+export function updateForceReset(successcb, errcb) {
   http("auth")
-    .put(`user/${ud.metadata.name}/reset`, ud)
+    .put(`user/reset`)
     .then((editresponse) => {
       console.log(editresponse);
       successcb();

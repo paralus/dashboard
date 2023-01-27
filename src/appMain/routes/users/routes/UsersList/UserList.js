@@ -426,12 +426,10 @@ class UserList extends React.Component {
       resetPassword(user.metadata.name)
         .then((resp) => {
           const recoveryLink = resp?.data?.recoveryLink;
-          const recoveryPassword = resp?.data?.defaultPassword;
           this.setState({
             showAlert: true,
             resetPasswordOpen: true,
             recoveryLink,
-            recoveryPassword,
             passwordResetUserName: user.metadata.name,
             alertMessage: (
               <>
@@ -446,7 +444,6 @@ class UserList extends React.Component {
           this.setState({
             showAlert: true,
             recoveryLink: null, // existing user
-            recoveryPassword: null, // new user
             alertMessage: parseError(error) || "Unexpected Error",
             alertSeverity: "error",
           });

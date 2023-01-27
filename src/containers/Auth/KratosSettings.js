@@ -12,16 +12,11 @@ import PageLayout from "./Login/components/PageLayout";
 import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import tealTheme from "../themes/tealTheme";
 import paraluslogo from "../../assets/images/logolarge.png";
-import {
-  userLogout,
-  updateForceReset,
-  getUserSessionInfo,
-} from "actions/index";
+import { userLogout, updateForceReset } from "actions/index";
 
 const KratosSettings = (props) => {
   const { query } = useQuery();
   const flowid = query.get("flow");
-  const userid = query.get("userid");
   const history = useHistory();
 
   // NOTE: flow might be needed on allowing this ui to change other attributes
@@ -31,7 +26,6 @@ const KratosSettings = (props) => {
   const [csrf_token, setCSRF] = useState(undefined);
   let [message, setMessage] = useState("");
   let [resetSuccess, setResetSuccess] = useState(false);
-  const [userId, setUserId] = useState("");
 
   const getSettingsFlow = () =>
     newKratosSdk()
@@ -45,18 +39,6 @@ const KratosSettings = (props) => {
         });
       })
       .catch(console.error);
-
-  useEffect(() => {
-    props.getUserSessionInfo();
-    if (userid) {
-      // 👇️ delete each query param
-      setUserId(userid);
-      query.delete("userid");
-      history.replace({
-        search: query.toString(),
-      });
-    }
-  }, []);
 
   useEffect(
     (_) => {
@@ -104,9 +86,7 @@ const KratosSettings = (props) => {
               setMessage("Your password has been reset.");
               setResetSuccess(true);
             };
-            const { userAndRoleDetail } = props;
-            console.log(userAndRoleDetail);
-            await props.updateForceReset(userAndRoleDetail, scb, handleError);
+            await props.updateForceReset(scb, handleError);
           }
         }
       })
@@ -217,14 +197,7 @@ const KratosSettings = (props) => {
   );
 };
 
-const mapStateToProps = ({ settings }) => {
-  const { userAndRoleDetail } = settings;
-  return {
-    userAndRoleDetail,
-  };
-};
-export default connect(mapStateToProps, {
+export default connect(null, {
   userLogout,
-  getUserSessionInfo,
   updateForceReset,
 })(KratosSettings);
