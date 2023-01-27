@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+
+## [0.1.7]- 2023-01-27
 ### Added
 - Enhance: Navigate user to reset page using force reset during first login [mabhi](https://github.com/mabhi)
 - Upgraded Ory Kratos client to v0.10.1 [akshay196](https://github.com/akshay196)
@@ -56,7 +58,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.6...HEAD
+[Unreleased]: https://github.com/paralus/dashboard/compare/v0.1.7...HEAD
+[0.1.7]: https://github.com/paralus/dashboard/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/paralus/dashboard/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/paralus/dashboard/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/paralus/dashboard/compare/v0.1.3...v0.1.4
