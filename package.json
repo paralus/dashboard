@@ -9,7 +9,7 @@
     "@material-ui/core": "^4.9.7",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
-    "@ory/kratos-client": "^0.9.0-alpha.3",
+    "@ory/kratos-client": "0.10.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

@@ -36,6 +36,10 @@ class App extends Component {
   constructor() {
     super();
     this.applyTheme = createTheme(tealTheme);
+    this.state = {
+      userDetailFetched: false,
+      moveToReset: true,
+    };
   }
 
   componentDidMount() {
@@ -45,6 +49,18 @@ class App extends Component {
     getUserSessionInfo();
     this.timeout = setInterval(() => getUserSessionInfo(), 60000 * 5);
     T.setTexts(require(`./locale/${lang}.json`));
+  }
+
+  componentDidUpdate(prevProps) {
+    const { userAndRoleDetail } = prevProps;
+    if (
+      this.state.moveToReset &&
+      !!userAndRoleDetail &&
+      userAndRoleDetail.spec.forceReset
+    ) {
+      this.setState({ moveToReset: false });
+      window.location = `/ksettings`;
+    }
   }
 
   render() {
@@ -102,7 +118,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ settings, UserSession }) => {
+const mapStateToProps = ({ settings, UserSession, Users }) => {
   const {
     themeColor,
     sideNavColor,
@@ -110,6 +126,7 @@ const mapStateToProps = ({ settings, UserSession }) => {
     partnerDetail,
     organization,
     lang,
+    userAndRoleDetail,
   } = settings;
   return {
     themeColor,
@@ -119,6 +136,7 @@ const mapStateToProps = ({ settings, UserSession }) => {
     UserSession,
     partnerDetail,
     organization,
+    userAndRoleDetail,
   };
 };
 

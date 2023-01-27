@@ -78,6 +78,7 @@ export function getSSOUserDetail(name) {
 
 export function addUser(params) {
   return function (dispatch) {
+    params.spec.forceReset = true;
     http("auth")
       .post("users/", params)
       .then((response) => {
@@ -98,6 +99,7 @@ export function addUserWithCallback(params, onSuccess, onFailure) {
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   params.metadata.partner = partner;
   params.metadata.organization = organization;
+  params.spec.forceReset = true;
   return function (dispatch) {
     http("auth")
       .post("users", params)
@@ -186,6 +188,18 @@ export function editUser(params) {
         console.log(error);
       });
   };
+}
+
+export function updateForceReset(successcb, errcb) {
+  http("auth")
+    .put(`user/reset`)
+    .then((editresponse) => {
+      console.log(editresponse);
+      successcb();
+    })
+    .catch((error) => {
+      errcb(error);
+    });
 }
 
 export function updateSSOUser(params) {

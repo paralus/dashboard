@@ -519,7 +519,7 @@ const settings = (state = initialSettings, action) => {
       return {
         ...state,
         isAddUserSuccess: true,
-        newUser: action.payload.data.spec,
+        newUser: action.payload.data,
       };
     case "edit_user_success":
       return {

@@ -233,17 +233,19 @@ class Login extends Component {
     auth.username = username;
 
     newKratosSdk()
-      .submitSelfServiceLoginFlow(flow.id, undefined, {
+      .submitSelfServiceLoginFlow(flow.id, {
         csrf_token: this.state.csrf_token,
         method: "password",
         password_identifier: this.state.username,
         password: this.state.password,
       })
       .then(() => {
-        const { initializeApp } = this.props;
+        // const { initializeApp } = this.props;
+        /*
         initializeApp(() => {
-          window.location.href = "/";
         });
+        */
+        window.location.href = "/";
       })
       .catch((err) => {
         console.log(err);
@@ -258,7 +260,7 @@ class Login extends Component {
 
     window.localStorage.setItem("provider", provider);
     newKratosSdk()
-      .submitSelfServiceLoginFlow(flow.id, undefined, {
+      .submitSelfServiceLoginFlow(flow.id, {
         csrf_token: this.state.csrf_token,
         method: "oidc",
         provider,

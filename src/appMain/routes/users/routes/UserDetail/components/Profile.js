@@ -41,7 +41,7 @@ const Profile = ({ user, handleAccountChange }) => {
         <ValidatorForm
           noValidate
           autoComplete="off"
-          // onSubmit={handleAdduser}
+          onSubmit={() => {}}
           onError={(errors) => console.log(errors)}
         >
           <div className="row">
@@ -55,7 +55,7 @@ const Profile = ({ user, handleAccountChange }) => {
                 value={user.metadata.name}
                 label="Email"
                 fullWidth
-                disabled={user.metadata.id}
+                disabled={!!user.metadata.id}
                 validators={["required", "isEmail"]}
                 errorMessages={["this field is required", "email is not valid"]}
               />

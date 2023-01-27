@@ -75,14 +75,18 @@ class UserInfo extends React.Component {
   render() {
     let username = "";
     let isSSOUser = false;
-    const { userAndRoleDetail } = this.props;
+    const { userAndRoleDetail, user } = this.props;
     const { isChangeOrgSuccess, anchorEl, open } = this.state;
     if (userAndRoleDetail) {
       username = userAndRoleDetail.metadata.name;
     } else {
       return null;
     }
-
+    let hasAccess =
+      user === null ||
+      (!!user && !user.spec.forceReset) ||
+      (user.spec.forceReset &&
+        user.metadata.name !== userAndRoleDetail.metadata.name);
     // TODO: This is temporary. Add a flag to indicate usertype RC-6789
     if (
       !`${userAndRoleDetail.spec.firstName}${userAndRoleDetail.spec.lastName}`
@@ -97,56 +101,59 @@ class UserInfo extends React.Component {
 
     return (
       <div className="user-profile d-flex flex-row align-items-center">
-        <div className="user-detail">
-          <h4
-            className="user-name"
-            style={{ textTransform: "none" }}
-            onClick={this.handleClick}
-          >
-            {` ${username} `}
-            <i className="zmdi zmdi-caret-down zmdi-hc-fw align-middle" />
-          </h4>
-          {this.props.organization && this.props.organization.detail && (
-            <small>{this.props.organization.detail.metadata.name}</small>
-          )}
-        </div>
-        <a
-          style={{ color: "#ff9800" }}
-          href={
-            this.props.partnerDetail?.settings?.docs_link?.length > 0
-              ? this.props.partnerDetail.settings.docs_link
-              : "#"
-          }
-        >
-          <HelpOutline style={{ cursor: "pointer", marginLeft: "20px" }} />
-        </a>
-        <Menu
-          className="user-info"
-          id="simple-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={this.handleRequestClose}
-          PaperProps={{
-            style: {
-              width: 200,
-            },
-          }}
-        >
-          <MenuItem
-            style={{ height: "0px" }}
-            className="p-0"
-            onClick={(_) => {}}
-          />
+        {/* only show the header profile details if user has already set his password */}
+        {hasAccess && (
+          <>
+            <div className="user-detail">
+              <h4
+                className="user-name"
+                style={{ textTransform: "none" }}
+                onClick={this.handleClick}
+              >
+                {` ${username} `}
+                <i className="zmdi zmdi-caret-down zmdi-hc-fw align-middle" />
+              </h4>
+              {this.props.organization && this.props.organization.detail && (
+                <small>{this.props.organization.detail.metadata.name}</small>
+              )}
+            </div>
+            <a
+              style={{ color: "#ff9800" }}
+              href={
+                this.props.partnerDetail?.settings?.docs_link?.length > 0
+                  ? this.props.partnerDetail.settings.docs_link
+                  : "#"
+              }
+            >
+              <HelpOutline style={{ cursor: "pointer", marginLeft: "20px" }} />
+            </a>
+            <Menu
+              className="user-info"
+              id="simple-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={this.handleRequestClose}
+              PaperProps={{
+                style: {
+                  width: 200,
+                },
+              }}
+            >
+              <MenuItem
+                style={{ height: "0px" }}
+                className="p-0"
+                onClick={(_) => {}}
+              />
 
-          <MenuItem onClick={this.handleProfileClick}>
-            <i className="zmdi zmdi-account-circle zmdi-hc-fw mr-2" />
-            Profile
-          </MenuItem>
-          <MenuItem onClick={this.handleLogout}>
-            <i className="zmdi zmdi-sign-in zmdi-hc-fw mr-2" />
-            Logout
-          </MenuItem>
-          {/* lang === "english" ?
+              <MenuItem onClick={this.handleProfileClick}>
+                <i className="zmdi zmdi-account-circle zmdi-hc-fw mr-2" />
+                Profile
+              </MenuItem>
+              <MenuItem onClick={this.handleLogout}>
+                <i className="zmdi zmdi-sign-in zmdi-hc-fw mr-2" />
+                Logout
+              </MenuItem>
+              {/* lang === "english" ?
           <MenuItem onClick={() => this.handleLang("german")}><i
               className="zmdi zmdi-settings zmdi-hc-fw mr-2" />German
           </MenuItem>
@@ -154,7 +161,9 @@ class UserInfo extends React.Component {
           <MenuItem onClick={() => this.handleLang("english")}><i
               className="zmdi zmdi-settings zmdi-hc-fw mr-2" />English
           </MenuItem> */}
-        </Menu>
+            </Menu>
+          </>
+        )}
         <Profile
           user={userAndRoleDetail}
           onRef={(ref) => {
@@ -166,7 +175,7 @@ class UserInfo extends React.Component {
   }
 }
 
-const mapStateToProps = ({ settings, Projects }) => {
+const mapStateToProps = ({ settings, Projects, Users }) => {
   const {
     account,
     isGetUserDataSuccess,
@@ -180,6 +189,7 @@ const mapStateToProps = ({ settings, Projects }) => {
     partnerDetail,
     organization,
   } = settings;
+  const { user } = Users;
   const { isProjectSet } = Projects;
   return {
     isGetUserDataSuccess,
@@ -194,6 +204,7 @@ const mapStateToProps = ({ settings, Projects }) => {
     partnerDetail,
     organization,
     isProjectSet,
+    user,
   };
 };
 

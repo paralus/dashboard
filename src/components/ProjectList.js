@@ -78,7 +78,7 @@ const ProjectList = ({ roles, handleClick, showExpandedList = false }) => {
       ) : (
         <>
           {projectList?.baseList.map((item, idx) => (
-            <span className={classes.activeLabel}>
+            <span className={classes.activeLabel} key={idx}>
               {item} {idx !== projectList.baseList.length - 1 && ", "}
             </span>
           ))}

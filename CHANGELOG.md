@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+- Enhance: Navigate user to reset page using force reset during first login [mabhi](https://github.com/mabhi)
+- Upgraded Ory Kratos client to v0.10.1 [akshay196](https://github.com/akshay196)
+
 
 ## [0.1.6]- 2022-12-29
 ### Fixed
