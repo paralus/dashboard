@@ -25,9 +25,10 @@ export function getOrgKubeconfigValidity(orgId) {
   ).get();
 }
 
-export function setOrgKubeconfigValidity(orgId, params) {
+export function setOrgKubeconfigValidity(orgId, accId, params) {
   params.opts = {
     organization: orgId,
+    account: accId,
   };
   return http(
     `v2/sentry/kubeconfig/organization/${orgId}/setting`,

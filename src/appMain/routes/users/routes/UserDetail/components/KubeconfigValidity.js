@@ -15,7 +15,13 @@ import { capitalizeFirstLetter } from "../../../../../../utils";
 const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
   if (!settings) return null;
   const dispatch = useDispatch();
+  const min = 1;
+  const max = 24 * 60 * 60;
 
+  const saInputProps = {
+    min,
+    max,
+  };
   const [alert, setAlert] = useState({
     show: false,
     message: "",
@@ -35,6 +41,11 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
     return Math.round(seconds / (60 * 60));
   };
 
+  const getMinutes = (seconds) => {
+    if (!seconds) return "";
+    return Math.round(seconds / 60);
+  };
+
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [kubectlSettings, setKubectlSettings] = useState(settings);
 
@@ -48,6 +59,17 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
     setKubectlSettings({
       ...kubectlSettings,
       validitySeconds: val * (60 * 60),
+    });
+    setIsSaveDisabled(false);
+  };
+
+  const onMinutesChange = (e) => {
+    var val = Number.parseInt(e.target.value, 10);
+    if (val > max) val = max;
+    if (val < min) val = min;
+    setKubectlSettings({
+      ...kubectlSettings,
+      saValiditySeconds: val * 60,
     });
     setIsSaveDisabled(false);
   };
@@ -99,11 +121,30 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
               name="seconds"
               value={getHours(kubectlSettings?.validitySeconds)}
               label="Hours"
-              onChange={onHoursChange}
+              onChange={(e) => onHoursChange(e)}
               size="small"
               type="number"
               // error={!Number.isInteger(hours)}
               variant="outlined"
+            />
+          </div>
+          <br />
+          <div>
+            <p className="text-muted">
+              De-provision service account if inactive for more than
+            </p>
+            <TextField
+              margin="dense"
+              id="sa-seconds"
+              name="sa-seconds"
+              value={getMinutes(kubectlSettings?.saValiditySeconds)}
+              label="Minutes"
+              onChange={(e) => onMinutesChange(e)}
+              size="small"
+              type="number"
+              // error={!Number.isInteger(hours)}
+              variant="outlined"
+              inputProps={saInputProps}
             />
           </div>
           <div className="mt-3">
