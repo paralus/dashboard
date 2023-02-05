@@ -89,7 +89,7 @@ const NamespaceCard = ({
   }, [projectId]);
 
   function containsSpecialChars(str) {
-    const specialChars = /[`!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?~]/;
+    const specialChars = /[`!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?~A-Z]/;
     return specialChars.test(str);
   }
 
@@ -124,7 +124,7 @@ const NamespaceCard = ({
       } else {
         setNamespaceError(true);
         setNamespaehelpertext(
-          "No special char. allowed & length between 1-63 characters."
+          "No special char. Uppercase letters allowed & length between 1-63 characters."
         );
         return false;
       }
