@@ -89,12 +89,12 @@ const NamespaceCard = ({
   }, [projectId]);
 
   function containsSpecialChars(str) {
-    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    const specialChars = /[`!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?~]/;
     return specialChars.test(str);
   }
 
   function checkValidNamespaceLength(str) {
-    if (str.length >= 4 && str.length <= 64) return true;
+    if (str.length >= 1 && str.length <= 63) return true;
     else return false;
   }
 
@@ -124,7 +124,7 @@ const NamespaceCard = ({
       } else {
         setNamespaceError(true);
         setNamespaehelpertext(
-          "No special char. allowed & length between 4-64 characters."
+          "No special char. allowed & length between 1-63 characters."
         );
         return false;
       }
