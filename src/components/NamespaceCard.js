@@ -88,8 +88,8 @@ const NamespaceCard = ({
     }
   }, [projectId]);
 
-  function containsSpecialChars(str) {
-    const specialChars = /[`!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?~A-Z]/;
+  function containsNoSpecialChars(str) {
+    const specialChars = /^[a-z0-9]([-a-z0-9]*[a-z0-9])?$/;
     return specialChars.test(str);
   }
 
@@ -113,7 +113,7 @@ const NamespaceCard = ({
     function CheckNamespaceValidation(str) {
       if (
         checkValidNamespaceLength(str) === true &&
-        containsSpecialChars(str) === false &&
+        containsNoSpecialChars(str) === true &&
         checkDuplicateInArray(str, namespaceTags) === false
       ) {
         setNamespaceError(false);
@@ -124,7 +124,7 @@ const NamespaceCard = ({
       } else {
         setNamespaceError(true);
         setNamespaehelpertext(
-          "No special char. Uppercase letters allowed & length between 1-63 characters."
+          "No special char. No Uppercase letters allowed & length between 1-63 characters."
         );
         return false;
       }
