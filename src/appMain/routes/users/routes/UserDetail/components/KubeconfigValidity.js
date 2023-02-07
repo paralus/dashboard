@@ -15,12 +15,12 @@ import { capitalizeFirstLetter } from "../../../../../../utils";
 const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
   if (!settings) return null;
   const dispatch = useDispatch();
-  const min = 1;
-  const max = 24 * 60 * 60;
+  const min_minutes = 10;
+  const max_minutes = 30 * 24 * 60;
 
   const saInputProps = {
-    min,
-    max,
+    min_minutes,
+    max_minutes,
   };
   const [alert, setAlert] = useState({
     show: false,
@@ -102,7 +102,7 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
       .catch((error) => {
         setAlert({
           show: true,
-          message: error?.response?.data?.error || "Unexpected Error",
+          message: error?.response?.data?.message || "Unexpected Error",
           severity: "error",
         });
       });
