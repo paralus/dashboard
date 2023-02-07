@@ -65,8 +65,8 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
 
   const onMinutesChange = (e) => {
     var val = Number.parseInt(e.target.value, 10);
-    if (val > max) val = max;
-    if (val < min) val = min;
+    if (val > max_minutes) val = max_minutes;
+    if (val < min_minutes) val = min_minutes;
     setKubectlSettings({
       ...kubectlSettings,
       saValiditySeconds: val * 60,
