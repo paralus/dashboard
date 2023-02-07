@@ -36,10 +36,6 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
     });
   };
 
-  const getHours = (seconds) => {
-    if (!seconds) return "";
-    return Math.round(seconds / (60 * 60));
-  };
 
   const getMinutes = (seconds) => {
     if (!seconds) return "";
@@ -49,27 +45,13 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [kubectlSettings, setKubectlSettings] = useState(settings);
 
-  const onHoursChange = (e) => {
-    const val = Number.parseInt(e.target.value, 10);
-    // if (Number.isNaN(val)) {
-    //   setHours("");
-    //   return;
-    // }
-    // setHours(val);
-    setKubectlSettings({
-      ...kubectlSettings,
-      validitySeconds: val * (60 * 60),
-    });
-    setIsSaveDisabled(false);
-  };
-
-  const onMinutesChange = (e) => {
+  const onMinutesChange = (e, key) => {
     var val = Number.parseInt(e.target.value, 10);
     if (val > max_minutes) val = max_minutes;
     if (val < min_minutes) val = min_minutes;
     setKubectlSettings({
       ...kubectlSettings,
-      saValiditySeconds: val * 60,
+      [key]: val * 60,
     });
     setIsSaveDisabled(false);
   };
@@ -119,13 +101,14 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
               margin="dense"
               id="seconds"
               name="seconds"
-              value={getHours(kubectlSettings?.validitySeconds)}
-              label="Hours"
-              onChange={(e) => onHoursChange(e)}
+              value={getMinutes(kubectlSettings?.validitySeconds)}
+              label="Minutes"
+              onChange={(e) => onMinutesChange(e,"validitySeconds")}
               size="small"
               type="number"
               // error={!Number.isInteger(hours)}
               variant="outlined"
+              inputProps={saInputProps}
             />
           </div>
           <br />
@@ -139,7 +122,7 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
               name="sa-seconds"
               value={getMinutes(kubectlSettings?.saValiditySeconds)}
               label="Minutes"
-              onChange={(e) => onMinutesChange(e)}
+              onChange={(e) => onMinutesChange(e, "saValiditySeconds")}
               size="small"
               type="number"
               // error={!Number.isInteger(hours)}
