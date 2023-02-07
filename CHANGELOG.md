@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+-  Configure the SA account lifetime from [mabhi](https://github.com/mabhi)
 
 ## [0.1.7]- 2023-01-27
 ### Added
