@@ -36,7 +36,6 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
     });
   };
 
-
   const getMinutes = (seconds) => {
     if (!seconds) return "";
     return Math.round(seconds / 60);
@@ -103,7 +102,7 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
               name="seconds"
               value={getMinutes(kubectlSettings?.validitySeconds)}
               label="Minutes"
-              onChange={(e) => onMinutesChange(e,"validitySeconds")}
+              onChange={(e) => onMinutesChange(e, "validitySeconds")}
               size="small"
               type="number"
               // error={!Number.isInteger(hours)}
