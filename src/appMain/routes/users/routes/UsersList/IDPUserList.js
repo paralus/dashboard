@@ -7,8 +7,14 @@ import AvTimerIcon from "@material-ui/icons/AvTimer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import GroupIcon from "@material-ui/icons/Group";
+<<<<<<< HEAD
 import { getUsers, 
   revokeKubeconfig, 
+=======
+import {
+  getUsers,
+  revokeKubeconfig,
+>>>>>>> added delete functionality for IDP users
   deleteUser,
   resetUserDeleteResponse,
 } from "actions/index";
@@ -23,7 +29,10 @@ import DataTableToolbar from "./components/DataTableToolbar";
 import KubeconfigValiditySSO from "./components/KubeconfigValiditySSO";
 import SsoGroups from "./components/IDPUserGroups/SsoGroups";
 import DeleteIconComponent from "components/DeleteIconComponent";
+<<<<<<< HEAD
 
+=======
+>>>>>>> added delete functionality for IDP users
 
 const style = {
   userNameLabel: {
@@ -79,8 +88,13 @@ class IDPUserList extends React.Component {
   UNSAFE_componentWillReceiveProps(props) {
     if (props.isDeleteUserSucess) {
       this.setState({
+<<<<<<< HEAD
         data: []
       })
+=======
+        data: [],
+      });
+>>>>>>> added delete functionality for IDP users
       this.props.getUsers(null, null, null, "", "", { type: "oidc" });
     }
     props.resetUserDeleteResponse();
@@ -366,6 +380,7 @@ class IDPUserList extends React.Component {
 
 const mapStateToProps = ({ settings }) => {
   const users = settings.users.list;
+<<<<<<< HEAD
   const {
     isDeleteUserSucess,
     getUsersIsLoading
@@ -374,6 +389,13 @@ const mapStateToProps = ({ settings }) => {
     users,
     isDeleteUserSucess,
     getUsersIsLoading
+=======
+  const { isDeleteUserSucess, getUsersIsLoading } = settings;
+  return {
+    users,
+    isDeleteUserSucess,
+    getUsersIsLoading,
+>>>>>>> added delete functionality for IDP users
   };
 };
 export default withRouter(
