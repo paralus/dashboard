@@ -19,7 +19,7 @@ import AppSnackbar from "components/AppSnackbar";
 import ConfirmIconAction from "components/ConfirmIconAction";
 import DataTable from "components/TableComponents/DataTable";
 import { IDP_USER_COLUMN_HEADER_CONFIG } from "constants/Constant";
-import { getTimeFromNow } from "../../../../../utils";
+import { getTimeFromNow, parseError } from "../../../../../utils";
 import DataTableToolbar from "./components/DataTableToolbar";
 import KubeconfigValiditySSO from "./components/KubeconfigValiditySSO";
 import SsoGroups from "./components/IDPUserGroups/SsoGroups";
@@ -97,7 +97,7 @@ class IDPUserList extends React.Component {
   onFailure = (error) => {
     this.setState({
       showAlert: true,
-      alertMessage: parseError(error),
+      alertMessage: parseError(error) || "Unexpected Error",
       alertSeverity: "error",
     });
   };
