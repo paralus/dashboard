@@ -108,9 +108,8 @@ class Settings extends React.Component {
 
   handleSaveValidity = (settings) => {
     const orgId = this.props?.detail?.metadata.id;
-    const accId = this.props.userAndRoleDetail.metadata.id;
     if (orgId) {
-      return setOrgKubeconfigValidity(orgId, accId, settings);
+      return setOrgKubeconfigValidity(orgId, settings);
     }
     throw Error("Unknown Error");
   };

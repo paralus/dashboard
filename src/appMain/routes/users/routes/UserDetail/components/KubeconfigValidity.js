@@ -41,8 +41,27 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
     return Math.round(seconds / 60);
   };
 
+  const getHours = (seconds) => {
+    if (!seconds) return "";
+    return Math.round(seconds / (60 * 60));
+  };
+
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [kubectlSettings, setKubectlSettings] = useState(settings);
+
+  const onHoursChange = (e) => {
+    const val = Number.parseInt(e.target.value, 10);
+    // if (Number.isNaN(val)) {
+    //   setHours("");
+    //   return;
+    // }
+    // setHours(val);
+    setKubectlSettings({
+      ...kubectlSettings,
+      validitySeconds: val * (60 * 60),
+    });
+    setIsSaveDisabled(false);
+  };
 
   const onMinutesChange = (e, key) => {
     var val = Number.parseInt(e.target.value, 10);
@@ -100,14 +119,13 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
               margin="dense"
               id="seconds"
               name="seconds"
-              value={getMinutes(kubectlSettings?.validitySeconds)}
-              label="Minutes"
-              onChange={(e) => onMinutesChange(e, "validitySeconds")}
+              value={getHours(kubectlSettings?.validitySeconds)}
+              label="Hours"
+              onChange={onHoursChange}
               size="small"
               type="number"
               // error={!Number.isInteger(hours)}
               variant="outlined"
-              inputProps={saInputProps}
             />
           </div>
           <br />
