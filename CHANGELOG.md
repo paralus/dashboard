@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+- namespace limitation [mabhi](https://github.com/mabhi)
+
 ## [0.1.7]- 2023-01-27
 ### Added
 - Enhance: Navigate user to reset page using force reset during first login [mabhi](https://github.com/mabhi)
