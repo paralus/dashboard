@@ -7,17 +7,23 @@ import AvTimerIcon from "@material-ui/icons/AvTimer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import GroupIcon from "@material-ui/icons/Group";
-import { getUsers, revokeKubeconfig } from "actions/index";
+import {
+  getUsers,
+  revokeKubeconfig,
+  deleteUser,
+  resetUserDeleteResponse,
+} from "actions/index";
 import ProjectList from "components/ProjectList";
 import ProjectRoleMatrix from "components/ProjectRoleMatrix";
 import AppSnackbar from "components/AppSnackbar";
 import ConfirmIconAction from "components/ConfirmIconAction";
 import DataTable from "components/TableComponents/DataTable";
 import { IDP_USER_COLUMN_HEADER_CONFIG } from "constants/Constant";
-import { getTimeFromNow } from "../../../../../utils";
+import { getTimeFromNow, parseError } from "../../../../../utils";
 import DataTableToolbar from "./components/DataTableToolbar";
 import KubeconfigValiditySSO from "./components/KubeconfigValiditySSO";
 import SsoGroups from "./components/IDPUserGroups/SsoGroups";
+import DeleteIconComponent from "components/DeleteIconComponent";
 
 const style = {
   userNameLabel: {
@@ -70,12 +76,30 @@ class IDPUserList extends React.Component {
     this.props.getUsers(null, null, null, "", "", { type: "oidc" });
   }
 
+  UNSAFE_componentWillReceiveProps(props) {
+    if (props.isDeleteUserSucess) {
+      this.setState({
+        data: [],
+      });
+      this.props.getUsers(null, null, null, "", "", { type: "oidc" });
+    }
+    props.resetUserDeleteResponse();
+  }
+
   getLastLogin = (data) => {
     const last_login = data && data.split(".");
     if (last_login && last_login[0]) {
       return last_login[0].replace("T", " ");
     }
     return "Never";
+  };
+
+  onFailure = (error) => {
+    this.setState({
+      showAlert: true,
+      alertMessage: parseError(error) || "Unexpected Error",
+      alertSeverity: "error",
+    });
   };
 
   handleSearchChange = (event) => {
@@ -176,6 +200,22 @@ class IDPUserList extends React.Component {
             <GroupIcon />
           </IconButton>
         </Tooltip>
+        <DeleteIconComponent
+          key={data.metadata.name}
+          button={{
+            type: "danger-icon",
+            label: "Delete",
+            confirmText: (
+              <span>
+                Are you sure you want to delete
+                <b> {data.metadata.name} </b>?
+              </span>
+            ),
+            handleClick: () => {
+              this.props.deleteUser(data.metadata.name, null, this.onFailure);
+            },
+          }}
+        />
         <Tooltip title="Manage Keys">
           <IconButton
             aria-label="edit"
@@ -262,7 +302,7 @@ class IDPUserList extends React.Component {
       openGroups,
       selectedUser,
     } = this.state;
-    const { users } = this.props;
+    const { users, getUsersIsLoading } = this.props;
     let data = [];
     let listCount = 0;
 
@@ -288,12 +328,14 @@ class IDPUserList extends React.Component {
             searchValue={searchText}
             hideAdd
           />
-          <DataTable
-            columnLabels={this.state.columnLabels}
-            list={data || []}
-            getCollapsedRow={this.getCollapsedRow}
-            parseRowData={this.parseRowData}
-          />
+          {!getUsersIsLoading && (
+            <DataTable
+              columnLabels={this.state.columnLabels}
+              list={data || []}
+              getCollapsedRow={this.getCollapsedRow}
+              parseRowData={this.parseRowData}
+            />
+          )}
         </Paper>
         <AppSnackbar
           open={this.state.showAlert}
@@ -323,12 +365,17 @@ class IDPUserList extends React.Component {
 
 const mapStateToProps = ({ settings }) => {
   const users = settings.users.list;
+  const { isDeleteUserSucess, getUsersIsLoading } = settings;
   return {
     users,
+    isDeleteUserSucess,
+    getUsersIsLoading,
   };
 };
 export default withRouter(
   connect(mapStateToProps, {
     getUsers,
+    deleteUser,
+    resetUserDeleteResponse,
   })(IDPUserList)
 );
