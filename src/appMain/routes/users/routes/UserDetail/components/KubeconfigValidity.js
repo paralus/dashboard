@@ -15,7 +15,13 @@ import { capitalizeFirstLetter } from "../../../../../../utils";
 const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
   if (!settings) return null;
   const dispatch = useDispatch();
+  const min_minutes = 10;
+  const max_minutes = 30 * 24 * 60;
 
+  const saInputProps = {
+    min_minutes,
+    max_minutes,
+  };
   const [alert, setAlert] = useState({
     show: false,
     message: "",
@@ -28,6 +34,11 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
       show: false,
       message: "",
     });
+  };
+
+  const getMinutes = (seconds) => {
+    if (!seconds) return "";
+    return Math.round(seconds / 60);
   };
 
   const getHours = (seconds) => {
@@ -48,6 +59,17 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
     setKubectlSettings({
       ...kubectlSettings,
       validitySeconds: val * (60 * 60),
+    });
+    setIsSaveDisabled(false);
+  };
+
+  const onMinutesChange = (e, key) => {
+    var val = Number.parseInt(e.target.value, 10);
+    if (val > max_minutes) val = max_minutes;
+    if (val < min_minutes) val = min_minutes;
+    setKubectlSettings({
+      ...kubectlSettings,
+      [key]: val * 60,
     });
     setIsSaveDisabled(false);
   };
@@ -80,7 +102,7 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
       .catch((error) => {
         setAlert({
           show: true,
-          message: error?.response?.data?.error || "Unexpected Error",
+          message: error?.response?.data?.message || "Unexpected Error",
           severity: "error",
         });
       });
@@ -104,6 +126,25 @@ const KubeconfigValidity = ({ settings, onSave, orgSetting, orgId }) => {
               type="number"
               // error={!Number.isInteger(hours)}
               variant="outlined"
+            />
+          </div>
+          <br />
+          <div>
+            <p className="text-muted">
+              De-provision service account if inactive for more than
+            </p>
+            <TextField
+              margin="dense"
+              id="sa-seconds"
+              name="sa-seconds"
+              value={getMinutes(kubectlSettings?.saValiditySeconds)}
+              label="Minutes"
+              onChange={(e) => onMinutesChange(e, "saValiditySeconds")}
+              size="small"
+              type="number"
+              // error={!Number.isInteger(hours)}
+              variant="outlined"
+              inputProps={saInputProps}
             />
           </div>
           <div className="mt-3">
