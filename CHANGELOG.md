@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Fixed
+- Fix showing Kratos information on error page [akshay196](https://github.com/akshay196)
 
 ## [0.1.8]- 2023-02-24
 ### Fixed
