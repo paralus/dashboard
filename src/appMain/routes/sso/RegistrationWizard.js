@@ -792,7 +792,7 @@ const RegistrationWizard = (props) => {
                         ? idpResponse?.spec?.mapperUrl
                         : idpPayload?.spec?.providerName === "generic"
                         ? idpResponse?.spec?.mapperUrl
-                        : `https://raw.githubusercontent.com/paralus/paralus/main/_kratos/oidc-mappers/` +
+                        : `https://raw.githubusercontent.com/paralus/paralus/v0.2.2/_kratos/oidc-mappers/` +
                           idpPayload?.spec?.providerName +
                           ".jsonnet",
                     }}
