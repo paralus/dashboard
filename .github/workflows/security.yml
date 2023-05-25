@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-    - cron: '0 0 * * 1'
+    - cron: '0 4 * * 1'  # Every Monday at 9:30 IST
 
 env:
   REGISTRY: docker.io
@@ -23,12 +23,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
 
       - name: Build an image from Dockerfile (paralus-init)
         run: |
