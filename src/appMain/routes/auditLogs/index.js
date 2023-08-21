@@ -12,6 +12,7 @@ function AuditLogs() {
   const UserSession = useSelector((state) => state.UserSession);
   const { visibleApps, visibleSystem, visibleAdmin } = UserSession;
   const isProjectRole = !visibleAdmin && visibleApps && visibleSystem;
+  // alert(JSON.stringify(isProjectRole))
 
   const { query } = useQuery();
   const tab = query.get("tab");
@@ -29,11 +30,11 @@ function AuditLogs() {
     return (
       <Box p={2}>
         <PageHeader
-          title="System Logs"
-          help="Your system audit logs are listed below"
+          title="Kubectl Logs"
+          help="Your kubectl audit logs are listed below"
         />
         <Paper>
-          <SystemLogs />
+          <KubectlLogs />
         </Paper>
       </Box>
     );

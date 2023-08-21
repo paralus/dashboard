@@ -7,6 +7,7 @@ import TableToolbar from "./TableToolbar";
 const columnLabels = [
   { label: "Date" },
   { label: "User" },
+  { label: "Project" },
   { label: "Cluster" },
   { label: "Namespace" },
   { label: "Resource" },
@@ -25,6 +26,10 @@ const AuditLogsTable = (props) => {
     {
       type: "regular",
       value: data._source.json.un || "-",
+    },
+    {
+      type: "regular",
+      value: data._source.json.pr || "-",
     },
     {
       type: "regular",
@@ -90,6 +95,7 @@ const AuditLogsTable = (props) => {
   const headerMapping = {
     ts: "Date",
     un: "User",
+    pr: "Project",
     cn: "Cluster",
     ns: "Namespace",
     n: "Resource Name",
@@ -113,6 +119,8 @@ const AuditLogsTable = (props) => {
         handleResetFilter={props.handleResetFilter}
         users={props.users}
         clusters={props.clusters}
+        projects={props.projects}
+        isProjectRole={props.isProjectRole}
         namespaces={props.namespaces}
         kinds={props.kinds}
         methods={props.methods}

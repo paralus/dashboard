@@ -63,6 +63,9 @@ const parseUserRoles = (roles) => {
         case "project.admin.write":
           userRoles.projectAdmin = true;
           break;
+        case "project.relayAudit.read":
+          userRoles.projectAuditRead = true;
+          break;
       }
     });
   });

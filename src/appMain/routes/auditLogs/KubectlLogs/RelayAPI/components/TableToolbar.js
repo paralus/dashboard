@@ -47,6 +47,7 @@ const filterToChips = (filter) => {
 const TableToolbar = (props) => {
   const { numSelected, handleRefreshClick, filter } = props;
   const { handleFilter, handleResetFilter, handleRemoveFilter } = props;
+  const { isProjectRole } = props;
   const [chips, setChips] = useState(filterToChips(filter));
 
   useEffect(() => {
@@ -103,6 +104,16 @@ const TableToolbar = (props) => {
         </div>
         <div className="pl-3 pt-2 d-flex flex-wrap">
           <div>
+            <FilterField
+              name="project"
+              value={filter.project}
+              list={props.projects}
+              defaultLabel={isProjectRole ? props.projects[0].key: "All Projects"}
+              label="Project"
+              handleFilter={handleFilter}
+            />
+          </div>
+          <div className="ml-4">
             <FilterField
               name="cluster"
               list={props.clusters}
