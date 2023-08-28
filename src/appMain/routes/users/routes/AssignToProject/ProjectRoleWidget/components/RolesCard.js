@@ -80,9 +80,7 @@ const RolesCard = ({
                         {value.metadata.name}
                       </span>
                     }
-                    secondary={
-                      value.metadata.description
-                    }
+                    secondary={value.metadata.description}
                   />
                 </ListItem>
               );

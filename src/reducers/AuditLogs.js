@@ -43,7 +43,7 @@ const AuditLogs = (state = initialData, action) => {
         auditLogsList: null,
         kubectlLogsList: {
           RelayAPI: null,
-          RelayCommands: null
+          RelayCommands: null,
         },
       };
     default:

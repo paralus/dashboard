@@ -108,7 +108,9 @@ const TableToolbar = (props) => {
               name="project"
               value={filter.project}
               list={props.projects}
-              defaultLabel={isProjectRole ? props.projects[0].key: "All Projects"}
+              defaultLabel={
+                isProjectRole ? props.projects[0].key : "All Projects"
+              }
               label="Project"
               handleFilter={handleFilter}
             />

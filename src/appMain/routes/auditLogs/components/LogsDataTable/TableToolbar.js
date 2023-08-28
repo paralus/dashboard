@@ -67,7 +67,16 @@ const TableToolbar = (props) => {
     filter,
     handleRemoveFilter,
   } = props;
-  const { numSelected, isProjectAdmin, isProjectRole, projects, clusters, types, users, kinds } = props;
+  const {
+    numSelected,
+    isProjectAdmin,
+    isProjectRole,
+    projects,
+    clusters,
+    types,
+    users,
+    kinds,
+  } = props;
   const [chips, setChips] = useState(filterToChips(filter));
 
   useEffect(() => {
@@ -124,7 +133,9 @@ const TableToolbar = (props) => {
               name="project"
               value={filter.project}
               list={projects}
-              defaultLabel={isProjectRole ? props.projects[0].key: "All Projects"}
+              defaultLabel={
+                isProjectRole ? props.projects[0].key : "All Projects"
+              }
               label="Project"
               handleFilter={handleFilter}
             />

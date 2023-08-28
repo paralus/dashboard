@@ -63,24 +63,24 @@ class RelayLogs extends React.Component {
       return { key: p?.metadata.name };
     });
     state.projects = projectList || [];
-    state.isProjectRole = props?.UserSession?.userRoles?.projectAuditRead
+    state.isProjectRole = props?.UserSession?.userRoles?.projectAuditRead;
     return { ...state };
   }
 
   handleRefreshClick = (filterProps) => {
     const { filter, auditType, isProjectRole, projects } = this.state;
     if (isProjectRole) {
-      let project = ""
+      let project = "";
       if (filterProps) {
         if (filterProps?.project) {
-          project = filterProps.project[0]
+          project = filterProps.project[0];
         } else {
-          project = projects[0]["key"]
-        } 
+          project = projects[0]["key"];
+        }
       } else if (filter.project) {
-        project = filter.project[0]
+        project = filter.project[0];
       } else {
-        project = projects[0]["key"]
+        project = projects[0]["key"];
       }
       this.props.getKubectlLogs(filterProps || filter, auditType, project);
     } else {
@@ -110,7 +110,8 @@ class RelayLogs extends React.Component {
 
   render() {
     const { list, count, users, filter, projects } = this.state;
-    const { namespaces, methods, clusters, isProjectAdmin, isProjectRole } = this.state;
+    const { namespaces, methods, clusters, isProjectAdmin, isProjectRole } =
+      this.state;
 
     return (
       <LogsDataTable

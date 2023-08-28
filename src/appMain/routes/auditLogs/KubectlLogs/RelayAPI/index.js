@@ -76,26 +76,26 @@ class RelayCommands extends React.Component {
     const projectList = props?.projectsList?.items.map((p) => {
       return { key: p?.metadata.name };
     });
-    state.projects = projectList || []; 
+    state.projects = projectList || [];
 
-    state.isProjectRole = props?.UserSession?.userRoles?.projectAuditRead
+    state.isProjectRole = props?.UserSession?.userRoles?.projectAuditRead;
     return { ...state };
   }
 
   handleRefreshClick = (filterProps) => {
     const { filter, auditType, isProjectRole, projects } = this.state;
     if (isProjectRole) {
-      let project = ""
+      let project = "";
       if (filterProps) {
         if (filterProps?.project) {
-          project = filterProps.project[0]
+          project = filterProps.project[0];
         } else {
-          project = projects[0]["key"]
-        } 
+          project = projects[0]["key"];
+        }
       } else if (filter.project) {
-        project = filter.project[0]
+        project = filter.project[0];
       } else {
-        project = projects[0]["key"]
+        project = projects[0]["key"];
       }
       this.props.getKubectlLogs(filterProps || filter, auditType, project);
     } else {
@@ -124,7 +124,17 @@ class RelayCommands extends React.Component {
   };
 
   render() {
-    const { list, count, users, types, clusters, projects, kinds, filter, isProjectRole } = this.state;
+    const {
+      list,
+      count,
+      users,
+      types,
+      clusters,
+      projects,
+      kinds,
+      filter,
+      isProjectRole,
+    } = this.state;
     return (
       <AuditLogsTable
         loading={this.props.loading}
