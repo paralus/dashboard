@@ -36,6 +36,16 @@ const AuditLogs = (state = initialData, action) => {
           RelayCommands: action.payload,
         },
       };
+    case "error":
+      return {
+        ...state,
+        loading: false,
+        auditLogsList: null,
+        kubectlLogsList: {
+          RelayAPI: null,
+          RelayCommands: null
+        },
+      };
     default:
       return state;
   }

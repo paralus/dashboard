@@ -96,6 +96,7 @@ const createSession = (user) => {
   }
   data.roles = roles;
   data.projectRoles = parseProjectRoles(roles);
+  data.userRoles = parseUserRoles(roles);
   return data;
 };
 

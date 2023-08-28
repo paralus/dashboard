@@ -135,8 +135,8 @@ class RelayLogs extends React.Component {
   }
 }
 
-const mapStateToProps = ({ AuditLogs, Projects, UserSession }) => {
-  const { kubectlLogsList, loading } = AuditLogs;
+const mapStateToProps = ({ AuditLogs, loading, Projects, UserSession }) => {
+  const { kubectlLogsList } = AuditLogs;
   const { projectsList } = Projects;
   return { kubectlLogsList, projectsList, UserSession, loading };
 };

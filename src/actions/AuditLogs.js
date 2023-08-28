@@ -18,6 +18,7 @@ export function getAuditLogs(filter, project) {
         dispatch({ type: "get_audit_logs", payload: response.data?.result });
       })
       .catch((error) => {
+        dispatch({ type: "error" });
         console.log(error);
       });
   };
@@ -44,6 +45,7 @@ export function getKubectlLogs(filter, type = "RelayCommands", project) {
         });
       })
       .catch((error) => {
+        dispatch({ type: "error" });
         console.log(error);
       });
   };
