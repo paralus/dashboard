@@ -1,4 +1,4 @@
-name: Create, publish container image
+name: Create, publish, sign and verify container image
 
 on:
   push:
@@ -9,8 +9,7 @@ env:
   IMAGE_NAME: paralusio/dashboard
 
 jobs:
-
-  build-push:
+  build-push-sign-verify:
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -40,6 +39,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
+        id: build
         uses: docker/build-push-action@0a97817b6ade9f46837855d676c4cca3a2471fc9
         with:
           context: .
@@ -47,3 +47,24 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.1.1
+
+      - name: Check Cosign
+        run: cosign version
+
+      - name: Sign Published Docker image using Cosign
+        run: |
+          cosign sign -y --key env://COSIGN_PRIVATE_KEY \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}
+        env:
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+        
+      - name: Verify Cosign Signature
+        run: |
+          cosign verify --key env://COSIGN_PUBLIC_KEY \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+        env:
+          COSIGN_PUBLIC_KEY: ${{ secrets.COSIGN_PUBLIC_KEY }}
