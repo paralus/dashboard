@@ -18,22 +18,26 @@ export function getAuditLogs(filter, project) {
         dispatch({ type: "get_audit_logs", payload: response.data?.result });
       })
       .catch((error) => {
+        dispatch({ type: "error" });
         console.log(error);
       });
   };
 }
 
-export function getKubectlLogs(filter, type = "RelayCommands") {
+export function getKubectlLogs(filter, type = "RelayCommands", project) {
   const partner = JSON.parse(window?.localStorage.getItem("partner"));
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   filter = { ...filter, partner: partner, organization: organization };
   let query = `auditType=${type}`;
   query += getFilterQuery(filter);
 
+  let url = "audit/relay";
+  if (project) url = `project/${project}/${url}`;
+
   return function (dispatch) {
     dispatch({ type: "load_audit_logs" });
     http("event", "v1")
-      .get(`audit/relay?${query}`)
+      .get(`${url}?${query}`)
       .then((response) => {
         dispatch({
           type: `get_kubectl_${type}_logs`,
@@ -41,6 +45,7 @@ export function getKubectlLogs(filter, type = "RelayCommands") {
         });
       })
       .catch((error) => {
+        dispatch({ type: "error" });
         console.log(error);
       });
   };

@@ -22,6 +22,8 @@ class RelayLogs extends React.Component {
       methods: [],
       filter: DefaultFilter,
       auditType: "RelayCommands",
+      projects: [],
+      isProjectRole: false,
     };
   }
 
@@ -61,12 +63,29 @@ class RelayLogs extends React.Component {
       return { key: p?.metadata.name };
     });
     state.projects = projectList || [];
+    state.isProjectRole = props?.UserSession?.userRoles?.projectAuditRead;
     return { ...state };
   }
 
   handleRefreshClick = (filterProps) => {
-    const { filter, auditType } = this.state;
-    this.props.getKubectlLogs(filterProps || filter, auditType);
+    const { filter, auditType, isProjectRole, projects } = this.state;
+    if (isProjectRole) {
+      let project = "";
+      if (filterProps) {
+        if (filterProps?.project) {
+          project = filterProps.project[0];
+        } else {
+          project = projects[0]["key"];
+        }
+      } else if (filter.project) {
+        project = filter.project[0];
+      } else {
+        project = projects[0]["key"];
+      }
+      this.props.getKubectlLogs(filterProps || filter, auditType, project);
+    } else {
+      this.props.getKubectlLogs(filterProps || filter, auditType);
+    }
   };
 
   handleResetFilter = () => {
@@ -91,7 +110,8 @@ class RelayLogs extends React.Component {
 
   render() {
     const { list, count, users, filter, projects } = this.state;
-    const { namespaces, methods, clusters } = this.state;
+    const { namespaces, methods, clusters, isProjectAdmin, isProjectRole } =
+      this.state;
 
     return (
       <LogsDataTable
@@ -105,6 +125,8 @@ class RelayLogs extends React.Component {
         methods={methods}
         filter={filter}
         projects={projects}
+        isProjectAdmin={isProjectAdmin}
+        isProjectRole={isProjectRole}
         handleFilter={this.handleFilter}
         handleResetFilter={this.handleResetFilter}
         handleRefreshClick={() => this.handleRefreshClick(null)}
@@ -114,8 +136,8 @@ class RelayLogs extends React.Component {
   }
 }
 
-const mapStateToProps = ({ AuditLogs, Projects, UserSession }) => {
-  const { kubectlLogsList, loading } = AuditLogs;
+const mapStateToProps = ({ AuditLogs, loading, Projects, UserSession }) => {
+  const { kubectlLogsList } = AuditLogs;
   const { projectsList } = Projects;
   return { kubectlLogsList, projectsList, UserSession, loading };
 };

@@ -116,11 +116,13 @@ const LogsDataTable = (props) => {
           handleRefreshClick={props.handleRefreshClick}
           handleResetFilter={props.handleResetFilter}
           handleFilter={props.handleFilter}
+          isProjectAdmin={props.isProjectAdmin}
           isProjectRole={props.isProjectRole}
           users={props.users}
           types={props.types}
           kinds={props.kinds}
           projects={props.projects}
+          clusters={props.clusters}
           filter={props.filter}
           list={props?.list || []}
           handleRemoveFilter={props?.handleRemoveFilter}

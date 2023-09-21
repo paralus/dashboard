@@ -8,8 +8,6 @@ import {
   ListItemIcon,
   Checkbox,
 } from "@material-ui/core";
-import { RoleTypes } from "constants/RoleTypes";
-import RoleHelp from "./RoleHelp";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -79,13 +77,10 @@ const RolesCard = ({
                     id={labelId}
                     primary={
                       <span style={{ fontWeight: 500 }}>
-                        {RoleTypes[value.metadata.name] || value.metadata.name}
+                        {value.metadata.name}
                       </span>
                     }
-                    secondary={
-                      RoleHelp[value.metadata.name] ||
-                      value.metadata.description
-                    }
+                    secondary={value.metadata.description}
                   />
                 </ListItem>
               );

@@ -63,6 +63,9 @@ const parseUserRoles = (roles) => {
         case "project.admin.write":
           userRoles.projectAdmin = true;
           break;
+        case "project.relayAudit.read":
+          userRoles.projectAuditRead = true;
+          break;
       }
     });
   });
@@ -93,6 +96,7 @@ const createSession = (user) => {
   }
   data.roles = roles;
   data.projectRoles = parseProjectRoles(roles);
+  data.userRoles = parseUserRoles(roles);
   return data;
 };
 
