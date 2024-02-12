@@ -9,6 +9,7 @@ import ClusterActions from "components/ClusterActions/index";
 import ClusterWidgets from "./components/ClusterWidgets";
 import ClusterStatusInfo from "./components/ClusterStatusInfo";
 import CountCard from "./components/CountCard";
+import DateFormat from "components/DateFormat";
 
 const useStyles = makeStyles((theme) => ({
   popover: {
@@ -187,6 +188,12 @@ const SlatList = (props) => {
                     params={cluster.spec.params}
                   />
                 </span>
+              </div>
+              <div className="mt-2 col-md-12">
+                <span className="d-inline-flex flex-row align-items-center">
+                    <span style={{ fontWeight: "500" }}>{`Created At : `}</span>
+                      <DateFormat timestamp={cluster.metadata.createdAt} />
+                  </span>
               </div>
             </div>
             {isClusterReady && customLabels.length > 0 && (
