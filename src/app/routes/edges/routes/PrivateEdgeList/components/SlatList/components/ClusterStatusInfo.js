@@ -35,7 +35,7 @@ function getClusterLastCheckedIn(cluster) {
     for (let index = 0; index < len; index++) {
       ready =
         cluster.spec.clusterData.cluster_status.conditions[index].type ===
-          "ClusterHealth"
+        "ClusterHealth";
       if (ready) {
         return cluster.spec.clusterData.cluster_status.conditions[index]
           .lastUpdated;
