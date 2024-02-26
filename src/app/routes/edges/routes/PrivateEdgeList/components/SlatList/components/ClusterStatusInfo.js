@@ -65,9 +65,9 @@ function ClusterStatusInfo({
               </span>
               <span style={{ fontSize: "14px" }}>
                 {isClusterAvailable(cluster) ? (
-                  <span style={{ color: "teal" }}>SUCCESS</span>
+                  <span style={{ color: "teal" }}>HEALTHY</span>
                 ) : (
-                  <span style={{ color: "red" }}>FAILURE</span>
+                  <span style={{ color: "red" }}>UNHEALTHY</span>
                 )}
               </span>
               {cluster && (
