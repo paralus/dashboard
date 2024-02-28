@@ -1,3 +1,9 @@
+## [0.2.2](https://github.com/paralus/dashboard/compare/v0.2.1...v0.2.2) (2024-02-28)
+
+### Features
+
+* changes for cluster connection status and defaulting to card lister ([#237](https://github.com/paralus/dashboard/issues/237)) ([be7d5cb](https://github.com/paralus/dashboard/commit/be7d5cb4f2a203d5bf4ad0c293c61111e128e31a))
+
 ## [0.2.1](https://github.com/paralus/dashboard/compare/v0.2.0...v0.2.1) (2023-09-25)
 
 ### Features
@@ -75,7 +81,8 @@
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/paralus/dashboard/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/paralus/dashboard/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/paralus/dashboard/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/paralus/dashboard/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/paralus/dashboard/compare/v0.1.9...v0.2.0
 [0.1.9]: https://github.com/paralus/dashboard/compare/v0.1.8...v0.1.9
