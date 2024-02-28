@@ -17,9 +17,9 @@ function isClusterAvailable(cluster) {
     ) {
       ready =
         cluster.spec.clusterData.cluster_status.conditions[index].type ===
-          "ClusterReady" &&
+          "ClusterHealth" &&
         cluster.spec.clusterData.cluster_status.conditions[index].status ===
-          "Success";
+          "Healthy";
       if (ready) {
         return ready;
       }
@@ -35,9 +35,7 @@ function getClusterLastCheckedIn(cluster) {
     for (let index = 0; index < len; index++) {
       ready =
         cluster.spec.clusterData.cluster_status.conditions[index].type ===
-          "ClusterReady" &&
-        cluster.spec.clusterData.cluster_status.conditions[index].status ===
-          "Success";
+        "ClusterHealth";
       if (ready) {
         return cluster.spec.clusterData.cluster_status.conditions[index]
           .lastUpdated;
@@ -67,9 +65,9 @@ function ClusterStatusInfo({
               </span>
               <span style={{ fontSize: "14px" }}>
                 {isClusterAvailable(cluster) ? (
-                  <span style={{ color: "teal" }}>SUCCESS</span>
+                  <span style={{ color: "teal" }}>HEALTHY</span>
                 ) : (
-                  <span style={{ color: "red" }}>FAILURE</span>
+                  <span style={{ color: "red" }}>UNHEALTHY</span>
                 )}
               </span>
               {cluster && (

@@ -643,7 +643,7 @@ class PrivateEdgeList extends React.Component {
       clusterType: "on-prem",
       clusterCreateStep: 0,
       downloadClusterYAMLClick: false,
-      renderInTable: true,
+      renderInTable: false,
       removeEdgeObj: {},
       versionType: "control plane and nodegroups",
       selected_nodegroups: [],
