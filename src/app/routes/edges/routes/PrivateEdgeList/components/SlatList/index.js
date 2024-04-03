@@ -191,6 +191,12 @@ const SlatList = (props) => {
               </div>
               <div className="mt-2 col-md-12">
                 <span className="d-inline-flex flex-row align-items-center">
+                  <span style={{ fontWeight: "500" }}>{`Description : `}</span>
+                </span>
+                <span> {cluster.metadata.description}</span>
+              </div>
+              <div className="mt-2 col-md-12">
+                <span className="d-inline-flex flex-row align-items-center">
                   <span style={{ fontWeight: "500" }}>{`Created At : `}</span>
                   <DateFormat timestamp={cluster.metadata.createdAt} />
                 </span>

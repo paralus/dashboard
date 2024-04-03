@@ -40,6 +40,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "11px",
     paddingLeft: "15px",
   },
+  description: {
+    fontSize: "11px",
+    paddingLeft: "15px",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
 }));
 
 const ProjectCard = ({ data, refreshProjects }) => {
@@ -125,6 +132,10 @@ const ProjectCard = ({ data, refreshProjects }) => {
                 {data.metadata.name}
               </h2>
             </Tooltip>
+            <div className={classes.description}>
+              <span className="mr-1">Description : </span>
+              <span>{data.metadata.description}</span>
+            </div>
             <div className={classes.created}>
               <span className="mr-1">Created :</span>
               <span>
