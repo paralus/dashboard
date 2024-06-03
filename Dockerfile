@@ -1,4 +1,4 @@
-FROM node:18 AS builder
+FROM node:20.14 AS builder
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
@@ -10,7 +10,7 @@ RUN yarn install --pure-lockfile --network-timeout 600000
 COPY . .
 RUN yarn run build
 
-FROM nginx:1.25.3
+FROM nginx:1.27.0
 EXPOSE 80
 COPY ./deploy/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
