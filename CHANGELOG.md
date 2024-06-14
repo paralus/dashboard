@@ -1,3 +1,9 @@
+## [0.2.3](https://github.com/paralus/dashboard/compare/v0.2.2...v0.2.3) (2024-06-14)
+
+### Features
+
+* add description field for project and cluster card ([#251](https://github.com/paralus/dashboard/issues/251)) ([68b23d9](https://github.com/paralus/dashboard/commit/68b23d9933f0408c925dd96967ecc31889467460))
+
 ## [0.2.2](https://github.com/paralus/dashboard/compare/v0.2.1...v0.2.2) (2024-02-28)
 
 ### Features
