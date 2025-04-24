@@ -10,7 +10,7 @@ RUN yarn install --pure-lockfile --network-timeout 600000
 COPY . .
 RUN yarn run build
 
-FROM nginx:1.27.1
+FROM nginx:1.28.0
 EXPOSE 80
 COPY ./deploy/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
