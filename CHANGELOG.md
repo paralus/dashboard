@@ -1,3 +1,13 @@
+## [0.2.4](https://github.com/paralus/dashboard/compare/v0.2.3...v0.2.4) (2025-05-23)
+
+### Dependencies
+
+* upgrade node nginx deps ([68eab5b](https://github.com/paralus/dashboard/commit/68eab5bb22975b50ab9c7b0f3917ea58aea2db93))
+
+### Security Fixes
+
+* package.json & yarn.lock to reduce vulnerabilities ([e60c010](https://github.com/paralus/dashboard/commit/e60c01055d5c09f6df6f487a308ed1d78406cbdb))
+
 ## [0.2.3](https://github.com/paralus/dashboard/compare/v0.2.2...v0.2.3) (2024-06-14)
 
 ### Features
