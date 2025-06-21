@@ -26,7 +26,7 @@
     "js-cookie": "^2.2.0",
     "keycode": "^2.2.1",
     "moment": "^2.29.4",
-    "node-sass": "^8.0.0",
+    "node-sass": "^9.0.0",
     "numeral": "^2.0.6",
     "prettier": "^2.6.0",
     "ramda": "^0.28.0",
