@@ -1,4 +1,6 @@
 # Dashboard
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fparalus%2Fdashboard.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fparalus%2Fdashboard?ref=badge_shield)
+
 
 Dashboard is the web UI that allows users to interact with paralus. Built using react, the dashboard is responsive, fast and feature loaded. It allows you to easily work with your clusters. The intuitive UI helps you manage your organization, projects and clusters along with user permissions and access. It makes importing clusters and managing access to it easier and quicker.
 
@@ -66,3 +68,7 @@ The easiest way to start is to look at existing issues and see if there’s some
 Once you decide on an issue, please comment on it so that all of us know that you’re on it.
 
 If you’re looking to add a new feature, raise a [new issue](https://github.com/paralus/dashboard/issues) and start a discussion with the community. Engage with the maintainers of the project and work your way through.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fparalus%2Fdashboard.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fparalus%2Fdashboard?ref=badge_large)
