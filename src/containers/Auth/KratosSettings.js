@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import { useHistory } from "react-router-dom";
-
 import Button from "@material-ui/core/Button";
-import { newKratosSdk } from "actions/Auth";
+import { newKratosSdk } from "../../actions/Auth";
 import { connect } from "react-redux";
 import { AxiosError } from "axios";
 import T from "i18n-react";
@@ -27,9 +26,22 @@ const KratosSettings = (props) => {
   let [message, setMessage] = useState("");
   let [resetSuccess, setResetSuccess] = useState(false);
 
+  // const getSettingsFlow = () =>
+  //   newKratosSdk()
+  //     .initializeSelfServiceSettingsFlowForBrowsers(undefined)
+  //     .then(({ data: flow }) => {
+  //       setFlow(flow);
+  //       flow.ui.nodes.forEach((node) => {
+  //         if (node.attributes.name === "csrf_token") {
+  //           setCSRF(node.attributes.value);
+  //         }
+  //       });
+  //     })
+  //     .catch(console.error);
+
   const getSettingsFlow = () =>
     newKratosSdk()
-      .initializeSelfServiceSettingsFlowForBrowsers(undefined)
+      .createBrowserSettingsFlow(undefined)
       .then(({ data: flow }) => {
         setFlow(flow);
         flow.ui.nodes.forEach((node) => {
@@ -68,10 +80,13 @@ const KratosSettings = (props) => {
       return;
     }
     newKratosSdk()
-      .submitSelfServiceSettingsFlow(flowid ?? flow.id, {
-        csrf_token,
-        method: "password",
-        password: password,
+      .updateSettingsFlow({
+        flow: flowid ?? flow.id,
+        updateSettingsFlowBody: {
+          csrf_token,
+          password,
+          method: "password",
+        },
       })
       .then(async ({ data }) => {
         if (data.ui.messages) {

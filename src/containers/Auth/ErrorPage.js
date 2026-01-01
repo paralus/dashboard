@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import { newKratosSdk } from "actions/Auth";
+import { newKratosSdk } from "../../actions/Auth";
 import { useLocation } from "react-router-dom";
 import PageLayout from "./Login/components/PageLayout";
 import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
@@ -33,9 +33,28 @@ const ErrorPage = (props) => {
     });
   };
 
-  const getKratosError = (errorCode) => {
+  // const getKratosError = (errorCode) => {
+  //   newKratosSdk()
+  //     .getSelfServiceError(errorCode)
+  //     .then(({ data: resp }) => {
+  //       if (resp) {
+  //         setErrorInfo(resp.error);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       setErrorInfo(null);
+  //       switch (err.response?.status) {
+  //         case (404, 403, 410):
+  //           // The error id could not be found or fetched or
+  //           // expired. Let's just redirect home!
+  //           moveToDashboard();
+  //       }
+  //     });
+  // };
+
+    const getKratosError = (errorCode) => {
     newKratosSdk()
-      .getSelfServiceError(errorCode)
+      .getFlowError({id: errorCode})
       .then(({ data: resp }) => {
         if (resp) {
           setErrorInfo(resp.error);
