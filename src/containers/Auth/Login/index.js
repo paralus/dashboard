@@ -89,7 +89,7 @@ class Login extends Component {
 
   initializeFlow = () =>
     newKratosSdk()
-      .createBrowserLoginFlow({ refresh: true }, "aal1")
+      .createBrowserLoginFlow({ refresh: true, aal: "2" })
       .then((response) => {
         const { data: flow } = response;
         flow.ui.nodes.forEach((node) => {
