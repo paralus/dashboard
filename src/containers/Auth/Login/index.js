@@ -60,36 +60,9 @@ class Login extends Component {
     this.confirm_password_node = null;
   }
 
-  // initializeFlow = () =>
-  //   newKratosSdk()
-  //     .initializeSelfServiceLoginFlowForBrowsers(true, "aal1")
-  //     .then((response) => {
-  //       const { data: flow } = response;
-  //       flow.ui.nodes.forEach((node) => {
-  //         if (node.attributes.name === "csrf_token") {
-  //           this.setState({ csrf_token: node.attributes.value });
-  //         }
-  //         if (node.group === "oidc") {
-  //           this.setState({
-  //             nodes: [
-  //               ...this.state.nodes,
-  //               {
-  //                 ...node.meta?.label,
-  //                 provider: node.meta.label.context.provider,
-  //               },
-  //             ],
-  //           });
-  //         }
-  //       });
-  //       this.setState({
-  //         flow,
-  //       });
-  //     })
-  //     .catch(console.error);
-
   initializeFlow = () =>
     newKratosSdk()
-      .createBrowserLoginFlow({ refresh: true, aal: "2" })
+      .createBrowserLoginFlow({ refresh: true, aal: "aal1" })
       .then((response) => {
         const { data: flow } = response;
         flow.ui.nodes.forEach((node) => {
@@ -258,26 +231,6 @@ class Login extends Component {
     const { auth } = this.props;
     const { username, flow } = this.state;
     auth.username = username;
-
-    // newKratosSdk()
-    //   .submitSelfServiceLoginFlow(flow.id, {
-    //     csrf_token: this.state.csrf_token,
-    //     method: "password",
-    //     password_identifier: this.state.username,
-    //     password: this.state.password,
-    //   })
-    //   .then(() => {
-    //     // const { initializeApp } = this.props;
-    //     /*
-    //     initializeApp(() => {
-    //     });
-    //     */
-    //     window.location.href = "/";
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     this.handleFlowError(err);
-    //   });
 
     newKratosSdk()
       .updateLoginFlow({
