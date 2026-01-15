@@ -247,5 +247,5 @@ export default withRouter(
     removeGroup,
     resetGroup,
     resetGroupList,
-  })(List)
+  })(List),
 );

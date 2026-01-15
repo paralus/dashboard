@@ -45,7 +45,7 @@ export const isSomething = R.complement(isNothing);
 // Highcharts Helpers
 export const seriesHaveNoData = R.pipe(
   R.propOr([], "series"),
-  R.all(({ data }) => isNothing(data))
+  R.all(({ data }) => isNothing(data)),
 );
 
 export const makeCancelable = (promise) => {
@@ -54,7 +54,7 @@ export const makeCancelable = (promise) => {
   const wrappedPromise = new Promise((resolve, reject) => {
     promise.then(
       (val) => (hasCanceled ? reject({ isCanceled: true }) : resolve(val)),
-      (error) => (hasCanceled ? reject({ isCanceled: true }) : reject(error))
+      (error) => (hasCanceled ? reject({ isCanceled: true }) : reject(error)),
     );
   });
 
@@ -84,7 +84,7 @@ export const JSONtoCSV = (
   excludedColumns = [],
   path = [],
   headers = [],
-  headerString = null
+  headerString = null,
 ) => {
   if (obj == null) return null;
   Object.keys(obj).forEach((key) => {
@@ -166,7 +166,7 @@ export const getKubeAge = (ts) => {
     const postfixes = ["y", "d", "h", "m", "s"];
     const { values } = periods.reduce(
       (a, c) => ({ ms: a.ms % c, values: [...a.values, Math.floor(a.ms / c)] }),
-      { ms: milliseconds, values: [] }
+      { ms: milliseconds, values: [] },
     );
     const getString = (value, idx) =>
       value ? `${value}${postfixes[idx]}` : "";
@@ -201,8 +201,8 @@ export const colorCodePhases = R.pipe(
         (p) => <Chip size="small" style={warningChipStyle} label={p} />,
       ],
       [R.T, (p) => <Chip size="small" style={errorChipStyle} label={p} />],
-    ])
-  )
+    ]),
+  ),
 );
 
 export const colorCodeHelmChart = R.pipe(
@@ -225,7 +225,7 @@ export const colorCodeHelmChart = R.pipe(
       (p) => <Chip size="small" style={warningChipStyle} label={p} />,
     ],
     [R.T, (p) => <Chip size="small" style={healthyChipStyle} label={p} />],
-  ])
+  ]),
 );
 
 export const readStatusByPods = ({ rowData }) => {
@@ -245,7 +245,7 @@ export const readStatusByPods = ({ rowData }) => {
     R.uniq,
     R.without([undefined]),
     R.when(R.complement(isHealthyStatus), R.reject(isHealthyStatus)),
-    R.ifElse(isNothing, R.always(longEm()), colorCodePhases)
+    R.ifElse(isNothing, R.always(longEm()), colorCodePhases),
   )(rowData);
 };
 
@@ -281,7 +281,7 @@ export const getHealthyPodsCount = ({ rowData }) => {
         !c.containerReasons
       );
     }),
-    R.length
+    R.length,
   )(rowData);
 };
 
@@ -313,7 +313,7 @@ export const makeLabelCellData = ({ rowData }) => {
         }
 
         return `${removeLabel(k)}:${rowData[k]}`;
-      })
+      }),
   );
 };
 
@@ -410,7 +410,7 @@ export const downloadFile = (
   fileName,
   content,
   type = "text/plain",
-  extention = null
+  extention = null,
 ) => {
   const textFileAsBlob = new Blob([content], { type });
   if (extention) fileName += `.${extention}`;

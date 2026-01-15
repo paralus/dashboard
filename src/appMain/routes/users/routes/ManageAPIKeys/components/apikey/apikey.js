@@ -87,7 +87,7 @@ class DataTableHead extends React.Component {
                 </Tooltip>
               </TableCell>
             ),
-            this
+            this,
           )}
         </TableRow>
       </TableHead>
@@ -179,7 +179,7 @@ class APIKeys extends React.Component {
     if (props.isAPIKeyDeleteSuccess) {
       this.props.getApiKeys(
         this.props.match.params.userId,
-        this.props.isSSOUser
+        this.props.isSSOUser,
       );
     }
     if (props.isAPIKeysSuccess) {
@@ -198,7 +198,7 @@ class APIKeys extends React.Component {
   handleCreateClick = (event) => {
     this.props.createApiKey(
       this.props.match.params.userId,
-      this.props.isSSOUser
+      this.props.isSSOUser,
     );
   };
 
@@ -233,7 +233,7 @@ class APIKeys extends React.Component {
 
   handleDeleteKey = (accountid, id) => {
     this.setState({ openDeleteWarning: false }, () =>
-      this.props.deleteApiKey(accountid, id)
+      this.props.deleteApiKey(accountid, id),
     );
   };
 
@@ -398,7 +398,7 @@ class APIKeys extends React.Component {
                 onClick={() =>
                   this.handleDeleteKey(
                     this.props.match.params.userId,
-                    this.state.deletekey
+                    this.state.deletekey,
                   )
                 }
                 color="secondary"

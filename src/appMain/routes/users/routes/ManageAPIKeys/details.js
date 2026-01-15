@@ -133,5 +133,5 @@ export default withRouter(
     getApiKeys,
     deleteApiKey,
     resetUserApiKeyResponse,
-  })(ManageAPIKeys)
+  })(ManageAPIKeys),
 );

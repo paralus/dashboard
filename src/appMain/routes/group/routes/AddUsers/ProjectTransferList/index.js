@@ -60,7 +60,7 @@ function not(a, b) {
     (value) =>
       !b.find((e) => {
         return e.metadata.name === value.metadata.name;
-      })
+      }),
   );
 }
 
@@ -68,7 +68,7 @@ function intersection(a, b) {
   return a.filter((value) =>
     b.find((e) => {
       return e.metadata.name === value.metadata.name;
-    })
+    }),
   );
 }
 

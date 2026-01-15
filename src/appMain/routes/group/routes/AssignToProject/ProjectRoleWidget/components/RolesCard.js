@@ -48,7 +48,7 @@ const RolesCard = ({
               const adminDisabled =
                 (projectRoleDisabled &&
                   !["ADMIN", "ADMIN_READ_ONLY"].includes(
-                    value.metadata.name
+                    value.metadata.name,
                   )) ||
                 (hasProjectRole &&
                   ["ADMIN", "ADMIN_READ_ONLY"].includes(value.metadata.name));

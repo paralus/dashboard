@@ -354,5 +354,5 @@ const mapStateToProps = ({ settings }) => {
   };
 };
 export default withRouter(
-  connect(mapStateToProps, { getCliDownloadOptions })(DownloadCli)
+  connect(mapStateToProps, { getCliDownloadOptions })(DownloadCli),
 );

@@ -118,7 +118,7 @@ class AddToGroups extends React.Component {
       for (let index = 0; index < removeUsersList.length; index++) {
         userDetail.spec.groups = this.arrayRemove(
           userDetail.spec.groups,
-          removeUsersList[index].metadata.name
+          removeUsersList[index].metadata.name,
         );
       }
       editUser(userDetail);
@@ -229,5 +229,5 @@ export default withRouter(
     getUserDetail,
     getGroups,
     resetUserGroupDeleteError,
-  })(AddToGroups)
+  })(AddToGroups),
 );

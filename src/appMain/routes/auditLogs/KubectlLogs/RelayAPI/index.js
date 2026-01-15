@@ -42,7 +42,7 @@ class RelayCommands extends React.Component {
     const logs = props?.kubectlLogsList?.[auditType] || {};
     const { hits = {}, aggregations = {} } = logs;
     const defaultKinds = KUBECTL_DEFAULT_KINDS.map((kind) =>
-      kind.toLowerCase()
+      kind.toLowerCase(),
     );
 
     state.list = hits?.hits || [];
@@ -163,5 +163,5 @@ const mapStateToProps = ({ AuditLogs, loading, Projects, UserSession }) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getKubectlLogs })(RelayCommands)
+  connect(mapStateToProps, { getKubectlLogs })(RelayCommands),
 );

@@ -9,7 +9,7 @@ function useToggle(initialState = false) {
       toggle: () => setState((s) => !s),
       reset: () => setState(initialState),
     }),
-    [initialState]
+    [initialState],
   );
 
   return [state, handlers];

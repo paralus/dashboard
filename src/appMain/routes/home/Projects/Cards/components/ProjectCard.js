@@ -63,7 +63,7 @@ const ProjectCard = ({ data, refreshProjects }) => {
     };
   });
   const organization = useSelector(
-    (state) => state.settings.organization.detail
+    (state) => state.settings.organization.detail,
   );
 
   const handleProjectClick = (project, path) => {
@@ -100,8 +100,8 @@ const ProjectCard = ({ data, refreshProjects }) => {
       deleteProject(
         data.metadata.name,
         deleteSuccessCallback,
-        deleteErrorCallback
-      )
+        deleteErrorCallback,
+      ),
     );
   };
 

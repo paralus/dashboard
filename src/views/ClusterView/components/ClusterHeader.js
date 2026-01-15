@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     fill: theme.palette.success.light,
     filter: `drop-shadow(0px 0px 6px ${fade(
       theme.palette.success.light,
-      0.75
+      0.75,
     )})`,
   },
   unhealthy: {
@@ -104,7 +104,7 @@ function getHealth(edge, classes) {
         fontSize="inherit"
         className={clsx(
           classes.healthIcon,
-          classes[isHealthy ? "healthy" : "unhealthy"]
+          classes[isHealthy ? "healthy" : "unhealthy"],
         )}
       />
       <Tooltip

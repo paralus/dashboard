@@ -24,7 +24,7 @@ const ExportTable = ({ list, tableType, headerMapping = null }) => {
   const handleExport = () => {
     data = JSONArrayToCSV(
       list.map((e) => e?._source),
-      ["meta"]
+      ["meta"],
     );
     if (headerMapping) headerMappingForData();
     const a = document.createElement("a");

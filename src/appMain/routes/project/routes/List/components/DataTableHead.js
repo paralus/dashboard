@@ -46,7 +46,7 @@ export default class DataTableHead extends React.Component {
                 </TableSortLabel>
               </TableCell>
             ),
-            this
+            this,
           )}
         </TableRow>
       </TableHead>

@@ -48,13 +48,13 @@ class EditUser extends React.Component {
     if (projectDetail) {
       newState.projectName = projectDetail.metadata.name;
       newState.editRoles = projectDetail.spec.userRoles.filter(
-        (r) => r.user == newState.userId
+        (r) => r.user == newState.userId,
       );
     }
     if (userDetail) {
       newState.selectedUser = userDetail.metadata.name;
       newState.editRoles = userDetail.spec.projectNamespaceRoles.filter(
-        (r) => r.project === state.projectId
+        (r) => r.project === state.projectId,
       );
     }
     return {
@@ -90,7 +90,7 @@ class EditUser extends React.Component {
     const { projectDetail } = this.props;
 
     const roles = projectDetail.spec.userRoles.filter(
-      (e) => e.user !== selectedUser
+      (e) => e.user !== selectedUser,
     );
 
     selectedRoles.forEach((role) => {
@@ -147,7 +147,7 @@ class EditUser extends React.Component {
     editProjectWithCallback(
       projectDetail,
       this.successCallback,
-      this.errorCallback
+      this.errorCallback,
     );
   };
 
@@ -284,5 +284,5 @@ export default withRouter(
     getProject,
     getUserDetail,
     resetProjectEditUser,
-  })(EditUser)
+  })(EditUser),
 );

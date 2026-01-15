@@ -22,14 +22,14 @@ const SideNav = ({ onToggleCollapsedNav }) => {
         dispatch(setDrawerType(MINI_DRAWER));
       }
     },
-    [window.innerWidth]
+    [window.innerWidth],
   );
 
   const drawerStyle = drawerType.includes(FIXED_DRAWER)
     ? "d-xl-flex"
     : drawerType.includes(COLLAPSED_DRAWER)
-    ? ""
-    : "d-flex";
+      ? ""
+      : "d-flex";
   return (
     <div className={`app-sidebar d-none ${drawerStyle}`}>
       <Drawer

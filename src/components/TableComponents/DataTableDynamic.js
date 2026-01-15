@@ -44,7 +44,7 @@ const DataTableDynamic = ({
     (_) => {
       if (refresh > 0) handleGetRows(rowsPerPage, offset);
     },
-    [refresh]
+    [refresh],
   );
 
   useEffect(
@@ -52,14 +52,14 @@ const DataTableDynamic = ({
       if (autoRefresh && !taskPoller.current) {
         taskPoller.current = setInterval(
           () => handleGetRows(rowsPerPage, offset),
-          autoRefreshInterval
+          autoRefreshInterval,
         );
       }
       if (!autoRefresh) {
         clearInterval(taskPoller.current);
       }
     },
-    [autoRefresh]
+    [autoRefresh],
   );
 
   const resetList = (rowsPerPage, offset) => {
@@ -68,7 +68,7 @@ const DataTableDynamic = ({
       clearInterval(taskPoller.current);
       taskPoller.current = setInterval(
         () => handleGetRows(rowsPerPage, offset),
-        autoRefreshInterval
+        autoRefreshInterval,
       );
     }
   };

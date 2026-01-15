@@ -70,5 +70,5 @@ export default withRouter(
   connect(mapStateToProps, {
     getUserDetail,
     resetUser,
-  })(UserDetail)
+  })(UserDetail),
 );

@@ -32,7 +32,7 @@ const ClusterConfigDownload = ({ edge, clusterStatus }) => {
                 getDownloadLink(
                   res.data,
                   `${edge.metadata.name}-bootstrap.yaml`,
-                  "application/yaml"
+                  "application/yaml",
                 ).click();
               });
             }}

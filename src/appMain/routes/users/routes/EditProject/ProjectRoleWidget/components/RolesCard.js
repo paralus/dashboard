@@ -45,10 +45,10 @@ const RolesCard = ({
               const adminDisabled =
                 (projectRoleDisabled &&
                   !["ADMIN", "ADMIN_READ_ONLY"].includes(
-                    value.metadata.name
+                    value.metadata.name,
                   )) ||
                 ["NAMESPACE_ADMIN", "NAMESPACE_READ_ONLY"].includes(
-                  value.metadata.name
+                  value.metadata.name,
                 );
               return (
                 <ListItem
@@ -65,7 +65,7 @@ const RolesCard = ({
                       checked={
                         checked.findIndex(
                           (element) =>
-                            element.metadata.name === value.metadata.name
+                            element.metadata.name === value.metadata.name,
                         ) !== -1
                       }
                       tabIndex={-1}

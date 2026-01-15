@@ -6,7 +6,7 @@ export function getUsers(
   searchText,
   orderBy = "",
   order = "",
-  filters
+  filters,
 ) {
   const partner = JSON.parse(window?.localStorage.getItem("partner"));
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
@@ -378,7 +378,7 @@ export function getKubeconfigValidity(accountId, isSSOUser = false) {
   return http(
     `v2/sentry/kubeconfig/${type}/${accountId}/setting?opts.organization=${orgid}`,
     "",
-    true
+    true,
   ).get();
 }
 
@@ -392,7 +392,7 @@ export function setKubeconfigValidity(accountId, params, isSSOUser = false) {
   return http(
     `v2/sentry/kubeconfig/${type}/${accountId}/setting`,
     "",
-    true
+    true,
   ).put("", params);
 }
 
@@ -401,7 +401,7 @@ export function revokeKubeconfig(accountId, isSSOUser = false) {
   if (isSSOUser) type = "ssouser";
   const partnerId = JSON.parse(window?.localStorage.getItem("partner_id"));
   const organizationId = JSON.parse(
-    window?.localStorage.getItem("organization_id")
+    window?.localStorage.getItem("organization_id"),
   );
   let req = {
     opts: {
@@ -416,7 +416,7 @@ export function revokeKubeconfig(accountId, isSSOUser = false) {
 export function revokeSelfKubeconfig(accountId) {
   const partnerId = JSON.parse(window?.localStorage.getItem("partner_id"));
   const organizationId = JSON.parse(
-    window?.localStorage.getItem("organization_id")
+    window?.localStorage.getItem("organization_id"),
   );
   let req = {
     opts: {

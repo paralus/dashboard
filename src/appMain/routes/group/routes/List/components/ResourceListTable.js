@@ -223,7 +223,7 @@ class ResourceListTable extends React.Component {
     let groupList = [...list];
     if (searchText) {
       groupList = list.filter(
-        (u) => u.metadata.name && u.metadata.name.indexOf(searchText) !== -1
+        (u) => u.metadata.name && u.metadata.name.indexOf(searchText) !== -1,
       );
       listCount = groupList.length;
     }

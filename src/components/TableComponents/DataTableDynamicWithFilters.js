@@ -36,7 +36,7 @@ const DataTableDynamicWithFilters = ({
     (_) => {
       if (refresh > 0) handleGetRows(rowsPerPage, offset, ...filterParams);
     },
-    [refresh]
+    [refresh],
   );
 
   const resetList = (rowsPerPage, offset, ...filters) => {
@@ -45,7 +45,7 @@ const DataTableDynamicWithFilters = ({
       clearInterval(taskPoller.current);
       taskPoller.current = setInterval(
         () => handleGetRows(rowsPerPage, offset, ...filters),
-        autoRefreshInterval
+        autoRefreshInterval,
       );
     }
   };
@@ -62,7 +62,7 @@ const DataTableDynamicWithFilters = ({
         resetList(rowsPerPage, 0, ...filters);
       }, 500);
     },
-    [...filters]
+    [...filters],
   );
 
   useEffect(
@@ -70,14 +70,14 @@ const DataTableDynamicWithFilters = ({
       if (autoRefresh && !taskPoller.current) {
         taskPoller.current = setInterval(
           () => handleGetRows(rowsPerPage, offset, ...filterParams),
-          autoRefreshInterval
+          autoRefreshInterval,
         );
       }
       if (!autoRefresh) {
         clearInterval(taskPoller.current);
       }
     },
-    [autoRefresh]
+    [autoRefresh],
   );
 
   const handleChangePage = (event, page) => {

@@ -23,20 +23,20 @@ const readBeforePoint = R.pipe(
   R.match(BEFORE_POINT_REGEX),
   R.head,
   R.when((x) => R.equals("String", R.type(x)), floater),
-  R.defaultTo(0)
+  R.defaultTo(0),
 );
 const readAfterPoint = R.pipe(
   (x) => Number(x).toFixed(20),
   R.match(AFTER_POINT_REGEX),
   R.head,
   R.when((x) => R.equals("String", R.type(x)), floater),
-  R.defaultTo(0)
+  R.defaultTo(0),
 );
 const getLongDash = () => "—";
 const equalsDash = R.equals(R.__, getLongDash());
 const defaultToDash = R.pipe(
   parseFloat,
-  R.when(Number.isNaN, R.always(getLongDash()))
+  R.when(Number.isNaN, R.always(getLongDash())),
 );
 const getPreciseRegex = (p) => new RegExp(`^-?[0-9]*.?0*[0-9]{0,${p}}`);
 const getFixedRegex = (p) => new RegExp(`^-?[0-9]*.?[0-9]{0,${p}}`);
@@ -51,7 +51,7 @@ const getPrecisionPoint = R.pipe(
   R.append("1"),
   R.concat(["0", "."]),
   R.join(""),
-  floater
+  floater,
 );
 
 const UNITS = {
@@ -88,7 +88,7 @@ const CONVERTERS = {
   a(v) {
     const number = Math.max(
       0,
-      Math.floor(Math.log(Math.abs(v)) / Math.log(1000))
+      Math.floor(Math.log(Math.abs(v)) / Math.log(1000)),
     );
     const unit = Object.keys(UNITS.a)[number];
     const denominator = UNITS.a[unit];
@@ -99,7 +99,7 @@ const CONVERTERS = {
   b(v) {
     const number = Math.max(
       0,
-      Math.floor(Math.log(Math.abs(v * 8)) / Math.log(1000))
+      Math.floor(Math.log(Math.abs(v * 8)) / Math.log(1000)),
     );
     const unit = Object.keys(UNITS.b)[number];
     const denominator = UNITS.b[unit];
@@ -110,7 +110,7 @@ const CONVERTERS = {
   B(v) {
     const number = Math.max(
       0,
-      Math.floor(Math.log(Math.abs(v)) / Math.log(1000))
+      Math.floor(Math.log(Math.abs(v)) / Math.log(1000)),
     );
     const unit = Object.keys(UNITS.B)[number];
     const denominator = UNITS.B[unit];
@@ -213,7 +213,7 @@ export const numeral = R.curry((value, format, fixed, unit, stringy) => {
 
   if (stringy) {
     numeralString = [converted.value, converted.unit].join(
-      _space && converted.unit ? " " : ""
+      _space && converted.unit ? " " : "",
     );
   }
 
@@ -249,6 +249,6 @@ export function formatter(value, format = "0.0 a", fixed = false, unit = "") {
 
 export function dateFormatter(date, standard) {
   return new Intl.DateTimeFormat(standard, dateFormatOptions).format(
-    new Date(date)
+    new Date(date),
   );
 }

@@ -80,7 +80,7 @@ function Counts({ healthy, unhealthy, total, showTotal = false }) {
 export default function ClusterResourceList({ type, onClick, edgeId }) {
   const classes = useStyles();
   const { selectedFilters, refreshInterval } = useContext(
-    ResourceFiltersContext
+    ResourceFiltersContext,
   );
   const handleClick = (key) => (e) => {
     if (onClick) onClick(key);

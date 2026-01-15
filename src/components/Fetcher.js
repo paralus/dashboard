@@ -82,7 +82,7 @@ class Fetcher extends React.Component {
     }
 
     this.cancelablePromise = makeCancelable(
-      this.getMeTheNewState(fetchArgs, handleResolution, handleRejection)
+      this.getMeTheNewState(fetchArgs, handleResolution, handleRejection),
     );
     this.cancelablePromise.promise
       .then((newState) => {

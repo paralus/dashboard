@@ -128,7 +128,7 @@ class AssignUser extends React.Component {
     editProjectWithCallback(
       projectDetail,
       this.successCallback,
-      this.errorCallback
+      this.errorCallback,
     );
   };
 
@@ -155,17 +155,17 @@ class AssignUser extends React.Component {
     const { drawerType, systemRoles, usersList } = this.props;
     let filteredUsersList = usersList
       .filter((u) =>
-        u.spec.projectNamespaceRoles?.find((pnr) => pnr.role !== "ADMIN")
+        u.spec.projectNamespaceRoles?.find((pnr) => pnr.role !== "ADMIN"),
       ) // Filter out all users with ADMIN roles
       .filter(
         (a) =>
           !a.spec.projectNamespaceRoles?.find(
-            (pnr) => pnr.project === projectId
-          )
+            (pnr) => pnr.project === projectId,
+          ),
       ); // Filter out users already assigned to the project
     if (filteredUsersList.length === 0) {
       filteredUsersList = usersList.filter(
-        (u) => !u.spec.projectNamespaceRoles
+        (u) => !u.spec.projectNamespaceRoles,
       );
     }
     const config = {
@@ -267,5 +267,5 @@ export default withRouter(
     getRoles,
     getUsers,
     getProject,
-  })(AssignUser)
+  })(AssignUser),
 );

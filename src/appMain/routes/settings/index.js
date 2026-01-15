@@ -45,7 +45,7 @@ class Settings extends React.Component {
   componentDidMount() {
     this.props.getOrganization(
       this.props.userAndRoleDetail.metadata.partner,
-      this.props.userAndRoleDetail.metadata.organization
+      this.props.userAndRoleDetail.metadata.organization,
     );
     if (this.props?.userAndRoleDetail) {
       getOrgKubeconfigValidity(this.props.detail.metadata.id).then((res) => {
@@ -301,5 +301,5 @@ export default withRouter(
     saveOrganization,
     resetOrganizationError,
     resetOrganizationSuccess,
-  })(Settings)
+  })(Settings),
 );

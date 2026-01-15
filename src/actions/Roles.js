@@ -78,7 +78,7 @@ export function editRoleWithCallback(data, onSuccess, onFailure) {
     http("auth")
       .put(
         `partner/${partner}/organization/${organization}/role/${data.metadata.name}`,
-        data
+        data,
       )
       .then((_) => {
         dispatch(getRoleDetail(data.metadata.name));
@@ -101,7 +101,7 @@ export function removeRole(name) {
     http("auth")
       .delete(
         `partner/${partner}/organization/${organization}/role/${name}`,
-        {}
+        {},
       )
       .then((response) => {
         dispatch({

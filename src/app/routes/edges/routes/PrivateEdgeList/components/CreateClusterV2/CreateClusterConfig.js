@@ -101,5 +101,5 @@ export const wizardConfig = Machine(
       setDeploymentType,
       resetContextParams,
     },
-  }
+  },
 );

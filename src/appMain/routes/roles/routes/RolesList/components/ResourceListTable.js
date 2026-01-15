@@ -216,7 +216,7 @@ class ResourceListTable extends React.Component {
       roleList = list.filter(
         (u) =>
           u.metadata.name &&
-          u.metadata.name.indexOf(searchText.toUpperCase()) !== -1
+          u.metadata.name.indexOf(searchText.toUpperCase()) !== -1,
       );
       listCount = roleList.length;
     }

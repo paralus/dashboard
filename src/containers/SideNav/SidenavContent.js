@@ -45,7 +45,7 @@ const MultiItem = ({ items, hide, label, icon }) => {
         setIsOpen(true);
       }
     },
-    [pathname]
+    [pathname],
   );
   const style = { backgroundColor: "#245c56", color: "#fff" };
   return (

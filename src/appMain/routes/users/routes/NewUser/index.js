@@ -102,7 +102,7 @@ class NewUser extends Component {
     const postParams = { ...user };
     if (user.spec.groups.length === 0) {
       const defaultUsers = availableGroups.find(
-        (g) => g.spec.type === "DEFAULT_USERS"
+        (g) => g.spec.type === "DEFAULT_USERS",
       );
       postParams.spec.groups = [defaultUsers.metadata.name];
     }
@@ -110,7 +110,7 @@ class NewUser extends Component {
     addUserWithCallback(
       postParams,
       this.handleSuccessCallback,
-      this.handleProfileError
+      this.handleProfileError,
     );
   };
 
@@ -119,7 +119,7 @@ class NewUser extends Component {
     const postParams = { ...user };
     if (!user.spec.groups) {
       const defaultUsers = availableGroups.find(
-        (g) => g.spec.type === "DEFAULT_USERS"
+        (g) => g.spec.type === "DEFAULT_USERS",
       );
       postParams.spec.groups = [defaultUsers.metadata.name];
     }
@@ -165,7 +165,7 @@ class NewUser extends Component {
     const selectedGroups = [];
     if (availableGroups && availableGroups.length > 0) {
       const defaultUsers = availableGroups.find(
-        (g) => g.spec.type === "DEFAULT_USERS"
+        (g) => g.spec.type === "DEFAULT_USERS",
       );
       if (defaultUsers) {
         selectedGroups.push(defaultUsers);
@@ -258,5 +258,5 @@ export default withRouter(
   connect(mapStateToProps, {
     addUserWithCallback,
     getGroups,
-  })(NewUser)
+  })(NewUser),
 );

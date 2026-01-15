@@ -84,8 +84,8 @@ function ClusterStatusInfo({
                       {Moment(
                         new Date(
                           lastCheckedIn.seconds * 1000 +
-                            lastCheckedIn.nanos / 1e6
-                        )
+                            lastCheckedIn.nanos / 1e6,
+                        ),
                       ).fromNow()}
                     </span>
                   ) : (

@@ -147,7 +147,7 @@ class AddUsers extends React.Component {
       removeUsersList.forEach((user) => {
         groupDetail.spec.users = this.arrayRemove(
           groupDetail.spec.users,
-          user.metadata.name
+          user.metadata.name,
         );
       });
     }
@@ -259,5 +259,5 @@ export default withRouter(
     editGroupWithCallback,
     getUsers,
     resetGroupUsers,
-  })(AddUsers)
+  })(AddUsers),
 );

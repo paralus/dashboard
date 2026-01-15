@@ -40,7 +40,7 @@ export function TimeControlProvider({ children, ...props }) {
   useEffect(() => {
     localStorage.setItem(
       "_duration_",
-      JSON.stringify(DURATION_OPTIONS.find((x) => x.value === state.duration))
+      JSON.stringify(DURATION_OPTIONS.find((x) => x.value === state.duration)),
     );
   }, [state.duration]);
   const updateDuration = (e) => {

@@ -7,14 +7,14 @@ export function getEdges(
   searchText = "",
   status = "",
   orderBy = "",
-  order = ""
+  order = "",
 ) {
   return function (dispatch) {
     let filterQuery = "";
     if (orderBy) filterQuery += `&orderBy=${orderBy}&order=${order}`;
     http("infra")
       .get(
-        `project/${project}/cluster?limit=${rows}&offset=${offset}&q=${searchText}${status}${filterQuery}`
+        `project/${project}/cluster?limit=${rows}&offset=${offset}&q=${searchText}${status}${filterQuery}`,
       )
       .then((response) => {
         dispatch({ type: "get_edges_success", payload: response });
@@ -30,7 +30,7 @@ export function getEdges(
 
 export function getEdgeDetail(name) {
   const cachedProject = JSON.parse(
-    window?.localStorage.getItem("currentProject")
+    window?.localStorage.getItem("currentProject"),
   );
   return function (dispatch) {
     return new Promise((resolve, reject) => {
@@ -57,7 +57,7 @@ export function getEdgeDetail(name) {
 
 export function getEdgeData(name) {
   const cachedProject = JSON.parse(
-    window?.localStorage.getItem("currentProject")
+    window?.localStorage.getItem("currentProject"),
   );
   return http("infra").get(`/project/${cachedProject}/cluster/${name}`);
 }
@@ -65,14 +65,14 @@ export function getEdgeData(name) {
 export function assignProjectToCluster(edgeId, params, projectId) {
   return http("edge").post(
     `projects/${projectId}/edges/${edgeId}/assignprojects/`,
-    params
+    params,
   );
 }
 
 export function unassignProjectFromCluster(edgeId, params, projectId) {
   return http("edge").post(
     `projects/${projectId}/edges/${edgeId}/unassignprojects/`,
-    params
+    params,
   );
 }
 
@@ -80,10 +80,10 @@ export function updateEdge(
   params,
   handleSuccessResponse,
   handleErrorResponse,
-  handleUpdateEdge
+  handleUpdateEdge,
 ) {
   const cachedProject = JSON.parse(
-    window?.localStorage.getItem("currentProject")
+    window?.localStorage.getItem("currentProject"),
   );
   return function (dispatch) {
     return http("infra")
@@ -123,18 +123,18 @@ export function updateEdge(
 
 export function createCluster(params) {
   const cachedProject = JSON.parse(
-    window?.localStorage.getItem("currentProject")
+    window?.localStorage.getItem("currentProject"),
   );
   return http("infra").post(`project/${cachedProject}/cluster`, params);
 }
 
 export function updateCluster(params) {
   const cachedProject = JSON.parse(
-    window?.localStorage.getItem("currentProject")
+    window?.localStorage.getItem("currentProject"),
   );
   return http("infra").put(
     `project/${cachedProject}/cluster/${params.metadata.name}`,
-    params
+    params,
   );
 }
 
@@ -144,7 +144,7 @@ export function resetAddEdge() {
 
 export function getDownloadBootstrapYAML(name) {
   const cachedProject = JSON.parse(
-    window?.localStorage.getItem("currentProject")
+    window?.localStorage.getItem("currentProject"),
   );
   return http(`infra/v3/project/${cachedProject}/cluster/`, false, {
     "content-type": "application/x-paralus-yaml",
@@ -177,7 +177,7 @@ export function getClusterStatus(cluster_name, projectId) {
 export function getClusterKubectlSettings(edgeId) {
   const orgId = JSON.parse(window?.localStorage.getItem("organization_id"));
   return http("v2/sentry/kubectl/cluster", "").get(
-    `${edgeId}/settings?opts.organization=` + orgId
+    `${edgeId}/settings?opts.organization=` + orgId,
   );
 }
 
@@ -188,13 +188,13 @@ export function setClusterKubectlSettings(edgeId, params) {
   };
   return http("v2/sentry/kubectl/cluster/", "").put(
     `${edgeId}/settings`,
-    params
+    params,
   );
 }
 
 export function removeCluster(name, force) {
   const cachedProject = JSON.parse(
-    window?.localStorage.getItem("currentProject")
+    window?.localStorage.getItem("currentProject"),
   );
   return function (dispatch) {
     http("infra")

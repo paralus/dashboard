@@ -75,7 +75,7 @@ class AddToGroups extends React.Component {
       removeGroupsFromUser(
         userId,
         removeUsersList,
-        this.addUserSuccessCallback
+        this.addUserSuccessCallback,
       );
     }
   };
@@ -129,5 +129,5 @@ export default withRouter(
     removeGroupsFromUser,
     getGroups,
     resetGroupUsers,
-  })(AddToGroups)
+  })(AddToGroups),
 );

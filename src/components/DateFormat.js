@@ -13,15 +13,15 @@ const DateFormat = ({ timestamp }) => {
   try {
     if (typeof timestamp === "number") {
       return new Intl.DateTimeFormat("en-US", dateFormatOptions).format(
-        timestamp
+        timestamp,
       );
     } else if (typeof timestamp === "string") {
       return new Intl.DateTimeFormat("en-US", dateFormatOptions).format(
-        Date.parse(timestamp)
+        Date.parse(timestamp),
       );
     } else {
       return new Intl.DateTimeFormat("en-US", dateFormatOptions).format(
-        new Date(timestamp.seconds * 1000 + timestamp.nanos / 1e6)
+        new Date(timestamp.seconds * 1000 + timestamp.nanos / 1e6),
       );
     }
   } catch (error) {

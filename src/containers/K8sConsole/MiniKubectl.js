@@ -59,5 +59,5 @@ const mapStateToProps = ({ Kubectl }) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { closeKubectlDrawer })(MiniKubectl)
+  connect(mapStateToProps, { closeKubectlDrawer })(MiniKubectl),
 );

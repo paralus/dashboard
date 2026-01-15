@@ -42,7 +42,7 @@ const RolesCard = ({
           systemRoles
             .filter(
               (r) =>
-                r.spec.scope !== "system" && r.spec.scope !== "organization"
+                r.spec.scope !== "system" && r.spec.scope !== "organization",
             )
             .map((value, index) => {
               const labelId = `transfer-list-all-item-${index}-label`;

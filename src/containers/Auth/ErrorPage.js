@@ -52,9 +52,9 @@ const ErrorPage = (props) => {
   //     });
   // };
 
-    const getKratosError = (errorCode) => {
+  const getKratosError = (errorCode) => {
     newKratosSdk()
-      .getFlowError({id: errorCode})
+      .getFlowError({ id: errorCode })
       .then(({ data: resp }) => {
         if (resp) {
           setErrorInfo(resp.error);

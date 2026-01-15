@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export const LABEL_REGEX = new RegExp(
-  "^[A-Za-z0-9]([A-Za-z0-9\\._-]*[A-Za-z0-9])?$"
+  "^[A-Za-z0-9]([A-Za-z0-9\\._-]*[A-Za-z0-9])?$",
 );
 
 const labelSchema = {
@@ -9,7 +9,7 @@ const labelSchema = {
     .test(
       "is-paralus.dev/",
       "prefix can't be paralus.dev/",
-      (value) => !value?.startsWith("paralus.dev/")
+      (value) => !value?.startsWith("paralus.dev/"),
     )
     .test("required-key", "required", (value) => !!value)
     .test("validate-key", "invalid key", (value) => {
@@ -33,7 +33,7 @@ const labelSchema = {
         const prefixExists = prefix && name.length;
         //  if prefix Exists ? length shouldn't exceed 253 characters : skip
         return prefixExists ? prefix.length <= 253 : true;
-      }
+      },
     )
     .test("validate-key-length", "key exceeds 63 character", (value) => {
       if (!value) return false;

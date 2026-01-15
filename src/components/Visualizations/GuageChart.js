@@ -43,7 +43,7 @@ const ACTIVITY_GUAGE_CHART_CONFIG = (config = {}) => {
       const color = R.pathOr(
         Highcharts.getOptions().colors[idx],
         ["data", 0, "color"],
-        i
+        i,
       );
       const backgroundColor = Highcharts.color(color).setOpacity(0.3).get();
       return R.assoc("backgroundColor", backgroundColor, fixedPane);
@@ -55,7 +55,7 @@ const ACTIVITY_GUAGE_CHART_CONFIG = (config = {}) => {
       const data = R.when(
         R.isEmpty,
         R.always([{}]),
-        R.take(1, R.propOr([], "data", i))
+        R.take(1, R.propOr([], "data", i)),
       );
       const zippedData = R.zipWith((l, r) => ({ ...l, ...r }), data, fixedData);
       return R.assoc("data", zippedData, i);
@@ -106,7 +106,7 @@ const ACTIVITY_GUAGE_CHART_CONFIG = (config = {}) => {
       },
       series: mergeSeries(config),
     },
-    config
+    config,
   );
 
   return { ...mergedWithoutSeries, series: mergeSeries(config) };

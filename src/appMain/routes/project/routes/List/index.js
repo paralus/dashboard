@@ -201,6 +201,6 @@ const mapStateToProps = ({ Projects, UserSession }) => {
 
 export default withRouter(
   connect(mapStateToProps, { getProjects, createProject, deleteProject })(
-    Project
-  )
+    Project,
+  ),
 );

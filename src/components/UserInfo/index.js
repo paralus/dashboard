@@ -218,5 +218,5 @@ export default withRouter(
     organizationLogin,
     getCliDownloadOptions,
     resetCliDownload,
-  })(UserInfo)
+  })(UserInfo),
 );

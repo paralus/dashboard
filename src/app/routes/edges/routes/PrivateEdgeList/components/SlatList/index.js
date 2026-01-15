@@ -246,7 +246,7 @@ const SlatList = (props) => {
                       <div>
                         {
                           props.projectList?.find(
-                            (p) => p.id === cluster.project_id
+                            (p) => p.id === cluster.project_id,
                           )?.name
                         }
                       </div>

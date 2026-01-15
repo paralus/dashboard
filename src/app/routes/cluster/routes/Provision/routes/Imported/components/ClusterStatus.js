@@ -34,7 +34,7 @@ const ClusterStatus = ({ clusterStatus }) => {
   }
   if (
     [clusterStatus.ClusterRegister, clusterStatus.ClusterCheckIn].includes(
-      "Failed"
+      "Failed",
     )
   ) {
     statusBadge = "failed";

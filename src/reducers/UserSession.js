@@ -110,7 +110,7 @@ const createProjectSession = (roles, projectId) => {
   let targetProjectId =
     projectId.metadata === undefined ? projectId : projectId.metadata.name;
   const projectRoles = roles.filter(
-    (r) => r.project && r.project === targetProjectId
+    (r) => r.project && r.project === targetProjectId,
   );
   projectRoles.forEach((ac) => {
     ac.permissions.forEach((perm) => {
@@ -150,7 +150,7 @@ const UserSession = (state = initialData, action) => {
       if (!adminSession.visibleAdmin && state.projectId) {
         projectSession = createProjectSession(
           action.user.spec.permissions,
-          state.projectId
+          state.projectId,
         );
         return {
           ...state,

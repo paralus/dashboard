@@ -28,7 +28,7 @@ const AddGroup = ({ groups, onClose, open, onSave, groupsList }) => {
 
   const uGroupList = groupsList
     ?.filter(
-      (a) => a.spec.type === "SYSTEM" && !groups.includes(a.metadata.name)
+      (a) => a.spec.type === "SYSTEM" && !groups.includes(a.metadata.name),
     )
     .map((b) => b.metadata.name);
 

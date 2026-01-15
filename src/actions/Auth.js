@@ -31,7 +31,7 @@ export const newKratosSdk = () => {
         timeout: 10000,
       },
     }),
-    ""
+    "",
     // Ensure that we are using the axios client with retry.
     // axios
   );
@@ -78,7 +78,7 @@ export function userLogout(idle) {
         dispatch({ type: "reset_usersession" });
         dispatch(closeKubectlDrawer());
         newKratosSdk()
-          .updateLogoutFlow({token: logoutUrl.logout_token})
+          .updateLogoutFlow({ token: logoutUrl.logout_token })
           .catch((error) => {
             console.error(error);
             dispatch({ type: "user_session_expired", payload: error });

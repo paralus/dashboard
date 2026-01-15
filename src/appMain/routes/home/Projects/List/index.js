@@ -235,5 +235,5 @@ export default withRouter(
     createProject,
     deleteProject,
     changeProject,
-  })(Project)
+  })(Project),
 );

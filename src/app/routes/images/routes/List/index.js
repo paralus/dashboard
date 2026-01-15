@@ -40,7 +40,7 @@ class List extends React.Component {
   UNSAFE_componentWillMount() {
     this.props.getRegistryDetail(
       this.props.match.params.registryId,
-      this.props.currentProject.id
+      this.props.currentProject.id,
     );
   }
 
@@ -190,5 +190,5 @@ export default withRouter(
     deleteImage,
     resetImageErrorResponse,
     getRegistryDetail,
-  })(List)
+  })(List),
 );

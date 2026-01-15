@@ -68,7 +68,7 @@ class ToolsDetail extends React.Component {
       path = "managessokeys";
     }
     history.push(
-      `${history.location.pathname}/${path}/${userAndRoleDetail.metadata.id}`
+      `${history.location.pathname}/${path}/${userAndRoleDetail.metadata.id}`,
     );
   };
 
@@ -195,5 +195,5 @@ const mapStateToProps = ({ settings, Tools }) => {
   return { userAndRoleDetail, cliConfigData, users };
 };
 export default withRouter(
-  connect(mapStateToProps, { getCLiConfig })(ToolsDetail)
+  connect(mapStateToProps, { getCLiConfig })(ToolsDetail),
 );

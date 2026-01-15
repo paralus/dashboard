@@ -18,7 +18,7 @@ export default function useHealth() {
       [R.always(status === "all"), R.T],
       [R.always(status === "healthy"), R.propEq("healthy", true)],
       [R.always(status === "unhealthy"), R.propEq("healthy", false)],
-    ])
+    ]),
   );
 
   return {

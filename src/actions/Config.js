@@ -39,7 +39,7 @@ export default function http(type, version = "v3", noTrailingSlash = false) {
         return Promise.reject(tError);
       }
       return Promise.reject(error);
-    }
+    },
   );
   return instance;
 }

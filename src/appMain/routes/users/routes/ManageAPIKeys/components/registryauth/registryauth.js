@@ -69,7 +69,7 @@ class DataTableHead extends React.Component {
                 </Tooltip>
               </TableCell>
             ),
-            this
+            this,
           )}
         </TableRow>
       </TableHead>
@@ -194,7 +194,7 @@ class RgistryAuthKeys extends React.Component {
                   </Tooltip>
                 </div>
               )}
-            </>
+            </>,
           );
         });
       });
@@ -206,7 +206,7 @@ class RgistryAuthKeys extends React.Component {
   handleCreateClick = (event) => {
     this.props.createRegistryAuthKey(
       this.props.match.params.userId,
-      this.props.isSSOUser
+      this.props.isSSOUser,
     );
   };
 
@@ -245,7 +245,7 @@ class RgistryAuthKeys extends React.Component {
 
   handleDeleteKey = (id) => {
     this.setState({ openDeleteWarning: false }, () =>
-      this.props.deleteRegistryAuthKey(id)
+      this.props.deleteRegistryAuthKey(id),
     );
   };
 
@@ -282,7 +282,7 @@ class RgistryAuthKeys extends React.Component {
                       <TableCell>
                         {new Intl.DateTimeFormat(
                           "en-US",
-                          dateFormatOptions
+                          dateFormatOptions,
                         ).format(new Date(n.created_at))}
                       </TableCell>
                       <TableCell className="text-right">
@@ -346,7 +346,7 @@ class RgistryAuthKeys extends React.Component {
                       className="zmdi zmdi-copy zmdi-hc-fw zmdi-hc-lg"
                       onClick={() => {
                         navigator.clipboard.writeText(
-                          this.state.regauthkey.secret
+                          this.state.regauthkey.secret,
                         );
                       }}
                       style={{

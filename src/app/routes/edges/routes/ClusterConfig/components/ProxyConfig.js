@@ -90,7 +90,7 @@ const ProxyConfig = (props) => {
                     type="text"
                     onChange={props.handleEdgeChange("httpsProxy")}
                     error={testProtocol(
-                      props.edge.spec.proxyConfig?.httpsProxy
+                      props.edge.spec.proxyConfig?.httpsProxy,
                     )}
                   />
                 </div>
@@ -153,7 +153,7 @@ const ProxyConfig = (props) => {
                           false
                         }
                         onChange={props.handleEdgeChange(
-                          "allowInsecureBootstrap"
+                          "allowInsecureBootstrap",
                         )}
                         color="primary"
                       />

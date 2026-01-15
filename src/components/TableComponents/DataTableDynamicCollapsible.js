@@ -26,7 +26,7 @@ const DataTableHead = ({ columnData }) => {
               {column.label}
             </TableCell>
           ),
-          this
+          this,
         )}
       </TableRow>
     </TableHead>
@@ -76,7 +76,7 @@ const DataTableDynamicCollapsible = ({
     (_) => {
       if (refresh > 0) handleGetRows(rowsPerPage, offset);
     },
-    [refresh]
+    [refresh],
   );
 
   const handleChangePage = (event, page) => {

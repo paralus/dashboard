@@ -78,7 +78,7 @@ const MenuOptionsList = React.forwardRef(
             onClose={onClose}
           />
         );
-      })
+      }),
 );
 
 const MenuButton = ({ icon, label, options, hide }) => {

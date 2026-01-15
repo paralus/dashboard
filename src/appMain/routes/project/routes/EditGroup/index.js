@@ -46,13 +46,13 @@ class EditGroup extends React.Component {
       if (projectDetail.spec.projectNamespaceRoles) {
         newState.editRoles = projectDetail.spec.projectNamespaceRoles.filter(
           (pnr) =>
-            pnr.group && pnr.group.length > 0 && pnr.group === newState.groupId
+            pnr.group && pnr.group.length > 0 && pnr.group === newState.groupId,
         );
       }
     }
     if (groupsList && !newState.selectedGroup) {
       newState.selectedGroup = groupsList.find(
-        (g) => g.metadata.name === newState.groupId
+        (g) => g.metadata.name === newState.groupId,
       );
       if (newState.selectedGroup) {
         newState.selectedGroup = newState.selectedGroup.metadata.name;
@@ -86,7 +86,7 @@ class EditGroup extends React.Component {
     const { projectDetail } = this.props;
 
     const roles = projectDetail.spec.projectNamespaceRoles.filter(
-      (e) => e.group !== groupId
+      (e) => e.group !== groupId,
     );
 
     selectedRoles.forEach((role) => {
@@ -143,7 +143,7 @@ class EditGroup extends React.Component {
     editProjectWithCallback(
       projectDetail,
       this.successCallback,
-      this.errorCallback
+      this.errorCallback,
     );
   };
 
@@ -289,5 +289,5 @@ export default withRouter(
     getRoles,
     getProject,
     getGroups,
-  })(EditGroup)
+  })(EditGroup),
 );

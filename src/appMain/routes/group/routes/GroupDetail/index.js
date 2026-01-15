@@ -92,5 +92,5 @@ export default withRouter(
   connect(mapStateToProps, {
     getGroupDetail,
     resetGroup,
-  })(GroupDetail)
+  })(GroupDetail),
 );

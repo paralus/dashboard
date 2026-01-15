@@ -62,7 +62,7 @@ const NamespaceCard = ({
 
     const uniqueNamespaces = [
       ...new Map(
-        [...selectedNs, ...ns].map((item) => [item.id, item])
+        [...selectedNs, ...ns].map((item) => [item.id, item]),
       ).values(),
     ];
     setSelectedNamespaces(uniqueNamespaces);
@@ -107,7 +107,7 @@ const NamespaceCard = ({
     const [namespaceTags, setNamespaceTags] = useState(props.tags);
     const [namespaceError, setNamespaceError] = useState(false);
     const [namespaehelpertext, setNamespaehelpertext] = useState(
-      "Provide namespace name(s), each followed by ENTER↵"
+      "Provide namespace name(s), each followed by ENTER↵",
     );
 
     function CheckNamespaceValidation(str) {
@@ -118,13 +118,13 @@ const NamespaceCard = ({
       ) {
         setNamespaceError(false);
         setNamespaehelpertext(
-          "Provide namespace name(s), each followed by ENTER↵"
+          "Provide namespace name(s), each followed by ENTER↵",
         );
         return true;
       } else {
         setNamespaceError(true);
         setNamespaehelpertext(
-          "No special char. No Uppercase letters allowed & length between 1-63 characters."
+          "No special char. No Uppercase letters allowed & length between 1-63 characters.",
         );
         return false;
       }

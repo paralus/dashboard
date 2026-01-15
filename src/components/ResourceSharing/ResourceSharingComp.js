@@ -72,7 +72,7 @@ const ResourceSharingComp = ({
         });
       setChecked(newChecked);
     },
-    [projectsList, selectedProjects]
+    [projectsList, selectedProjects],
   );
 
   const handleToggle = (value) => () => {
@@ -93,7 +93,7 @@ const ResourceSharingComp = ({
     const val = e.target.value;
     setSearchText(val);
     const filteredItems = projectsList.filter(
-      (n) => n.label.indexOf(val) !== -1
+      (n) => n.label.indexOf(val) !== -1,
     );
     setItems(filteredItems);
   };

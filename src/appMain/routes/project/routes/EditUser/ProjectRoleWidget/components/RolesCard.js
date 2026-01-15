@@ -42,17 +42,17 @@ const RolesCard = ({
           systemRoles
             .filter(
               (r) =>
-                r.spec.scope !== "system" && r.spec.scope !== "organization"
+                r.spec.scope !== "system" && r.spec.scope !== "organization",
             )
             .map((value, index) => {
               const labelId = `transfer-list-all-item-${index}-label`;
               const adminDisabled =
                 (projectRoleDisabled &&
                   !["ADMIN", "ADMIN_READ_ONLY"].includes(
-                    value.metadata.name
+                    value.metadata.name,
                   )) ||
                 ["NAMESPACE_ADMIN", "NAMESPACE_READ_ONLY"].includes(
-                  value.metadata.name
+                  value.metadata.name,
                 );
               return (
                 <ListItem
@@ -69,7 +69,7 @@ const RolesCard = ({
                       checked={
                         checked.findIndex(
                           (element) =>
-                            element.metadata.name === value.metadata.name
+                            element.metadata.name === value.metadata.name,
                         ) !== -1
                       }
                       tabIndex={-1}

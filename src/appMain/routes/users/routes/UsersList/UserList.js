@@ -321,7 +321,7 @@ class UserList extends React.Component {
     }
     if (name === "project") {
       const selectedProject = projectsList.find(
-        (e) => e.id === event.target.value
+        (e) => e.id === event.target.value,
       );
       user.roles[index].project = { ...selectedProject };
     }
@@ -354,7 +354,7 @@ class UserList extends React.Component {
       const { rowsPerPage, offset, searchText, orderBy, order } = this.state;
       this.timeout = setTimeout(
         () => getUsers(null, null, searchText, orderBy, order),
-        1000
+        1000,
       );
       this.handleCreateUserClose();
     } else {
@@ -756,7 +756,7 @@ class UserList extends React.Component {
                   <IconButton
                     onClick={() => {
                       navigator.clipboard.writeText(
-                        `${this.props.newUser?.spec.password}`
+                        `${this.props.newUser?.spec.password}`,
                       );
                     }}
                     aria-label="copy"
@@ -798,7 +798,7 @@ class UserList extends React.Component {
                   <IconButton
                     onClick={() => {
                       navigator.clipboard.writeText(
-                        `${this.state.recoveryLink}`
+                        `${this.state.recoveryLink}`,
                       );
                     }}
                     aria-label="copy"
@@ -871,5 +871,5 @@ export default withRouter(
     deleteUser,
     resetUserDeleteResponse,
     getGroups,
-  })(UserList)
+  })(UserList),
 );

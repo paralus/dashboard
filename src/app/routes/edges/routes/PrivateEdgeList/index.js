@@ -252,7 +252,7 @@ class DataTableHead extends React.Component {
                 </Tooltip>
               </TableCell>
             ),
-            this
+            this,
           )}
         </TableRow>
       </TableHead>
@@ -282,8 +282,8 @@ class PrivateEdgeList extends React.Component {
         this.state.searchText,
         this.state.searchStatus,
         this.state.orderBy,
-        this.state.order
-      )
+        this.state.order,
+      ),
     );
   };
   handleFilter = (selectedOptions) => {
@@ -311,8 +311,8 @@ class PrivateEdgeList extends React.Component {
         this.state.searchText,
         this.state.searchStatus,
         this.state.orderBy,
-        this.state.order
-      )
+        this.state.order,
+      ),
     );
   };
 
@@ -512,7 +512,7 @@ class PrivateEdgeList extends React.Component {
     this.props.removeCluster(
       edge.metadata.name,
       this.props.currentProject.metadata.name,
-      forceDelete
+      forceDelete,
     );
     this.props.history.push("/app/edges");
   };
@@ -773,7 +773,7 @@ class PrivateEdgeList extends React.Component {
       this.setState({ ...this.state });
       const { history } = this.props;
       history.push(
-        `${history.location.pathname}/${this.state.edge.metadata.name}`
+        `${history.location.pathname}/${this.state.edge.metadata.name}`,
       );
     }
 
@@ -786,7 +786,7 @@ class PrivateEdgeList extends React.Component {
       ) {
         const { history } = this.props;
         history.push(
-          `${history.location.pathname}/${props.edges.detail.metadata.name}`
+          `${history.location.pathname}/${props.edges.detail.metadata.name}`,
         );
       }
     }
@@ -799,7 +799,7 @@ class PrivateEdgeList extends React.Component {
         this.state.searchText,
         this.state.searchStatus,
         this.state.orderBy,
-        this.state.order
+        this.state.order,
       );
     }
 
@@ -840,7 +840,7 @@ class PrivateEdgeList extends React.Component {
         this.state.searchText,
         this.state.searchStatus,
         this.state.orderBy,
-        this.state.order
+        this.state.order,
       );
     }
 
@@ -852,7 +852,7 @@ class PrivateEdgeList extends React.Component {
         this.state.searchText,
         this.state.searchStatus,
         this.state.orderBy,
-        this.state.order
+        this.state.order,
       );
     }
   }
@@ -873,9 +873,9 @@ class PrivateEdgeList extends React.Component {
           this.state.searchText,
           this.state.searchStatus,
           this.state.orderBy,
-          this.state.order
+          this.state.order,
         ),
-      500
+      500,
     );
 
     this.setState(this.state);
@@ -936,7 +936,7 @@ class PrivateEdgeList extends React.Component {
       this.state.searchText,
       this.state.searchStatus,
       this.state.orderBy,
-      this.state.order
+      this.state.order,
     );
     if (this.timeInterval) {
       clearInterval(this.timeInterval);
@@ -950,9 +950,9 @@ class PrivateEdgeList extends React.Component {
           this.state.searchText,
           this.state.searchStatus,
           this.state.orderBy,
-          this.state.order
+          this.state.order,
         ),
-      30000
+      30000,
     );
     this.state.isResponseSuccess = false;
     this.setState({ ...this.state });
@@ -978,9 +978,9 @@ class PrivateEdgeList extends React.Component {
           this.state.searchText,
           this.state.searchStatus,
           this.state.orderBy,
-          this.state.order
+          this.state.order,
         ),
-      30000
+      30000,
     );
   };
 
@@ -988,7 +988,7 @@ class PrivateEdgeList extends React.Component {
     this.props.getEdgeDetail(this.state.edge.name);
     this.clusterDetailPoller = setInterval(
       () => this.props.getEdgeDetail(this.state.edge.name),
-      5000
+      5000,
     );
   };
 
@@ -1028,7 +1028,7 @@ class PrivateEdgeList extends React.Component {
     this.state.downloadClusterYAMLClick = true;
     this.setState(
       { ...this.state },
-      this.props.getDownloadBootstrapYAML(this.state.edge.name)
+      this.props.getDownloadBootstrapYAML(this.state.edge.name),
     );
   };
 
@@ -1134,9 +1134,9 @@ class PrivateEdgeList extends React.Component {
       () =>
         this.props.openKubectlDrawer(
           this.props.currentProject.metadata.name,
-          name
+          name,
         ),
-      500
+      500,
     );
   };
 
@@ -1148,7 +1148,7 @@ class PrivateEdgeList extends React.Component {
   handleChangeList = (ng) => {
     this.state.checkList[ng.name] = !this.state.checkList[ng.name];
     const notchecked = Object.keys(this.state.checkList).find(
-      (x) => this.state.checkList[x] === false
+      (x) => this.state.checkList[x] === false,
     );
     this.state.selectAll = !notchecked;
     this.setState({ ...this.state });
@@ -1254,7 +1254,7 @@ class PrivateEdgeList extends React.Component {
       // if user has access to the current project or the user has org wide roles
       var allPermissions = this.props.userAndRoleDetail.spec.permissions
         .filter(
-          (obj) => obj.project === projectName || obj.scope === "organization"
+          (obj) => obj.project === projectName || obj.scope === "organization",
         )
         .map((item) => item.permissions);
       let deduplicatedPermissions = new Set(allPermissions.flat(1));
@@ -1287,7 +1287,7 @@ class PrivateEdgeList extends React.Component {
           <Paper className="mb-4">
             <DataTableToolbar
               hasWriteAccessInCluster={hasWriteAccessInCluster(
-                this.props.UserSession.projectId
+                this.props.UserSession.projectId,
               )}
               renderInTable={this.state.renderInTable}
               callGetEdges={this.callGetEdges}
@@ -1340,7 +1340,7 @@ class PrivateEdgeList extends React.Component {
                             className="pr-0"
                             onClick={() =>
                               history.push(
-                                `${history.location.pathname}/${n.metadata.name}`
+                                `${history.location.pathname}/${n.metadata.name}`,
                               )
                             }
                           >
@@ -1428,7 +1428,7 @@ class PrivateEdgeList extends React.Component {
                   index={index}
                   UserSession={this.props.UserSession}
                   hasWriteAccessInCluster={hasWriteAccessInCluster(
-                    n.metadata.project
+                    n.metadata.project,
                   )}
                   isUpdateEndpointsSuccess={this.props.isUpdateEndpointsSuccess}
                   isUpdateEndpointsError={this.props.isUpdateEndpointsError}
@@ -1626,5 +1626,5 @@ export default withRouter(
     setDefaultClusterStatus,
     openKubectlDrawer,
     closeKubectlDrawer,
-  })(withStyles(styles)(PrivateEdgeList))
+  })(withStyles(styles)(PrivateEdgeList)),
 );

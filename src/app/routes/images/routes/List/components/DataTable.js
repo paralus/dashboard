@@ -276,7 +276,7 @@ class DataTable extends React.Component {
                                         .length -
                                         1 && <Divider light />}
                                   </div>
-                                )
+                                ),
                               )}
                           </List>
                         </ExpansionPanelDetails>
@@ -327,7 +327,7 @@ class DataTable extends React.Component {
                   onClick={() =>
                     this.deleteImage(
                       this.state.warningDeleteDialog.image,
-                      this.state.warningDeleteDialog.tag
+                      this.state.warningDeleteDialog.tag,
                     )
                   }
                   color="accent"

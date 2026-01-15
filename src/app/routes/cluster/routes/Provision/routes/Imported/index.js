@@ -36,7 +36,7 @@ const Imported = () => {
     if (!taskPoller.current) {
       taskPoller.current = setInterval(
         (_) => fetchClusterDetail(),
-        autoRefreshInterval * 1000
+        autoRefreshInterval * 1000,
       );
     }
   };
@@ -56,7 +56,7 @@ const Imported = () => {
         initTaskPoller();
       }
     },
-    [autoRefreshInterval]
+    [autoRefreshInterval],
   );
 
   if (!edge) return null;

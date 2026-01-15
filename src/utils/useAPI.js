@@ -43,19 +43,21 @@ export default function useAPI({
       if (showLoading) setLoading(true);
       const { type, version, noTrailingSlash } = options || {};
       cancelable.current = makeCancelable(
-        options ? http(type, version, noTrailingSlash)(...args) : Axios(...args)
+        options
+          ? http(type, version, noTrailingSlash)(...args)
+          : Axios(...args),
       );
       cancelable.current.promise
         .then((response) => {
           setData(
-            handleResolution ? handleResolution(response.data) : response.data
+            handleResolution ? handleResolution(response.data) : response.data,
           );
         })
         .catch((error) => {
           setError(handleRejection ? handleRejection(error) : error);
         });
     },
-    [optionsAndArgs]
+    [optionsAndArgs],
   );
 
   const callAPIwithInterval = useCallback(
@@ -69,7 +71,7 @@ export default function useAPI({
         }, refreshInterval * 1000);
       }
     },
-    [optionsAndArgs]
+    [optionsAndArgs],
   );
 
   useEffect(() => {

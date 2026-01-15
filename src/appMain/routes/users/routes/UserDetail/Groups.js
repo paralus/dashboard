@@ -83,7 +83,7 @@ class Groups extends React.Component {
     userDetail.spec.groups = this.arrayRemove(userDetail.spec.groups, group);
     userDetail.spec.projectNamespaceRoles = this.pnrGroupRemove(
       userDetail.spec.projectNamespaceRoles,
-      group
+      group,
     );
     editUser(userDetail);
   };
@@ -249,5 +249,5 @@ export default withRouter(
     getUserDetail,
     editUser,
     resetUserGroupDeleteError,
-  })(Groups)
+  })(Groups),
 );

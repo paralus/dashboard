@@ -11,7 +11,7 @@ function RolesInfo({ projectId, addGroupInRole = null, roleInfo = [] }) {
       const { roleName, namespace_id } = curr;
       if (roleName.includes("NAMESPACE") && namespace_id) {
         const namespace = thisProjectNamespaces?.find(
-          (pn) => pn.metadata?.id === namespace_id
+          (pn) => pn.metadata?.id === namespace_id,
         );
         if (namespace) acc.push(namespace.metadata.name);
       }

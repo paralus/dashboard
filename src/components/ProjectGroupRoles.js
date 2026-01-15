@@ -73,7 +73,7 @@ const formatProjects = (roles, group) => {
             </div>
             <RoleLabel name={r.role.name} />
             {!group && <GroupLabel name={r.group.name} />}
-          </div>
+          </div>,
         );
       }
       // else {
@@ -136,7 +136,7 @@ const formatProjects = (roles, group) => {
             <div className="mr-2">{r.name}</div>
             <RoleLabel name={r.role} />
             {!group && <GroupLabel name={r.group} />}
-          </div>
+          </div>,
         );
       } else {
         projects.push(
@@ -144,7 +144,7 @@ const formatProjects = (roles, group) => {
             <div className="mr-2">{r.name}</div>
             <RoleLabel name={r.role} />
             {!group && <NoGroupLabel />}
-          </div>
+          </div>,
         );
       }
     });

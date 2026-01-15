@@ -132,5 +132,5 @@ class UploadMedaData extends React.Component {
 }
 
 export default withRouter(
-  connect(null, { uploadMetaDataFile })(UploadMedaData)
+  connect(null, { uploadMetaDataFile })(UploadMedaData),
 );

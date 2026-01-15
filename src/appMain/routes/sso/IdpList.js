@@ -81,7 +81,7 @@ class IdpList extends React.Component {
     deleteIdentityProvider(
       idpId,
       this.onDeleteIdpSuccess,
-      this.onDeleteIdpFailure
+      this.onDeleteIdpFailure,
     );
   };
 
@@ -230,5 +230,5 @@ export default withRouter(
   connect(mapStateToProps, {
     getAllIdentityProviders,
     deleteIdentityProvider,
-  })(IdpList)
+  })(IdpList),
 );
