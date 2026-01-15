@@ -5,7 +5,7 @@ export function openKubectlDrawer(
   command,
   kubectl_type,
   edge_id,
-  isLogsOnly,
+  isLogsOnly
 ) {
   return {
     type: "open_kubectl_drawer",

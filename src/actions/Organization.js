@@ -18,11 +18,11 @@ export function getOrganization(partner, name) {
         });
         localStorage.setItem(
           "organization_id",
-          JSON.stringify(response.data.metadata.id),
+          JSON.stringify(response.data.metadata.id)
         );
         localStorage.setItem(
           "organization",
-          JSON.stringify(response.data.metadata.name),
+          JSON.stringify(response.data.metadata.name)
         );
       })
       .catch((error) => {
@@ -42,11 +42,11 @@ export default function getInitOrganization(partner, callback) {
         });
         localStorage.setItem(
           "organization_id",
-          JSON.stringify(response.data.items[0].metadata.id),
+          JSON.stringify(response.data.items[0].metadata.id)
         );
         localStorage.setItem(
           "organization",
-          JSON.stringify(response.data.items[0].metadata.name),
+          JSON.stringify(response.data.items[0].metadata.name)
         );
         dispatch(getInitProjects(callback));
       })
@@ -63,7 +63,7 @@ export function saveOrganization(params) {
     http("auth")
       .put(
         `partner/${params.metadata.partner}/organization/${params.metadata.name}`,
-        params,
+        params
       )
       .then((response) => {
         console.log(response);
@@ -86,7 +86,7 @@ export function updateOragnization(params) {
   console.log(`updateOragnization called ${params}`);
   return http("auth").put(
     `partner/${params.metadata.partner}/organization/${params.metadata.name}`,
-    params,
+    params
   );
 }
 

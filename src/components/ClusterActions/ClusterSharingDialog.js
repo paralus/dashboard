@@ -70,7 +70,7 @@ const ClusterSharingDialog = ({ edge, isOpen, onClose }) => {
 
   const getProjectID = (label) => {
     const project = projects?.projectsList?.results?.find(
-      (p) => p.name === label,
+      (p) => p.name === label
     );
     return project?.id || null;
   };
@@ -106,13 +106,13 @@ const ClusterSharingDialog = ({ edge, isOpen, onClose }) => {
     if (addedProjectList.length > 0) {
       payload.projects = assignUnassignPayload(addedProjectList);
       promises.push(
-        assignProjectToCluster(edge.id, payload, currentProject.id),
+        assignProjectToCluster(edge.id, payload, currentProject.id)
       );
     }
     if (removedProjectList?.length > 0) {
       payload.projects = assignUnassignPayload(removedProjectList);
       promises.push(
-        unassignProjectFromCluster(edge.id, payload, currentProject.id),
+        unassignProjectFromCluster(edge.id, payload, currentProject.id)
       );
     }
 
@@ -142,13 +142,13 @@ const ClusterSharingDialog = ({ edge, isOpen, onClose }) => {
       assignUnassignPromise = unassignProjectFromCluster(
         edge.id,
         { shareMode: "ALL" },
-        currentProject.id,
+        currentProject.id
       );
     } else if (sharingType === "shareAll") {
       assignUnassignPromise = assignProjectToCluster(
         edge.id,
         { shareMode: "ALL" },
-        currentProject.id,
+        currentProject.id
       );
     }
 

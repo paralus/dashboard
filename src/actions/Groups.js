@@ -58,7 +58,7 @@ export function updateGroup(data) {
     http("auth")
       .put(
         `partner/${partner}/organization/${organization}/group/${data.metadata.name}`,
-        data,
+        data
       )
       .then((response) => {
         dispatch({
@@ -83,7 +83,7 @@ export function editGroupWithCallback(data, onSuccess, onFailure) {
     http("auth")
       .put(
         `partner/${partner}/organization/${organization}/group/${data.metadata.name}`,
-        data,
+        data
       )
       .then((_) => {
         dispatch(getGroupDetail(data.metadata.name));
@@ -106,7 +106,7 @@ export function removeGroup(name) {
     http("auth")
       .delete(
         `partner/${partner}/organization/${organization}/group/${name}`,
-        {},
+        {}
       )
       .then((response) => {
         dispatch({

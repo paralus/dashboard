@@ -110,7 +110,7 @@ class ProjectsTable extends React.Component {
                     <TableCell id={`${index}_event_message`}>
                       {new Intl.DateTimeFormat(
                         "en-US",
-                        dateFormatOptions,
+                        dateFormatOptions
                       ).format(new Date(n.created_at))}
                     </TableCell>
                     <TableCell id={`${index}_Actions`} className="text-right">

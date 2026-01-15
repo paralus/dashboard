@@ -69,8 +69,8 @@ function mapStateToProps(state) {
   userRole = userRole?.isSuperAdmin
     ? "SUPER_ADMIN"
     : userRole?.isPartnerAdmin
-      ? "PARTNER_ADMIN"
-      : null;
+    ? "PARTNER_ADMIN"
+    : null;
   return {
     userRole,
     project: state?.Projects?.currentProject,

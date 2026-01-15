@@ -79,7 +79,7 @@ class Projects extends React.Component {
     const { userDetail, editUserWithCallback } = this.props;
     userDetail.spec.projectNamespaceRoles = this.arrayRemove(
       userDetail.spec.projectNamespaceRoles,
-      data.project,
+      data.project
     );
     editUserWithCallback(userDetail, this.successCallback, this.errorCallback);
   };
@@ -161,7 +161,7 @@ class Projects extends React.Component {
     if (data.length > 0) {
       data.forEach((e) => {
         let similarElement = processed.find(
-          (element) => element.project === e.project && element.role === e.role,
+          (element) => element.project === e.project && element.role === e.role
         );
         if (!similarElement) {
           processed.push({
@@ -201,7 +201,7 @@ class Projects extends React.Component {
     if (data.length > 0) {
       data.forEach((e) => {
         let similarElement = processed.find(
-          (element) => element.project === e.project,
+          (element) => element.project === e.project
         );
         if (!similarElement) {
           processed.push({
@@ -233,7 +233,7 @@ class Projects extends React.Component {
       userDetail.spec.projectNamespaceRoles.length > 0
     ) {
       tableData = this.processProjectWithNamespaces(
-        userDetail.spec.projectNamespaceRoles,
+        userDetail.spec.projectNamespaceRoles
       );
       if (tableData.length > 0)
         tableData = this.processProjectWithRoles(tableData);
@@ -244,7 +244,7 @@ class Projects extends React.Component {
       userDetail.spec.projectNamespaceRoles &&
       userDetail.spec.projectNamespaceRoles.length > 0 &&
       userDetail.spec.projectNamespaceRoles.find((r) =>
-        ["ADMIN", "ADMIN_READ_ONLY"].includes(r.role),
+        ["ADMIN", "ADMIN_READ_ONLY"].includes(r.role)
       )
     ) {
       createDisabled = true;
@@ -326,5 +326,5 @@ export default withRouter(
     getUserDetail,
     editUserWithCallback,
     resetProjectError,
-  })(Projects),
+  })(Projects)
 );

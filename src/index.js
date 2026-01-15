@@ -25,7 +25,7 @@ if (process.env.NODE_ENV !== "production") {
 const store = createStore(
   reducers(history),
   {},
-  compose(applyMiddleware(...middleware)),
+  compose(applyMiddleware(...middleware))
 );
 
 ReactDOM.render(
@@ -45,5 +45,5 @@ ReactDOM.render(
       </BrowserRouter>
     </ConnectedRouter>
   </Provider>,
-  document.getElementById("app-site"),
+  document.getElementById("app-site")
 );

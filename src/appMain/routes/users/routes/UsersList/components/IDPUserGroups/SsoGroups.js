@@ -22,7 +22,7 @@ const SsoGroups = ({ open, user, onClose }) => {
     (_) => {
       fetchGroups();
     },
-    [user],
+    [user]
   );
   return (
     <div>

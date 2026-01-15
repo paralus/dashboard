@@ -51,7 +51,7 @@ class EditProject extends React.Component {
         newState.selectedProject = "ALL PROJECTS";
       } else {
         newState.selectedProject = projectsList.items.find(
-          (p) => p.metadata.name === newState.projectId,
+          (p) => p.metadata.name === newState.projectId
         ).metadata.name;
       }
     }
@@ -82,7 +82,7 @@ class EditProject extends React.Component {
     const { userDetail } = this.props;
 
     const roles = userDetail.spec.projectNamespaceRoles.filter(
-      (e) => e.project !== selectedProject,
+      (e) => e.project !== selectedProject
     );
     const ifAllProjectsSelected = roles.filter(
       (e) =>
@@ -91,7 +91,7 @@ class EditProject extends React.Component {
         e.role &&
         e.role !== "" &&
         (e.role === "ADMIN" || e.role === "ADMIN_READ_ONLY") &&
-        e.project === undefined,
+        e.project === undefined
     );
 
     selectedRoles.forEach((role) => {
@@ -283,5 +283,5 @@ export default withRouter(
     getRoles,
     getUserDetail,
     getProjects,
-  })(EditProject),
+  })(EditProject)
 );

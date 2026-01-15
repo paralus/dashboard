@@ -44,10 +44,10 @@ const SelectClustersField = ({ deployedClusters, onChange }) => {
       getClusterList(currentProject.id, "READY", 200, 0, searchText).then(
         (res) => {
           setClusters(res.data.results);
-        },
+        }
       );
     },
-    [searchText],
+    [searchText]
   );
 
   useEffect(
@@ -55,7 +55,7 @@ const SelectClustersField = ({ deployedClusters, onChange }) => {
       const list = Object.keys(checkList)?.filter((c) => checkList[c]);
       onChange(list);
     },
-    [checkList],
+    [checkList]
   );
 
   const getHealth = (cluster) => {

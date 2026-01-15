@@ -26,7 +26,7 @@ class ClusterList extends Component {
         10000,
         0,
         "",
-        "",
+        ""
       );
     this.timeInterval = setInterval(
       () =>
@@ -35,9 +35,9 @@ class ClusterList extends Component {
           10000,
           0,
           "",
-          "",
+          ""
         ),
-      60000,
+      60000
     );
   }
 

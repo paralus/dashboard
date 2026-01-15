@@ -249,5 +249,5 @@ export default withRouter(
     removeRole,
     resetRole,
     resetRolesList,
-  })(List),
+  })(List)
 );

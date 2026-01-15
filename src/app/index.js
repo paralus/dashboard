@@ -20,8 +20,8 @@ import SuspenseComponent from "components/SuspenseComponent";
 import { ConsolePaths } from "constants/ConsolePaths";
 import Cluster from "./routes/cluster";
 
-const Edges = React.lazy(
-  () => import(/* webpackPrefetch: true */ "./routes/edges"),
+const Edges = React.lazy(() =>
+  import(/* webpackPrefetch: true */ "./routes/edges")
 );
 
 class App extends React.Component {
@@ -245,5 +245,5 @@ export default withRouter(
     toggleCollapsedNav,
     getOrgKubeconfigSettings,
     userLogout,
-  })(App),
+  })(App)
 );

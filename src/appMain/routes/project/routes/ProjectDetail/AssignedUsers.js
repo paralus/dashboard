@@ -71,12 +71,12 @@ class AssignedUsers extends React.Component {
     const { editProjectWithCallback, projectDetail } = this.props;
 
     projectDetail.spec.userRoles = projectDetail.spec.userRoles.filter(
-      (r) => r.user != data.user,
+      (r) => r.user != data.user
     );
     editProjectWithCallback(
       projectDetail,
       this.successCallback,
-      this.errorCallback,
+      this.errorCallback
     );
   };
 
@@ -151,7 +151,7 @@ class AssignedUsers extends React.Component {
     if (data.length > 0) {
       data.forEach((e) => {
         let similarElement = processed.find(
-          (element) => element.user === e.user && element.role === e.role,
+          (element) => element.user === e.user && element.role === e.role
         );
         if (!similarElement) {
           processed.push({
@@ -194,7 +194,7 @@ class AssignedUsers extends React.Component {
     if (data.length > 0) {
       data.forEach((e) => {
         let similarElement = processed.find(
-          (element) => element.user === e.user,
+          (element) => element.user === e.user
         );
         if (!similarElement) {
           processed.push({
@@ -303,5 +303,5 @@ export default withRouter(
     getProject,
     resetProjectError,
     editProjectWithCallback,
-  })(AssignedUsers),
+  })(AssignedUsers)
 );

@@ -153,7 +153,7 @@ class AssignToProject extends React.Component {
               return ur.project === p.metadata.name;
             }
             return false;
-          }),
+          })
       );
     }
 
@@ -257,5 +257,5 @@ export default withRouter(
     editUserWithCallback,
     getRoles,
     getUserDetail,
-  })(AssignToProject),
+  })(AssignToProject)
 );

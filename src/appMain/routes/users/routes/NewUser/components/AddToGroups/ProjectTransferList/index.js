@@ -60,7 +60,7 @@ function not(a, b) {
     (value) =>
       !b.find((e) => {
         return e.name === value.name;
-      }),
+      })
   );
 }
 
@@ -69,7 +69,7 @@ function intersection(a, b) {
   return a.filter((value) =>
     b.find((e) => {
       return e.name === value.name;
-    }),
+    })
   );
 }
 

@@ -12,11 +12,11 @@ export function initializeApp(callback) {
         });
         localStorage.setItem(
           "partner_id",
-          JSON.stringify(response.data.metadata.id),
+          JSON.stringify(response.data.metadata.id)
         );
         localStorage.setItem(
           "partner",
-          JSON.stringify(response.data.metadata.name),
+          JSON.stringify(response.data.metadata.name)
         );
         dispatch(getInitOrganization(response.data.metadata.name, callback));
       })

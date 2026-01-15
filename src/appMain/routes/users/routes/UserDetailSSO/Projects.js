@@ -82,7 +82,7 @@ class Projects extends React.Component {
       userId,
       postData,
       this.successCallback,
-      this.errorCallback,
+      this.errorCallback
     );
   };
 
@@ -264,5 +264,5 @@ export default withRouter(
     getUserRoles,
     unassignUserFromProject,
     resetProjectError,
-  })(Projects),
+  })(Projects)
 );

@@ -52,6 +52,6 @@ export function uploadMetaDataFile(idpId, params) {
   return http("auth").post(
     `sso/idp/${idpId}/upload_metadata/`,
     formData,
-    config,
+    config
   );
 }

@@ -40,7 +40,7 @@ const ProjectCard = ({
     fieldValue = selectedProject;
   } else {
     fieldValue = projectsList.items.find(
-      (p) => p.metadata.name === selectedProject,
+      (p) => p.metadata.name === selectedProject
     );
   }
   return (

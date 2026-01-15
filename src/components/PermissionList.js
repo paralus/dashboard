@@ -47,7 +47,7 @@ const getPermissionList = (permissions, showExpandedList) => {
     baseList: [...uniquePermissionList].splice(0, 2),
     otherList: [...uniquePermissionList].splice(
       2,
-      uniquePermissionList.length - 1,
+      uniquePermissionList.length - 1
     ),
   };
 };

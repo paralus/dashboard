@@ -42,5 +42,5 @@ const mapStateToProps = ({ settingsOps, settings, Projects }) => {
 export default withRouter(
   connect(mapStateToProps, {
     getEdgesOP,
-  })(Overview),
+  })(Overview)
 );

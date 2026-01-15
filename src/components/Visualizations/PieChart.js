@@ -13,7 +13,7 @@ const DONUT_SERIES_CONFIG = {
 
 const DONUT_CHART_CONFIG = (config = {}) => {
   const updatedSeries = (config.series || []).map((s) =>
-    merge(DONUT_SERIES_CONFIG, s),
+    merge(DONUT_SERIES_CONFIG, s)
   );
   return merge(
     {
@@ -26,7 +26,7 @@ const DONUT_CHART_CONFIG = (config = {}) => {
         },
       },
     },
-    { ...config, series: updatedSeries },
+    { ...config, series: updatedSeries }
   );
 };
 

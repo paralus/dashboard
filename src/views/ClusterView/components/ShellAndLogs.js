@@ -51,7 +51,7 @@ export default function ShellAndLogs({
 
   const readOnlyRole = or(
     propEq("namespaceReadOnly", true),
-    propEq("projectReadOnly", true),
+    propEq("projectReadOnly", true)
   )(userRoles);
 
   const handleKubectlOpen = (namespace, cmd, isLogsOnly) => {
@@ -67,10 +67,10 @@ export default function ShellAndLogs({
             btoa(cmd),
             "namespace",
             edge?.metadata.id,
-            isLogsOnly,
-          ),
+            isLogsOnly
+          )
         ),
-      500,
+      500
     );
   };
 

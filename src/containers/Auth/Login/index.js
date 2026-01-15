@@ -137,7 +137,7 @@ class Login extends Component {
       case "security_csrf_violation":
         // A CSRF violation occurred. Best to just refresh the flow!
         alert(
-          "A security violation was detected, please fill out the form again.",
+          "A security violation was detected, please fill out the form again."
         );
         this.props.history.push("/#/reload");
         return;
@@ -566,7 +566,7 @@ class Login extends Component {
       // Make an API call after 12hrs(+1min) which will trigger user session expiry
       setTimeout(
         this.props.getUserSessionInfo.bind(this),
-        SESSION_TIMEOUT_MILLISECONDS,
+        SESSION_TIMEOUT_MILLISECONDS
       );
       if (UserSession.noRolesUser) {
         return <Redirect to="/app/noaccess" />;
@@ -663,5 +663,5 @@ export default withRouter(
     resetPasswordError,
     getUserSessionInfo,
     initializeApp,
-  })(Login),
+  })(Login)
 );

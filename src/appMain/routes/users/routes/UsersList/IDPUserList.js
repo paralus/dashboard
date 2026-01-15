@@ -313,7 +313,7 @@ class IDPUserList extends React.Component {
 
     if (this.state.searchText) {
       data = data.filter(
-        (u) => u.metadata.name.indexOf(this.state.searchText) !== -1,
+        (u) => u.metadata.name.indexOf(this.state.searchText) !== -1
       );
       listCount = data.length;
     }
@@ -354,7 +354,7 @@ class IDPUserList extends React.Component {
           user={selectedUser}
           onClose={(_) => {
             this.setState({ openGroups: false, selectedUser: null }, (_) =>
-              this.props.getUsers(null, null, null, "", "", { type: "oidc" }),
+              this.props.getUsers(null, null, null, "", "", { type: "oidc" })
             );
           }}
         />
@@ -377,5 +377,5 @@ export default withRouter(
     getUsers,
     deleteUser,
     resetUserDeleteResponse,
-  })(IDPUserList),
+  })(IDPUserList)
 );

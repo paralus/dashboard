@@ -65,7 +65,7 @@ function ClusterLabelEditor({ isOpen, onOpen, labels, edge, refreshEdge }) {
   const { clusterLabels, currentProject } = useSelector((state) => {
     return {
       clusterLabels: state.Labels?.clusterLabels?.filter(
-        (cl) => !isEdgeLabel(cl),
+        (cl) => !isEdgeLabel(cl)
       ),
       currentProject: state?.Projects?.currentProject,
     };

@@ -212,5 +212,5 @@ export default withRouter(
     getUserDetail,
     editUser,
     resetUserGroupDeleteError,
-  })(Groups),
+  })(Groups)
 );

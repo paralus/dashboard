@@ -80,5 +80,5 @@ const mapStateToProps = ({ Projects }) => {
 export default withRouter(
   connect(mapStateToProps, {
     getProject,
-  })(ProjectDetail),
+  })(ProjectDetail)
 );

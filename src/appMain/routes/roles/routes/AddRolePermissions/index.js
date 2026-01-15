@@ -160,7 +160,7 @@ class AddRolePermissions extends React.Component {
       removePermissionsList.forEach((permission) => {
         roleDetail.spec.rolepermissions = this.arrayRemove(
           roleDetail.spec.rolepermissions,
-          permission.metadata.name,
+          permission.metadata.name
         );
       });
     }
@@ -170,7 +170,7 @@ class AddRolePermissions extends React.Component {
     editRoleWithCallback(
       roleDetail,
       this.addPermissionSuccessCallback,
-      this.handleFailureCallback,
+      this.handleFailureCallback
     );
   };
 
@@ -187,11 +187,11 @@ class AddRolePermissions extends React.Component {
       if (roleDetail.spec.scope.toLowerCase() != "namespace") {
         allPermissions = this.arrayObjectRemove(
           allPermissions,
-          "kubectl.namespace.read",
+          "kubectl.namespace.read"
         );
         allPermissions = this.arrayObjectRemove(
           allPermissions,
-          "kubectl.namespace.write",
+          "kubectl.namespace.write"
         );
       }
     }
@@ -288,5 +288,5 @@ export default withRouter(
     editRoleWithCallback,
     getRolePermissions,
     resetRolePermissions,
-  })(AddRolePermissions),
+  })(AddRolePermissions)
 );

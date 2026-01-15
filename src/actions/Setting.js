@@ -21,7 +21,7 @@ export function getOrgKubeconfigValidity(orgId) {
   return http(
     `v2/sentry/kubeconfig/organization/${orgId}/setting`,
     "",
-    true,
+    true
   ).get();
 }
 
@@ -32,7 +32,7 @@ export function setOrgKubeconfigValidity(orgId, params) {
   return http(
     `v2/sentry/kubeconfig/organization/${orgId}/setting`,
     "",
-    true,
+    true
   ).put("", params);
 }
 

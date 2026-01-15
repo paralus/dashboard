@@ -19,17 +19,17 @@ import "styles/app.scss";
 
 import AutoLogout from "./Auth/AutoLogout";
 
-const MainApp = React.lazy(
-  () => import(/* webpackPrefetch: true */ "app/index"),
+const MainApp = React.lazy(() =>
+  import(/* webpackPrefetch: true */ "app/index")
 );
-const AppMain = React.lazy(
-  () => import(/* webpackPrefetch: true */ "appMain/index"),
+const AppMain = React.lazy(() =>
+  import(/* webpackPrefetch: true */ "appMain/index")
 );
-const FullScreenKubectl = React.lazy(
-  () => import("containers/K8sConsole/FullScreenKubectl"),
+const FullScreenKubectl = React.lazy(() =>
+  import("containers/K8sConsole/FullScreenKubectl")
 );
-const Login = React.lazy(
-  () => import(/* webpackPrefetch: true */ "./Auth/Login"),
+const Login = React.lazy(() =>
+  import(/* webpackPrefetch: true */ "./Auth/Login")
 );
 
 class App extends Component {

@@ -31,7 +31,7 @@ export const newKratosSdk = () => {
         timeout: 10000,
       },
     }),
-    "",
+    ""
     // Ensure that we are using the axios client with retry.
     // axios
   );

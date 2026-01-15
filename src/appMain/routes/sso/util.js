@@ -6,7 +6,7 @@ export function downloadCertificate(text, name, type) {
   downloadAnchorNode.setAttribute("href", URL.createObjectURL(file));
   downloadAnchorNode.setAttribute(
     "download",
-    `${name.toLocaleLowerCase().replace(/\s/g, "-")}-certificate.pem`,
+    `${name.toLocaleLowerCase().replace(/\s/g, "-")}-certificate.pem`
   );
   document.body.appendChild(downloadAnchorNode); // required for firefox
   downloadAnchorNode.click();

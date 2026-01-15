@@ -48,7 +48,7 @@ export default function useThunk({
           throw error;
         });
     },
-    [stringyArgs],
+    [stringyArgs]
   );
 
   const callThunkWithInterval = useCallback(
@@ -62,7 +62,7 @@ export default function useThunk({
         }, refreshInterval * 1000);
       }
     },
-    [stringyArgs],
+    [stringyArgs]
   );
 
   const unmount = useCallback(() => {

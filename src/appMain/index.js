@@ -243,5 +243,5 @@ const mapStateToProps = ({
 };
 
 export default withRouter(
-  connect(mapStateToProps, { toggleCollapsedNav, userLogout })(AppMain),
+  connect(mapStateToProps, { toggleCollapsedNav, userLogout })(AppMain)
 );

@@ -327,7 +327,7 @@ function IDPRegistration(props) {
                       downloadCertificate(
                         idpDetail.scp_cert,
                         "okta-certificate.pem",
-                        "text/plain",
+                        "text/plain"
                       )
                     }
                   >

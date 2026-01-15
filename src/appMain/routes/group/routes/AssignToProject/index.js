@@ -131,7 +131,7 @@ class AssignToProject extends React.Component {
     editGroupWithCallback(
       groupDetail,
       this.successCallback,
-      this.errorCallback,
+      this.errorCallback
     );
   };
 
@@ -164,7 +164,7 @@ class AssignToProject extends React.Component {
               return gp.project === p.metadata.name;
             }
             return false;
-          }),
+          })
       );
     }
     const hasProjectRole =
@@ -267,5 +267,5 @@ export default withRouter(
     editGroupWithCallback,
     getRoles,
     getGroupDetail,
-  })(AssignToProject),
+  })(AssignToProject)
 );

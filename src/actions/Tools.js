@@ -23,7 +23,7 @@ export function getKubeConfig(accountid, onSuccess, onError) {
         "&opts.organization=" +
         organization,
       "",
-      true,
+      true
     )
       .get()
       .then((response) => {

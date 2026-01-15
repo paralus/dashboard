@@ -75,12 +75,12 @@ class Projects extends React.Component {
     const { groupDetail, editGroupWithCallback } = this.props;
     groupDetail.spec.projectNamespaceRoles = this.arrayRemove(
       groupDetail.spec.projectNamespaceRoles,
-      data.project,
+      data.project
     );
     editGroupWithCallback(
       groupDetail,
       this.successCallback,
-      this.errorCallback,
+      this.errorCallback
     );
   };
 
@@ -166,7 +166,7 @@ class Projects extends React.Component {
     if (data.length > 0) {
       data.forEach((e) => {
         let similarElement = processed.find(
-          (element) => element.project === e.project && element.role === e.role,
+          (element) => element.project === e.project && element.role === e.role
         );
         if (!similarElement) {
           processed.push({
@@ -206,7 +206,7 @@ class Projects extends React.Component {
     if (data.length > 0) {
       data.forEach((e) => {
         let similarElement = processed.find(
-          (element) => element.project === e.project,
+          (element) => element.project === e.project
         );
         if (!similarElement) {
           processed.push({
@@ -239,7 +239,7 @@ class Projects extends React.Component {
       groupDetail.spec.projectNamespaceRoles.length > 0
     ) {
       tableData = this.processProjectWithNamespaces(
-        groupDetail.spec.projectNamespaceRoles,
+        groupDetail.spec.projectNamespaceRoles
       );
       if (tableData.length > 0)
         tableData = this.processProjectWithRoles(tableData);
@@ -250,7 +250,7 @@ class Projects extends React.Component {
       groupDetail.spec.projectNamespaceRoles &&
       groupDetail.spec.projectNamespaceRoles.length > 0 &&
       groupDetail.spec.projectNamespaceRoles.find((p) =>
-        ["ADMIN", "ADMIN_READ_ONLY"].includes(p.role),
+        ["ADMIN", "ADMIN_READ_ONLY"].includes(p.role)
       )
     ) {
       createDisabled = true;
@@ -333,5 +333,5 @@ export default withRouter(
     getGroupDetail,
     editGroupWithCallback,
     resetProjectError,
-  })(Projects),
+  })(Projects)
 );

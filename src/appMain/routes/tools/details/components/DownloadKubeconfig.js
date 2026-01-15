@@ -47,7 +47,7 @@ const DownloadKubeconfig = ({ user, withIcon }) => {
               show: true,
               message: "Error Downloading Kubeconfig. Try again later.",
               severity: "error",
-            }),
+            })
           )}
           style={{ marginRight: "15px" }}
           color="primary"
@@ -65,7 +65,7 @@ const DownloadKubeconfig = ({ user, withIcon }) => {
               show: true,
               message: "Error Downloading Kubeconfig. Try again later.",
               severity: "error",
-            }),
+            })
           )}
         >
           <T.span text="tools.download_kubeconfig_button" />

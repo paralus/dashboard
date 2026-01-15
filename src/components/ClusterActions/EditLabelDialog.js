@@ -58,7 +58,7 @@ const EditLabelDialog = ({ isOpen, onClose, edge }) => {
   const { clusterLabels, currentProject } = useSelector((state) => {
     return {
       clusterLabels: state.Labels?.clusterLabels?.filter(
-        (cl) => !isEdgeLabel(cl),
+        (cl) => !isEdgeLabel(cl)
       ),
       currentProject: state?.Projects?.currentProject,
     };

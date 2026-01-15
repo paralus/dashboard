@@ -96,10 +96,10 @@ const maxCpu = R.pipe(
       R.propOr(0, "_y"),
       applyFormatter("0.00a"),
       nanToZero,
-      (x) => `(${x} cores)`,
+      (x) => `(${x} cores)`
     ),
   ]),
-  R.join(" "),
+  R.join(" ")
 );
 
 const maxCpuUsage = R.pipe(
@@ -108,7 +108,7 @@ const maxCpuUsage = R.pipe(
   R.propOr(0, "y"),
   applyFormatter("0.00a"),
   nanToZero,
-  (x) => `${x} cores`,
+  (x) => `${x} cores`
 );
 
 const currentCpu = R.pipe(
@@ -119,10 +119,10 @@ const currentCpu = R.pipe(
       R.propOr(0, "_y"),
       applyFormatter("0.00a"),
       nanToZero,
-      (x) => `(${x} cores)`,
+      (x) => `(${x} cores)`
     ),
   ]),
-  R.join(" "),
+  R.join(" ")
 );
 
 const currentCpuWithTotal = R.pipe(
@@ -132,42 +132,42 @@ const currentCpuWithTotal = R.pipe(
     R.pipe(
       (d) => (R.isNil(d) ? {} : d),
       (d) => ({ ...d, _y: R.pipe(applyFormatter("0.00a"), nanToZero)(d._y) }),
-      (d) => (d._y > 0 ? `(${d._y}/${d.total} cores)` : `(${d._y} cores)`),
+      (d) => (d._y > 0 ? `(${d._y}/${d.total} cores)` : `(${d._y} cores)`)
     ),
   ]),
-  R.join(" "),
+  R.join(" ")
 );
 
 const currentCpuUsage = R.pipe(
   R.last,
   R.propOr(0, "_y"),
   applyFormatter("0.00a"),
-  (x) => `CURR ${longEm(x)} cores`,
+  (x) => `CURR ${longEm(x)} cores`
 );
 
 export const dashboardCpuUsage = R.pipe(
   R.toPairs,
   R.last,
   ([ts, value]) => value,
-  applyFormatter("0.00a"),
+  applyFormatter("0.00a")
 );
 export const dashboardMemoryUsage = R.pipe(
   R.toPairs,
   R.last,
-  ([ts, value]) => value,
+  ([ts, value]) => value
   // applyFormatter("0.0 B")
 );
 
 export const dashboardCpuTotal = R.pipe(
   R.toPairs,
   R.last,
-  ([ts, value]) => value,
+  ([ts, value]) => value
 );
 
 export const dashboardMemoryTotal = R.pipe(
   R.toPairs,
   R.last,
-  ([ts, value]) => value,
+  ([ts, value]) => value
   // applyFormatter("0.0 B")
 );
 
@@ -178,14 +178,14 @@ const maxMemory = R.pipe(
     R.pipe(R.propOr(0, "y"), applyFormatter("0.0%")),
     R.pipe(R.propOr(0, "_y"), applyFormatter("0.0 B"), (x) => `(${x})`),
   ]),
-  R.join(" "),
+  R.join(" ")
 );
 
 const maxMemoryInBytes = R.pipe(
   R.sort(R.descend(R.prop("y"))),
   R.head,
   R.propOr(0, "y"),
-  applyFormatter("0.0 B"),
+  applyFormatter("0.0 B")
 );
 
 const currentMemory = R.pipe(
@@ -194,7 +194,7 @@ const currentMemory = R.pipe(
     R.pipe(R.propOr(0, "y"), applyFormatter("0.0%")),
     R.pipe(R.propOr(0, "_y"), applyFormatter("0.0 B"), (x) => `(${x})`),
   ]),
-  R.join(" "),
+  R.join(" ")
 );
 
 const currentMemoryWithTotal = R.pipe(
@@ -208,24 +208,24 @@ const currentMemoryWithTotal = R.pipe(
         _y: applyFormatter("0.0 B")(d._y),
         total: applyFormatter("0.0 B")(d.total),
       }),
-      (d) => `(${d._y}/${d.total})`,
+      (d) => `(${d._y}/${d.total})`
     ),
   ]),
-  R.join(" "),
+  R.join(" ")
 );
 
 const currentMemoryInBytes = R.pipe(
   R.last,
   R.propOr(0, "_y"),
   applyFormatter("0.0 B"),
-  (x) => `CURR ${longEm(x)}`,
+  (x) => `CURR ${longEm(x)}`
 );
 
 const currentResourceMessage = (
   usage,
   limit,
   isBestEffort,
-  checkMemory = false,
+  checkMemory = false
 ) => {
   try {
     if (isBestEffort || isNothing(limit)) {
@@ -252,12 +252,12 @@ const averageInNum = R.pipe(
   averageR,
   applyFormatter("0.00a"),
   nanToZero,
-  (x) => `${x} cores`,
+  (x) => `${x} cores`
 );
 
 const averageArray = R.pipe(
   R.filter(isSomething),
-  R.converge(R.divide, [R.sum, R.length]),
+  R.converge(R.divide, [R.sum, R.length])
 );
 
 const averageMemory = R.pipe(
@@ -267,10 +267,10 @@ const averageMemory = R.pipe(
       R.pluck("_y"),
       averageArray,
       applyFormatter("0.0 B"),
-      (x) => `(${x})`,
+      (x) => `(${x})`
     ),
   ]),
-  R.join(" "),
+  R.join(" ")
 );
 
 const averageCpu = R.pipe(
@@ -280,10 +280,10 @@ const averageCpu = R.pipe(
       R.pluck("_y"),
       averageArray,
       applyFormatter("0.00a"),
-      (x) => `(${x} cores)`,
+      (x) => `(${x} cores)`
     ),
   ]),
-  R.join(" "),
+  R.join(" ")
 );
 
 export const getTimestamps = R.pipe(
@@ -292,7 +292,7 @@ export const getTimestamps = R.pipe(
   R.map(R.keys),
   R.flatten,
   R.uniq,
-  R.sort(R.ascend(R.identity)),
+  R.sort(R.ascend(R.identity))
 );
 
 const getLastPlotPoint = R.pipe(R.prop("data"), R.last, R.prop("y"));
@@ -305,7 +305,7 @@ const addMarker = R.when(
       enabled: true,
       radius: 4,
     },
-  })),
+  }))
 );
 
 function getDataPadding(array = []) {
@@ -355,7 +355,7 @@ export function xformClusterHealthTs(response) {
         reason,
       };
     }),
-    addMarker,
+    addMarker
   );
   return {
     ...commonConfigForHealthCharts,
@@ -393,7 +393,7 @@ export function xformClusterCpuTs({ usage, request, total }) {
       };
     }),
     addMarker,
-    normalizeTimeSeries,
+    normalizeTimeSeries
   );
   const committedSeries = {
     name: "Committed",
@@ -420,7 +420,7 @@ export function xformClusterCpuTs({ usage, request, total }) {
         const unitFormat = " cores";
         const valueString = ` (${applyFormatter(
           "0.00a",
-          _y,
+          _y
         )}/${total})${unitFormat}`;
         return `<span style="color:${color}">●</span> ${series.name}: <b>${formattedValue}</b>${valueString}<br/>`;
       },
@@ -452,7 +452,7 @@ export function xformClusterMemoryTs({ usage, request, total }) {
       };
     }),
     addMarker,
-    normalizeTimeSeries,
+    normalizeTimeSeries
   );
   const committedSeries = {
     name: "Committed",
@@ -476,7 +476,7 @@ export function xformClusterMemoryTs({ usage, request, total }) {
         const valueFormat = "0.0 B";
         const valueString = ` (${applyFormatter(
           valueFormat,
-          _y,
+          _y
         )}/${applyFormatter(valueFormat, total)})`;
         return `<span style="color:${color}">●</span> ${series.name}: <b>${formattedValue}</b>${valueString}<br/>`;
       },
@@ -507,7 +507,7 @@ export function xformClusterStorageTs({ usage, total }) {
       };
     }),
     addMarker,
-    normalizeTimeSeries,
+    normalizeTimeSeries
   );
   const usageSeries = {
     name: "Usage",
@@ -525,7 +525,7 @@ export function xformClusterStorageTs({ usage, total }) {
         const valueFormat = "0.0 B";
         const valueString = ` (${applyFormatter(
           valueFormat,
-          _y,
+          _y
         )}/${applyFormatter(valueFormat, total)})`;
         return `<span style="color:${color}">●</span> ${series.name}: <b>${formattedValue}</b>${valueString}<br/>`;
       },
@@ -563,7 +563,7 @@ export function xformNodeHealthCountTs(response) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     )(timestamps),
   };
   const notReadySeries = {
@@ -583,7 +583,7 @@ export function xformNodeHealthCountTs(response) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     )(timestamps),
   };
   const series = {
@@ -651,7 +651,7 @@ export function xformWorkloadHealthCountTs(response) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     )(timestamps),
   };
   const notReadySeries = {
@@ -671,7 +671,7 @@ export function xformWorkloadHealthCountTs(response) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     )(timestamps),
   };
   const series = {
@@ -741,7 +741,7 @@ export function xformPodHealthCountTs(response) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     )(timestamps),
   };
   const errorSeries = {
@@ -761,7 +761,7 @@ export function xformPodHealthCountTs(response) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     )(timestamps),
   };
   const series = {
@@ -821,7 +821,7 @@ export function xformNodeHealthTs(name) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     );
     return {
       ...commonConfigForHealthCharts,
@@ -865,7 +865,7 @@ export function xformPodCpuTs({ qos }) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     );
     const formatString = isBestEffort ? "0.00a" : "0%";
     const usageSeries = {
@@ -888,7 +888,7 @@ export function xformPodCpuTs({ qos }) {
       usageSeriesData,
       limit,
       isBestEffort,
-      false,
+      false
     );
     const max = isBestEffort
       ? maxCpuUsage(usageSeriesData)
@@ -927,7 +927,7 @@ export function xformContainerCpuTs(isCpu, qos) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     );
     const formatStringCpu = isBestEffort ? "0.00a" : "0%";
     const formatStringMem = isBestEffort ? "0.0 B" : "0%";
@@ -952,22 +952,22 @@ export function xformContainerCpuTs(isCpu, qos) {
       usageSeriesData,
       limit,
       isBestEffort,
-      !isCpu,
+      !isCpu
     );
     const max = isBestEffort
       ? isCpu
         ? maxCpuUsage(usageSeriesData)
         : maxMemoryInBytes(usageSeriesData)
       : isCpu
-        ? maxCpu(usageSeriesData)
-        : maxMemory(usageSeriesData);
+      ? maxCpu(usageSeriesData)
+      : maxMemory(usageSeriesData);
     const averageMessage = isBestEffort
       ? isCpu
         ? averageInNum(usageSeriesData)
         : averageInBytes(usageSeriesData)
       : isCpu
-        ? averageCpu(usageSeriesData)
-        : averageMemory(usageSeriesData);
+      ? averageCpu(usageSeriesData)
+      : averageMemory(usageSeriesData);
 
     return {
       max,
@@ -998,7 +998,7 @@ export function xformPodMemoryTs({ qos }) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     );
     const formatString = isBestEffort ? "0.0 B" : "0%";
     const usageSeries = {
@@ -1020,7 +1020,7 @@ export function xformPodMemoryTs({ qos }) {
       usageSeriesData,
       limit,
       isBestEffort,
-      true,
+      true
     );
     const max = isBestEffort
       ? maxMemoryInBytes(usageSeriesData)
@@ -1055,7 +1055,7 @@ export function xformPodHealthTs(name) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     );
     return {
       ...commonConfigForHealthCharts,
@@ -1101,7 +1101,7 @@ export function xformContainerHealthTs(name) {
         };
       }),
       addMarker,
-      normalizeTimeSeries,
+      normalizeTimeSeries
     );
     return {
       ...commonConfigForHealthCharts,
@@ -1168,7 +1168,7 @@ export function xformPodRestartTs(response) {
             y: Number(value),
           })),
           addMarker,
-          normalizeTimeSeries,
+          normalizeTimeSeries
         )(response),
       },
     ],
@@ -1186,5 +1186,5 @@ export const getFormattedResponse = R.pipe(
       key: edgeIdShort,
       count: R.pipe(R.last, R.last)(d.values),
     };
-  }),
+  })
 );

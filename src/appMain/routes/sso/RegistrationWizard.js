@@ -67,7 +67,7 @@ const MetaDataUrlSchema = Yup.object().shape({
   metadata_url: Yup.string()
     .matches(
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
-      "Invalid link ",
+      "Invalid link "
     )
     .max(300, `Can't be longer than 300`),
 });
@@ -223,7 +223,7 @@ const RegistrationWizard = (props) => {
   const [idpId, setIdpId] = useState(props.match.params.ssoId);
 
   const [idpResponse, setIdpResponse] = useState(
-    props.location.state ? props.location.state : {},
+    props.location.state ? props.location.state : {}
   );
   const [activeStep, setActiveStep] = useState(0);
 
@@ -298,7 +298,7 @@ const RegistrationWizard = (props) => {
         setError(
           error.response.data
             ? capitalizeFirstLetter(error.response.data.message)
-            : "Unable to process request",
+            : "Unable to process request"
         );
         setLoading(false);
         setMsg("");
@@ -326,7 +326,7 @@ const RegistrationWizard = (props) => {
         setError(
           error.response.data
             ? capitalizeFirstLetter(error.response.data.message)
-            : "Unable to process request",
+            : "Unable to process request"
         );
         setLoading(false);
         setMsg("");
@@ -346,7 +346,7 @@ const RegistrationWizard = (props) => {
         setError(
           error.response.data && error.response.data.details.length
             ? capitalizeFirstLetter(error.response.data.details[0].detail)
-            : "Unable to process request",
+            : "Unable to process request"
         );
         setLoading(false);
         setMsg("");
@@ -395,14 +395,14 @@ const RegistrationWizard = (props) => {
           saveIdpDetails(
             transformRequest(firstStep.current.values),
             "UPDATE",
-            skipNextStep,
+            skipNextStep
           );
           return;
         }
         saveIdpDetails(
           transformRequest(firstStep.current.values),
           "CREATE",
-          skipNextStep,
+          skipNextStep
         );
       }
     }
@@ -642,7 +642,7 @@ const RegistrationWizard = (props) => {
                         <IconButton
                           onClick={() => {
                             navigator.clipboard.writeText(
-                              `${spConfig?.spec?.callbackUrl}`,
+                              `${spConfig?.spec?.callbackUrl}`
                             );
                             setToolTip("Copied");
                           }}
@@ -674,7 +674,7 @@ const RegistrationWizard = (props) => {
                         <IconButton
                           onClick={() => {
                             navigator.clipboard.writeText(
-                              `${spConfig?.spec?.issuerUrl}`,
+                              `${spConfig?.spec?.issuerUrl}`
                             );
                             setToolTip("Copied");
                           }}
@@ -706,7 +706,7 @@ const RegistrationWizard = (props) => {
                         <IconButton
                           onClick={() => {
                             navigator.clipboard.writeText(
-                              `${spConfig?.spec?.authUrl}`,
+                              `${spConfig?.spec?.authUrl}`
                             );
                             setToolTip("Copied");
                           }}
@@ -738,7 +738,7 @@ const RegistrationWizard = (props) => {
                         <IconButton
                           onClick={() => {
                             navigator.clipboard.writeText(
-                              `${spConfig?.spec?.tokenUrl}`,
+                              `${spConfig?.spec?.tokenUrl}`
                             );
                             setToolTip("Copied");
                           }}
@@ -791,10 +791,10 @@ const RegistrationWizard = (props) => {
                       metadata_url: idpResponse?.spec?.mapperUrl
                         ? idpResponse?.spec?.mapperUrl
                         : idpPayload?.spec?.providerName === "generic"
-                          ? idpResponse?.spec?.mapperUrl
-                          : `https://raw.githubusercontent.com/paralus/paralus/v0.2.2/_kratos/oidc-mappers/` +
-                            idpPayload?.spec?.providerName +
-                            ".jsonnet",
+                        ? idpResponse?.spec?.mapperUrl
+                        : `https://raw.githubusercontent.com/paralus/paralus/v0.2.2/_kratos/oidc-mappers/` +
+                          idpPayload?.spec?.providerName +
+                          ".jsonnet",
                     }}
                     validationSchema={MetaDataUrlSchema}
                     innerRef={secondStep}
@@ -970,8 +970,8 @@ const RegistrationWizard = (props) => {
                   {activeStep === steps.length - 1
                     ? "Save & Exit"
                     : editMode || editModeOn
-                      ? "Update & Continue"
-                      : "Save & Continue"}
+                    ? "Update & Continue"
+                    : "Save & Continue"}
                 </Button>
               </div>
             </div>

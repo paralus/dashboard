@@ -216,7 +216,7 @@ const TableToolbar = (props) => {
                     onDelete={handleRemoveFilter}
                     labelMap={FILTER_LABEL_MAP}
                   />
-                ),
+                )
             )}
           </div>
         </div>

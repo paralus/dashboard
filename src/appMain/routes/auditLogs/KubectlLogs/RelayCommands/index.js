@@ -143,5 +143,5 @@ const mapStateToProps = ({ AuditLogs, loading, Projects, UserSession }) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getKubectlLogs })(RelayLogs),
+  connect(mapStateToProps, { getKubectlLogs })(RelayLogs)
 );

@@ -90,7 +90,7 @@ const ClusterConfig = ({
       const edgeObj = res.data;
       if (edgeObj?.spec?.edge_provider_params?.params?.length > 0) {
         edgeObj.spec.edge_provider_params.params = JSON.parse(
-          edgeObj.spec.edge_provider_params.params,
+          edgeObj.spec.edge_provider_params.params
         );
       }
       if (!edgeObj.spec.Metro) {
@@ -314,5 +314,5 @@ export default withRouter(
   connect(mapStateToProps, {
     getEdgeDetail,
     updateEdge,
-  })(ClusterConfig),
+  })(ClusterConfig)
 );

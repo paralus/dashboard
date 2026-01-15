@@ -134,18 +134,18 @@ const ProjectRoleMatrix = ({ roles }) => {
                     </TableCell>
                     {getRoleProjectRowList(
                       group,
-                      projectMatrix[project][group],
+                      projectMatrix[project][group]
                     )}
                   </TableRow>
                 ) : (
                   <TableRow key={`${groupidx}${projectidx}`}>
                     {getRoleProjectRowList(
                       group,
-                      projectMatrix[project][group],
+                      projectMatrix[project][group]
                     )}
                   </TableRow>
-                ),
-              ),
+                )
+              )
             )}
           </TableBody>
         </Table>

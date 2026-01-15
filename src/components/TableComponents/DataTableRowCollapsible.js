@@ -28,7 +28,7 @@ const DataTableRowCollapsible = ({
     (_) => {
       if (prevData && prevData.name !== data.name) setOpen(false);
     },
-    [data],
+    [data]
   );
 
   return (

@@ -47,7 +47,7 @@ class AssignGroup extends React.Component {
       if (projectDetail.spec.projectNamespaceRoles) {
         newState.projectGroups =
           projectDetail.spec.projectNamespaceRoles.filter(
-            (pnr) => pnr.group && pnr.group.length > 0,
+            (pnr) => pnr.group && pnr.group.length > 0
           );
       }
     }
@@ -138,7 +138,7 @@ class AssignGroup extends React.Component {
     editProjectWithCallback(
       projectDetail,
       this.successCallback,
-      this.errorCallback,
+      this.errorCallback
     );
   };
 
@@ -170,7 +170,7 @@ class AssignGroup extends React.Component {
       filteredGroupList = groupsList.filter((g) => g.spec.type === "SYSTEM");
       if (projectGroups) {
         filteredGroupList = filteredGroupList.filter(
-          (g) => !projectGroups.find((pgr) => pgr.group === g.metadata.name),
+          (g) => !projectGroups.find((pgr) => pgr.group === g.metadata.name)
         );
       }
     }
@@ -271,5 +271,5 @@ export default withRouter(
     getRoles,
     getProject,
     getGroups,
-  })(AssignGroup),
+  })(AssignGroup)
 );

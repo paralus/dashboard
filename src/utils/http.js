@@ -35,7 +35,7 @@ export default function http(type, version = "v1", headers = {}) {
         return Promise.reject(tError);
       }
       return Promise.reject(error);
-    },
+    }
   );
 
   return instance;

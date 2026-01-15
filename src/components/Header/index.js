@@ -98,7 +98,7 @@ class Header extends React.Component {
       "/app/tools",
     ];
     const isSystemContext = systemPaths.some(
-      (path) => history.location.pathname.indexOf(path) === 0,
+      (path) => history.location.pathname.indexOf(path) === 0
     );
 
     const isDashboard = match.path === "/app" && match.isExact;
@@ -180,5 +180,5 @@ export default withRouter(
     setDrawerType,
     changeProject,
     resetChangeProject,
-  })(Header),
+  })(Header)
 );

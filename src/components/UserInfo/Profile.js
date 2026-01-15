@@ -111,5 +111,5 @@ class Profile extends React.Component {
 export default withRouter(
   connect(null, {
     getUserSessionInfo,
-  })(Profile),
+  })(Profile)
 );

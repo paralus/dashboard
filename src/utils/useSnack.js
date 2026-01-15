@@ -47,7 +47,7 @@ export function SnackbarProvider({ children }) {
       setSeverity(severity);
       setAutoHideDuration(autoHideDuration);
     },
-    [],
+    []
   );
 
   return (

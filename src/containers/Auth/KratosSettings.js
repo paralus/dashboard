@@ -66,7 +66,7 @@ const KratosSettings = (props) => {
       });
       setMessage("");
     },
-    [password, confirm_password],
+    [password, confirm_password]
   );
 
   const handleChangePassword = () => {

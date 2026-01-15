@@ -62,7 +62,7 @@ const RolesCard = ({
                       checked={
                         checked.findIndex(
                           (element) =>
-                            element.metadata.name === value.metadata.name,
+                            element.metadata.name === value.metadata.name
                         ) !== -1
                       }
                       tabIndex={-1}

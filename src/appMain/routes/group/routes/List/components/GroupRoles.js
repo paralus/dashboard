@@ -18,7 +18,7 @@ const GroupRoles = (props) => {
       ) {
         const pnr = groupData.spec.projectNamespaceRoles[index];
         const found = groupRoles.find(
-          (e) => e.project === pnr.project && e.role === pnr.role,
+          (e) => e.project === pnr.project && e.role === pnr.role
         );
         if (!found) groupRoles.push(pnr);
       }

@@ -6,7 +6,7 @@ export function getProjects() {
   return function (dispatch) {
     http("auth")
       .get(
-        `partner/${partner}/organization/${organization}/projects?limit=1000&order=ASC&orderby=name`,
+        `partner/${partner}/organization/${organization}/projects?limit=1000&order=ASC&orderby=name`
       ) // Dirty fix for Default project getting lost because of pagination
       .then((response) => {
         dispatch({ type: "get_projects_success", payload: response });
@@ -21,7 +21,7 @@ export function getProjectList(limit = 25, offset = 0) {
   const partner = JSON.parse(window?.localStorage.getItem("partner"));
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   return http("auth").get(
-    `partner/${partner}/organization/${organization}/projects?limit=${limit}&offset=${offset}&order=DESC&orderby=createdAt`,
+    `partner/${partner}/organization/${organization}/projects?limit=${limit}&offset=${offset}&order=DESC&orderby=createdAt`
   );
 }
 
@@ -30,24 +30,24 @@ export function getInitProjects(callback) {
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   return function (dispatch) {
     const cachedProject = JSON.parse(
-      window?.localStorage?.getItem("currentProject"),
+      window?.localStorage?.getItem("currentProject")
     );
 
     http("auth")
       .get(
-        `partner/${partner}/organization/${organization}/projects?limit=1000&order=DESC&orderby=name`,
+        `partner/${partner}/organization/${organization}/projects?limit=1000&order=DESC&orderby=name`
       ) // Dirty fix for Default project getting lost because of pagination
       .then((response) => {
         let currentProject = null;
         if (cachedProject) {
           const found = response.data?.items?.find(
-            (p) => p.metadata.name === cachedProject,
+            (p) => p.metadata.name === cachedProject
           );
           if (found) {
             currentProject = found;
           } else {
             const defaultProject = response.data.items.find(
-              (p) => p.spec.default,
+              (p) => p.spec.default
             );
             currentProject =
               defaultProject ||
@@ -55,7 +55,7 @@ export function getInitProjects(callback) {
           }
         } else {
           const defaultProject = response.data.items.find(
-            (p) => p.spec.default,
+            (p) => p.spec.default
           );
           currentProject =
             defaultProject ||
@@ -115,7 +115,7 @@ export function updateProject(project, params) {
   const organization = JSON.parse(window?.localStorage.getItem("organization"));
   return http("auth").put(
     `partner/${partner}/organization/${organization}/project/${project}`,
-    params,
+    params
   );
 }
 
@@ -137,7 +137,7 @@ export function deleteProject(name, onSuccess, onFailure) {
     http("auth")
       .delete(
         `partner/${partner}/organization/${organization}/project/${name}`,
-        {},
+        {}
       )
       .then((response) => {
         dispatch({
@@ -192,7 +192,7 @@ export function editProjectWithCallback(data, onSuccess, onFailure) {
     http("auth")
       .put(
         `partner/${partner}/organization/${organization}/project/${data.metadata.name}`,
-        data,
+        data
       )
       .then((_) => {
         dispatch(getProject(data.metadata.name));

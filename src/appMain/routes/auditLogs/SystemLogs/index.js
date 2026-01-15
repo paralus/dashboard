@@ -114,5 +114,5 @@ const mapStateToProps = ({ AuditLogs, Projects, UserSession }) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getAuditLogs })(SystemLogs),
+  connect(mapStateToProps, { getAuditLogs })(SystemLogs)
 );

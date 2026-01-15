@@ -37,7 +37,7 @@ const KubeconfigValiditySSO = ({ open, user, onClose, setAlert }) => {
         validitySeconds: Number.parseInt(seconds, 10),
         enableSessionCheck: sessionCheck,
       },
-      true,
+      true
     )
       .then((_) => {
         setAlert({

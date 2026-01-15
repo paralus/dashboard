@@ -36,7 +36,7 @@ class AssignedGroups extends React.Component {
     const { isAddUserError, error, resetProjectError, projectDetail } = props;
     if (projectDetail && projectDetail.spec.projectNamespaceRoles) {
       state.projGroups = projectDetail.spec.projectNamespaceRoles.filter(
-        (pnr) => pnr.group && pnr.group.length > 0,
+        (pnr) => pnr.group && pnr.group.length > 0
       );
     }
     if (isAddUserError) {
@@ -80,12 +80,12 @@ class AssignedGroups extends React.Component {
     const { editProjectWithCallback, projectDetail } = this.props;
     projectDetail.spec.projectNamespaceRoles =
       projectDetail.spec.projectNamespaceRoles.filter(
-        (r) => r.group != data.group,
+        (r) => r.group != data.group
       );
     editProjectWithCallback(
       projectDetail,
       this.successCallback,
-      this.errorCallback,
+      this.errorCallback
     );
   };
 
@@ -162,7 +162,7 @@ class AssignedGroups extends React.Component {
           (element) =>
             element.project === e.project &&
             element.group === e.group &&
-            element.role === e.role,
+            element.role === e.role
         );
         if (!similarElement) {
           processed.push({
@@ -204,7 +204,7 @@ class AssignedGroups extends React.Component {
       data.forEach((e) => {
         let similarElement = processed.find(
           (element) =>
-            element.project === e.project && element.group === e.group,
+            element.project === e.project && element.group === e.group
         );
         if (!similarElement) {
           processed.push({
@@ -314,5 +314,5 @@ export default withRouter(
     getProject,
     resetProjectError,
     editProjectWithCallback,
-  })(AssignedGroups),
+  })(AssignedGroups)
 );

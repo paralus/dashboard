@@ -86,7 +86,7 @@ class UserProfile extends Component {
     editUserWithCallback(
       user,
       this.handleSuccessCallback,
-      this.handleProfileError,
+      this.handleProfileError
     );
   };
 
@@ -160,5 +160,5 @@ export default withRouter(
   connect(null, {
     editUserWithCallback,
     setKubeconfigValidity,
-  })(UserProfile),
+  })(UserProfile)
 );

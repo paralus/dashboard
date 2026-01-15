@@ -46,7 +46,7 @@ const ProjectRoleWidget = ({
   React.useEffect(() => {
     if (editRoles && systemRoles && !roleModified) {
       const ifAllProjects = editRoles.filter(
-        (r) => r.role && r.role !== "" && r.project === undefined,
+        (r) => r.role && r.role !== "" && r.project === undefined
       );
       const editChecked = editRoles
         .filter((r) => r.project === editProject)
@@ -85,7 +85,7 @@ const ProjectRoleWidget = ({
   const handleToggle = (value) => () => {
     setRoleModified(true);
     const currentIndex = checked.findIndex(
-      (element) => element.metadata.name === value.metadata.name,
+      (element) => element.metadata.name === value.metadata.name
     );
     const newChecked = [...checked];
 
@@ -108,7 +108,7 @@ const ProjectRoleWidget = ({
       for (let pair of pairs) {
         if (value.metadata.name === pair[0]) {
           const item = checked.findIndex(
-            (element) => element.metadata.name === pair[1],
+            (element) => element.metadata.name === pair[1]
           );
           if (item !== -1) newChecked.splice(item, 1);
         }
@@ -132,7 +132,7 @@ const ProjectRoleWidget = ({
     if (proj === "ALL PROJECTS") {
       setProjectRoleDisabled(true);
       const adminRole = systemRoles.find(
-        (element) => element.metadata.name === "ADMIN",
+        (element) => element.metadata.name === "ADMIN"
       );
       if (adminRole) {
         setChecked([adminRole]);
@@ -141,7 +141,7 @@ const ProjectRoleWidget = ({
     } else {
       setProjectRoleDisabled(false);
       const ai = checked.findIndex(
-        (element) => element.metadata.name === "ADMIN",
+        (element) => element.metadata.name === "ADMIN"
       );
       if (ai !== -1) {
         const newChecked = [...checked];

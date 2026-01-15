@@ -84,12 +84,12 @@ const ClusterActions = ({
     // Remove actions for Non ready clusters
     if (!isClusterReady)
       menuItems = menuItems.filter((item) =>
-        NOT_READY_MENU_ITEMS.includes(item),
+        NOT_READY_MENU_ITEMS.includes(item)
       );
     // Remove actions for read-only clusters
     if (!hasWriteAccessInCluster) {
       menuItems = menuItems.filter(
-        (item) => !CLUSTER_RO_MENU_ITEMS.includes(item),
+        (item) => !CLUSTER_RO_MENU_ITEMS.includes(item)
       );
     }
 

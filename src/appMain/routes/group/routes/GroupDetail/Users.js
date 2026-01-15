@@ -189,5 +189,5 @@ export default withRouter(
     getGroupDetail,
     updateGroup,
     resetGroupUsers,
-  })(Users),
+  })(Users)
 );

@@ -63,10 +63,10 @@ const colourStyles = {
       color: isDisabled
         ? "#ccc"
         : isSelected
-          ? chroma.contrast(color, "white") > 2
-            ? "white"
-            : "black"
-          : data.color,
+        ? chroma.contrast(color, "white") > 2
+          ? "white"
+          : "black"
+        : data.color,
       cursor: isDisabled ? "not-allowed" : "default",
     };
   },

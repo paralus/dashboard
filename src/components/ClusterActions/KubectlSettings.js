@@ -22,7 +22,7 @@ const KubectlSettings = ({ open, onClose, edge }) => {
     (_) => {
       setSettingsError(!clusterID);
     },
-    [clusterID],
+    [clusterID]
   );
 
   useEffect(() => {
