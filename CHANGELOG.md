@@ -1,3 +1,10 @@
+## [0.2.5](https://github.com/paralus/dashboard/compare/v0.2.4...v0.2.5) (2026-01-14)
+
+### Dependencies
+
+- upgraded kratos client sdk from `v1.1.0` to `v25.4.0`
+- removed depricated dependencies `create-react-context` and `node-saas`
+
 ## [0.2.4](https://github.com/paralus/dashboard/compare/v0.2.3...v0.2.4) (2025-05-23)
 
 ### Dependencies
