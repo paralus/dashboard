@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { newKratosSdk } from "actions/Auth";
+import { newKratosSdk } from "../../actions/Auth";
 import { useQuery } from "utils/helpers";
 
 const AutoRegister = (props) => {
@@ -10,10 +10,36 @@ const AutoRegister = (props) => {
   const [flow, setFlow] = useState(undefined);
   const [csrf_token, setCSRF] = useState(undefined);
 
+  // const getRegistrationFlow = () => {
+  //   const provider = window.localStorage.getItem("provider");
+  //   newKratosSdk()
+  //     .initializeSelfServiceRegistrationFlowForBrowsers(undefined)
+  //     .then(({ data: flow }) => {
+  //       setFlow(flow);
+  //       console.log("FLOW", flow);
+  //       flow.ui.nodes.forEach((node) => {
+  //         if (node.attributes.name === "csrf_token") {
+  //           setCSRF(node.attributes.value);
+  //         }
+  //       });
+
+  //       newKratosSdk()
+  //         .submitSelfServiceRegistrationFlow(flowid, {
+  //           csrf_token,
+  //           method: "oidc",
+  //           provider: provider,
+  //         })
+  //         .then(() => {
+  //           props.history.push("/");
+  //         });
+  //     })
+  //     .catch(console.error);
+  // };
+
   const getRegistrationFlow = () => {
     const provider = window.localStorage.getItem("provider");
     newKratosSdk()
-      .initializeSelfServiceRegistrationFlowForBrowsers(undefined)
+      .createBrowserRegistrationFlow(undefined)
       .then(({ data: flow }) => {
         setFlow(flow);
         console.log("FLOW", flow);
@@ -24,10 +50,13 @@ const AutoRegister = (props) => {
         });
 
         newKratosSdk()
-          .submitSelfServiceRegistrationFlow(flowid, {
-            csrf_token,
-            method: "oidc",
-            provider: provider,
+          .updateRegistrationFlow({
+            flow: flowid,
+            updateRegistrationFlowBody: {
+              csrf_token,
+              provider,
+              method: "oidc",
+            },
           })
           .then(() => {
             props.history.push("/");

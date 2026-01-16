@@ -7,9 +7,9 @@ const env = isDevelopment ? "development" : "production";
 const cssModulesQuery = {
   modules: {
     auto: true,
-    localIdentName: "[name]-[local]-[hash:base64:5]"
+    localIdentName: "[name]-[local]-[hash:base64:5]",
   },
-  importLoaders: 1
+  importLoaders: 1,
 };
 
 module.exports = {
@@ -23,12 +23,12 @@ module.exports = {
         loader: require.resolve("babel-loader"),
         options: {
           presets: ["@babel/preset-env", "@babel/preset-react"],
-          plugins: ["react-hot-loader/babel"]
-        }
+          plugins: ["react-hot-loader/babel"],
+        },
       },
       {
         test: /\.(png|jpg|gif|mp4|ogg|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: "file-loader"
+        loader: "file-loader",
       },
       {
         test: /\.css$/i,
@@ -36,9 +36,9 @@ module.exports = {
           "style-loader",
           {
             loader: "css-loader",
-            options: cssModulesQuery
-          }
-        ]
+            options: cssModulesQuery,
+          },
+        ],
       },
       {
         test: /\.scss$/i,
@@ -46,17 +46,22 @@ module.exports = {
           "style-loader",
           {
             loader: "css-loader",
-            options: cssModulesQuery
+            options: cssModulesQuery,
           },
-          "sass-loader"
-        ]
-      }
-    ]
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("sass"),
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.ProvidePlugin({
-      process: "process/browser"
-    })
+      process: "process/browser",
+    }),
   ],
   resolve: {
     alias: {
@@ -70,9 +75,9 @@ module.exports = {
       app: `${srcPathAbsolute}/app/`,
       utils: `${srcPathAbsolute}/utils/`,
       styles: `${srcPathAbsolute}/styles/`,
-      process: "process/browser"
+      process: "process/browser",
     },
     extensions: [".js", ".jsx"],
-    modules: [srcPathAbsolute, "../node_modules"]
-  }
+    modules: [srcPathAbsolute, "../node_modules"],
+  },
 };

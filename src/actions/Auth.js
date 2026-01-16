@@ -1,6 +1,6 @@
 import http from "./Config";
 import { closeKubectlDrawer } from "./Kubectl";
-import { Configuration, V0alpha2Api } from "@ory/kratos-client";
+import { Configuration, FrontendApi } from "@ory/kratos-client";
 
 export function userSignup(user) {
   return function (dispatch) {
@@ -19,7 +19,7 @@ export function userSignup(user) {
 }
 
 export const newKratosSdk = () => {
-  return new V0alpha2Api(
+  return new FrontendApi(
     new Configuration({
       basePath: window.env?.KRATOS_URL || `//${window.location.host}`,
       baseOptions: {
@@ -43,17 +43,42 @@ export function userLogin() {
   };
 }
 
+// export function userLogout(idle) {
+//   return function (dispatch) {
+//     newKratosSdk()
+//       .createSelfServiceLogoutFlowUrlForBrowsers()
+//       .then(({ data: logoutUrl }) => {
+//         dispatch({ type: "reset_project" });
+//         dispatch({ type: "user_session_expired" });
+//         dispatch({ type: "reset_usersession" });
+//         dispatch(closeKubectlDrawer());
+//         newKratosSdk()
+//           .submitSelfServiceLogoutFlow(logoutUrl.logout_token)
+//           .catch((error) => {
+//             console.error(error);
+//             dispatch({ type: "user_session_expired", payload: error });
+//           })
+//           .then(() => {
+//             window.location.href = "/#/reload";
+//           });
+//       })
+//       .catch((error) => {
+//         dispatch({ type: "user_session_expired", payload: error });
+//       });
+//   };
+// }
+
 export function userLogout(idle) {
   return function (dispatch) {
     newKratosSdk()
-      .createSelfServiceLogoutFlowUrlForBrowsers()
+      .createBrowserLogoutFlow()
       .then(({ data: logoutUrl }) => {
         dispatch({ type: "reset_project" });
         dispatch({ type: "user_session_expired" });
         dispatch({ type: "reset_usersession" });
         dispatch(closeKubectlDrawer());
         newKratosSdk()
-          .submitSelfServiceLogoutFlow(logoutUrl.logout_token)
+          .updateLogoutFlow({ token: logoutUrl.logout_token })
           .catch((error) => {
             console.error(error);
             dispatch({ type: "user_session_expired", payload: error });

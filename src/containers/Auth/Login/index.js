@@ -27,7 +27,7 @@ import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import PageLayout from "./components/PageLayout";
 import ChangePasswordForm from "./components/ChangePasswordForm";
-import { newKratosSdk } from "actions/Auth";
+import { newKratosSdk } from "../../../actions/Auth";
 import paraluslogo from "../../../assets/images/logolarge.png";
 
 const SESSION_TIMEOUT_MILLISECONDS = 12 * 60 * 60 * 1000 + 1 * 60 * 1000; // 12hrs + 1min
@@ -62,7 +62,7 @@ class Login extends Component {
 
   initializeFlow = () =>
     newKratosSdk()
-      .initializeSelfServiceLoginFlowForBrowsers(true, "aal1")
+      .createBrowserLoginFlow({ refresh: true, aal: "aal1" })
       .then((response) => {
         const { data: flow } = response;
         flow.ui.nodes.forEach((node) => {
@@ -233,11 +233,14 @@ class Login extends Component {
     auth.username = username;
 
     newKratosSdk()
-      .submitSelfServiceLoginFlow(flow.id, {
-        csrf_token: this.state.csrf_token,
-        method: "password",
-        password_identifier: this.state.username,
-        password: this.state.password,
+      .updateLoginFlow({
+        flow: flow.id,
+        updateLoginFlowBody: {
+          method: "password",
+          csrf_token: this.state.csrf_token,
+          password_identifier: this.state.username,
+          password: this.state.password,
+        },
       })
       .then(() => {
         // const { initializeApp } = this.props;
@@ -259,11 +262,29 @@ class Login extends Component {
     auth.username = username;
 
     window.localStorage.setItem("provider", provider);
+    // newKratosSdk()
+    //   .submitSelfServiceLoginFlow(flow.id, {
+    //     csrf_token: this.state.csrf_token,
+    //     method: "oidc",
+    //     provider,
+    //   })
+    //   .catch((err) => {
+    //     this.handleFlowError(err);
+    //   })
+    //   .then((res) => {
+    //     initializeApp(() => {
+    //       window.location.href = res.data.redirect_browser_to;
+    //     });
+    //   });
+
     newKratosSdk()
-      .submitSelfServiceLoginFlow(flow.id, {
-        csrf_token: this.state.csrf_token,
-        method: "oidc",
-        provider,
+      .updateLoginFlow({
+        flow: flow.id,
+        updateLoginFlowBody: {
+          csrf_token: this.state.csrf_token,
+          method: "oidc",
+          provider,
+        },
       })
       .catch((err) => {
         this.handleFlowError(err);
