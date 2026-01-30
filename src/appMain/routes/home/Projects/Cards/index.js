@@ -27,7 +27,7 @@ const Cards = ({ viewSwitcher }) => {
   const sortedData = [...data].sort((a, b) =>
     a.metadata.name.localeCompare(b.metadata.name, undefined, {
       sensitivity: "base",
-    }),
+    })
   );
 
   const filteredData =
