@@ -172,43 +172,52 @@ class AppMain extends React.Component {
               />
             </div>
           )}
-          {hasAccess &&
-            currentProject &&
-            currentProject.metadata.name &&
-            forceResetEnabledForUser && (
-              <main className="app-main-content-wrapper">
-                <div className="app-main-content">
-                  <Container maxWidth="lg">
-                    <Route exact path={`${match.url}`} component={Home} />
-                    <Route path={`${match.url}/users`} component={Users} />
-                    <Route
-                      path={`${match.url}/settings`}
-                      component={Settings}
-                    />
-                    <Route path={`${match.url}/tools`} component={Tools} />
-                    <Route path={`${match.url}/audit`} component={AuditLogs} />
-                    <Route path={`${match.url}/projects`} component={Project} />
-                    <Route path={`${match.url}/groups`} component={Group} />
-                    <Route path={`${match.url}/roles`} component={Roles} />
-                    <Route
-                      exact
-                      path={`${match.url}/sso/new`}
-                      component={RegistrationWizard}
-                    />
-                    <Route
-                      exact
-                      path={`${match.url}/sso/update/:ssoId`}
-                      component={RegistrationWizard}
-                    />
-                    <Route
-                      exact
-                      path={`${match.url}/sso`}
-                      component={IdpList}
-                    />
-                  </Container>
-                </div>
-              </main>
-            )}
+          {hasAccess && forceResetEnabledForUser && (
+            <main className="app-main-content-wrapper">
+              <div className="app-main-content">
+                <Container maxWidth="lg">
+                  <Route exact path={`${match.url}`} component={Home} />
+
+                  {currentProject?.metadata?.name && (
+                    <>
+                      <Route path={`${match.url}/users`} component={Users} />
+                      <Route
+                        path={`${match.url}/settings`}
+                        component={Settings}
+                      />
+                      <Route path={`${match.url}/tools`} component={Tools} />
+                      <Route
+                        path={`${match.url}/audit`}
+                        component={AuditLogs}
+                      />
+                      <Route
+                        path={`${match.url}/projects`}
+                        component={Project}
+                      />
+                      <Route path={`${match.url}/groups`} component={Group} />
+                      <Route path={`${match.url}/roles`} component={Roles} />
+                      <Route
+                        exact
+                        path={`${match.url}/sso/new`}
+                        component={RegistrationWizard}
+                      />
+                      <Route
+                        exact
+                        path={`${match.url}/sso/update/:ssoId`}
+                        component={RegistrationWizard}
+                      />
+                      <Route
+                        exact
+                        path={`${match.url}/sso`}
+                        component={IdpList}
+                      />
+                    </>
+                  )}
+                </Container>
+              </div>
+            </main>
+          )}
+
           {!this.props.kubectlOpen && <Footer />}
         </div>
         {hasAccess && currentProject?.metadata.name && <MiniKubectl />}
@@ -243,5 +252,5 @@ const mapStateToProps = ({
 };
 
 export default withRouter(
-  connect(mapStateToProps, { toggleCollapsedNav, userLogout })(AppMain)
+  connect(mapStateToProps, { toggleCollapsedNav, userLogout })(AppMain),
 );
