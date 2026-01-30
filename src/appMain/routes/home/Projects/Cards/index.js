@@ -15,7 +15,7 @@ const Cards = ({ viewSwitcher }) => {
 
   const getProjects = (_) => {
     getProjectList(100, 0).then((res) => {
-      setData(res?.data?.items);
+      setData(res?.data?.items ?? []);
       setLoading(false);
     });
   };
@@ -24,11 +24,11 @@ const Cards = ({ viewSwitcher }) => {
     getProjects(100, 0);
   }, []);
 
-  const sortedData = data.sort((a, b) => {
-    return a.metadata.name.localeCompare(b.metadata.name, undefined, {
+  const sortedData = [...data].sort((a, b) =>
+    a.metadata.name.localeCompare(b.metadata.name, undefined, {
       sensitivity: "base",
-    });
-  });
+    })
+  );
 
   const filteredData =
     searchText.length > 0
