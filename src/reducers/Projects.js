@@ -1,11 +1,14 @@
 const initialData = {
   isProjectSet: false,
-  projectsList: null,
+  projectsList: {
+    items: [],
+    metadata: { count: 0 },
+  },
   currentProject: null,
   reloadOnChangeProject: false,
-  projectRoles: null,
-  projectUsers: null,
-  projectGroups: null,
+  projectRoles: {},
+  projectUsers: [],
+  projectGroups: [],
   projectDetail: null,
   isAddUserError: false,
   isAddGroupError: false,
@@ -13,50 +16,57 @@ const initialData = {
 };
 
 const Projects = (state = initialData, action) => {
-  let { currentProject, projectRoles } = state;
-  const { projectsList } = state;
+  let {  projectRoles } = state;
+  // const { projectsList } = state;
   switch (action.type) {
-    case "get_init_projects_success":
-      if (!projectsList) {
-        return {
-          ...state,
-          isProjectSet: action.payload.data.items.length > 0,
-          projectsList: action.payload.data,
-          currentProject: action.currentProject,
-        };
-      }
-      return {
-        ...state,
-      };
+    case "get_init_projects_success": {
+      const data = action.payload?.data || {};
+      const items = Array.isArray(data.items) ? data.items : [];
 
-    case "get_projects_success":
       return {
         ...state,
-        isProjectSet: action.payload.data.items.length > 0,
-        projectsList: action.payload.data,
-        currentProject,
+        isProjectSet: items.length > 0,
+        projectsList: {
+          ...data,
+          items,
+        },
+        currentProject: action.currentProject || null,
       };
+    }
+    case "get_projects_success": {
+      const data = action.payload?.data || {};
+      const items = Array.isArray(data.items) ? data.items : [];
+
+      return {
+        ...state,
+        isProjectSet: items.length > 0,
+        projectsList: {
+          ...data,
+          items,
+        },
+      };
+    }
     case "get_project_success":
       return {
         ...state,
-        projectDetail: action.payload.data,
+        projectDetail: action.payload?.data || null,
       };
     case "create_project_success":
       return {
         ...state,
         isProjectSet: true,
       };
-    case "set_current_project":
-      if (state.projectsList) {
-        currentProject = state.projectsList.items.find((p) => {
-          return p.metadata.name === action.payload.name;
-        });
-      }
+    case "set_current_project": {
+      const items = state.projectsList?.items || [];
+      const currentProject =
+        items.find((p) => p.metadata.name === action.payload.name) || null;
+
       return {
         ...state,
         currentProject,
         reloadOnChangeProject: !action.payload.noReload,
       };
+    }
     case "reset_change_project":
       return {
         ...state,
@@ -66,7 +76,10 @@ const Projects = (state = initialData, action) => {
       return {
         ...state,
         isProjectSet: false,
-        projectsList: null,
+        projectsList: {
+          items: [],
+          metadata: { count: 0 },
+        },
         currentProject: null,
         reloadOnChangeProject: false,
       };
@@ -81,12 +94,12 @@ const Projects = (state = initialData, action) => {
     case "get_project_users_success":
       return {
         ...state,
-        projectUsers: action.payload.data.results,
+        projectUsers: action.payload?.data?.results || [],
       };
     case "get_project_groups_success":
       return {
         ...state,
-        projectGroups: action.payload.data.results,
+        projectGroups: action.payload?.data?.results || [],
       };
     case "add_projectusers_error":
       return {

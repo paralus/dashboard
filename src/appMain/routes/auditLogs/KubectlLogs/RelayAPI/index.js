@@ -29,7 +29,7 @@ class RelayCommands extends React.Component {
   }
 
   componentDidMount() {
-    this.handleRefreshClick();
+    this.handleRefreshClick(null);
     if (this.props.location.state && this.props.location.state.filter) {
       const { name, value } = this.props.location.state.filter;
       // manually changing filter option
@@ -85,9 +85,12 @@ class RelayCommands extends React.Component {
   handleRefreshClick = (filterProps) => {
     const { filter, auditType, isProjectRole, projects } = this.state;
     if (isProjectRole) {
+      if (!Array.isArray(projects) || projects.length === 0) {
+      return;
+      }
       let project = "";
       if (filterProps) {
-        if (filterProps?.project) {
+        if (filterProps?.project?.length) {
           project = filterProps.project[0];
         } else {
           project = projects[0]["key"];

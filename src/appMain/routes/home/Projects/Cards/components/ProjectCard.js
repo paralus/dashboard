@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProjectCard = ({ data, refreshProjects }) => {
+  if (!data || !data.metadata) return null;
   const classes = useStyles();
   const [cachedProject, setCachedProject] = useLocalStorage("currentProject");
   const [alert, setAlert] = useState(false);
@@ -58,7 +59,9 @@ const ProjectCard = ({ data, refreshProjects }) => {
   const history = useHistory();
   const { permissions, isAdmin } = useSelector((state) => {
     return {
-      permissions: state.UserSession?.projectRoles[data.id],
+      permissions: data?.metadata?.id
+      ? state.UserSession?.projectRoles?.[data.metadata.id]
+      : null,
       isAdmin: state.UserSession.visibleAdmin,
     };
   });
@@ -196,7 +199,7 @@ const ProjectCard = ({ data, refreshProjects }) => {
                 <ConfirmIconAction
                   icon={<DeleteIcon />}
                   action={handleDeleteProject}
-                  disabled={data.spec.default}
+                  disabled={data.spec?.default}
                   confirmText={
                     <>
                       <span className="mr-1">

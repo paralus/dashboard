@@ -38,29 +38,28 @@ export function getInitProjects(callback) {
         `partner/${partner}/organization/${organization}/projects?limit=1000&order=DESC&orderby=name`
       ) // Dirty fix for Default project getting lost because of pagination
       .then((response) => {
+        const items = response.data?.items || [];
         let currentProject = null;
-        if (cachedProject) {
-          const found = response.data?.items?.find(
-            (p) => p.metadata.name === cachedProject
-          );
-          if (found) {
-            currentProject = found;
+        if (items.length > 0) {
+          if (cachedProject) {
+            const found = response.data?.items?.find(
+              (p) => p.metadata.name === cachedProject
+            );
+            if (found) {
+              currentProject = found;
+            } else {
+              const defaultProject = response.data.items.find(
+                (p) => p.spec.default
+              );
+              currentProject = items.find((p) => p.spec?.default) || items[0];
+            }
           } else {
             const defaultProject = response.data.items.find(
               (p) => p.spec.default
             );
-            currentProject =
-              defaultProject ||
-              response.data.items[response.data.items.length - 1];
+            currentProject = items.find((p) => p.spec?.default) || items[0];
           }
-        } else {
-          const defaultProject = response.data.items.find(
-            (p) => p.spec.default
-          );
-          currentProject =
-            defaultProject ||
-            response.data.items[response.data.items.length - 1];
-        }
+        }  
         dispatch({
           type: "get_init_projects_success",
           payload: response,
@@ -90,23 +89,40 @@ export function createProject(params, onSuccess = null, onFailure = null) {
     http("auth")
       .post(`partner/${partner}/organization/${organization}/project`, reqData)
       .then((response) => {
+
+        const createdProject = response?.data;
+
         dispatch({ type: "create_project_success", payload: response });
         dispatch(getProjects(partner, organization));
+        if (createdProject?.metadata?.name) {
+          dispatch({
+            type: "set_session_current_project",
+            payload: createdProject,
+          });
+
+          localStorage.setItem(
+            "currentProject",
+            JSON.stringify(createdProject.metadata.name)
+          );
+        }
         if (onSuccess) onSuccess();
       })
       .catch((error) => {
+        const errorData =
+          error?.response?.data || {
+            message: "Failed to create project. Please try again.",
+          };
+
         dispatch({
           type: "create_project_error",
-          payload: error.response.data,
+          payload: errorData,
         });
+
         if (onFailure) {
-          if (error.response.data) {
-            onFailure(error.response.data.message);
-          } else {
-            onFailure(JSON.stringify(error.response.data));
-          }
+          onFailure(errorData.message);
         }
       });
+
   };
 }
 
