@@ -29,6 +29,13 @@ module.exports = merge(common, {
     port: 3000,
     historyApiFallback: true,
     hot: isFastRefresh ? "only" : true,
+     // THIS FIXES THE BLACK ERROR SCREEN
+    client: {
+      overlay: {
+        errors: false,
+        warnings: false,
+      },
+    },
     proxy: [
       {
         context: ["/debug"],
