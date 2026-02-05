@@ -16,7 +16,7 @@ const initialData = {
 };
 
 const Projects = (state = initialData, action) => {
-  let {  projectRoles } = state;
+  let { projectRoles } = state;
   // const { projectsList } = state;
   switch (action.type) {
     case "get_init_projects_success": {

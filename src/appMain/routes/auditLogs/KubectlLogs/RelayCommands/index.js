@@ -99,7 +99,6 @@ class RelayLogs extends React.Component {
     }
   };
 
-
   handleResetFilter = () => {
     const filter = DefaultFilter;
     this.setState({ filter }, this.handleRefreshClick(filter));

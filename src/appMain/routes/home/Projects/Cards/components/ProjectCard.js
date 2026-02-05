@@ -60,8 +60,8 @@ const ProjectCard = ({ data, refreshProjects }) => {
   const { permissions, isAdmin } = useSelector((state) => {
     return {
       permissions: data?.metadata?.id
-      ? state.UserSession?.projectRoles?.[data.metadata.id]
-      : null,
+        ? state.UserSession?.projectRoles?.[data.metadata.id]
+        : null,
       isAdmin: state.UserSession.visibleAdmin,
     };
   });

@@ -59,7 +59,7 @@ export function getInitProjects(callback) {
             );
             currentProject = items.find((p) => p.spec?.default) || items[0];
           }
-        }  
+        }
         dispatch({
           type: "get_init_projects_success",
           payload: response,
@@ -89,7 +89,6 @@ export function createProject(params, onSuccess = null, onFailure = null) {
     http("auth")
       .post(`partner/${partner}/organization/${organization}/project`, reqData)
       .then((response) => {
-
         const createdProject = response?.data;
 
         dispatch({ type: "create_project_success", payload: response });
@@ -108,10 +107,9 @@ export function createProject(params, onSuccess = null, onFailure = null) {
         if (onSuccess) onSuccess();
       })
       .catch((error) => {
-        const errorData =
-          error?.response?.data || {
-            message: "Failed to create project. Please try again.",
-          };
+        const errorData = error?.response?.data || {
+          message: "Failed to create project. Please try again.",
+        };
 
         dispatch({
           type: "create_project_error",
@@ -122,7 +120,6 @@ export function createProject(params, onSuccess = null, onFailure = null) {
           onFailure(errorData.message);
         }
       });
-
   };
 }
 

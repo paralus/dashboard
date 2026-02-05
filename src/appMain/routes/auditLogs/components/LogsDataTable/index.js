@@ -116,7 +116,7 @@ const LogsDataTable = (props) => {
           handleRefreshClick={props.handleRefreshClick}
           handleResetFilter={props.handleResetFilter}
           handleFilter={props.handleFilter}
-          numSelected={0}   // REQUIRED PROP
+          numSelected={0} // REQUIRED PROP
           isProjectAdmin={props.isProjectAdmin}
           isProjectRole={props.isProjectRole}
           users={Array.isArray(props.users) ? props.users : []}

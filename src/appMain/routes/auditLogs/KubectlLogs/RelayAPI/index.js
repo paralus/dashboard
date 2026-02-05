@@ -86,7 +86,7 @@ class RelayCommands extends React.Component {
     const { filter, auditType, isProjectRole, projects } = this.state;
     if (isProjectRole) {
       if (!Array.isArray(projects) || projects.length === 0) {
-      return;
+        return;
       }
       let project = "";
       if (filterProps) {

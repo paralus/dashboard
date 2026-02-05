@@ -93,7 +93,7 @@ class AppMain extends React.Component {
     } = this.props;
 
     const hasProject = Boolean(currentProject?.metadata?.name);
-    
+
     let favicon_src = ParalusMark;
     if (partnerDetail && partnerDetail.fav_icon_link) {
       favicon_src = partnerDetail.fav_icon_link;
@@ -181,7 +181,6 @@ class AppMain extends React.Component {
             <main className="app-main-content-wrapper">
               <div className="app-main-content">
                 <Container maxWidth="lg">
-
                   {/* Routes are ALWAYS available */}
                   <Route exact path={`${match.url}`} component={Home} />
                   <Route path={`${match.url}/users`} component={Users} />
@@ -191,8 +190,16 @@ class AppMain extends React.Component {
                   <Route path={`${match.url}/projects`} component={Project} />
                   <Route path={`${match.url}/groups`} component={Group} />
                   <Route path={`${match.url}/roles`} component={Roles} />
-                  <Route exact path={`${match.url}/sso/new`} component={RegistrationWizard} />
-                  <Route exact path={`${match.url}/sso/update/:ssoId`} component={RegistrationWizard} />
+                  <Route
+                    exact
+                    path={`${match.url}/sso/new`}
+                    component={RegistrationWizard}
+                  />
+                  <Route
+                    exact
+                    path={`${match.url}/sso/update/:ssoId`}
+                    component={RegistrationWizard}
+                  />
                   <Route exact path={`${match.url}/sso`} component={IdpList} />
 
                   {/* Empty state overlay */}
@@ -202,7 +209,7 @@ class AppMain extends React.Component {
                         title={<span>No Projects Available</span>}
                         linkHelper={
                           <span>
-                            There are no projects available. Please create one. {" "}
+                            There are no projects available. Please create one.{" "}
                             <Link
                               to="/"
                               style={{
@@ -219,7 +226,6 @@ class AppMain extends React.Component {
                       />
                     </div>
                   )}
-
                 </Container>
               </div>
             </main>

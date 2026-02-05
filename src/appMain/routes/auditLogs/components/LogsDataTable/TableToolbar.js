@@ -77,13 +77,11 @@ const TableToolbar = (props) => {
     users,
     kinds,
   } = props;
-  
+
   const hasProjects = Array.isArray(projects) && projects.length > 0;
 
   const projectDefaultLabel =
-    isProjectRole && hasProjects
-      ? projects[0].key
-      : "All Projects";
+    isProjectRole && hasProjects ? projects[0].key : "All Projects";
 
   const [chips, setChips] = useState(filterToChips(filter));
 
@@ -217,7 +215,7 @@ const TableToolbar = (props) => {
               (chip) =>
                 chip.content.length > 0 && (
                   <FilterChip
-                    key={`${chip.label}-${chip.content}`} 
+                    key={`${chip.label}-${chip.content}`}
                     label={chip.label}
                     content={chip.content}
                     onDelete={handleRemoveFilter}
