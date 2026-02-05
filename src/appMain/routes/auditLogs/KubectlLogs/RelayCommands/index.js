@@ -59,30 +59,41 @@ class RelayLogs extends React.Component {
     if (aggregateMethods?.length > state.methods?.length)
       state.methods = aggregateMethods;
 
-    const projectList = props?.projectsList?.items.map((p) => {
-      return { key: p?.metadata.name };
-    });
-    state.projects = projectList || [];
+    const items = Array.isArray(props?.projectsList?.items)
+      ? props.projectsList.items
+      : [];
+    const projectList = items.map((p) => ({
+      key: p?.metadata?.name,
+    }));
+    state.projects = projectList;
     state.isProjectRole = props?.UserSession?.userRoles?.projectAuditRead;
     return { ...state };
   }
 
   handleRefreshClick = (filterProps) => {
     const { filter, auditType, isProjectRole, projects } = this.state;
+
+    const hasProjects = Array.isArray(projects) && projects.length > 0;
+
     if (isProjectRole) {
       let project = "";
-      if (filterProps) {
+
+      if (hasProjects) {
         if (filterProps?.project) {
           project = filterProps.project[0];
+        } else if (filter?.project) {
+          project = filter.project[0];
         } else {
-          project = projects[0]["key"];
+          project = projects[0].key;
         }
-      } else if (filter.project) {
-        project = filter.project[0];
-      } else {
-        project = projects[0]["key"];
       }
-      this.props.getKubectlLogs(filterProps || filter, auditType, project);
+
+      // If no projects, call API WITHOUT project filter
+      if (project) {
+        this.props.getKubectlLogs(filterProps || filter, auditType, project);
+      } else {
+        this.props.getKubectlLogs(filterProps || filter, auditType);
+      }
     } else {
       this.props.getKubectlLogs(filterProps || filter, auditType);
     }

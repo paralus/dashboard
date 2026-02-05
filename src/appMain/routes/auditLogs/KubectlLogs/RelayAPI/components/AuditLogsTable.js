@@ -117,6 +117,7 @@ const AuditLogsTable = (props) => {
         handleRefreshClick={props.handleRefreshClick}
         handleFilter={props.handleFilter}
         handleResetFilter={props.handleResetFilter}
+        numSelected={0}
         users={props.users}
         clusters={props.clusters}
         projects={props.projects}

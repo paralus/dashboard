@@ -116,17 +116,19 @@ const LogsDataTable = (props) => {
           handleRefreshClick={props.handleRefreshClick}
           handleResetFilter={props.handleResetFilter}
           handleFilter={props.handleFilter}
+          numSelected={0} // REQUIRED PROP
           isProjectAdmin={props.isProjectAdmin}
           isProjectRole={props.isProjectRole}
-          users={props.users}
-          types={props.types}
-          kinds={props.kinds}
-          projects={props.projects}
-          clusters={props.clusters}
-          filter={props.filter}
-          list={props?.list || []}
-          handleRemoveFilter={props?.handleRemoveFilter}
+          users={Array.isArray(props.users) ? props.users : []}
+          types={Array.isArray(props.types) ? props.types : []}
+          kinds={Array.isArray(props.kinds) ? props.kinds : []}
+          projects={Array.isArray(props.projects) ? props.projects : []}
+          clusters={Array.isArray(props.clusters) ? props.clusters : []}
+          filter={props.filter || {}}
+          list={props.list || []}
+          handleRemoveFilter={props.handleRemoveFilter || (() => {})}
         />
+
         <DataTable
           list={props?.list || []}
           count={props?.count}
