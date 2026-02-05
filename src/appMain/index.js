@@ -201,31 +201,6 @@ class AppMain extends React.Component {
                     component={RegistrationWizard}
                   />
                   <Route exact path={`${match.url}/sso`} component={IdpList} />
-
-                  {/* Empty state overlay */}
-                  {!hasProject && (
-                    <div style={{ paddingTop: "75px" }}>
-                      <InfoCardComponent
-                        title={<span>No Projects Available</span>}
-                        linkHelper={
-                          <span>
-                            There are no projects available. Please create one.{" "}
-                            <Link
-                              to="/"
-                              style={{
-                                color: "#009688",
-                                fontWeight: 500,
-                                textDecoration: "underline",
-                              }}
-                            >
-                              click here
-                            </Link>
-                            .
-                          </span>
-                        }
-                      />
-                    </div>
-                  )}
                 </Container>
               </div>
             </main>

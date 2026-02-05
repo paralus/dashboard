@@ -49,8 +49,18 @@ const TableToolbar = (props) => {
   const { handleFilter, handleResetFilter, handleRemoveFilter } = props;
   const { isProjectRole, projects = [] } = props;
   const hasProjects = Array.isArray(projects) && projects.length > 0;
-  const projectDefaultLabel =
-    isProjectRole && hasProjects ? projects[0].key : "All Projects";
+
+  const projectOptions = hasProjects
+    ? projects
+    : [
+        {
+          key: "NO_PROJECTS",
+          label: "No projects exist",
+          disabled: true,
+        },
+      ];
+
+  const projectDefaultLabel = "All Projects";
   const [chips, setChips] = useState(filterToChips(filter));
 
   useEffect(() => {
@@ -110,7 +120,7 @@ const TableToolbar = (props) => {
             <FilterField
               name="project"
               value={filter.project}
-              list={props.projects}
+              list={projectOptions}
               defaultLabel={projectDefaultLabel}
               label="Project"
               handleFilter={handleFilter}
