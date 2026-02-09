@@ -78,18 +78,7 @@ const TableToolbar = (props) => {
     kinds,
   } = props;
 
-  const hasProjects = Array.isArray(projects) && projects.length > 0;
-
-  const projectOptions = hasProjects
-    ? projects
-    : [
-        {
-          key: "NO_PROJECTS",
-          label: "No projects exist",
-          disabled: true,
-        },
-      ];
-
+  const projectOptions = Array.isArray(projects) ? projects : [];
   const projectDefaultLabel = "All Projects";
   const [chips, setChips] = useState(filterToChips(filter));
 
