@@ -47,7 +47,12 @@ const filterToChips = (filter) => {
 const TableToolbar = (props) => {
   const { numSelected, handleRefreshClick, filter } = props;
   const { handleFilter, handleResetFilter, handleRemoveFilter } = props;
-  const { isProjectRole } = props;
+  const { isProjectRole, projects = [] } = props;
+  const hasProjects = Array.isArray(projects) && projects.length > 0;
+
+  const projectOptions = Array.isArray(projects) ? projects : [];
+
+  const projectDefaultLabel = "All Projects";
   const [chips, setChips] = useState(filterToChips(filter));
 
   useEffect(() => {
@@ -107,10 +112,8 @@ const TableToolbar = (props) => {
             <FilterField
               name="project"
               value={filter.project}
-              list={props.projects}
-              defaultLabel={
-                isProjectRole ? props.projects[0].key : "All Projects"
-              }
+              list={projectOptions}
+              defaultLabel={projectDefaultLabel}
               label="Project"
               handleFilter={handleFilter}
             />
@@ -184,6 +187,7 @@ const TableToolbar = (props) => {
               (chip) =>
                 chip.content.length > 0 && (
                   <FilterChip
+                    key={`${chip.label}-${String(chip.content)}`}
                     label={chip.label}
                     content={chip.content}
                     onDelete={handleRemoveFilter}
