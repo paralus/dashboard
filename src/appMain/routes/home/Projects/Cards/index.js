@@ -24,11 +24,13 @@ const Cards = ({ viewSwitcher }) => {
     getProjects(100, 0);
   }, []);
 
-  const sortedData = data.sort((a, b) => {
-    return a.metadata.name.localeCompare(b.metadata.name, undefined, {
-      sensitivity: "base",
-    });
-  });
+  const sortedData = Array.isArray(data)
+    ? [...data].filter(Boolean).sort((a, b) =>
+        a.metadata.name.localeCompare(b.metadata.name, undefined, {
+          sensitivity: "base",
+        })
+      )
+    : [];
 
   const filteredData =
     searchText.length > 0
@@ -53,11 +55,21 @@ const Cards = ({ viewSwitcher }) => {
         </Paper>
       )}
       <div className="row">
-        {!loading && UserSession.visibleAdmin && (
+        {!loading && UserSession.visibleAdmin && sortedData.length === 0 && (
+          <div className="col-12">
+            <NewProject refreshProjects={getProjects} />
+          </div>
+        )}
+
+        {!loading && UserSession.visibleAdmin && sortedData.length > 0 && (
           <NewProject refreshProjects={getProjects} />
         )}
-        {filteredData.map((n, index) => (
-          <ProjectCard key={index} data={n} refreshProjects={getProjects} />
+        {filteredData.filter(Boolean).map((n) => (
+          <ProjectCard
+            key={n.metadata.id}
+            data={n}
+            refreshProjects={getProjects}
+          />
         ))}
       </div>
     </div>

@@ -16,11 +16,13 @@ function FilterField({
   defaultValue = "_ALL_",
   handleFilter,
 }) {
-  if (!list || list?.length === 0) return null;
+  // if (!list || list?.length === 0) return null;
+  const hasOptions = Array.isArray(list) && list.length > 0;
   return (
     <TextField
       select
       fullWidth
+      disabled={!hasOptions}
       margin="normal"
       className="float-right"
       id={`event_${name}_filter`}
@@ -43,8 +45,8 @@ function FilterField({
           <span style={styleText}>{defaultLabel}</span>
         </MenuItem>
       )}
-      {list?.length > 0 &&
-        list?.map((option) => (
+      {hasOptions ? (
+        list.map((option) => (
           <MenuItem
             key={option?.[optionValue]}
             value={option?.[optionValue]}
@@ -52,7 +54,14 @@ function FilterField({
           >
             <span style={styleText}>{option?.[optionLabel]}</span>
           </MenuItem>
-        ))}
+        ))
+      ) : (
+        <MenuItem disabled>
+          <span style={{ ...styleText, opacity: 0.6 }}>
+            No projects available
+          </span>
+        </MenuItem>
+      )}
     </TextField>
   );
 }

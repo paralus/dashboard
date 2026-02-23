@@ -22,6 +22,8 @@ import Roles from "./routes/roles";
 import Home from "./routes/home";
 import IdpList from "./routes/sso/IdpList";
 import RegistrationWizard from "./routes/sso/RegistrationWizard";
+// import NewProject from "appMain/routes/home/Projects/Cards/components/NewProject";
+import { Link } from "react-router-dom";
 
 class AppMain extends React.Component {
   constructor() {
@@ -89,6 +91,9 @@ class AppMain extends React.Component {
       userAndRoleDetail,
       user,
     } = this.props;
+
+    const hasProject = Boolean(currentProject?.metadata?.name);
+
     let favicon_src = ParalusMark;
     if (partnerDetail && partnerDetail.fav_icon_link) {
       favicon_src = partnerDetail.fav_icon_link;
@@ -172,43 +177,34 @@ class AppMain extends React.Component {
               />
             </div>
           )}
-          {hasAccess &&
-            currentProject &&
-            currentProject.metadata.name &&
-            forceResetEnabledForUser && (
-              <main className="app-main-content-wrapper">
-                <div className="app-main-content">
-                  <Container maxWidth="lg">
-                    <Route exact path={`${match.url}`} component={Home} />
-                    <Route path={`${match.url}/users`} component={Users} />
-                    <Route
-                      path={`${match.url}/settings`}
-                      component={Settings}
-                    />
-                    <Route path={`${match.url}/tools`} component={Tools} />
-                    <Route path={`${match.url}/audit`} component={AuditLogs} />
-                    <Route path={`${match.url}/projects`} component={Project} />
-                    <Route path={`${match.url}/groups`} component={Group} />
-                    <Route path={`${match.url}/roles`} component={Roles} />
-                    <Route
-                      exact
-                      path={`${match.url}/sso/new`}
-                      component={RegistrationWizard}
-                    />
-                    <Route
-                      exact
-                      path={`${match.url}/sso/update/:ssoId`}
-                      component={RegistrationWizard}
-                    />
-                    <Route
-                      exact
-                      path={`${match.url}/sso`}
-                      component={IdpList}
-                    />
-                  </Container>
-                </div>
-              </main>
-            )}
+          {hasAccess && forceResetEnabledForUser && (
+            <main className="app-main-content-wrapper">
+              <div className="app-main-content">
+                <Container maxWidth="lg">
+                  {/* Routes are ALWAYS available */}
+                  <Route exact path={`${match.url}`} component={Home} />
+                  <Route path={`${match.url}/users`} component={Users} />
+                  <Route path={`${match.url}/settings`} component={Settings} />
+                  <Route path={`${match.url}/tools`} component={Tools} />
+                  <Route path={`${match.url}/audit`} component={AuditLogs} />
+                  <Route path={`${match.url}/projects`} component={Project} />
+                  <Route path={`${match.url}/groups`} component={Group} />
+                  <Route path={`${match.url}/roles`} component={Roles} />
+                  <Route
+                    exact
+                    path={`${match.url}/sso/new`}
+                    component={RegistrationWizard}
+                  />
+                  <Route
+                    exact
+                    path={`${match.url}/sso/update/:ssoId`}
+                    component={RegistrationWizard}
+                  />
+                  <Route exact path={`${match.url}/sso`} component={IdpList} />
+                </Container>
+              </div>
+            </main>
+          )}
           {!this.props.kubectlOpen && <Footer />}
         </div>
         {hasAccess && currentProject?.metadata.name && <MiniKubectl />}
