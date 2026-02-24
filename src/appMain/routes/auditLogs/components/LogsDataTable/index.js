@@ -26,6 +26,7 @@ const LogsDataTable = (props) => {
   const classes = useStyles();
 
   const eventActorEmail = (item) => {
+    if (item.username) return item.username;
     if (!item?.actor?.type) return "-";
     if (item.actor.type === "USER") {
       return item.actor.account.username;
@@ -53,8 +54,24 @@ const LogsDataTable = (props) => {
   };
 
   const getProjectName = (item) => {
-    if (!item.project || item.project == "") return "N/A";
+    if (!item.project || item.project === "") return "N/A";
     return item.project;
+  };
+
+  const getClientType = (item) => {
+    if (item.session_type) {
+      if (item.session_type === "browser shell") return "Browser";
+      if (item.session_type === "kubectl cli") return "Terminal";
+      return item.session_type;
+    }
+    if (item?.client?.type) {
+      if (item.client.type === "KUBECTL") return "Terminal";
+      return (
+        item.client.type.charAt(0).toUpperCase() +
+        item.client.type.slice(1).toLowerCase()
+      );
+    }
+    return "-";
   };
 
   const parseRowData = (data) =>
@@ -80,15 +97,25 @@ const LogsDataTable = (props) => {
       },
       {
         type: "regular",
+        value: getClientType(data._source.json),
+      },
+      {
+        type: "regular",
         value: getProjectName(data._source.json),
       },
       props.isRelayCommands && {
         type: "regular",
-        value: data._source.json.detail.meta?.cluster_name,
+        value:
+          data._source.json.detail?.meta?.cluster_name ||
+          data._source.json.cluster_name,
       },
       {
         type: "regular",
-        value: data._source.json.detail.message,
+        value:
+          data._source.json.detail?.message ||
+          `${data._source.json.method || ""} ${data._source.json.kind || ""} ${
+            data._source.json.name || ""
+          }`,
       },
     ].filter(Boolean);
 
@@ -96,6 +123,7 @@ const LogsDataTable = (props) => {
     { label: "" },
     { label: "Date" },
     { label: "User" },
+    { label: "Client" },
     { label: "Project" },
     props.isRelayCommands && { label: "Cluster" },
     { label: "Message" },
