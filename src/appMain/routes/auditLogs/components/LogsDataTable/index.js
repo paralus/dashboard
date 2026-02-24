@@ -26,7 +26,7 @@ const LogsDataTable = (props) => {
   const classes = useStyles();
 
   const eventActorEmail = (item) => {
-    if (item.un) return item.un;
+    if (item.username) return item.username;
     if (!item?.actor?.type) return "-";
     if (item.actor.type === "USER") {
       return item.actor.account.username;
@@ -54,16 +54,15 @@ const LogsDataTable = (props) => {
   };
 
   const getProjectName = (item) => {
-    if (item.pr) return item.pr;
     if (!item.project || item.project === "") return "N/A";
     return item.project;
   };
 
   const getClientType = (item) => {
-    if (item.st) {
-      if (item.st === "browser shell") return "Browser";
-      if (item.st === "kubectl cli") return "Terminal";
-      return item.st;
+    if (item.session_type) {
+      if (item.session_type === "browser shell") return "Browser";
+      if (item.session_type === "kubectl cli") return "Terminal";
+      return item.session_type;
     }
     if (item?.client?.type) {
       if (item.client.type === "KUBECTL") return "Terminal";
@@ -107,14 +106,15 @@ const LogsDataTable = (props) => {
       props.isRelayCommands && {
         type: "regular",
         value:
-          data._source.json.detail?.meta?.cluster_name || data._source.json.cn,
+          data._source.json.detail?.meta?.cluster_name ||
+          data._source.json.cluster_name,
       },
       {
         type: "regular",
         value:
           data._source.json.detail?.message ||
-          `${data._source.json.m || ""} ${data._source.json.k || ""} ${
-            data._source.json.n || ""
+          `${data._source.json.method || ""} ${data._source.json.kind || ""} ${
+            data._source.json.name || ""
           }`,
       },
     ].filter(Boolean);

@@ -20,24 +20,24 @@ const AuditLogsTable = (props) => {
   const parseRowData = (data, index) => [
     {
       type: "regular",
-      value: <DateFormat timestamp={data._source.json.ts} />,
-      stringValue: data._source.json.ts,
+      value: <DateFormat timestamp={data._source.json.timestamp} />,
+      stringValue: data._source.json.timestamp,
     },
     {
       type: "regular",
-      value: data._source.json.un || "-",
+      value: data._source.json.username || "-",
     },
     {
       type: "regular",
-      value: data._source.json.pr || "-",
+      value: data._source.json.project || "-",
     },
     {
       type: "regular",
-      value: data._source.json.cn || "-",
+      value: data._source.json.cluster_name || "-",
     },
     {
       type: "regular",
-      value: data._source.json.ns || "-",
+      value: data._source.json.namespace || "-",
     },
     {
       type: "regular",
@@ -45,22 +45,22 @@ const AuditLogsTable = (props) => {
         <>
           <div>
             <b className="mr-2">Name:</b>
-            <span>{data._source.json.n || "-"}</span>
+            <span>{data._source.json.name || "-"}</span>
           </div>
           <div>
             <b className="mr-2">Kind:</b>
-            <span>{data._source.json.k || "-"}</span>
+            <span>{data._source.json.kind || "-"}</span>
           </div>
         </>
       ),
     },
     {
       type: "regular",
-      value: data._source.json.m || "-",
+      value: data._source.json.method || "-",
     },
     {
       type: "regular",
-      value: data._source.json.st || "-",
+      value: data._source.json.session_type || "-",
     },
     {
       type: "regular",
@@ -69,23 +69,23 @@ const AuditLogsTable = (props) => {
         <>
           <div>
             <b className="mr-2">APIVersion:</b>
-            <span>{data._source.json.av || "-"}</span>
+            <span>{data._source.json.api_version || "-"}</span>
           </div>
           <div>
             <b className="mr-2">Query:</b>
-            <span>{data._source.json.q || "-"}</span>
+            <span>{data._source.json.query || "-"}</span>
           </div>
           <div>
             <b className="mr-2">RemoteAddr:</b>
-            <span>{data._source.json.ra || "-"}</span>
+            <span>{data._source.json.remote_addr || "-"}</span>
           </div>
           <div>
             <b className="mr-2">StatusCode:</b>
-            <span>{data._source.json.sc || "-"}</span>
+            <span>{data._source.json.status_code || "-"}</span>
           </div>
           <div>
             <b className="mr-2">Duration (secs):</b>
-            <span>{data._source.json.d || "-"}</span>
+            <span>{data._source.json.duration || "-"}</span>
           </div>
         </>
       ),
@@ -93,22 +93,22 @@ const AuditLogsTable = (props) => {
   ];
 
   const headerMapping = {
-    ts: "Date",
-    un: "User",
-    pr: "Project",
-    cn: "Cluster",
-    ns: "Namespace",
-    n: "Resource Name",
-    k: "Resource Kind",
-    m: "Method",
-    st: "Access Method",
-    av: "API Version",
-    q: "Query",
-    ra: "Remote Address",
-    sc: "Status Code",
-    d: "Duration (secs)",
-    o: "Organisation Id",
-    p: "Partner Id",
+    timestamp: "Date",
+    username: "User",
+    project: "Project",
+    cluster_name: "Cluster",
+    namespace: "Namespace",
+    name: "Resource Name",
+    kind: "Resource Kind",
+    method: "Method",
+    session_type: "Access Method",
+    api_version: "API Version",
+    query: "Query",
+    remote_addr: "Remote Address",
+    status_code: "Status Code",
+    duration: "Duration (secs)",
+    organization_id: "Organisation Id",
+    partner_id: "Partner Id",
   };
 
   return (
