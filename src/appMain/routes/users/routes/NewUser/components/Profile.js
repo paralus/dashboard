@@ -79,7 +79,7 @@ const Profile = ({
               <>
                 <div className="col-md-6">
                   <TextValidator
-                    required
+                    // required
                     margin="dense"
                     id="first_name"
                     name="First Name"
@@ -87,13 +87,13 @@ const Profile = ({
                     label="First Name"
                     onChange={handleAccountChange("first_name")}
                     fullWidth
-                    validators={["required"]}
-                    errorMessages={["this field is required"]}
+                    // validators={["required"]}
+                    // errorMessages={["this field is required"]}
                   />
                 </div>
                 <div className="col-md-6">
                   <TextValidator
-                    required
+                    // required
                     margin="dense"
                     id="last_name"
                     name="Last Name"
@@ -101,8 +101,8 @@ const Profile = ({
                     label="Last Name"
                     onChange={handleAccountChange("last_name")}
                     fullWidth
-                    validators={["required"]}
-                    errorMessages={["this field is required"]}
+                    // validators={["required"]}
+                    // errorMessages={["this field is required"]}
                   />
                 </div>
 

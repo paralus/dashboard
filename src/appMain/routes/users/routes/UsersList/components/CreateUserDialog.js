@@ -78,7 +78,7 @@ const CreateUserDialog = (props) => {
 
               <div className="col-md-6">
                 <TextValidator
-                  required
+                  // required
                   margin="dense"
                   id="first_name"
                   name="First Name"
@@ -86,13 +86,13 @@ const CreateUserDialog = (props) => {
                   label="First Name"
                   onChange={handleAccountChange("first_name")}
                   fullWidth
-                  validators={["required"]}
-                  errorMessages={["this field is required"]}
+                  // validators={["required"]}
+                  // errorMessages={["this field is required"]}
                 />
               </div>
               <div className="col-md-6">
                 <TextValidator
-                  required
+                  // required
                   margin="dense"
                   id="last_name"
                   name="Last Name"
@@ -100,8 +100,8 @@ const CreateUserDialog = (props) => {
                   label="Last Name"
                   onChange={handleAccountChange("last_name")}
                   fullWidth
-                  validators={["required"]}
-                  errorMessages={["this field is required"]}
+                  // validators={["required"]}
+                  // errorMessages={["this field is required"]}
                 />
               </div>
 
