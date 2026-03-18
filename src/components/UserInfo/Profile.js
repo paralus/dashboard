@@ -63,6 +63,9 @@ class Profile extends React.Component {
     const { open } = this.state;
     if (!user) return null;
 
+    const fullName = [user.spec.firstName, user.spec.lastName]
+      .filter(Boolean)
+      .join(" ");
     return (
       <Dialog
         open={open}
@@ -75,12 +78,12 @@ class Profile extends React.Component {
         <DialogContent className="p-0">
           <hr className="m-0" />
           <div style={style.profileContainer}>
-            {!!`${user.spec.firstName}${user.spec.lastName}`.length && (
+            {fullName && (
               <>
                 <div>
                   <b>Name</b>
                 </div>
-                <div className="">{`${user.spec.firstName} ${user.spec.lastName}`}</div>
+                <div className="">{fullName}</div>
               </>
             )}
             <div>
